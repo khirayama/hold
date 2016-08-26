@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       get '/logout' => 'sessions#destroy'
 
       resources :accounts
+      resources :transaction_categories
     end
   end
 end

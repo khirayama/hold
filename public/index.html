@@ -4,6 +4,49 @@
   <title>Sample</title>
   <meta charset="utf-8">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script>
+function crud($parent, resources, template, data) {
+  $.ajax({
+    type: 'GET',
+    url: `/api/v1/${resources}`
+  }).done(function(res) {
+    res.forEach(function (resource) {
+      $parent.find('.index-list').append(template(resource));
+    });
+  });
+
+  $parent.find('.create-button').on('click', function() {
+    $.ajax({
+      type: 'POST',
+      url: `/api/v1/${resources}`,
+      data: data.create
+    }).done(function(res) {
+      location.reload();
+    });
+  });
+
+  $parent.on('click', '.update-button', function(event) {
+    var id = $(event.target).data('id');
+    $.ajax({
+      type: 'PUT',
+      url: `/api/v1/${resources}/${id}`,
+      data: data.update
+    }).done(function(res) {
+      location.reload();
+    });
+  });
+
+  $parent.on('click', '.delete-button', function(event) {
+    var id = $(event.target).data('id');
+    $.ajax({
+      type: 'DELETE',
+      url: `/api/v1/${resources}/${id}`,
+    }).done(function(res) {
+      location.reload();
+    });
+  });
+}
+  </script>
 </head>
 <body>
   <a href="/api/v1/auth/twitter">Sign up with Twitter</a>
@@ -20,54 +63,49 @@ $.ajax({
   </script>
 
   <h2>Accounts</h2>
-  <div class="create-amount-button">Create amount(wallet / 1000)</div>
-  <ul class="account-list"></ul>
+  <div class="accounts">
+    <div class="create-button">Create amount(wallet / 1000)</div>
+    <ul class="index-list"></ul>
+  </div>
   <script>
-$.ajax({
-  type: 'GET',
-  url: '/api/v1/accounts'
-}).done(function(res) {
-  res.forEach(function (account) {
-    $('.account-list').append(`
+var $accounts = $('.accounts');
+function accountTemplate(account) {
+  return `
     <li>
-      ${account.id} / ${account.name} / ${account.amount}
-      <div class="update-amount-button" data-accountid="${account.id}">Update</div>
-      <div class="delete-amount-button" data-accountid="${account.id}">Delete</div>
+    ${account.id} / ${account.name} / ${account.amount}
+    <div class="update-button" data-id="${account.id}">Update</div>
+    <div class="delete-button" data-id="${account.id}">Delete</div>
     </li>
-    `);
-  });
-});
+  `;
+}
+var accountData ={
+  create: { name: 'wallet', amount: 1000 },
+  update: { name: 'bank', amount: Math.floor(Math.random() * 10000) }
+};
+crud($accounts, 'accounts', accountTemplate, accountData);
+  </script>
 
-$('.create-amount-button').on('click', function() {
-  $.ajax({
-    type: 'POST',
-    url: '/api/v1/accounts',
-    data: { name: 'wallet', amount: 1000 }
-  }).done(function(res) {
-    location.reload();
-  });
-});
-
-$('body').on('click', '.update-amount-button', function(event) {
-  var id = $(event.target).data('accountid');
-  $.ajax({
-    type: 'PUT',
-    url: `/api/v1/accounts/${id}`,
-    data: { name: 'bank', amount: Math.floor(Math.random() * 10000) }
-  }).done(function(res) {
-    location.reload();
-  });
-});
-
-$('body').on('click', '.delete-amount-button', function(event) {
-  var id = $(event.target).data('accountid');
-  $.ajax({
-    type: 'DELETE',
-    url: `/api/v1/accounts/${id}`,
-  }).done(function(res) {
-    location.reload();
-  });
-});
+  <h2>TransactionCategories</h2>
+  <div class="transaction-categories">
+    <div class="create-button">Create transaction category(foods)</div>
+    <ul class="index-list"></ul>
+  </div>
+  <script>
+var $transactionCategories = $('.transaction-categories');
+function transactionCategoryTemplate(transactionCategory) {
+  return `
+    <li>
+      ${transactionCategory.id} / ${transactionCategory.name}
+      <div class="update-transaction-category-button" data-id="${transactionCategory.id}">Update</div>
+      <div class="delete-transaction-category-button" data-id="${transactionCategory.id}">Delete</div>
+    </li>
+  `;
+}
+var transactionCategoryData ={
+  create: { name: 'foods' },
+  update: { name: 'shopping' }
+};
+crud($transactionCategories, 'transaction_categories', transactionCategoryTemplate, transactionCategoryData);
   </script>
 
 </body>
