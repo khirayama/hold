@@ -5,39 +5,39 @@ module Api
 
       def index
         transaction_categories = current_user.transaction_categories.map do |transaction_category|
-          omit_transaction_categories(transaction_category)
+          omit_transaction_category(transaction_category)
         end
         render json: transaction_categories
       end
 
-      # def create
-      #   account = current_user.accounts.build(account_params)
-      #   if account.save
-      #     render json: omit_account(account)
-      #   end
-      # end
-      #
-      # def update
-      #   account = current_user.accounts.find(params[:id])
-      #   if account.update(account_params)
-      #     render json: omit_account(account)
-      #   end
-      # end
-      #
-      # def destroy
-      #   account = current_user.accounts.find(params[:id])
-      #   account.destroy!
-      # end
+      def create
+        transaction_category = current_user.transaction_categories.build(transaction_category_params)
+        if transaction_category.save
+          render json: omit_transaction_category(transaction_category)
+        end
+      end
+
+      def update
+        transaction_category = current_user.transaction_categories.find(params[:id])
+        if transaction_category.update(transaction_category_params)
+          render json: omit_transaction_category(transaction_category)
+        end
+      end
+
+      def destroy
+        transaction_category = current_user.transaction_categories.find(params[:id])
+        transaction_category.destroy!
+      end
 
       private
-        # def account_params
-        #   params.permit(:id, :name, :amount)
-        # end
+        def transaction_category_params
+          params.permit(:id, :name)
+        end
 
         def omit_transaction_category(transaction_category)
           {
-            id: transaction.id,
-            name: transaction.name,
+            id: transaction_category.id,
+            name: transaction_category.name
           }
         end
     end

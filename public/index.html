@@ -96,8 +96,8 @@ function transactionCategoryTemplate(transactionCategory) {
   return `
     <li>
       ${transactionCategory.id} / ${transactionCategory.name}
-      <div class="update-transaction-category-button" data-id="${transactionCategory.id}">Update</div>
-      <div class="delete-transaction-category-button" data-id="${transactionCategory.id}">Delete</div>
+      <div class="update-button" data-id="${transactionCategory.id}">Update</div>
+      <div class="delete-button" data-id="${transactionCategory.id}">Delete</div>
     </li>
   `;
 }
