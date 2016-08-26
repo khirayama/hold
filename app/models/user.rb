@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :accounts, foreign_key: :user_id
+  has_many :transaction_categories, foreign_key: :user_id
 
   def self.find_or_create_from_auth_hash(auth_hash)
     provider = auth_hash[:provider]
