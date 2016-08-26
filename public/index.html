@@ -7,5 +7,68 @@
 </head>
 <body>
   <a href="/api/v1/auth/twitter">Sign up with Twitter</a>
+
+  <h2>User</h2>
+  <div class="user-information"></div>
+  <script>
+$.ajax({
+  type: 'GET',
+  url: '/api/v1/current_user_information'
+}).done(function(res) {
+  $('.user-information').html(JSON.stringify(res));
+});
+  </script>
+
+  <h2>Accounts</h2>
+  <div class="create-amount-button">Create amount(wallet / 1000)</div>
+  <ul class="account-list"></ul>
+  <script>
+$.ajax({
+  type: 'GET',
+  url: '/api/v1/accounts'
+}).done(function(res) {
+  res.forEach(function (account) {
+    $('.account-list').append(`
+    <li>
+      ${account.id} / ${account.name} / ${account.amount}
+      <div class="update-amount-button" data-accountid="${account.id}">Update</div>
+      <div class="delete-amount-button" data-accountid="${account.id}">Delete</div>
+    </li>
+    `);
+  });
+});
+
+$('.create-amount-button').on('click', function() {
+  $.ajax({
+    type: 'POST',
+    url: '/api/v1/accounts',
+    data: { name: 'wallet', amount: 1000 }
+  }).done(function(res) {
+    location.reload();
+  });
+});
+
+$('body').on('click', '.update-amount-button', function(event) {
+  var id = $(event.target).data('accountid');
+  $.ajax({
+    type: 'PUT',
+    url: `/api/v1/accounts/${id}`,
+    data: { name: 'bank', amount: Math.floor(Math.random() * 10000) }
+  }).done(function(res) {
+    location.reload();
+  });
+});
+
+$('body').on('click', '.delete-amount-button', function(event) {
+  var id = $(event.target).data('accountid');
+  $.ajax({
+    type: 'DELETE',
+    url: `/api/v1/accounts/${id}`,
+  }).done(function(res) {
+    location.reload();
+  });
+});
+  </script>
+
 </body>
 </html>

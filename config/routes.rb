@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
       get '/auth/:provider/callback' => 'sessions#create'
       get '/logout' => 'sessions#destroy'
+
+      resources :accounts
     end
   end
 end
