@@ -7,6 +7,6 @@ class CreateTransactionCategories < ActiveRecord::Migration[5.0]
       t.timestamps
     end
 
-    add_index :accounts, [:user_id]
+    add_index :transaction_categories, [:user_id]
   end
 end
