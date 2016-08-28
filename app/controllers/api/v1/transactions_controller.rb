@@ -12,21 +12,59 @@ module Api
 
       def create
         transaction = current_user.transactions.build(transaction_params)
+
+        from_account = current_user.accounts.find(transaction.from_account_id) if transaction.from_account_id.present?
+        to_account = current_user.accounts.find(transaction.to_account_id) if transaction.to_account_id.present?
+
+        from_account.amount -= transaction.amount if from_account.present?
+        to_account.amount += transaction.amount if to_account.present?
+
         if transaction.save
+          from_account.save if from_account.present?
+          to_account.save if to_account.present?
           render json: format_transaction(transaction)
         end
       end
 
       def update
         transaction = current_user.transactions.find(params[:id])
+
+        from_account = current_user.accounts.find(transaction.from_account_id) if transaction.from_account_id.present?
+        to_account = current_user.accounts.find(transaction.to_account_id) if transaction.to_account_id.present?
+
+        from_account.amount += transaction.amount if from_account.present?
+        to_account.amount -= transaction.amount if to_account.present?
+
         if transaction.update(transaction_params)
+          from_account.save if from_account.present?
+          to_account.save if to_account.present?
+
+          from_account = current_user.accounts.find(transaction.from_account_id) if transaction.from_account_id.present?
+          to_account = current_user.accounts.find(transaction.to_account_id) if transaction.to_account_id.present?
+
+          from_account.amount -= transaction.amount if from_account.present?
+          to_account.amount += transaction.amount if to_account.present?
+
+          from_account.save if from_account.present?
+          to_account.save if to_account.present?
+
           render json: format_transaction(transaction)
         end
       end
 
       def destroy
         transaction = current_user.transactions.find(params[:id])
-        transaction.destroy!
+
+        from_account = current_user.accounts.find(transaction.from_account_id) if transaction.from_account_id.present?
+        to_account = current_user.accounts.find(transaction.to_account_id) if transaction.to_account_id.present?
+
+        from_account.amount += transaction.amount if from_account.present?
+        to_account.amount -= transaction.amount if to_account.present?
+
+        if transaction.destroy!
+          from_account.save if from_account.present?
+          to_account.save if to_account.present?
+        end
       end
 
       private

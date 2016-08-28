@@ -79,8 +79,8 @@ function accountTemplate(account) {
   `;
 }
 var accountData ={
-  create: { name: 'wallet', amount: 1000 },
-  update: { name: 'bank', amount: Math.floor(Math.random() * 10000) }
+  create: { name: 'wallet', amount: 1000000 },
+  update: { name: 'bank', amount: Math.floor(Math.random() * 10000000) }
 };
 crud($accounts, 'accounts', accountTemplate, accountData);
   </script>
@@ -130,17 +130,17 @@ function transactionTemplate(transaction) {
 }
 var transactionData ={
   create: {
-    from_account_id: 3,
+    from_account_id: 1,
     to_account_id: null,
-    transaction_category_id: 2,
+    transaction_category_id: 1,
     amount: 1000,
     payment_date: '2016/08/28',
     transaction_date: '2016/08/28'
   },
   update: {
-    from_account_id: 3,
-    to_account_id: 4,
-    transaction_category_id: 2,
+    from_account_id: 1,
+    to_account_id: 2,
+    transaction_category_id: 1,
     amount: 2000,
     payment_date: '2016/08/28',
     transaction_date: '2016/08/28'
