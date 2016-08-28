@@ -4,7 +4,7 @@ class CreateTransactions < ActiveRecord::Migration[5.0]
       t.integer :user_id, null: false
       t.string :from_account_id
       t.string :to_account_id
-      t.string :category_id
+      t.string :transaction_category_id
       t.column :amount, 'int unsigned', null: false
       t.date :payment_date
       t.date :transaction_date
@@ -12,6 +12,6 @@ class CreateTransactions < ActiveRecord::Migration[5.0]
       t.timestamps
     end
 
-    add_index :transactions, [:user_id, :category_id, :from_account_id, :to_account_id]
+    add_index :transactions, [:user_id, :transaction_category_id]
   end
 end
