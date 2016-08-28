@@ -119,8 +119,8 @@ function transactionTemplate(transaction) {
   return `
     <li>
       ${transaction.id} /
-      ${transaction.from_account} / ${transaction.to_account} /
-      ${transaction.amount} / ${transaction.transaction_category} /
+      ${transaction.from_account.name} / ${transaction.to_account.name} /
+      ${transaction.amount} / ${transaction.transaction_category.name} /
       ${transaction.payment_date} / ${transaction.transaction_date}
       <div class="update-button" data-id="${transaction.id}">Update</div>
       <div class="delete-button" data-id="${transaction.id}">Delete</div>

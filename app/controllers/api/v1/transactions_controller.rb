@@ -43,9 +43,26 @@ module Api
         end
 
         def omit_transaction(transaction)
+          from_account =  current_user.accounts.find(transaction.from_account_id)
+          to_account =  current_user.accounts.find(transaction.to_account_id)
+          transaction_category = current_user.transaction_categories.find(transaction.transaction_category_id)
           {
             id: transaction.id,
-            amount: transaction.amount
+            from_account: {
+              id: from_account.id,
+              name: from_account.name
+            },
+            to_account: {
+              id: to_account.id,
+              name: to_account.name
+            },
+            transaction_category: {
+              id: transaction_category.id,
+              name: transaction_category.name
+            },
+            amount: transaction.amount,
+            payment_date: transaction.payment_date,
+            transaction_date: transaction.transaction_date
           }
         end
     end
