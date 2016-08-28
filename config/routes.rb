@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
       resources :accounts
       resources :transaction_categories
+      resources :transactions
     end
   end
 end
