@@ -119,7 +119,8 @@ function transactionTemplate(transaction) {
   return `
     <li>
       ${transaction.id} /
-      ${transaction.from_account.name} / ${transaction.to_account.name} /
+      ${(transaction.from_account) ? transaction.from_account.name : ' - '} /
+      ${(transaction.to_account) ? transaction.to_account.name : ' - '} /
       ${transaction.amount} / ${transaction.transaction_category.name} /
       ${transaction.payment_date} / ${transaction.transaction_date}
       <div class="update-button" data-id="${transaction.id}">Update</div>
@@ -130,7 +131,7 @@ function transactionTemplate(transaction) {
 var transactionData ={
   create: {
     from_account_id: 3,
-    to_account_id: 4,
+    to_account_id: null,
     transaction_category_id: 2,
     amount: 1000,
     payment_date: '2016/08/28',
