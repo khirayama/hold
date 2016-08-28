@@ -108,5 +108,45 @@ var transactionCategoryData ={
 crud($transactionCategories, 'transaction_categories', transactionCategoryTemplate, transactionCategoryData);
   </script>
 
+
+  <h2>Transactions</h2>
+  <div class="transactions">
+    <div class="create-button">Create transaction</div>
+    <ul class="index-list"></ul>
+  </div>
+  <script>
+var $transactions = $('.transactions');
+function transactionTemplate(transaction) {
+  return `
+    <li>
+      ${transaction.id} /
+      ${transaction.from_account} / ${transaction.to_account} /
+      ${transaction.amount} / ${transaction.transaction_category} /
+      ${transaction.payment_date} / ${transaction.transaction_date}
+      <div class="update-button" data-id="${transaction.id}">Update</div>
+      <div class="delete-button" data-id="${transaction.id}">Delete</div>
+    </li>
+  `;
+}
+var transactionData ={
+  create: {
+    from_account_id: 3,
+    to_account_id: 4,
+    transaction_category_id: 2,
+    amount: 1000,
+    payment_date: '2016/08/28',
+    transaction_date: '2016/08/28'
+  },
+  update: {
+    from_account_id: 3,
+    to_account_id: 4,
+    transaction_category_id: 2,
+    amount: 2000,
+    payment_date: '2016/08/28',
+    transaction_date: '2016/08/28'
+  }
+};
+crud($transactions, 'transactions', transactionTemplate, transactionData);
+  </script>
 </body>
 </html>
