@@ -6,6 +6,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <script>
 function crud($parent, resources, template) {
+  $parent.find('.update-box').hide();
+
   $.ajax({
     type: 'GET',
     url: `/api/v1/${resources}`
@@ -34,11 +36,18 @@ function crud($parent, resources, template) {
   $parent.on('click', '.edit-button', function(event) {
     var data = $(event.target).data('content');
     var $box = $parent.find('.update-box');
+    $parent.find('.create-box').hide();
+    $box.show();
     $box.find('input').each(function(index, input) {
       var $input = $(input);
       var key = $input.attr('name');
       $input.val(data[key]);
     });
+  });
+
+  $parent.on('click', '.cancel-edit-button', function() {
+    $parent.find('.create-box').show();
+    $parent.find('.update-box').hide();
   });
 
   $parent.on('click', '.update-button', function(event) {
@@ -98,6 +107,7 @@ $.ajax({
       <input type="text" name="name" />
       <input type="number" name="amount" />
       <div class="update-button">Update</div>
+      <div class="cancel-edit-button">Cancel</div>
     </div>
     <ul class="index-list"></ul>
   </div>
@@ -125,6 +135,7 @@ crud($accounts, 'accounts', accountTemplate);
       <input type="hidden" name="id" />
       <input type="text" name="name" />
       <div class="update-button">Update</div>
+      <div class="cancel-edit-button">Cancel</div>
     </div>
     <ul class="index-list"></ul>
   </div>
