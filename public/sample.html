@@ -15,22 +15,47 @@ function crud($parent, resources, template, data) {
     });
   });
 
-  $parent.find('.create-button').on('click', function() {
+  $parent.find('.create-button').on('click', function(event) {
+    var data = {};
+    var $box = $parent.find('.create-box');
+    $box.find('input').each((index, input) => {
+      var $input = $(input);
+      data[$input.attr('name')] = $input.val();
+    });
     $.ajax({
       type: 'POST',
       url: `/api/v1/${resources}`,
-      data: data.create
+      data: data
     }).done(function(res) {
       location.reload();
     });
   });
 
+  $parent.on('click', '.edit-button', function(event) {
+    var data = $(event.target).data('content');
+    var $box = $parent.find('.update-box');
+    $box.find('input').each(function(index, input) {
+      var $input = $(input);
+      var key = $input.attr('name');
+      $input.val(data[key]);
+    });
+  });
+
   $parent.on('click', '.update-button', function(event) {
-    var id = $(event.target).data('id');
+    var data = {};
+    var $box = $parent.find('.update-box');
+    var id = $parent.find('input[name="id"]').val();
+    $box.find('input').each((index, input) => {
+      var $input = $(input);
+      if ($input.attr('name') != 'id') {
+        data[$input.attr('name')] = $input.val();
+      }
+    });
+    console.log(id, data);
     $.ajax({
       type: 'PUT',
       url: `/api/v1/${resources}/${id}`,
-      data: data.update
+      data: data
     }).done(function(res) {
       location.reload();
     });
@@ -64,7 +89,17 @@ $.ajax({
 
   <h2>Accounts</h2>
   <div class="accounts">
-    <div class="create-button">Create amount(wallet / 1000)</div>
+    <div class="create-box">
+      <input type="text" name="name" />
+      <input type="number" name="amount" />
+      <div class="create-button">Create amount</div>
+    </div>
+    <div class="update-box">
+      <input type="hidden" name="id" />
+      <input type="text" name="name" />
+      <input type="number" name="amount" />
+      <div class="update-button">Update amount</div>
+    </div>
     <ul class="index-list"></ul>
   </div>
   <script>
@@ -73,7 +108,7 @@ function accountTemplate(account) {
   return `
     <li>
     ${account.id} / ${account.name} / ${account.amount}
-    <div class="update-button" data-id="${account.id}">Update</div>
+    <div class="edit-button" data-content='${JSON.stringify(account)}'>Edit</div>
     <div class="delete-button" data-id="${account.id}">Delete</div>
     </li>
   `;
