@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <script>
-function crud($parent, resources, template, data) {
+function crud($parent, resources, template) {
   $.ajax({
     type: 'GET',
     url: `/api/v1/${resources}`
@@ -91,13 +91,13 @@ $.ajax({
     <div class="create-box">
       <input type="text" name="name" />
       <input type="number" name="amount" />
-      <div class="create-button">Create amount</div>
+      <div class="create-button">Create</div>
     </div>
     <div class="update-box">
       <input type="hidden" name="id" />
       <input type="text" name="name" />
       <input type="number" name="amount" />
-      <div class="update-button">Update amount</div>
+      <div class="update-button">Update</div>
     </div>
     <ul class="index-list"></ul>
   </div>
@@ -112,16 +112,20 @@ function accountTemplate(account) {
     </li>
   `;
 }
-var accountData ={
-  create: { name: 'wallet', amount: 1000000 },
-  update: { name: 'bank', amount: Math.floor(Math.random() * 10000000) }
-};
-crud($accounts, 'accounts', accountTemplate, accountData);
+crud($accounts, 'accounts', accountTemplate);
   </script>
 
   <h2>TransactionCategories</h2>
   <div class="transaction-categories">
-    <div class="create-button">Create transaction category(foods)</div>
+    <div class="create-box">
+      <input type="text" name="name" />
+      <div class="create-button">Create</div>
+    </div>
+    <div class="update-box">
+      <input type="hidden" name="id" />
+      <input type="text" name="name" />
+      <div class="update-button">Update</div>
+    </div>
     <ul class="index-list"></ul>
   </div>
   <script>
@@ -130,16 +134,12 @@ function transactionCategoryTemplate(transactionCategory) {
   return `
     <li>
       ${transactionCategory.id} / ${transactionCategory.name}
-      <div class="update-button" data-id="${transactionCategory.id}">Update</div>
+      <div class="edit-button" data-content='${JSON.stringify(transactionCategory)}'>Edit</div>
       <div class="delete-button" data-id="${transactionCategory.id}">Delete</div>
     </li>
   `;
 }
-var transactionCategoryData ={
-  create: { name: 'foods' },
-  update: { name: 'shopping' }
-};
-crud($transactionCategories, 'transaction_categories', transactionCategoryTemplate, transactionCategoryData);
+crud($transactionCategories, 'transaction_categories', transactionCategoryTemplate);
   </script>
 
   <h2>Transactions</h2>
@@ -180,7 +180,7 @@ var transactionData ={
     transaction_date: '2016/08/28'
   }
 };
-crud($transactions, 'transactions', transactionTemplate, transactionData);
+crud($transactions, 'transactions', transactionTemplate);
   </script>
 </body>
 </html>
