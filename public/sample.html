@@ -51,7 +51,6 @@ function crud($parent, resources, template, data) {
         data[$input.attr('name')] = $input.val();
       }
     });
-    console.log(id, data);
     $.ajax({
       type: 'PUT',
       url: `/api/v1/${resources}/${id}`,
