@@ -5,22 +5,36 @@
   <meta charset="utf-8">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <script>
-function crud($parent, resources, template) {
+window.resources = {};
+function createSelectElement(element, json) {
+  var $element = $(element);
+  var html = '<select name="' + $element.attr('name') + '" data-key="' + $element.data('key') + '">';
+  json.forEach(function(item) {
+    html += '<option value="' + item.id + '">' + item.name + '</option>';
+  });
+  html += '</select>';
+  $element.html(html);
+}
+function crud($parent, resources, template, shownUpdateBoxCallback) {
+  // init
   $parent.find('.update-box').hide();
 
+  // index
   $.ajax({
     type: 'GET',
     url: `/api/v1/${resources}`
   }).done(function(res) {
+    window.resources[resources] = res;
     res.forEach(function (resource) {
       $parent.find('.index-list').append(template(resource));
     });
   });
 
-  $parent.find('.create-button').on('click', function(event) {
+  // create
+  $parent.on('click', '.create-button', function(event) {
     var data = {};
     var $box = $parent.find('.create-box');
-    $box.find('input').each((index, input) => {
+    $box.find('input, select').each((index, input) => {
       var $input = $(input);
       data[$input.attr('name')] = $input.val();
     });
@@ -32,15 +46,20 @@ function crud($parent, resources, template) {
       location.reload();
     });
   });
+  $parent.on('keydown', '.create-box input', function(event) {
+    if (event.keyCode === 13) $parent.find('.create-button').trigger('click');
+  });
 
+  // edit
   $parent.on('click', '.edit-button', function(event) {
     var data = $(event.target).data('content');
     var $box = $parent.find('.update-box');
     $parent.find('.create-box').hide();
     $box.show();
+    shownUpdateBoxCallback();
     $box.find('input').each(function(index, input) {
       var $input = $(input);
-      var key = $input.attr('name');
+      var key = $input.data('key') || $input.attr('name');
       $input.val(data[key]);
     });
   });
@@ -50,11 +69,12 @@ function crud($parent, resources, template) {
     $parent.find('.update-box').hide();
   });
 
+  // update
   $parent.on('click', '.update-button', function(event) {
     var data = {};
     var $box = $parent.find('.update-box');
     var id = $parent.find('input[name="id"]').val();
-    $box.find('input').each((index, input) => {
+    $box.find('input, select').each((index, input) => {
       var $input = $(input);
       if ($input.attr('name') != 'id') {
         data[$input.attr('name')] = $input.val();
@@ -68,7 +88,11 @@ function crud($parent, resources, template) {
       location.reload();
     });
   });
+  $parent.on('keydown', '.update-box input', function(event) {
+    if (event.keyCode === 13) $parent.find('.update-button').trigger('click');
+  });
 
+  // delete
   $parent.on('click', '.delete-button', function(event) {
     var id = $(event.target).data('id');
     $.ajax({
@@ -155,7 +179,26 @@ crud($transactionCategories, 'transaction_categories', transactionCategoryTempla
 
   <h2>Transactions</h2>
   <div class="transactions">
-    <div class="create-button">Create transaction</div>
+    <div class="create-box">
+      from:<div class="js-select-accounts" name="from_account_id"></div>
+      to:<div class="js-select-accounts" name="to_account_id"></div>
+      transaction category:<div class="js-select-transaction-categories" name="transaction_category_id"></div>
+      <input type="number" name="amount" />
+      <input type="date" name="payment_date" />
+      <input type="date" name="transaction_date" />
+      <div class="create-button">Create</div>
+    </div>
+    <div class="update-box">
+      <input type="hidden" name="id" />
+      from:<div class="js-select-accounts" name="from_account_id"></div>
+      to:<div class="js-select-accounts" name="to_account_id"></div>
+      transaction category:<div class="js-select-transaction-categories" name="transaction_category_id"></div>
+      <input type="number" name="amount" />
+      <input type="date" name="payment_date"/>
+      <input type="date" name="transaction_date" />
+      <div class="update-button">Update</div>
+      <div class="cancel-edit-button">Cancel</div>
+    </div>
     <ul class="index-list"></ul>
   </div>
   <script>
@@ -166,32 +209,26 @@ function transactionTemplate(transaction) {
       ${transaction.id} /
       ${(transaction.from_account) ? transaction.from_account.name : ' - '} /
       ${(transaction.to_account) ? transaction.to_account.name : ' - '} /
-      ${transaction.amount} / ${transaction.transaction_category.name} /
+      ${transaction.amount} /
+      ${(transaction.transaction_category) ? transaction.transaction_category.name : ' - '} /
       ${transaction.payment_date} / ${transaction.transaction_date}
-      <div class="update-button" data-id="${transaction.id}">Update</div>
+      <div class="edit-button" data-content='${JSON.stringify(transaction)}'>Edit</div>
       <div class="delete-button" data-id="${transaction.id}">Delete</div>
     </li>
   `;
 }
-var transactionData ={
-  create: {
-    from_account_id: 1,
-    to_account_id: null,
-    transaction_category_id: 1,
-    amount: 1000,
-    payment_date: '2016/08/28',
-    transaction_date: '2016/08/28'
-  },
-  update: {
-    from_account_id: 1,
-    to_account_id: 2,
-    transaction_category_id: 1,
-    amount: 2000,
-    payment_date: '2016/08/28',
-    transaction_date: '2016/08/28'
-  }
-};
-crud($transactions, 'transactions', transactionTemplate);
+function createUpdateTransactionForm() {
+  document.querySelectorAll('.js-select-accounts').forEach(function(element) {
+    createSelectElement(element, [{name: 'none', id: null}].concat(window.resources.accounts));
+  });
+  document.querySelectorAll('.js-select-transaction-categories').forEach(function(element) {
+    createSelectElement(element, [{name: 'none', id: null}].concat(window.resources.transaction_categories));
+  });
+}
+setTimeout(function() {
+  createUpdateTransactionForm();
+}, 1000);
+crud($transactions, 'transactions', transactionTemplate, createUpdateTransactionForm);
   </script>
 </body>
 </html>
