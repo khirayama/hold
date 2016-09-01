@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import { startDesktopApp } from '../../actions/app-action-creators';
+import { fetchAccounts } from '../../actions/account-action-creators';
 
 
 const propTypes = {
@@ -21,6 +22,7 @@ export default class Container extends Component {
   componentDidMount() {
     this.props.store.addChangeListener(this.updateState);
     startDesktopApp(location.pathname);
+    fetchAccounts();
   }
 
   componentWillUnmount() {
