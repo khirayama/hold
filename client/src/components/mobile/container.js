@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 
-import types from '../../constants/action-types';
-
-import { dispatch } from '../../libs/app-dispatcher';
+import { startMobileApp } from '../../actions/app-action-creators';
 
 
 const propTypes = {
@@ -22,10 +20,7 @@ export default class Container extends Component {
 
   componentDidMount() {
     this.props.store.addChangeListener(this.updateState);
-    dispatch({
-      type: types.START_MOBILE_APP,
-      pathname: location.pathname,
-    });
+    startMobileApp(location.pathname);
   }
 
   componentWillUnmount() {

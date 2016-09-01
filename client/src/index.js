@@ -1,10 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import types from './constants/action-types';
-
-import { dispatch } from './libs/app-dispatcher';
-
 import logger from './utils/logger';
 import { isMobileUI } from './utils/is-mobile-ui';
 import { loadStyle } from './utils/load-style';
@@ -14,12 +10,11 @@ import Store from './store';
 import DesktopContainer from './components/desktop/container';
 import MobileContainer from './components/mobile/container';
 
+import { changeHistory } from './actions/app-action-creators';
+
 
 window.addEventListener('popstate', (event) => {
-  dispatch({
-    type: types.CHANGE_HISTORY,
-    pathname: location.pathname
-  });
+  changeHistory(location.pathname);
 });
 
 window.addEventListener('load', () => {
