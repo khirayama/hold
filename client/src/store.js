@@ -5,6 +5,8 @@ import { subscribe } from './libs/app-dispatcher';
 
 import logger from './utils/logger';
 
+import accounts from './reducers/accounts';
+
 
 export default class Store extends MicroStore {
   constructor() {
@@ -15,7 +17,6 @@ export default class Store extends MicroStore {
 
   _subscribe() {
     subscribe((action) => {
-      // redirect case
       switch (action.type) {
         case types.CHANGE_HISTORY:
           logger.info('Change histroy');
@@ -27,6 +28,8 @@ export default class Store extends MicroStore {
           logger.info('Start mobile app');
           break;
       }
+
+      this.state.accounts = accounts(this.state.accounts, action);
 
       this.dispatchChange();
     });

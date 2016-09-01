@@ -14,7 +14,6 @@ export class Account {
     }
   }
   fetch(cache = true) {
-    console.log('call');
     if (cache && this._cache !== null) {
       return new Promise((resolve, reject) => {
         resolve(this._cache);
