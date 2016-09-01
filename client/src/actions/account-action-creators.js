@@ -7,9 +7,9 @@ import Account from '../resources/account'
 
 export function formatAccount(account, error = null) {
   return {
-    id: account.id,
-    name: account.name,
-    amount: account.amount,
+    id: account.id || null,
+    name: account.name || null,
+    amount: account.amount || null,
     error: error,
   }
 };
@@ -19,6 +19,19 @@ export function fetchAccounts() {
     dispatch({
       type: types.FETCH_ACCOUNTS,
       accounts: data.map((account) => formatAccount(account)),
+    });
+  });
+}
+
+export function createAccount(entity) {
+  dispatch({
+    type: types.CREATE_ACCOUNT,
+    account: formatAccount(entity),
+  });
+  Account.create(entity).catch((error) => {
+    dispatch({
+      type: types.FAIL_TO_CREATE_ACCOUNT,
+      account: formatAccount(data, error),
     });
   });
 }

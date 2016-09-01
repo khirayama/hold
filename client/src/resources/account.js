@@ -31,6 +31,14 @@ export class Account {
       });
     }
   }
+  create(entity) {
+    return new Promise((resolve, reject) => {
+      request.post(this._url(), entity).then((res) => {
+        this._create(res.data);
+        resolve(entity);
+      }).catch((error) => { reject(error); });
+    });
+  }
   update(entity) {
     return new Promise((resolve, reject) => {
       request.put(this._url(entity.id), entity).then((res) => {
@@ -60,6 +68,9 @@ export class Account {
   }
 
   // for cache
+  _create(newEntity) {
+    this._cache.push(newEntity);
+  }
   _update(newEntity) {
     this.find(newEntity.id).then((entity) => {
       entity = Object.assign({}, entity, newEntity);
