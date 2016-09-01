@@ -16,6 +16,8 @@ export default function accounts(state, action) {
       return action.accounts;
     case types.UPDATE_ACCOUNT:
       return updateAccount(state, action.account);
+    case types.FAIL_TO_UPDATE_ACCOUNT:
+      return updateAccount(state, action.account);
     default:
       return state || [];
   }

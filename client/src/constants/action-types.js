@@ -5,6 +5,7 @@ const actionTypes = {
 
   FETCH_ACCOUNTS: '__FETCH_ACCOUNTS',
   UPDATE_ACCOUNT: '__UPDATE_ACCOUNT',
+  FAIL_TO_UPDATE_ACCOUNT: '__FAIL_TO_UPDATE_ACCOUNT',
 };
 
 export default actionTypes;
