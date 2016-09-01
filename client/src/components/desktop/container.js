@@ -177,8 +177,8 @@ class AccountListItem extends Component {
 
     this.setState({
       isEditing: true,
-      name: account.name,
-      amount: account.amount,
+      name: account.name || '',
+      amount: account.amount || '',
     });
   }
   _done() {
@@ -191,6 +191,13 @@ class AccountListItem extends Component {
       amount: this.state.amount,
     });
   }
+  _recreate() {
+    createAccount({
+      name: this.state.name,
+      amount: this.state.amount,
+      error: this.props.account.error,
+    });
+  }
   _onClickAccountListItem() {
     this._edit();
   }
@@ -201,7 +208,11 @@ class AccountListItem extends Component {
     this.setState({ amount: event.target.value });
   }
   _onClickUpdateButton() {
-    this._update();
+    if (this.props.account.id) {
+      this._update();
+    } else {
+      this._recreate();
+    }
     this._done();
   }
   _onKeyDownNameAndAmountInputs(event) {
@@ -210,12 +221,20 @@ class AccountListItem extends Component {
     const ctrl = event.ctrlKey || event.metaKey;
 
     if (keyCodes.ENTER === keyCode) {
-      this._update();
+      if (this.props.account.id) {
+        this._update();
+      } else {
+        this._recreate();
+      }
       this._done();
     }
   }
   _onClickErrorIcon() {
-    this._update();
+    if (this.props.account.id) {
+      this._update();
+    } else {
+      this._edit();
+    }
   }
   render() {
     const account = this.props.account;

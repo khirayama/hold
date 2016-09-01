@@ -24,14 +24,22 @@ export function fetchAccounts() {
 }
 
 export function createAccount(entity) {
-  dispatch({
-    type: types.CREATE_ACCOUNT,
-    account: formatAccount(entity),
-  });
+  // TODO: Add client uuid to account
+  if (!entity.error) {
+    dispatch({
+      type: types.CREATE_ACCOUNT,
+      account: formatAccount(entity),
+    });
+  } else {
+    dispatch({
+      type: types.UPDATE_ACCOUNT,
+      account: formatAccount(entity),
+    });
+  }
   Account.create(entity).catch((error) => {
     dispatch({
       type: types.FAIL_TO_CREATE_ACCOUNT,
-      account: formatAccount(data, error),
+      account: formatAccount(entity, error),
     });
   });
 }
