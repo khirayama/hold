@@ -36,7 +36,12 @@ export function createAccount(entity) {
       account: formatAccount(entity),
     });
   }
-  Account.create(entity).catch((error) => {
+  Account.create(entity).then((data) => {
+    dispatch({
+      type: types.UPDATE_ACCOUNT,
+      account: formatAccount(data),
+    });
+  }).catch((error) => {
     dispatch({
       type: types.FAIL_TO_CREATE_ACCOUNT,
       account: formatAccount(entity, error),
@@ -53,6 +58,23 @@ export function updateAccount(entity) {
     Account.find(entity.id).then((data) => {
       dispatch({
         type: types.FAIL_TO_UPDATE_ACCOUNT,
+        account: formatAccount(data, error),
+      });
+    });
+  });
+}
+
+export function deleteAccount(id) {
+  Account.delete(id).then(() => {
+    dispatch({
+      type: types.DELETE_ACCOUNT,
+      id,
+    });
+  }).catch((error) => {
+    Account.find(id).then((data) => {
+      console.log(data);
+      dispatch({
+        type: types.FAIL_TO_DELETE_ACCOUNT,
         account: formatAccount(data, error),
       });
     });

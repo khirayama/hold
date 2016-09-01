@@ -47,6 +47,14 @@ export class Account {
       }).catch((error) => { reject(error); });
     });
   }
+  delete(id) {
+    return new Promise((resolve, reject) => {
+      request.delete(this._url(id)).then((res) => {
+        this._delete(id);
+        resolve(id);
+      }).catch((error) => { reject(error); });
+    });
+  }
   find(id) {
     if (this._cache !== null) {
       return new Promise((resolve, reject) => {
@@ -72,8 +80,17 @@ export class Account {
     this._cache.push(newEntity);
   }
   _update(newEntity) {
-    this.find(newEntity.id).then((entity) => {
-      entity = Object.assign({}, entity, newEntity);
+    this._cache.map((entity) => {
+      if (entity.id === newEntity.id) {
+        return newEntity;
+      } else {
+        return entity;
+      }
+    });
+  }
+  _delete(id) {
+    this._cache.filter((entity) => {
+      return (entity.id !== id);
     });
   }
 }

@@ -7,6 +7,7 @@ import {
   fetchAccounts,
   createAccount,
   updateAccount,
+  deleteAccount,
 } from '../../actions/account-action-creators';
 
 
@@ -169,6 +170,7 @@ class AccountListItem extends Component {
     this.onChangeNameInput = this._onChangeNameInput.bind(this);
     this.onChangeAmountInput = this._onChangeAmountInput.bind(this);
     this.onClickUpdateButton = this._onClickUpdateButton.bind(this);
+    this.onClickDeleteButton = this._onClickDeleteButton.bind(this);
     this.onKeyDownNameAndAmountInputs = this._onKeyDownNameAndAmountInputs.bind(this);
     this.onClickErrorIcon = this._onClickErrorIcon.bind(this);
   }
@@ -198,6 +200,9 @@ class AccountListItem extends Component {
       error: this.props.account.error,
     });
   }
+  _delete() {
+    deleteAccount(this.props.account.id);
+  }
   _onClickAccountListItem() {
     this._edit();
   }
@@ -214,6 +219,9 @@ class AccountListItem extends Component {
       this._recreate();
     }
     this._done();
+  }
+  _onClickDeleteButton() {
+    this._delete();
   }
   _onKeyDownNameAndAmountInputs(event) {
     const keyCode = event.keyCode;
@@ -271,6 +279,9 @@ class AccountListItem extends Component {
           >
             {account.name} / {account.amount}
           </label>
+          <span
+            onClick={this.onClickDeleteButton}
+          >Delete</span>
           {errorIconElement}
         </li>
       );
