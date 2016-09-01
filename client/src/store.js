@@ -12,6 +12,10 @@ export default class Store extends MicroStore {
   constructor() {
     super();
 
+    this.state ={
+      accounts: [],
+    };
+
     this._subscribe();
   }
 

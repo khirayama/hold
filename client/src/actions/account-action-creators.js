@@ -12,3 +12,12 @@ export function fetchAccounts() {
     });
   });
 }
+
+export function updateAccount(entity) {
+  Account.update(entity).then((data) => {
+    dispatch({
+      type: types.UPDATE_ACCOUNT,
+      account: data,
+    });
+  });
+}

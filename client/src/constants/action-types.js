@@ -4,6 +4,7 @@ const actionTypes = {
   CHANGE_HISTORY: '__CHANGE_HISTORY',
 
   FETCH_ACCOUNTS: '__FETCH_ACCOUNTS',
+  UPDATE_ACCOUNT: '__UPDATE_ACCOUNT',
 };
 
 export default actionTypes;
