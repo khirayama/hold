@@ -82,7 +82,7 @@ export default class AccountListItem extends Component {
     const shift = event.shiftKey;
     const ctrl = event.ctrlKey || event.metaKey;
 
-    if (keyCodes.ENTER === keyCode) {
+    if (keyCodes.ENTER === keyCode && !shift && !ctrl) {
       if (this.props.account.id) {
         this._update();
       } else {
@@ -125,21 +125,20 @@ export default class AccountListItem extends Component {
           >Update</span>
         </li>
       );
-    } else {
-      return (
-        <li>
-          <label
-            onClick={this.onClickAccountListItem}
-          >
-            {account.name} / {account.amount}
-          </label>
-          <span
-            onClick={this.onClickDeleteButton}
-          >Delete</span>
-          {errorIconElement}
-        </li>
-      );
     }
+    return (
+      <li>
+        <span
+          onClick={this.onClickAccountListItem}
+        >
+          {account.name} / {account.amount}
+        </span>
+        <span
+          onClick={this.onClickDeleteButton}
+        >Delete</span>
+        {errorIconElement}
+      </li>
+    );
   }
 }
 

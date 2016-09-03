@@ -1,4 +1,6 @@
-export function isMobileUI() {
+/* global window */
+
+export default function isMobileUI() {
   const ua = window.navigator.userAgent;
 
   let isTouchable = false;
@@ -10,34 +12,26 @@ export function isMobileUI() {
   }
 
   // get os name by user agent
-  switch (true) {
-    case (ua.indexOf('Macintosh') !== -1):
-      osName = 'mac';
-      break;
-    case (ua.indexOf('Windows') !== -1):
-      osName = 'win';
-      break;
-    case (ua.indexOf('Android') !== -1):
-      osName = 'android';
-      break;
-    case (ua.indexOf('iPhone') !== -1):
-      osName = 'ios';
-      break;
-      defalut:
-        osName = 'unknown';
-        break;
+  if (ua.indexOf('Macintosh') !== -1) {
+    osName = 'mac';
+  } else if (ua.indexOf('Windows') !== -1) {
+    osName = 'win';
+  } else if (ua.indexOf('Android') !== -1) {
+    osName = 'android';
+  } else if (ua.indexOf('iPhone') !== -1) {
+    osName = 'ios';
+  } else {
+    osName = 'unknown';
   }
 
   // judgement ui
-  let isMobileUI = false;
+  let _isMobileUI = false;
 
-  switch (true) {
-    case (isTouchable && osName == 'android'):
-      isMobileUI = true;
-      break;
-    case (isTouchable && osName == 'ios'):
-      isMobileUI = true;
-      break;
+  if (isTouchable && osName === 'android') {
+    _isMobileUI = true;
+  } else if (isTouchable && osName === 'ios') {
+    _isMobileUI = true;
   }
-  return isMobileUI;
-};
+
+  return _isMobileUI;
+}

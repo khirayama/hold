@@ -38,7 +38,7 @@ export default class AccountCreateForm extends Component {
     });
   }
   _onClickNewButton() {
-    this._new()
+    this._new();
   }
   _onChangeNameInput(event) {
     this.setState({ name: event.target.value });
@@ -55,7 +55,7 @@ export default class AccountCreateForm extends Component {
     const shift = event.shiftKey;
     const ctrl = event.ctrlKey || event.metaKey;
 
-    if (keyCodes.ENTER === keyCode) {
+    if (keyCodes.ENTER === keyCode && !shift && !ctrl) {
       this._create();
       this._done();
     }
@@ -79,13 +79,12 @@ export default class AccountCreateForm extends Component {
           />
         </span>
       );
-    } else {
-      return (
-        <div
-          onClick={this.onClickNewButton}
-        >Add account</div>
-      );
     }
+    return (
+      <div
+        onClick={this.onClickNewButton}
+      >Add account</div>
+    );
   }
 }
 

@@ -4,7 +4,7 @@ import types from '../constants/action-types';
 
 import { dispatch } from '../libs/app-dispatcher';
 
-import Account from '../resources/account'
+import Account from '../resources/account';
 
 
 export function formatAccount(account, error = null) {
@@ -13,9 +13,9 @@ export function formatAccount(account, error = null) {
     id: account.id || null,
     name: account.name || null,
     amount: account.amount || null,
-    error: error,
-  }
-};
+    error,
+  };
+}
 
 export function fetchAccounts() {
   Account.fetch().then((data) => {

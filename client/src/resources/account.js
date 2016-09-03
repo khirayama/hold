@@ -1,7 +1,7 @@
 import request from 'axios';
 
 
-export class Account {
+export class AccountModel {
   constructor() {
     this._cache = null;
     this._rootUrl = '/api/v1/accounts';
@@ -9,27 +9,23 @@ export class Account {
   _url(id = null) {
     if (id != null) {
       return `${this._rootUrl}/${id}`;
-    } else {
-      return this._rootUrl;
     }
+    return this._rootUrl;
   }
   fetch(cache = true) {
     if (cache && this._cache !== null) {
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         resolve(this._cache);
+      });
+    }
+    return new Promise((resolve, reject) => {
+      request.get(this._url()).then((res) => {
+        this._cache = res.data;
+        resolve(res.data);
       }).catch((error) => {
         reject(error);
       });
-    } else {
-      return new Promise((resolve, reject) => {
-        request.get(this._url()).then((res) => {
-          this._cache = res.data;
-          resolve(res.data);
-        }).catch((error) => {
-          reject(error);
-        });
-      });
-    }
+    });
   }
   create(entity) {
     return new Promise((resolve, reject) => {
@@ -49,7 +45,7 @@ export class Account {
   }
   delete(id) {
     return new Promise((resolve, reject) => {
-      request.delete(this._url(id)).then((res) => {
+      request.delete(this._url(id)).then(() => {
         this._delete(id);
         resolve(id);
       }).catch((error) => { reject(error); });
@@ -57,22 +53,21 @@ export class Account {
   }
   find(id) {
     if (this._cache !== null) {
-      return new Promise((resolve, reject) => {
-        for(let index = 0; index < this._cache.length; index++) {
+      return new Promise((resolve) => {
+        for (let index = 0; index < this._cache.length; index++) {
           const item = this._cache[index];
           if (item.id === id) {
             resolve(item);
           }
         }
         resolve(null);
-      }).catch((error) => { reject(error); });
-    } else {
-      return new Promise((resolve, reject) => {
-        request.get(this._url(id)).then((res) => {
-          resolve(res.data);
-        });
-      }).catch((error) => { reject(error); });
+      });
     }
+    return new Promise((resolve, reject) => {
+      request.get(this._url(id)).then((res) => {
+        resolve(res.data);
+      }).catch((error) => { reject(error); });
+    });
   }
 
   // for cache
@@ -83,16 +78,13 @@ export class Account {
     this._cache.map((entity) => {
       if (entity.id === newEntity.id) {
         return newEntity;
-      } else {
-        return entity;
       }
+      return entity;
     });
   }
   _delete(id) {
-    this._cache.filter((entity) => {
-      return (entity.id !== id);
-    });
+    this._cache = this._cache.filter((entity) => (entity.id !== id));
   }
 }
 
-export default new Account();
+export default new AccountModel();

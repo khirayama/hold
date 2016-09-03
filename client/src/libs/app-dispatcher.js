@@ -31,7 +31,7 @@ export function waitFor(actionType, callback) {
   appDispatcher.addListener(ACTION_DISPATCH, callback_);
 }
 
-export function unsubscribeAll(callback) {
+export function unsubscribeAll() {
   appDispatcher._listeners = {};
 }
 

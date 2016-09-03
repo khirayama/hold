@@ -1,4 +1,6 @@
-export function loadStyle(filePath) {
+/* global document */
+
+export default function loadStyle(filePath) {
   const link = document.createElement('link');
   const head = document.querySelector('head');
 
@@ -7,4 +9,3 @@ export function loadStyle(filePath) {
 
   head.appendChild(link);
 }
-

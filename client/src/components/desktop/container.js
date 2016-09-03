@@ -1,14 +1,9 @@
+/* global location */
+
 import React, { Component } from 'react';
 
-import keyCodes from '../../constants/key-codes';
-
 import { startDesktopApp } from '../../actions/app-action-creators';
-import {
-  fetchAccounts,
-  createAccount,
-  updateAccount,
-  deleteAccount,
-} from '../../actions/account-action-creators';
+import { fetchAccounts } from '../../actions/account-action-creators';
 
 import AccountList from './account-list';
 import AccountCreateForm from './account-create-form';

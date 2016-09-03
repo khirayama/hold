@@ -1,9 +1,11 @@
+/* global window, document, location */
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 
 import logger from './utils/logger';
-import { isMobileUI } from './utils/is-mobile-ui';
-import { loadStyle } from './utils/load-style';
+import isMobileUI from './utils/is-mobile-ui';
+import loadStyle from './utils/load-style';
 
 import Store from './store';
 
@@ -13,7 +15,7 @@ import MobileContainer from './components/mobile/container';
 import { changeHistory } from './actions/app-action-creators';
 
 
-window.addEventListener('popstate', (event) => {
+window.addEventListener('popstate', () => {
   changeHistory(location.pathname);
 });
 

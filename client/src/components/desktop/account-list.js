@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import AccountListItem from './account-list-item';
 
@@ -6,11 +6,9 @@ import AccountListItem from './account-list-item';
 export default function AccountList(props) {
   return (
     <ul>
-      { props.accounts.map((account) => {
-        return (
-          <AccountListItem key={account.cid} account={account} />
-        );
-      }) }
+      { props.accounts.map(
+        (account) => <AccountListItem key={account.cid} account={account} />
+      ) }
     </ul>
   );
 }

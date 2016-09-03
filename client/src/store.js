@@ -12,7 +12,7 @@ export default class Store extends MicroStore {
   constructor() {
     super();
 
-    this.state ={
+    this.state = {
       accounts: [],
     };
 
@@ -30,6 +30,8 @@ export default class Store extends MicroStore {
           break;
         case types.START_MOBILE_APP:
           logger.info('Start mobile app');
+          break;
+        default:
           break;
       }
 

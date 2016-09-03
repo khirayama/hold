@@ -1,3 +1,5 @@
+/* global location */
+
 import React, { Component } from 'react';
 
 import { startMobileApp } from '../../actions/app-action-creators';
@@ -34,8 +36,6 @@ export default class Container extends Component {
   }
 
   render() {
-    const state = this.state.store.getState();
-
     return (
       <div>Mobile App</div>
     );
