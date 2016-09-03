@@ -175,5 +175,48 @@ describe('app-action-creators', () => {
 
       updateAccount({ id: 1, name: 'test', amount: 1000 });
     });
+
+    it('dispatch FAIL_TO_UPDATE_ACCOUNT action', (done) => {
+      subscribe((action) => {
+        switch (action.type) {
+          case types.UPDATE_ACCOUNT:
+            assert.deepStrictEqual(action.account, {
+              cid: action.account.cid,
+              id: 1,
+              name: 'test',
+              amount: 1000,
+              error: null,
+            });
+            break;
+          case types.FAIL_TO_UPDATE_ACCOUNT:
+            assert.deepStrictEqual(action.account, {
+              cid: action.account.cid,
+              id: 1,
+              name: 'test',
+              amount: 1000,
+              error: {
+                message: 'something wrong',
+              },
+            });
+            Account.find.restore();
+            Account.update.restore();
+            done();
+            break;
+        }
+      });
+
+      sinon.stub(Account, 'find', () => {
+        return new Promise((resolve) => {
+          resolve({ id: 1, name: 'test', amount: 1000 });
+        });
+      });
+      sinon.stub(Account, 'update', () => {
+        return new Promise((resolve, reject) => {
+          reject({ message: 'something wrong' });
+        });
+      });
+
+      updateAccount({ id: 1, name: 'test', amount: 1000 });
+    });
   });
 });
