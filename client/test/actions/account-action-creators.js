@@ -30,6 +30,20 @@ function createError() {
   return { message: 'something wrong' };
 }
 
+function successCallback(res) {
+  return () => {
+    return new Promise((resolve) => {
+      resolve(res);
+    });
+  }
+}
+
+function errorCallback() {
+  return new Promise((resolve, reject) => {
+    reject(createError());
+  });
+}
+
 describe('app-action-creators', () => {
   beforeEach(() => {
     unsubscribeAll();
@@ -77,11 +91,7 @@ describe('app-action-creators', () => {
         }
       });
 
-      const stub = sinon.stub(Account, 'fetch', () => {
-        return new Promise((resolve) => {
-          resolve([]);
-        });
-      });
+      sinon.stub(Account, 'fetch', successCallback([]));
 
       fetchAccounts();
     });
@@ -114,11 +124,7 @@ describe('app-action-creators', () => {
         }
       });
 
-      const stub = sinon.stub(Account, 'create', () => {
-        return new Promise((resolve) => {
-          resolve(createSampleAccount({ id: 1 }));
-        });
-      });
+      sinon.stub(Account, 'create', successCallback(createSampleAccount({ id: 1 })));
 
       createAccount(createSampleAccount());
     });
@@ -151,11 +157,7 @@ describe('app-action-creators', () => {
         }
       });
 
-      const stub = sinon.stub(Account, 'create', () => {
-        return new Promise((resolve, reject) => {
-          reject(createError());
-        });
-      });
+      sinon.stub(Account, 'create', errorCallback);
 
       createAccount(createSampleAccount());
     });
@@ -210,16 +212,8 @@ describe('app-action-creators', () => {
         }
       });
 
-      sinon.stub(Account, 'find', () => {
-        return new Promise((resolve) => {
-          resolve(createSampleAccount({ id: 1 }));
-        });
-      });
-      sinon.stub(Account, 'update', () => {
-        return new Promise((resolve, reject) => {
-          reject(createError());
-        });
-      });
+      sinon.stub(Account, 'find', successCallback(createSampleAccount({ id: 1 })));
+      sinon.stub(Account, 'update', errorCallback);
 
       updateAccount(createSampleAccount({ id: 1 }));
     });
