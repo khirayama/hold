@@ -66,6 +66,7 @@ describe('app-action-creators', () => {
         switch (action.type) {
           case types.FETCH_ACCOUNTS:
             assert.strictEqual(action.accounts.length, 0);
+            Account.fetch.restore();
             done();
             break;
         }
@@ -102,6 +103,7 @@ describe('app-action-creators', () => {
               amount: 1000,
               error: null,
             });
+            Account.create.restore();
             done();
             break;
         }
@@ -114,6 +116,64 @@ describe('app-action-creators', () => {
       });
 
       createAccount({ name: 'test', amount: 1000 });
+    });
+
+    it('dispatch FAIL_TO_CREATE_ACCOUNT action', (done) => {
+      subscribe((action) => {
+        switch (action.type) {
+          case types.CREATE_ACCOUNT:
+            assert.deepStrictEqual(action.account, {
+              cid: action.account.cid,
+              id: null,
+              name: 'test',
+              amount: 1000,
+              error: null,
+            });
+            break;
+          case types.FAIL_TO_CREATE_ACCOUNT:
+            assert.deepStrictEqual(action.account, {
+              cid: action.account.cid,
+              id: null,
+              name: 'test',
+              amount: 1000,
+              error: {
+                message: 'something wrong',
+              },
+            });
+            Account.create.restore();
+            done();
+            break;
+        }
+      });
+
+      const stub = sinon.stub(Account, 'create', () => {
+        return new Promise((resolve, reject) => {
+          reject({ message: 'something wrong' });
+        });
+      });
+
+      createAccount({ name: 'test', amount: 1000 });
+    });
+  });
+
+  describe('updateAccount', () => {
+    it('dispatch UPDATE_ACCOUNT action', (done) => {
+      subscribe((action) => {
+        switch (action.type) {
+          case types.UPDATE_ACCOUNT:
+            assert.deepStrictEqual(action.account, {
+              cid: action.account.cid,
+              id: 1,
+              name: 'test',
+              amount: 1000,
+              error: null,
+            });
+            done();
+            break;
+        }
+      });
+
+      updateAccount({ id: 1, name: 'test', amount: 1000 });
     });
   });
 });
