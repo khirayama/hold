@@ -7,7 +7,7 @@ import { dispatch } from '../libs/app-dispatcher';
 import Account from '../resources/account';
 
 
-export function formatAccount(account, error = null) {
+export function _formatAccount(account, error = null) {
   return {
     cid: account.cid || uuid(),
     id: account.id || null,
@@ -21,13 +21,13 @@ export function fetchAccounts() {
   Account.fetch().then((data) => {
     dispatch({
       type: types.FETCH_ACCOUNTS,
-      accounts: data.map((account) => formatAccount(account)),
+      accounts: data.map((account) => _formatAccount(account)),
     });
   });
 }
 
 export function createAccount(entity) {
-  const account = formatAccount(entity);
+  const account = _formatAccount(entity);
 
   dispatch({
     type: types.CREATE_ACCOUNT,
@@ -36,18 +36,18 @@ export function createAccount(entity) {
   Account.create(account).then((data) => {
     dispatch({
       type: types.UPDATE_ACCOUNT,
-      account: formatAccount(Object.assign({}, account, data)),
+      account: _formatAccount(Object.assign({}, account, data)),
     });
   }).catch((error) => {
     dispatch({
       type: types.FAIL_TO_CREATE_ACCOUNT,
-      account: formatAccount(account, error),
+      account: _formatAccount(account, error),
     });
   });
 }
 
 export function updateAccount(entity) {
-  const account = formatAccount(entity);
+  const account = _formatAccount(entity);
 
   dispatch({
     type: types.UPDATE_ACCOUNT,
@@ -58,14 +58,14 @@ export function updateAccount(entity) {
     Account.find(entity.id).then((data) => {
       dispatch({
         type: types.FAIL_TO_UPDATE_ACCOUNT,
-        account: formatAccount(data, error),
+        account: _formatAccount(data, error),
       });
     });
   });
 }
 
 export function deleteAccount(entity) {
-  const account = formatAccount(entity);
+  const account = _formatAccount(entity);
 
   Account.delete(account.id).then(() => {
     dispatch({
@@ -75,7 +75,7 @@ export function deleteAccount(entity) {
   }).catch((error) => {
     dispatch({
       type: types.FAIL_TO_DELETE_ACCOUNT,
-      account: formatAccount(account, error),
+      account: _formatAccount(account, error),
     });
   });
 }
