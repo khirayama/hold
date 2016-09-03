@@ -19,6 +19,17 @@ import types from '../../src/constants/action-types';
 import Account from '../../src/resources/account';
 
 
+function createSampleAccount(entity) {
+  return Object.assign({}, {
+    name: 'test',
+    amount: 1000,
+  }, entity);
+}
+
+function createError() {
+  return { message: 'something wrong' };
+}
+
 describe('app-action-creators', () => {
   beforeEach(() => {
     unsubscribeAll();
@@ -26,15 +37,12 @@ describe('app-action-creators', () => {
 
   describe('_formatAccount', () => {
     it('formatted account without error', () => {
-      const account = _formatAccount({
-        id: 1,
-        name: 'test',
-        amount: 1000
-      });
+      const account = _formatAccount(createSampleAccount());
+
       assert.notStrictEqual(account.cid, null);
       assert.deepStrictEqual(account, {
         cid: account.cid,
-        id: 1,
+        id: null,
         name: 'test',
         amount: 1000,
         error: null,
@@ -42,15 +50,12 @@ describe('app-action-creators', () => {
     });
 
     it('formatted account with error', () => {
-      const account = _formatAccount({
-        id: 1,
-        name: 'test',
-        amount: 1000
-      }, { message: 'something wrong' });
+      const account = _formatAccount(createSampleAccount(), createError());
+
       assert.notStrictEqual(account.cid, null);
       assert.deepStrictEqual(account, {
         cid: account.cid,
-        id: 1,
+        id: null,
         name: 'test',
         amount: 1000,
         error: {
@@ -111,11 +116,11 @@ describe('app-action-creators', () => {
 
       const stub = sinon.stub(Account, 'create', () => {
         return new Promise((resolve) => {
-          resolve({ id: 1, name: 'test', amount: 1000 });
+          resolve(createSampleAccount({ id: 1 }));
         });
       });
 
-      createAccount({ name: 'test', amount: 1000 });
+      createAccount(createSampleAccount());
     });
 
     it('dispatch FAIL_TO_CREATE_ACCOUNT action', (done) => {
@@ -148,11 +153,11 @@ describe('app-action-creators', () => {
 
       const stub = sinon.stub(Account, 'create', () => {
         return new Promise((resolve, reject) => {
-          reject({ message: 'something wrong' });
+          reject(createError());
         });
       });
 
-      createAccount({ name: 'test', amount: 1000 });
+      createAccount(createSampleAccount());
     });
   });
 
@@ -173,7 +178,7 @@ describe('app-action-creators', () => {
         }
       });
 
-      updateAccount({ id: 1, name: 'test', amount: 1000 });
+      updateAccount(createSampleAccount({ id: 1 }));
     });
 
     it('dispatch FAIL_TO_UPDATE_ACCOUNT action', (done) => {
@@ -207,16 +212,16 @@ describe('app-action-creators', () => {
 
       sinon.stub(Account, 'find', () => {
         return new Promise((resolve) => {
-          resolve({ id: 1, name: 'test', amount: 1000 });
+          resolve(createSampleAccount({ id: 1 }));
         });
       });
       sinon.stub(Account, 'update', () => {
         return new Promise((resolve, reject) => {
-          reject({ message: 'something wrong' });
+          reject(createError());
         });
       });
 
-      updateAccount({ id: 1, name: 'test', amount: 1000 });
+      updateAccount(createSampleAccount({ id: 1 }));
     });
   });
 });
