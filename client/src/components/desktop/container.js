@@ -146,7 +146,7 @@ class AccountList extends Component {
       <ul>
         { this.props.accounts.map((account) => {
           return (
-            <AccountListItem key={account.id} account={account} />
+            <AccountListItem key={account.cid} account={account} />
           );
         }) }
       </ul>
@@ -187,21 +187,20 @@ class AccountListItem extends Component {
     this.setState({ isEditing: false });
   }
   _update() {
-    updateAccount({
-      id: this.props.account.id,
+    updateAccount(Object.assign({}, this.props.account, {
       name: this.state.name,
       amount: this.state.amount,
-    });
+    }));
   }
   _recreate() {
-    createAccount({
+    createAccount(Object.assign({}, this.props.account, {
       name: this.state.name,
       amount: this.state.amount,
       error: this.props.account.error,
-    });
+    }));
   }
   _delete() {
-    deleteAccount(this.props.account.id);
+    deleteAccount(this.props.account);
   }
   _onClickAccountListItem() {
     this._edit();

@@ -35,7 +35,7 @@ export class Account {
     return new Promise((resolve, reject) => {
       request.post(this._url(), entity).then((res) => {
         this._create(res.data);
-        resolve(entity);
+        resolve(res.data);
       }).catch((error) => { reject(error); });
     });
   }

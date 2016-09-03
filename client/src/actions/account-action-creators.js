@@ -1,3 +1,5 @@
+import uuid from 'node-uuid';
+
 import types from '../constants/action-types';
 
 import { dispatch } from '../libs/app-dispatcher';
@@ -7,6 +9,7 @@ import Account from '../resources/account'
 
 export function formatAccount(account, error = null) {
   return {
+    cid: account.cid || uuid(),
     id: account.id || null,
     name: account.name || null,
     amount: account.amount || null,
@@ -24,37 +27,34 @@ export function fetchAccounts() {
 }
 
 export function createAccount(entity) {
-  // TODO: Add client uuid to account
-  if (!entity.error) {
-    dispatch({
-      type: types.CREATE_ACCOUNT,
-      account: formatAccount(entity),
-    });
-  } else {
-    dispatch({
-      type: types.UPDATE_ACCOUNT,
-      account: formatAccount(entity),
-    });
-  }
-  Account.create(entity).then((data) => {
+  const account = formatAccount(entity);
+
+  dispatch({
+    type: types.CREATE_ACCOUNT,
+    account,
+  });
+  Account.create(account).then((data) => {
     dispatch({
       type: types.UPDATE_ACCOUNT,
-      account: formatAccount(data),
+      account: formatAccount(Object.assign({}, account, data)),
     });
   }).catch((error) => {
     dispatch({
       type: types.FAIL_TO_CREATE_ACCOUNT,
-      account: formatAccount(entity, error),
+      account: formatAccount(account, error),
     });
   });
 }
 
 export function updateAccount(entity) {
+  const account = formatAccount(entity);
+
   dispatch({
     type: types.UPDATE_ACCOUNT,
-    account: formatAccount(entity),
+    account,
   });
-  Account.update(entity).catch((error) => {
+  Account.update(account).catch((error) => {
+    // Find data to get previous account state
     Account.find(entity.id).then((data) => {
       dispatch({
         type: types.FAIL_TO_UPDATE_ACCOUNT,
@@ -64,19 +64,18 @@ export function updateAccount(entity) {
   });
 }
 
-export function deleteAccount(id) {
-  Account.delete(id).then(() => {
+export function deleteAccount(entity) {
+  const account = formatAccount(entity);
+
+  Account.delete(account.id).then(() => {
     dispatch({
       type: types.DELETE_ACCOUNT,
-      id,
+      account,
     });
   }).catch((error) => {
-    Account.find(id).then((data) => {
-      console.log(data);
-      dispatch({
-        type: types.FAIL_TO_DELETE_ACCOUNT,
-        account: formatAccount(data, error),
-      });
+    dispatch({
+      type: types.FAIL_TO_DELETE_ACCOUNT,
+      account: formatAccount(account, error),
     });
   });
 }

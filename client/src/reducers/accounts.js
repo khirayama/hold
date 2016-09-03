@@ -10,7 +10,7 @@ export function createAccount(accounts, createdAccount) {
 
 export function updateAccount(accounts, updatedAccount) {
   return accounts.map((account) => {
-    if (account.id === updatedAccount.id) {
+    if (account.cid === updatedAccount.cid) {
       return updatedAccount;
     } else {
       return account;
@@ -18,9 +18,9 @@ export function updateAccount(accounts, updatedAccount) {
   });
 }
 
-export function deleteAccount(accounts, id) {
+export function deleteAccount(accounts, deletedAccount) {
   return accounts.filter((account) => {
-    return (account.id !== id);
+    return (account.cid !== deletedAccount.cid);
   });
 }
 
@@ -37,7 +37,7 @@ export default function accounts(state, action) {
     case types.FAIL_TO_UPDATE_ACCOUNT:
       return updateAccount(state, action.account);
     case types.DELETE_ACCOUNT:
-      return deleteAccount(state, action.id);
+      return deleteAccount(state, action.account);
     case types.FAIL_TO_DELETE_ACCOUNT:
       return updateAccount(state, action.account);
     default:

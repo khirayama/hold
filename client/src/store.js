@@ -36,6 +36,7 @@ export default class Store extends MicroStore {
       this.state.accounts = accounts(this.state.accounts, action);
 
       this.dispatchChange();
+      logger.debug(action, this.state);
     });
   }
 }
