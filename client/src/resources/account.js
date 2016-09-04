@@ -85,6 +85,9 @@ export class AccountModel {
   _delete(id) {
     this._cache = this._cache.filter((entity) => (entity.id !== id));
   }
+  _clear() {
+    this._cache = null;
+  }
 }
 
 export default new AccountModel();
