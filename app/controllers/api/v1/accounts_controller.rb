@@ -27,6 +27,7 @@ module Api
       def destroy
         account = current_user.accounts.find(params[:id])
         account.destroy!
+        render json: { id: account.id }
       end
 
       private

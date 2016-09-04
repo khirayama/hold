@@ -39,15 +39,15 @@ export class AccountModel {
     return new Promise((resolve, reject) => {
       request.put(this._url(entity.id), entity).then((res) => {
         this._update(res.data);
-        resolve(entity);
+        resolve(res.data);
       }).catch((error) => { reject(error); });
     });
   }
   delete(id) {
     return new Promise((resolve, reject) => {
-      request.delete(this._url(id)).then(() => {
-        this._delete(id);
-        resolve(id);
+      request.delete(this._url(id)).then((res) => {
+        this._delete(res.data);
+        resolve(res.data);
       }).catch((error) => { reject(error); });
     });
   }
@@ -60,30 +60,44 @@ export class AccountModel {
             resolve(item);
           }
         }
-        resolve(null);
+        this._find(id, resolve, reject);
       });
     }
     return new Promise((resolve, reject) => {
-      request.get(this._url(id)).then((res) => {
-        resolve(res.data);
-      }).catch((error) => { reject(error); });
+      this._find(id, resolve, reject);
     });
+  }
+  _find(id, resolve, reject) {
+    request.get(this._url(id)).then((res) => {
+      this._create(res.data);
+      resolve(res.data);
+    }).catch((error) => { reject(error); });
   }
 
   // for cache
   _create(newEntity) {
+    if (this._cache === null) {
+      this._cache = [];
+    }
     this._cache.push(newEntity);
   }
   _update(newEntity) {
-    this._cache.map((entity) => {
-      if (entity.id === newEntity.id) {
-        return newEntity;
-      }
-      return entity;
-    });
+    if (this._cache === null) {
+      this._cache = [newEntity];
+    } else {
+      this._cache.map((entity) => {
+        if (entity.id === newEntity.id) {
+          return newEntity;
+        }
+        return entity;
+      });
+    }
   }
-  _delete(id) {
-    this._cache = this._cache.filter((entity) => (entity.id !== id));
+  _delete(deletedEntity) {
+    if (this._cache === null) {
+      return;
+    }
+    this._cache = this._cache.filter((entity) => (entity.id !== deletedEntity.id));
   }
   _clear() {
     this._cache = null;

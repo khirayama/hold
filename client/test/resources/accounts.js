@@ -14,6 +14,8 @@ function promiseStub(status, res) {
     return new Promise((resolve, reject) => {
       if (status === 'success') {
         resolve(res);
+      } else if (status === 'error') {
+        reject(res);
       } else {
         reject(res);
       }
@@ -82,6 +84,149 @@ describe('AccountModel', () => {
           assert.deepStrictEqual(res, cache);
           done();
         });
+      });
+    });
+
+    it('error with cache', (done) => {
+      sinon.stub(request, 'get', promiseStub('error', createError()));
+
+      account.fetch().catch((res) => {
+        assert.deepStrictEqual(res, createError());
+        assert.deepStrictEqual(account._cache, null);
+        done();
+      });
+    });
+  });
+
+  describe('create', () => {
+    beforeEach(() => {
+      account._clear();
+    });
+
+    afterEach(() => {
+      request.post.restore();
+    });
+
+    it('success', (done) => {
+      sinon.stub(request, 'post', promiseStub('success', {
+        data: { id: 1, name: 'test', amount: 1000 }
+      }));
+
+      account.create({name: 'test', amount: 1000}).then((res) => {
+        assert.deepStrictEqual(res, {
+          id: 1,
+          name: 'test',
+          amount: 1000,
+        });
+        assert.deepStrictEqual(account._cache, [{
+          id: 1,
+          name: 'test',
+          amount: 1000,
+        }]);
+        done();
+      });
+    });
+
+    it('error', (done) => {
+      sinon.stub(request, 'post', promiseStub('error', createError()));
+
+      account.create({name: 'test', amount: 1000}).catch((error) => {
+        assert.deepStrictEqual(error, createError());
+        assert.deepStrictEqual(account._cache, null);
+        done();
+      });
+    });
+  });
+
+  describe('update', () => {
+    beforeEach(() => {
+      account._clear();
+    });
+
+    afterEach(() => {
+      request.put.restore();
+    });
+
+    it('success', (done) => {
+      sinon.stub(request, 'put', promiseStub('success', {
+        data: { id: 1, name: 'test', amount: 1000 }
+      }));
+
+      account.update({name: 'test', amount: 1000}).then((res) => {
+        assert.deepStrictEqual(res, {
+          id: 1,
+          name: 'test',
+          amount: 1000,
+        });
+        assert.deepStrictEqual(account._cache, [{
+          id: 1,
+          name: 'test',
+          amount: 1000,
+        }]);
+        done();
+      });
+    });
+
+    it('error', (done) => {
+      sinon.stub(request, 'put', promiseStub('error', createError()));
+
+      account.update({name: 'test', amount: 1000}).catch((error) => {
+        assert.deepStrictEqual(error, createError());
+        assert.deepStrictEqual(account._cache, null);
+        done();
+      });
+    });
+  });
+
+  describe('delete', () => {
+    beforeEach(() => {
+      account._clear();
+    });
+
+    afterEach(() => {
+      request.delete.restore();
+    });
+
+    it('success', (done) => {
+      sinon.stub(request, 'delete', promiseStub('success', {
+        data: { id: 1 }
+      }));
+
+      account.delete().then((res) => {
+        assert.deepStrictEqual(res, { id: 1 });
+        assert.deepStrictEqual(account._cache, null);
+        done();
+      });
+    });
+
+    it('error', (done) => {
+      sinon.stub(request, 'delete', promiseStub('error', createError()));
+
+      account.delete().catch((error) => {
+        assert.deepStrictEqual(error, createError());
+        assert.deepStrictEqual(account._cache, null);
+        done();
+      });
+    });
+  });
+
+  describe('find', () => {
+    beforeEach(() => {
+      account._clear();
+    });
+
+    afterEach(() => {
+      request.get.restore();
+    });
+
+    it('success', (done) => {
+      sinon.stub(request, 'get', promiseStub('success', {
+        data: { id: 1, name: 'test', amount: 1000 }
+      }));
+
+      account.find(1).then((res) => {
+        assert.deepStrictEqual(res, { id: 1, name: 'test', amount: 1000 });
+        done();
       });
     });
   });
