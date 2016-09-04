@@ -4,13 +4,13 @@ import request from 'axios';
 export class AccountModel {
   constructor() {
     this._cache = null;
-    this._rootUrl = '/api/v1/accounts';
+    this._resourceUrl = '/api/v1/accounts';
   }
   _url(id = null) {
     if (id != null) {
-      return `${this._rootUrl}/${id}`;
+      return `${this._resourceUrl}/${id}`;
     }
-    return this._rootUrl;
+    return this._resourceUrl;
   }
   fetch(cache = true) {
     if (cache && this._cache !== null) {
