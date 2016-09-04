@@ -2,6 +2,11 @@ import assert from 'power-assert';
 import sinon from 'sinon';
 
 import {
+  createError,
+  promiseStub,
+} from '../test-helper';
+
+import {
   _formatAccount,
   fetchAccounts,
   createAccount,
@@ -24,24 +29,6 @@ function createSampleAccount(entity) {
     name: 'test',
     amount: 1000,
   }, entity);
-}
-
-function createError() {
-  return { message: 'something wrong' };
-}
-
-function successCallback(res) {
-  return () => {
-    return new Promise((resolve) => {
-      resolve(res);
-    });
-  }
-}
-
-function errorCallback() {
-  return new Promise((resolve, reject) => {
-    reject(createError());
-  });
 }
 
 describe('app-action-creators', () => {
@@ -91,7 +78,7 @@ describe('app-action-creators', () => {
         }
       });
 
-      sinon.stub(Account, 'fetch', successCallback([]));
+      sinon.stub(Account, 'fetch', promiseStub('success', []));
 
       fetchAccounts();
     });
@@ -124,7 +111,7 @@ describe('app-action-creators', () => {
         }
       });
 
-      sinon.stub(Account, 'create', successCallback(createSampleAccount({ id: 1 })));
+      sinon.stub(Account, 'create', promiseStub('success', createSampleAccount({ id: 1 })));
 
       createAccount(createSampleAccount());
     });
@@ -157,7 +144,7 @@ describe('app-action-creators', () => {
         }
       });
 
-      sinon.stub(Account, 'create', errorCallback);
+      sinon.stub(Account, 'create', promiseStub('error', createError()));
 
       createAccount(createSampleAccount());
     });
@@ -212,8 +199,8 @@ describe('app-action-creators', () => {
         }
       });
 
-      sinon.stub(Account, 'find', successCallback(createSampleAccount({ id: 1 })));
-      sinon.stub(Account, 'update', errorCallback);
+      sinon.stub(Account, 'find', promiseStub('success', createSampleAccount({ id: 1 })));
+      sinon.stub(Account, 'update', promiseStub('error', createError()));
 
       updateAccount(createSampleAccount({ id: 1 }));
     });

@@ -78,4 +78,32 @@ describe('accounts reducers', () => {
       }]);
     });
   });
+
+  describe('delete', () => {
+    it('Delete account', () => {
+      const newAccounts = deleteAccount(accounts, { cid: 1 });
+
+      assert.deepStrictEqual(accounts, [{
+        cid: 1,
+        name: 'test',
+        amount: 1000
+      }]);
+      assert.deepStrictEqual(newAccounts, []);
+    });
+
+    it('Delete not exist id account', () => {
+      const newAccounts = updateAccount(accounts, { cid: 2 });
+
+      assert.deepStrictEqual(accounts, [{
+        cid: 1,
+        name: 'test',
+        amount: 1000
+      }]);
+      assert.deepStrictEqual(newAccounts, [{
+        cid: 1,
+        name: 'test',
+        amount: 1000
+      }]);
+    });
+  });
 });

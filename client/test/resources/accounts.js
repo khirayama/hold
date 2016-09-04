@@ -4,24 +4,11 @@ import request from 'axios';
 
 import { AccountModel } from '../../src/resources/account';
 
+import {
+  createError,
+  promiseStub,
+} from '../test-helper';
 
-function createError() {
-  return { message: 'something wrong' };
-}
-
-function promiseStub(status, res) {
-  return () => {
-    return new Promise((resolve, reject) => {
-      if (status === 'success') {
-        resolve(res);
-      } else if (status === 'error') {
-        reject(res);
-      } else {
-        reject(res);
-      }
-    });
-  };
-}
 
 describe('AccountModel', () => {
   let account = null;
