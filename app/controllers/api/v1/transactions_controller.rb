@@ -11,6 +11,7 @@ module Api
       end
 
       def create
+        # TODO: It is business logics. Move to model
         transaction = current_user.transactions.build(transaction_params)
 
         from_account = current_user.accounts.find(transaction.from_account_id) if transaction.from_account_id.present?
@@ -27,6 +28,7 @@ module Api
       end
 
       def update
+        # TODO: It is business logics. Move to model
         transaction = current_user.transactions.find(params[:id])
 
         from_account = current_user.accounts.find(transaction.from_account_id) if transaction.from_account_id.present?
@@ -53,6 +55,7 @@ module Api
       end
 
       def destroy
+        # TODO: It is business logics. Move to model
         transaction = current_user.transactions.find(params[:id])
 
         from_account = current_user.accounts.find(transaction.from_account_id) if transaction.from_account_id.present?
