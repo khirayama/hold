@@ -16,6 +16,8 @@ function createSelectElement(element, json) {
   $element.html(html);
 }
 function crud($parent, resources, template, shownUpdateBoxCallback) {
+  shownUpdateBoxCallback = shownUpdateBoxCallback || function() {};
+
   // init
   $parent.find('.update-box').hide();
 
