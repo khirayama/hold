@@ -11,63 +11,49 @@ module Api
       end
 
       def create
-        # TODO: It is business logics. Move to model
         transaction = current_user.transactions.build(transaction_params)
 
-        from_account = current_user.accounts.find(transaction.from_account_id) if transaction.from_account_id.present?
-        to_account = current_user.accounts.find(transaction.to_account_id) if transaction.to_account_id.present?
+       if transaction.save
+          transfer(
+            transaction.from_account_id,
+            transaction.to_account_id,
+            transaction.amount
+          )
 
-        from_account.amount -= transaction.amount if from_account.present?
-        to_account.amount += transaction.amount if to_account.present?
-
-        if transaction.save
-          from_account.save if from_account.present?
-          to_account.save if to_account.present?
           render json: format_transaction(transaction)
         end
       end
 
       def update
-        # TODO: It is business logics. Move to model
         transaction = current_user.transactions.find(params[:id])
 
-        from_account = current_user.accounts.find(transaction.from_account_id) if transaction.from_account_id.present?
-        to_account = current_user.accounts.find(transaction.to_account_id) if transaction.to_account_id.present?
-
-        from_account.amount += transaction.amount if from_account.present?
-        to_account.amount -= transaction.amount if to_account.present?
+        transfer(
+          transaction.to_account_id,
+          transaction.from_account_id,
+          transaction.amount
+        )
 
         if transaction.update(transaction_params)
-          from_account.save if from_account.present?
-          to_account.save if to_account.present?
-
-          from_account = current_user.accounts.find(transaction.from_account_id) if transaction.from_account_id.present?
-          to_account = current_user.accounts.find(transaction.to_account_id) if transaction.to_account_id.present?
-
-          from_account.amount -= transaction.amount if from_account.present?
-          to_account.amount += transaction.amount if to_account.present?
-
-          from_account.save if from_account.present?
-          to_account.save if to_account.present?
+          transfer(
+            transaction.from_account_id,
+            transaction.to_account_id,
+            transaction.amount
+          )
 
           render json: format_transaction(transaction)
         end
       end
 
       def destroy
-        # TODO: It is business logics. Move to model
         transaction = current_user.transactions.find(params[:id])
 
-        from_account = current_user.accounts.find(transaction.from_account_id) if transaction.from_account_id.present?
-        to_account = current_user.accounts.find(transaction.to_account_id) if transaction.to_account_id.present?
+        transfer(
+          transaction.to_account_id,
+          transaction.from_account_id,
+          transaction.amount
+        )
 
-        from_account.amount += transaction.amount if from_account.present?
-        to_account.amount -= transaction.amount if to_account.present?
-
-        if transaction.destroy!
-          from_account.save if from_account.present?
-          to_account.save if to_account.present?
-        end
+        transaction.destroy!
       end
 
       private
@@ -112,6 +98,14 @@ module Api
             }
           end
           new_transaction
+        end
+
+        def transfer(from_account_id, to_account_id, amount)
+          from_account = current_user.accounts.find(from_account_id) if from_account_id.present?
+          to_account = current_user.accounts.find(to_account_id) if to_account_id.present?
+
+          from_account.decrease(amount) if from_account.present?
+          to_account.increase(amount) if to_account.present?
         end
     end
   end
