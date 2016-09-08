@@ -106,6 +106,9 @@ module Api
 
           from_account.decrease(amount) if from_account.present?
           to_account.increase(amount) if to_account.present?
+
+          from_account.save if from_account.present?
+          to_account.save if to_account.present?
         end
     end
   end

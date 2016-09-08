@@ -6,11 +6,9 @@ class Account < ApplicationRecord
 
   def increase(amount)
     self.amount += amount
-    self.save
   end
 
   def decrease(amount)
     self.amount -= amount
-    self.save
   end
 end
