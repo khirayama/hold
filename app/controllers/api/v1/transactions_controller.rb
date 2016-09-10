@@ -104,11 +104,13 @@ module Api
           from_account = current_user.accounts.find(from_account_id) if from_account_id.present?
           to_account = current_user.accounts.find(to_account_id) if to_account_id.present?
 
-          from_account.decrease(amount) if from_account.present?
-          to_account.increase(amount) if to_account.present?
+          Account.transaction do
+            from_account.decrement!(:amount, amount) if from_account.present?
+            to_account.increment!(:amount, amount) if to_account.present?
+          end
 
-          from_account.save if from_account.present?
-          to_account.save if to_account.present?
+          # from_account.save if from_account.present?
+          # to_account.save if to_account.present?
         end
     end
   end
