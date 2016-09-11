@@ -14,11 +14,10 @@ module Api
         transaction = current_user.transactions.build(transaction_params)
 
        if transaction.save
-          transfer(
-            transaction.from_account_id,
-            transaction.to_account_id,
-            transaction.amount
-          )
+          from_account = current_user.accounts.find(from_account_id) if from_account_id.present?
+          to_account = current_user.accounts.find(to_account_id) if to_account_id.present?
+
+          from_account.transfer(to_account, transaction.amount)
 
           render json: format_transaction(transaction)
         end
@@ -27,18 +26,16 @@ module Api
       def update
         transaction = current_user.transactions.find(params[:id])
 
-        transfer(
-          transaction.to_account_id,
-          transaction.from_account_id,
-          transaction.amount
-        )
+        from_account = current_user.accounts.find(from_account_id) if from_account_id.present?
+        to_account = current_user.accounts.find(to_account_id) if to_account_id.present?
+
+        to_account.transfer(from_account, transaction.amount)
 
         if transaction.update(transaction_params)
-          transfer(
-            transaction.from_account_id,
-            transaction.to_account_id,
-            transaction.amount
-          )
+          from_account = current_user.accounts.find(from_account_id) if from_account_id.present?
+          to_account = current_user.accounts.find(to_account_id) if to_account_id.present?
+
+          from_account.transfer(to_account, transaction.amount)
 
           render json: format_transaction(transaction)
         end
@@ -47,11 +44,10 @@ module Api
       def destroy
         transaction = current_user.transactions.find(params[:id])
 
-        transfer(
-          transaction.to_account_id,
-          transaction.from_account_id,
-          transaction.amount
-        )
+        from_account = current_user.accounts.find(from_account_id) if from_account_id.present?
+        to_account = current_user.accounts.find(to_account_id) if to_account_id.present?
+
+        to_account.transfer(from_account, transaction.amount)
 
         transaction.destroy!
       end
@@ -98,19 +94,6 @@ module Api
             }
           end
           new_transaction
-        end
-
-        def transfer(from_account_id, to_account_id, amount)
-          from_account = current_user.accounts.find(from_account_id) if from_account_id.present?
-          to_account = current_user.accounts.find(to_account_id) if to_account_id.present?
-
-          Account.transaction do
-            from_account.decrement!(:amount, amount) if from_account.present?
-            to_account.increment!(:amount, amount) if to_account.present?
-          end
-
-          # from_account.save if from_account.present?
-          # to_account.save if to_account.present?
         end
     end
   end
