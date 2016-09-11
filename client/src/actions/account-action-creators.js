@@ -10,7 +10,7 @@ import Account from '../resources/account';
 export function _formatAccount(account, error = null) {
   return {
     cid: account.cid || uuid(),
-    id: account.id || '',
+    id: account.id || null,
     name: account.name || '',
     amount: account.amount || 0,
     error,
