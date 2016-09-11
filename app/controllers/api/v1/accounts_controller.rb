@@ -12,7 +12,7 @@ module Api
 
       def create
         account = current_user.accounts.build(account_params)
-        if account.save
+        if account.save!
           render json: omit_account(account)
         end
       end
