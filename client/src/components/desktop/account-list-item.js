@@ -34,8 +34,8 @@ export default class AccountListItem extends Component {
 
     this.setState({
       isEditing: true,
-      name: account.name || '',
-      amount: account.amount || '',
+      name: account.name,
+      amount: account.amount,
     });
   }
   _done() {
