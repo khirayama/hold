@@ -12,6 +12,9 @@ export class AccountModel {
     }
     return this._resourceUrl;
   }
+  get accounts() {
+    return this._cache;
+  }
   fetch(cache = true) {
     if (cache && this._cache !== null) {
       return new Promise((resolve) => {
@@ -72,6 +75,16 @@ export class AccountModel {
       this._create(res.data);
       resolve(res.data);
     }).catch((error) => { reject(error); });
+  }
+
+  calcTotalAmount() {
+    let totalAmount = 0;
+    if (this._cache !== null) {
+      this.accounts.forEach((account) => {
+        totalAmount += account.amount || 0;
+      });
+    }
+    return totalAmount;
   }
 
   // for cache

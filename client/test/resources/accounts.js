@@ -217,4 +217,17 @@ describe('AccountModel', () => {
       });
     });
   });
+
+  describe('calcTotalAmount', () => {
+    beforeEach(() => {
+      account._cache = [
+        {id: 54, name: "Wallet", amount: 1000},
+        {id: 57, name: "Bank", amount: 1000}
+      ];
+    });
+    it('calc total value', () => {
+      const totalAmount = account.calcTotalAmount();
+      assert.deepStrictEqual(totalAmount, 2000);
+    });
+  });
 });
