@@ -41,8 +41,17 @@ export default class Container extends Component {
 
     return (
       <div>
-        <AccountList accounts={state.accounts} />
-        <AccountCreateForm />
+        <section className="account">
+          <h2>Accounts</h2>
+          <AccountList accounts={state.accounts} />
+          <AccountCreateForm />
+        </section>
+        <section className="transaction-category">
+          <h2>Transaction category</h2>
+        </section>
+        <section className="transaction">
+          <h2>Transaction</h2>
+        </section>
       </div>
     );
   }
