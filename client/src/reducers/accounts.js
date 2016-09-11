@@ -21,7 +21,7 @@ export function deleteAccount(accounts, deletedAccount) {
   return accounts.filter((account) => (account.cid !== deletedAccount.cid));
 }
 
-export default function _accounts(state, action) {
+export default function accountReducer(state, action) {
   switch (action.type) {
     case types.FETCH_ACCOUNTS:
       return action.accounts;
@@ -41,4 +41,3 @@ export default function _accounts(state, action) {
       return state.concat() || [];
   }
 }
-

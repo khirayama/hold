@@ -5,7 +5,7 @@ import { subscribe } from './libs/app-dispatcher';
 
 import logger from './utils/logger';
 
-import accounts from './reducers/accounts';
+import accountsReducer from './reducers/accounts';
 
 
 export default class Store extends MicroStore {
@@ -35,7 +35,7 @@ export default class Store extends MicroStore {
           break;
       }
 
-      this.state.accounts = accounts(this.state.accounts, action);
+      this.state.accounts = accountsReducer(this.state.accounts, action);
 
       this.dispatchChange();
       logger.debug(action, this.state);
