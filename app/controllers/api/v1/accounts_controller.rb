@@ -19,7 +19,7 @@ module Api
 
       def update
         account = current_user.accounts.find(params[:id])
-        if account.update(account_params)
+        if account.update!(account_params)
           render json: omit_account(account)
         end
       end

@@ -58,7 +58,10 @@ export function updateAccount(entity) {
     Account.find(entity.id).then((data) => {
       dispatch({
         type: types.FAIL_TO_UPDATE_ACCOUNT,
-        account: _formatAccount(data, error),
+        account: _formatAccount(
+          Object.assign({}, account, data),
+          error
+        ),
       });
     });
   });
