@@ -8,6 +8,7 @@ class CreateTransactions < ActiveRecord::Migration[5.0]
       t.column :amount, 'int unsigned', null: false
       t.date :payment_date
       t.date :transaction_date
+      t.string :note
 
       t.timestamps
     end

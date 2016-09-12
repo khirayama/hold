@@ -4,4 +4,5 @@ class Transaction < ApplicationRecord
   validates :amount, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, presence: true
   validates :payment_date, presence: true
   validates :transaction_date, presence: true
+  validates :note, length: { maximum: 200 }
 end
