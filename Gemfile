@@ -1,12 +1,14 @@
 source 'https://rubygems.org'
 
-
 gem 'rails', '~> 5.0.0'
 gem 'sqlite3'
 gem 'puma', '~> 3.0'
 
 gem 'omniauth'
 gem 'omniauth-twitter'
+
+# for static pages
+gem 'slim-rails'
 
 group :development, :test do
   gem 'pry-rails'
