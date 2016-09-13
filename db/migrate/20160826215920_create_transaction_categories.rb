@@ -3,8 +3,8 @@ class CreateTransactionCategories < ActiveRecord::Migration[5.0]
     create_table :transaction_categories do |t|
       t.integer :user_id, null: false
       t.string :name, null: false
-      t.string :payment, default: true, null: false
-      t.string :income, default: false, null: false
+      t.boolean :payment, default: true, null: false
+      t.boolean :income, default: false, null: false
 
       t.timestamps
     end

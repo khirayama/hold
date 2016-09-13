@@ -3,7 +3,7 @@ class CreateAccounts < ActiveRecord::Migration[5.0]
     create_table :accounts do |t|
       t.integer :user_id, null: false
       t.string :name
-      t.column :amount, 'int unsigned', null: false
+      t.float :amount, null: false
 
       t.timestamps
     end

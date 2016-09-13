@@ -15,19 +15,19 @@ ActiveRecord::Schema.define(version: 20160828021215) do
   create_table "accounts", force: :cascade do |t|
     t.integer  "user_id",    null: false
     t.string   "name"
-    t.integer  "amount",     null: false
+    t.float    "amount",     null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_accounts_on_user_id"
   end
 
   create_table "transaction_categories", force: :cascade do |t|
-    t.integer  "user_id",                  null: false
-    t.string   "name",                     null: false
-    t.string   "payment",    default: "t", null: false
-    t.string   "income",     default: "f", null: false
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.integer  "user_id",                    null: false
+    t.string   "name",                       null: false
+    t.boolean  "payment",    default: true,  null: false
+    t.boolean  "income",     default: false, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.index ["user_id"], name: "index_transaction_categories_on_user_id"
   end
 
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20160828021215) do
     t.string   "from_account_id"
     t.string   "to_account_id"
     t.string   "transaction_category_id"
-    t.integer  "amount",                  null: false
+    t.float    "amount",                  null: false
     t.date     "payment_date"
     t.date     "transaction_date"
     t.string   "note"

@@ -13,6 +13,6 @@ RSpec.describe Account, type: :model do
 
   describe "#amount" do
     it { should validate_presence_of(:amount) }
-    it { should validate_numericality_of(:amount).only_integer.is_greater_than_or_equal_to(0) }
+    it { should validate_numericality_of(:amount).is_greater_than_or_equal_to(0) }
   end
 end
