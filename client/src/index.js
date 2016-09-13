@@ -26,11 +26,11 @@ window.addEventListener('load', () => {
 
   if (isMobileUI()) {
     logger.info(`Start app for mobile at ${new Date()}`);
-    loadStyle('mobile/index.css');
+    loadStyle('/mobile/index.css');
     ReactDOM.render(<MobileContainer store={store} />, document.querySelector('#app'));
   } else {
     logger.info(`Start app for desktop at ${new Date()}`);
-    loadStyle('desktop/index.css');
+    loadStyle('/desktop/index.css');
     ReactDOM.render(<DesktopContainer store={store} />, document.querySelector('#app'));
   }
 });

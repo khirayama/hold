@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get '/' => 'static_pages#home'
+  get '/app/*pathname' => 'static_pages#app'
+
   namespace :api, { format: 'json' } do
     namespace :v1 do
       get '/current_user_information' => 'application#current_user_information'

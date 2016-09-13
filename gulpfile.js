@@ -50,7 +50,7 @@ var options = {
 function buildMarkups(isWatch) {
   function build() {
     console.log('build: markups');
-    return gulp.src([SRC_ROOT + '/index.jade', SRC_ROOT + '/styleguide.jade'])
+    return gulp.src([SRC_ROOT + '/app.jade', SRC_ROOT + '/styleguide.jade'])
       .pipe(plumber())
       .pipe(jade())
       .pipe(gulp.dest(DIST_ROOT));
@@ -59,7 +59,7 @@ function buildMarkups(isWatch) {
   if (isWatch) {
     return function() {
       build();
-      gulp.watch([SRC_ROOT + '/index.jade', SRC_ROOT + '/styleguide.jade'], build);
+      gulp.watch([SRC_ROOT + '/app.jade', SRC_ROOT + '/styleguide.jade'], build);
     };
   } else {
     return function() {
