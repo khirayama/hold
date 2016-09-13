@@ -14,7 +14,9 @@ Bundler.require(*Rails.groups)
 
 module Hold
   class Application < Rails::Application
+    config.i18n.default_locale = :en
     config.time_zone = 'Tokyo'
+    config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.api_only = true
   end
 end
