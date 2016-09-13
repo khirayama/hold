@@ -22,12 +22,11 @@ ActiveRecord::Schema.define(version: 20160828021215) do
   end
 
   create_table "transaction_categories", force: :cascade do |t|
-    t.integer  "user_id",                    null: false
-    t.string   "name",                       null: false
-    t.boolean  "payment",    default: true,  null: false
-    t.boolean  "income",     default: false, null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.integer  "user_id",                              null: false
+    t.string   "name",                                 null: false
+    t.string   "transaction_type", default: "payment", null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.index ["user_id"], name: "index_transaction_categories_on_user_id"
   end
 

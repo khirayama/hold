@@ -37,7 +37,8 @@ module Api
         def omit_transaction_category(transaction_category)
           {
             id: transaction_category.id,
-            name: transaction_category.name
+            name: transaction_category.name,
+            transaction_type: transaction_category.transaction_type
           }
         end
     end

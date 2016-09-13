@@ -19,22 +19,22 @@ module Api
 
         def create_initial_transaction_categories
           # Payment
-          current_user.transaction_categories.create(name: "Food", payment: true, income: false)
-          current_user.transaction_categories.create(name: "Daily goods", payment: true, income: false)
-          current_user.transaction_categories.create(name: "Transport", payment: true, income: false)
-          current_user.transaction_categories.create(name: "Network", payment: true, income: false)
-          current_user.transaction_categories.create(name: "Utilities", payment: true, income: false)
-          current_user.transaction_categories.create(name: "Home", payment: true, income: false)
-          current_user.transaction_categories.create(name: "Socializing", payment: true, income: false)
-          current_user.transaction_categories.create(name: "Hobbies", payment: true, income: false)
-          current_user.transaction_categories.create(name: "Education", payment: true, income: false)
-          current_user.transaction_categories.create(name: "Medical", payment: true, income: false)
-          current_user.transaction_categories.create(name: "Other", payment: true, income: false)
+          current_user.transaction_categories.create(name: "Food", transaction_type: :payment)
+          current_user.transaction_categories.create(name: "Daily goods", transaction_type: :payment)
+          current_user.transaction_categories.create(name: "Transport", transaction_type: :payment)
+          current_user.transaction_categories.create(name: "Network", transaction_type: :payment)
+          current_user.transaction_categories.create(name: "Utilities", transaction_type: :payment)
+          current_user.transaction_categories.create(name: "Home", transaction_type: :payment)
+          current_user.transaction_categories.create(name: "Socializing", transaction_type: :payment)
+          current_user.transaction_categories.create(name: "Hobbies", transaction_type: :payment)
+          current_user.transaction_categories.create(name: "Education", transaction_type: :payment)
+          current_user.transaction_categories.create(name: "Medical", transaction_type: :payment)
+          current_user.transaction_categories.create(name: "Other", transaction_type: :payment)
 
           # Income
-          current_user.transaction_categories.create(name: "Salary", payment: false, income: true)
-          current_user.transaction_categories.create(name: "Bonus", payment: false, income: true)
-          current_user.transaction_categories.create(name: "Other", payment: false, income: true)
+          current_user.transaction_categories.create(name: "Salary", transaction_type: :income)
+          current_user.transaction_categories.create(name: "Bonus", transaction_type: :income)
+          current_user.transaction_categories.create(name: "Other", transaction_type: :income)
         end
     end
   end
