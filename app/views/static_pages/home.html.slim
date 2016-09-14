@@ -1,1 +1,12 @@
-h1 home
+form(method="GET" action="/locale")
+  - if I18n.locale == :ja
+    input(type="hidden" name="locale" value="en")
+    button ENGLISH
+  - else
+    input(type="hidden" name="locale" value="ja")
+    button 日本語
+
+h1 Hold
+p
+  = t('home.catchphrase')
+a(href="/api/v1/auth/twitter") Sign in with twitter

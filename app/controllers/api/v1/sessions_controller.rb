@@ -7,7 +7,7 @@ module Api
 
         create_initial_transaction_categories
 
-        redirect_to '/'
+        redirect_to '/app'
       end
 
       def destroy
