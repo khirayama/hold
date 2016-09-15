@@ -1,9 +1,6 @@
   class StaticPagesController < ApplicationController
 
     def home
-      locale = cookies[:locale] || I18n.locale
-      I18n.locale = locale
-      cookies[:locale] = locale
     end
 
     def app
