@@ -1,4 +1,5 @@
 form(method="GET" action="/locale")
+  = I18n.locale
   - if I18n.locale == :ja
     input(type="hidden" name="locale" value="en")
     button ENGLISH
