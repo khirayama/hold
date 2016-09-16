@@ -1,6 +1,6 @@
 Rails.application.config.middleware.use OmniAuth::Builder do
   configure do |config|
-    config.path_prefix = '/api/v1/auth'
+    config.path_prefix = '/auth'
   end
 
   provider :twitter,

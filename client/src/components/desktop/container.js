@@ -41,6 +41,7 @@ export default class Container extends Component {
 
     return (
       <div>
+        <a href="/logout">Sign out</a>
         <section className="account">
           <h2>Accounts</h2>
           <AccountList accounts={state.accounts} />

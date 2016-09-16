@@ -1,10 +1,9 @@
   class StaticPagesController < ApplicationController
 
     def home
-    end
-
-    def app
-      render :file => '/public/app'
+      if logged_in?
+        render :file => '/public/app'
+      end
     end
 
     def locale
