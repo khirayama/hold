@@ -29,27 +29,6 @@ module Api
         transaction_category.destroy!
       end
 
-      # Model?
-      def create_initial_transaction_categories
-        # Payment
-        current_user.transaction_categories.create(name: "Food", transaction_type: :payment)
-        current_user.transaction_categories.create(name: "Daily goods", transaction_type: :payment)
-        current_user.transaction_categories.create(name: "Transport", transaction_type: :payment)
-        current_user.transaction_categories.create(name: "Network", transaction_type: :payment)
-        current_user.transaction_categories.create(name: "Utilities", transaction_type: :payment)
-        current_user.transaction_categories.create(name: "Home", transaction_type: :payment)
-        current_user.transaction_categories.create(name: "Socializing", transaction_type: :payment)
-        current_user.transaction_categories.create(name: "Hobbies", transaction_type: :payment)
-        current_user.transaction_categories.create(name: "Education", transaction_type: :payment)
-        current_user.transaction_categories.create(name: "Medical", transaction_type: :payment)
-        current_user.transaction_categories.create(name: "Other", transaction_type: :payment)
-
-        # Income
-        current_user.transaction_categories.create(name: "Salary", transaction_type: :income)
-        current_user.transaction_categories.create(name: "Bonus", transaction_type: :income)
-        current_user.transaction_categories.create(name: "Other", transaction_type: :income)
-      end
-
       private
         def transaction_category_params
           params.permit(:id, :name)
