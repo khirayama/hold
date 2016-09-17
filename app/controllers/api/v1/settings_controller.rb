@@ -10,7 +10,7 @@ module Api
 
       private
         def setting_params
-          params.permit(:id, :currency_code, :start_date, :start_date_skip_option)
+          params.permit(:id, :language, :currency_code, :start_date, :start_date_skip_option)
         end
     end
   end
