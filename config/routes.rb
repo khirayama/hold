@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   namespace :api, { format: 'json' } do
     namespace :v1 do
-      get '/current_user_information' => 'application#current_user_information'
+      get '/user_status' => 'application#user_status'
 
       resources :accounts
       resources :transaction_categories
