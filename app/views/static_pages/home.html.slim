@@ -1,13 +1,10 @@
-form(method="GET" action="/locale")
-  = I18n.locale
-  - if I18n.locale == :ja
-    input(type="hidden" name="locale" value="en")
-    button ENGLISH
-  - else
-    input(type="hidden" name="locale" value="ja")
-    button 日本語
-
 h1 Hold
 p
   = t('home.catchphrase')
 a(href="/auth/twitter") Sign in with twitter
+
+ul
+  li
+    a(href="?lang=en") ENGLISH
+  li
+    a(href="?lang=ja") 日本語

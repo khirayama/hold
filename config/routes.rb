@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
   get '/' => 'static_pages#home'
-  get '/app' => 'static_pages#app'
-  get '/app/*pathname' => 'static_pages#app'
 
   get '/auth/:provider/callback' => 'sessions#create'
   get '/logout' => 'sessions#destroy'
