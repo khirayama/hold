@@ -24,8 +24,4 @@ class ApplicationController < ActionController::Base
         .select { |_| I18n::available_locales.include?(_) }
         .first
     end
-
-    def default_url_options(options = {})
-      { lang: I18n.locale }
-    end
 end
