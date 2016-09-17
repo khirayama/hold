@@ -10,13 +10,7 @@ module Api
           id: current_user.id,
           provider: current_user.provider,
           nickname: current_user.nickname,
-          image_url: current_user.image_url,
-          setting: {
-            language: setting.language,
-            currency_code: setting.currency_code,
-            start_date: setting.start_date,
-            start_date_skip_option: setting.start_date_skip_option
-          }
+          image_url: current_user.image_url
         }
       end
 
