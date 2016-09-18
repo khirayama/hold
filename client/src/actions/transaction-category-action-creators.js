@@ -46,3 +46,40 @@ export function createTransactionCategory(entity) {
     });
   });
 }
+
+export function updateTransactionCategory(entity) {
+  const transactionCategory = _formatTransactionCategory(entity);
+
+  dispatch({
+    type: types.UPDATE_TRANSACTION_CATEGORY,
+    transactionCategory,
+  });
+  TransactionCategory.update(transactionCategory).catch((error) => {
+    // Find data to get previous transaction category state
+    TransactionCategory.find(entity.id).then((data) => {
+      dispatch({
+        type: types.FAIL_TO_UPDATE_TRANSACTION_CATEGORY,
+        transactionCategory: _formatTransactionCategory(
+          Object.assign({}, transactionCategory, data),
+          error
+        ),
+      });
+    });
+  });
+}
+
+export function deleteTransactionCategory(entity) {
+  const transactionCategory = _formatTransactionCategory(entity);
+
+  TransactionCategory.delete(transactionCategory.id).then(() => {
+    dispatch({
+      type: types.DELETE_TRANSACTION_CATEGORY,
+      transactionCategory,
+    });
+  }).catch((error) => {
+    dispatch({
+      type: types.FAIL_TO_DELETE_TRANSACTION_CATEGORY,
+      transactionCategory: _formatTransactionCategory(transactionCategory, error),
+    });
+  });
+}

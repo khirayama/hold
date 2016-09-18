@@ -9,6 +9,7 @@ import { fetchTransactionCategories } from '../../actions/transaction-category-a
 
 import AccountList from './account-list';
 import AccountCreateForm from './account-create-form';
+import TransactionCategoryList from './transaction-category-list';
 
 
 export default class Container extends Component {
@@ -53,6 +54,7 @@ export default class Container extends Component {
         </section>
         <section className="transaction-category">
           <h2>Transaction category</h2>
+          <TransactionCategoryList transactionCategories={state.transactionCategories} />
         </section>
         <section className="transaction">
           <h2>Transaction</h2>
