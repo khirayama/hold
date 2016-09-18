@@ -8,6 +8,7 @@ import {
   fetchUserSetting,
 } from '../../actions/user-action-creators';
 import { fetchAccounts } from '../../actions/account-action-creators';
+import { fetchTransactionCategories } from '../../actions/transaction-category-action-creators';
 
 import AccountList from './account-list';
 import AccountCreateForm from './account-create-form';
@@ -27,9 +28,10 @@ export default class Container extends Component {
   componentDidMount() {
     this.props.store.addChangeListener(this.updateState);
     startDesktopApp(location.pathname);
-    fetchUserStatus()
-    fetchUserSetting()
+    fetchUserStatus();
+    fetchUserSetting();
     fetchAccounts();
+    fetchTransactionCategories();
   }
 
   componentWillUnmount() {

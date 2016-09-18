@@ -4,7 +4,7 @@ import request from 'axios';
 export class UserStatusModel {
   constructor() {
     this._cache = null;
-    this._resourceUrl = '/api/v1/user_status'
+    this._resourceUrl = '/api/v1/user_status';
   }
   _url(id = null) {
     if (id != null) {

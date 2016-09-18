@@ -4,8 +4,9 @@ class ApplicationController < ActionController::Base
       !!session[:user_id]
     end
 
-    def set_locale
-      I18n.locale = locale_in_params || locale_in_accept_language || I18n.default_locale
+    def update_locale(locale = nil)
+      I18n.locale = locale || locale_in_params || cookies[:_locale] || locale_in_accept_language || I18n.default_locale
+      cookies[:_locale] = I18n.locale
     end
 
     def locale_in_params

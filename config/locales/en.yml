@@ -1,3 +1,17 @@
 en:
   home:
     catchphrase: "Simple personal financial management app"
+  transaction_categories:
+    foods: 'Foods'
+    daily_goods: 'Daily goods'
+    transport: 'Transport'
+    network: 'Network'
+    utilities: 'Utilities'
+    home: 'Home'
+    socializing: 'Socializing'
+    hobbies: 'Hobbies'
+    education: 'Education'
+    medical: 'Medical'
+    salary: 'Salary'
+    bonus: 'Bonus'
+    other: 'Other'

@@ -1,3 +1,17 @@
 ja:
   home:
     catchphrase: "シンプルな家計簿"
+  transaction_categories:
+    foods: '食費'
+    daily_goods: '日用品'
+    transport: '交通費'
+    network: '通信費'
+    utilities: '光熱費'
+    home: '家賃'
+    socializing: '交際費'
+    hobbies: '娯楽費'
+    education: '教育費'
+    medical: '医療費'
+    salary: '給与'
+    bonus: '賞与'
+    other: 'その他'

@@ -4,7 +4,7 @@
       if logged_in?
         render :file => '/public/app'
       else
-        set_locale
+        update_locale
       end
     end
   end

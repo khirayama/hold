@@ -4,22 +4,20 @@ class TransactionCategory < ApplicationRecord
   validates :name, length: { maximum: 50 }, presence: true
 
   def self.create_initial_transaction_categories(user)
-    # Payment
-    user.transaction_categories.create(name: "Food", transaction_type: :payment)
-    user.transaction_categories.create(name: "Daily goods", transaction_type: :payment)
-    user.transaction_categories.create(name: "Transport", transaction_type: :payment)
-    user.transaction_categories.create(name: "Network", transaction_type: :payment)
-    user.transaction_categories.create(name: "Utilities", transaction_type: :payment)
-    user.transaction_categories.create(name: "Home", transaction_type: :payment)
-    user.transaction_categories.create(name: "Socializing", transaction_type: :payment)
-    user.transaction_categories.create(name: "Hobbies", transaction_type: :payment)
-    user.transaction_categories.create(name: "Education", transaction_type: :payment)
-    user.transaction_categories.create(name: "Medical", transaction_type: :payment)
-    user.transaction_categories.create(name: "Other", transaction_type: :payment)
+    user.transaction_categories.create({ name: I18n.t('transaction_categories.foods'), transaction_type: :payment })
+    user.transaction_categories.create({ name: I18n.t('transaction_categories.dialy_goods'), transaction_type: :payment })
+    user.transaction_categories.create({ name: I18n.t('transaction_categories.transport'), transaction_type: :payment })
+    user.transaction_categories.create({ name: I18n.t('transaction_categories.network'), transaction_type: :payment })
+    user.transaction_categories.create({ name: I18n.t('transaction_categories.utilities'), transaction_type: :payment })
+    user.transaction_categories.create({ name: I18n.t('transaction_categories.home'), transaction_type: :payment })
+    user.transaction_categories.create({ name: I18n.t('transaction_categories.socializing'), transaction_type: :payment })
+    user.transaction_categories.create({ name: I18n.t('transaction_categories.hobbies'), transaction_type: :payment })
+    user.transaction_categories.create({ name: I18n.t('transaction_categories.education'), transaction_type: :payment })
+    user.transaction_categories.create({ name: I18n.t('transaction_categories.medical'), transaction_type: :payment })
+    user.transaction_categories.create({ name: I18n.t('transaction_categories.other'), transaction_type: :payment })
 
-    # Income
-    user.transaction_categories.create(name: "Salary", transaction_type: :income)
-    user.transaction_categories.create(name: "Bonus", transaction_type: :income)
-    user.transaction_categories.create(name: "Other", transaction_type: :income)
+    user.transaction_categories.create({ name: I18n.t('transaction_categories.salary'), transaction_type: :income })
+    user.transaction_categories.create({ name: I18n.t('transaction_categories.bonus'), transaction_type: :income })
+    user.transaction_categories.create({ name: I18n.t('transaction_categories.other'), transaction_type: :income })
   end
 end
