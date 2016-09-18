@@ -70,15 +70,16 @@ export function updateAccount(entity) {
 export function deleteAccount(entity) {
   const account = _formatAccount(entity);
 
-  Account.delete(account.id).then(() => {
-    dispatch({
-      type: types.DELETE_ACCOUNT,
-      account,
-    });
-  }).catch((error) => {
-    dispatch({
-      type: types.FAIL_TO_DELETE_ACCOUNT,
-      account: _formatAccount(account, error),
-    });
+  dispatch({
+    type: types.DELETE_ACCOUNT,
+    account,
   });
+  if (account.id !== null) {
+    Account.delete(account.id).catch((error) => {
+      dispatch({
+        type: types.FAIL_TO_DELETE_ACCOUNT,
+        account: _formatAccount(account, error),
+      });
+    });
+  }
 }

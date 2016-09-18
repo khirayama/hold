@@ -79,15 +79,16 @@ export function updateTransactionCategory(entity) {
 export function deleteTransactionCategory(entity) {
   const transactionCategory = _formatTransactionCategory(entity);
 
-  TransactionCategory.delete(transactionCategory.id).then(() => {
-    dispatch({
-      type: types.DELETE_TRANSACTION_CATEGORY,
-      transactionCategory,
-    });
-  }).catch((error) => {
-    dispatch({
-      type: types.FAIL_TO_DELETE_TRANSACTION_CATEGORY,
-      transactionCategory: _formatTransactionCategory(transactionCategory, error),
-    });
+  dispatch({
+    type: types.DELETE_TRANSACTION_CATEGORY,
+    transactionCategory,
   });
+  if (transactionCategory.id !== null) {
+    TransactionCategory.delete(transactionCategory.id).catch((error) => {
+      dispatch({
+        type: types.FAIL_TO_DELETE_TRANSACTION_CATEGORY,
+        transactionCategory: _formatTransactionCategory(transactionCategory, error),
+      });
+    });
+  }
 }
