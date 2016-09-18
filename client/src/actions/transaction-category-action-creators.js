@@ -12,8 +12,16 @@ export function _formatTransactionCategory(transactionCategory, error = null) {
     cid: transactionCategory.cid || uuid(),
     id: transactionCategory.id || null,
     name: transactionCategory.name || '',
-    transactionType: transactionCategory.transaction_type || '',
+    transactionType: transactionCategory.transaction_type || transactionCategory.transactionType ||  '',
     error,
+  };
+}
+
+export function _formatRequest(transactionCategory) {
+  return {
+    id: transactionCategory.id,
+    name: transactionCategory.name,
+    transaction_type: transactionCategory.transactionType,
   };
 }
 
@@ -34,7 +42,7 @@ export function createTransactionCategory(entity) {
     transactionCategory,
   });
 
-  TransactionCategory.create(transactionCategory).then((data) => {
+  TransactionCategory.create(_formatRequest(transactionCategory)).then((data) => {
     dispatch({
       type: types.UPDATE_TRANSACTION_CATEGORY,
       transactionCategory: _formatTransactionCategory(Object.assign({}, transactionCategory, data)),
@@ -54,7 +62,7 @@ export function updateTransactionCategory(entity) {
     type: types.UPDATE_TRANSACTION_CATEGORY,
     transactionCategory,
   });
-  TransactionCategory.update(transactionCategory).catch((error) => {
+  TransactionCategory.update(_formatRequest(transactionCategory)).catch((error) => {
     // Find data to get previous transaction category state
     TransactionCategory.find(entity.id).then((data) => {
       dispatch({

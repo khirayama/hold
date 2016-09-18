@@ -18,10 +18,12 @@ export default class TransactionCategoryListItem extends Component {
     this.state = {
       isEditing: false,
       name: transactionCategory.name,
+      transactionType: transactionCategory.transactionType,
     };
 
     this.onClickTransactionCategoryListItem = this._onClickTransactionCategoryListItem.bind(this);
     this.onChangeNameInput = this._onChangeNameInput.bind(this);
+    this.onChangeTransactionTypeSelect = this._onChangeTransactionTypeSelect.bind(this);
     this.onClickUpdateButton = this._onClickUpdateButton.bind(this);
     this.onClickDeleteButton = this._onClickDeleteButton.bind(this);
     this.onKeyDownNameInput = this._onKeyDownNameInput.bind(this);
@@ -33,6 +35,7 @@ export default class TransactionCategoryListItem extends Component {
     this.setState({
       isEditing: true,
       name: transactionCategory.name,
+      transactionType: transactionCategory.transactionType,
     });
   }
   _done() {
@@ -41,11 +44,13 @@ export default class TransactionCategoryListItem extends Component {
   _update() {
     updateTransactionCategory(Object.assign({}, this.props.transactionCategory, {
       name: this.state.name,
+      transactionType: this.state.transactionType,
     }));
   }
   _recreate() {
     createTransactionCategory(Object.assign({}, this.props.transactionCategory, {
       name: this.state.name,
+      transactionType: this.state.transactionType,
       error: this.props.transactionCategory.error,
     }));
   }
@@ -57,6 +62,9 @@ export default class TransactionCategoryListItem extends Component {
   }
   _onChangeNameInput(event) {
     this.setState({ name: event.target.value });
+  }
+  _onChangeTransactionTypeSelect(event) {
+    this.setState({ transactionType: event.target.value });
   }
   _onClickUpdateButton() {
     if (this.props.transactionCategory.id) {
@@ -106,6 +114,13 @@ export default class TransactionCategoryListItem extends Component {
             onChange={this.onChangeNameInput}
             onKeyDown={this.onKeyDownNameInput}
           />
+          <select
+            defaultValue={this.state.transactionType}
+            onChange={this.onChangeTransactionTypeSelect}
+          >
+            <option value="payment">Payment</option>
+            <option value="income">Income</option>
+          </select>
           <span
             onClick={this.onClickUpdateButton}
           >Update</span>
@@ -117,7 +132,7 @@ export default class TransactionCategoryListItem extends Component {
         <span
           onClick={this.onClickTransactionCategoryListItem}
         >
-          {transactionCategory.name}
+          {transactionCategory.name} / {transactionCategory.transactionType}
         </span>
         <span
           onClick={this.onClickDeleteButton}

@@ -31,7 +31,7 @@ module Api
 
       private
         def transaction_category_params
-          params.permit(:id, :name)
+          params.permit(:id, :name, :transaction_type)
         end
 
         def omit_transaction_category(transaction_category)
