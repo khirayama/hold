@@ -19,6 +19,7 @@ export default class TransactionCategoryCreateForm extends Component {
     this.onChangeNameInput = this._onChangeNameInput.bind(this);
     this.onChangeTransactionCategorySelect = this._onChangeTransactionCategorySelect.bind(this);
     this.onClickCreateButton = this._onClickCreateButton.bind(this);
+    this.onClickCancelButton = this._onClickCancelButton.bind(this);
     this.onKeyDownNameInput = this._onKeyDownNameInput.bind(this);
   }
   _new() {
@@ -48,6 +49,9 @@ export default class TransactionCategoryCreateForm extends Component {
   }
   _onClickCreateButton() {
     this._create();
+    this._done();
+  }
+  _onClickCancelButton() {
     this._done();
   }
   _onKeyDownNameInput(event) {
@@ -81,6 +85,9 @@ export default class TransactionCategoryCreateForm extends Component {
           <div
             onClick={this.onClickCreateButton}
           >Create</div>
+          <div
+            onClick={this.onClickCancelButton}
+          >Cancel</div>
         </span>
       );
     }
