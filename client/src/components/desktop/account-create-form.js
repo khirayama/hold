@@ -19,6 +19,7 @@ export default class AccountCreateForm extends Component {
     this.onChangeNameInput = this._onChangeNameInput.bind(this);
     this.onChangeAmountInput = this._onChangeAmountInput.bind(this);
     this.onClickCreateButton = this._onClickCreateButton.bind(this);
+    this.onClickCancelButton = this._onClickCancelButton.bind(this);
     this.onKeyDownNameAndAmountInputs = this._onKeyDownNameAndAmountInputs.bind(this);
   }
   _new() {
@@ -48,6 +49,9 @@ export default class AccountCreateForm extends Component {
   }
   _onClickCreateButton() {
     this._create();
+    this._done();
+  }
+  _onClickCancelButton() {
     this._done();
   }
   _onKeyDownNameAndAmountInputs(event) {
@@ -80,6 +84,9 @@ export default class AccountCreateForm extends Component {
           <div
             onClick={this.onClickCreateButton}
           >Create</div>
+          <div
+            onClick={this.onClickCancelButton}
+          >Cancel</div>
         </span>
       );
     }
