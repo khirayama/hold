@@ -3,10 +3,7 @@
 import React, { Component } from 'react';
 
 import { startDesktopApp } from '../../actions/app-action-creators';
-import {
-  fetchUserStatus,
-  fetchUserSetting,
-} from '../../actions/user-action-creators';
+import { fetchUser } from '../../actions/user-action-creators';
 import { fetchAccounts } from '../../actions/account-action-creators';
 import { fetchTransactionCategories } from '../../actions/transaction-category-action-creators';
 
@@ -28,8 +25,7 @@ export default class Container extends Component {
   componentDidMount() {
     this.props.store.addChangeListener(this.updateState);
     startDesktopApp(location.pathname);
-    fetchUserStatus();
-    fetchUserSetting();
+    fetchUser();
     fetchAccounts();
     fetchTransactionCategories();
   }

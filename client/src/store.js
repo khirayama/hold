@@ -13,7 +13,9 @@ export default class Store extends MicroStore {
     super();
 
     this.state = {
+      user: null,
       accounts: [],
+      transactionCategories: [],
     };
 
     this._subscribe();
@@ -37,8 +39,8 @@ export default class Store extends MicroStore {
 
       this.state.accounts = accountsReducer(this.state.accounts, action);
 
-      this.dispatchChange();
       logger.debug(action, this.state);
+      this.dispatchChange();
     });
   }
 }
