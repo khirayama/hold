@@ -21,7 +21,7 @@ export function deleteAccount(accounts, deletedAccount) {
   return accounts.filter((account) => (account.cid !== deletedAccount.cid));
 }
 
-export default function accountReducer(state, action) {
+export default function accountsReducer(state, action) {
   switch (action.type) {
     case types.FETCH_ACCOUNTS:
       return action.accounts;
