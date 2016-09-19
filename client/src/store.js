@@ -15,7 +15,7 @@ export default class Store extends MicroStore {
     super();
 
     this.state = {
-      user: null,
+      user: { setting: {} },
       accounts: [],
       transactionCategories: [],
     };
