@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import numeral from 'numeral';
 
 import keyCodes from '../../constants/key-codes';
 
@@ -7,6 +8,16 @@ import {
   updateAccount,
   deleteAccount,
 } from '../../actions/account-action-creators';
+
+
+function currency(num, currencyCode) {
+  // int currency code
+  if (currencyCode === '¥') {
+    return currencyCode + numeral(num).format('0,0');
+  } else {
+    return currencyCode + numeral(num).format('0,0.00');
+  }
+}
 
 
 export default class AccountListItem extends Component {
@@ -131,7 +142,7 @@ export default class AccountListItem extends Component {
         <span
           onClick={this.onClickAccountListItem}
         >
-          {account.name} / {account.amount}
+          {account.name} / {currency(account.amount, this.props.currencyCode)}
         </span>
         <span
           onClick={this.onClickDeleteButton}
@@ -144,4 +155,5 @@ export default class AccountListItem extends Component {
 
 AccountListItem.propTypes = {
   account: React.PropTypes.object.isRequired,
+  currencyCode: React.PropTypes.string.isRequired,
 };

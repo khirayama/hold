@@ -24,13 +24,14 @@ export function _formatUser(user, setting, error = null) {
   };
 }
 
-export function fetchUser() {
+export function fetchUser(callback) {
   UserStatus.fetch().then((user) => {
     Setting.fetch().then((setting) => {
       dispatch({
         type: types.FETCH_USER,
         user: _formatUser(user, setting),
       });
+      callback();
     });
   });
 }

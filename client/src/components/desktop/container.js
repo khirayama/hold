@@ -28,9 +28,10 @@ export default class Container extends Component {
   componentDidMount() {
     this.props.store.addChangeListener(this.updateState);
     startDesktopApp(location.pathname);
-    fetchUser();
-    fetchAccounts();
-    fetchTransactionCategories();
+    fetchUser(() => {
+      fetchAccounts();
+      fetchTransactionCategories();
+    });
   }
 
   componentWillUnmount() {
@@ -55,7 +56,10 @@ export default class Container extends Component {
         </section>
         <section className="account">
           <h2>Accounts</h2>
-          <AccountList accounts={state.accounts} currency={state.user.setting.currencyCode} />
+          <AccountList
+            accounts={state.accounts}
+            currencyCode={state.user.setting.currencyCode || ''}
+          />
           <AccountCreateForm />
         </section>
         <section className="transaction-category">

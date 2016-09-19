@@ -7,7 +7,13 @@ export default function AccountList(props) {
   return (
     <ul>
       { props.accounts.map(
-        (account) => <AccountListItem key={account.cid} account={account} />
+        (account) => (
+          <AccountListItem
+            key={account.cid}
+            account={account}
+            currencyCode={props.currencyCode}
+          />
+        )
       ) }
     </ul>
   );
@@ -15,4 +21,5 @@ export default function AccountList(props) {
 
 AccountList.propTypes = {
   accounts: React.PropTypes.array.isRequired,
+  currencyCode: React.PropTypes.string.isRequired,
 };
