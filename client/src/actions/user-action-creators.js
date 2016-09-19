@@ -17,9 +17,9 @@ export function _formatUser(user, setting, error = null) {
     setting: {
       cid: setting.cid || uuid(),
       language: setting.language,
-      currency_code: setting.currency_code,
-      start_date: setting.start_date,
-      start_date_skip_option: setting.start_date_skip_option,
+      currencyCode: setting.currency_code,
+      startDate: setting.start_date,
+      startDateSkipOption: setting.start_date_skip_option,
     }
   };
 }

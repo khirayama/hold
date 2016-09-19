@@ -7,6 +7,7 @@ import { fetchUser } from '../../actions/user-action-creators';
 import { fetchAccounts } from '../../actions/account-action-creators';
 import { fetchTransactionCategories } from '../../actions/transaction-category-action-creators';
 
+import UserSetting from './user-setting';
 import AccountList from './account-list';
 import AccountCreateForm from './account-create-form';
 import TransactionCategoryList from './transaction-category-list';
@@ -48,6 +49,10 @@ export default class Container extends Component {
     return (
       <div>
         <a href="/logout">Sign out</a>
+        <section className="setting">
+          <h2>Setting</h2>
+          <UserSetting user={state.user} />
+        </section>
         <section className="account">
           <h2>Accounts</h2>
           <AccountList accounts={state.accounts} />

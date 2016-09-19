@@ -6,6 +6,10 @@ export default function userReducer(state, action) {
     case types.FETCH_USER:
       return action.user;
     default:
-      return Object.assign({}, state) || null;
+      if (state == null) {
+        return null;
+      } else {
+        return Object.assign({}, state);
+      }
   }
 }
