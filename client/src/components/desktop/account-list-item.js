@@ -133,7 +133,7 @@ export default class AccountListItem extends Component {
         <span
           onClick={this.onClickAccountListItem}
         >
-          {account.name} / {currency(account.amount, this.props.currencyCode)}
+          {account.name} / {currency(account.amount, account.currencyCode)}
         </span>
         <span
           onClick={this.onClickDeleteButton}
@@ -146,5 +146,4 @@ export default class AccountListItem extends Component {
 
 AccountListItem.propTypes = {
   account: React.PropTypes.object.isRequired,
-  currencyCode: React.PropTypes.string.isRequired,
 };

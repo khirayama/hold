@@ -11,7 +11,6 @@ export default function AccountList(props) {
           <AccountListItem
             key={account.cid}
             account={account}
-            currencyCode={props.currencyCode}
           />
         )
       ) }
@@ -21,5 +20,4 @@ export default function AccountList(props) {
 
 AccountList.propTypes = {
   accounts: React.PropTypes.array.isRequired,
-  currencyCode: React.PropTypes.string.isRequired,
 };

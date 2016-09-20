@@ -56,10 +56,7 @@ export default class Container extends Component {
         </section>
         <section className="account">
           <h2>Accounts</h2>
-          <AccountList
-            accounts={state.accounts}
-            currencyCode={state.user.setting.currencyCode || ''}
-          />
+          <AccountList accounts={state.accounts} />
           <AccountCreateForm />
         </section>
         <section className="transaction-category">
