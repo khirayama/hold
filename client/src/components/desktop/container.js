@@ -50,9 +50,8 @@ export default class Container extends Component {
     return (
       <div>
         <a href="/logout">Sign out</a>
-        <section className="setting">
-          <h2>Setting</h2>
-          <UserSetting user={state.user} />
+        <section className="transaction">
+          <h2>Transaction</h2>
         </section>
         <section className="account">
           <h2>Accounts</h2>
@@ -64,8 +63,9 @@ export default class Container extends Component {
           <TransactionCategoryList transactionCategories={state.transactionCategories} />
           <TransactionCategoryCreateForm />
         </section>
-        <section className="transaction">
-          <h2>Transaction</h2>
+        <section className="setting">
+          <h2>Setting</h2>
+          <UserSetting user={state.user} />
         </section>
       </div>
     );
