@@ -56,7 +56,7 @@ export class TransactionCategoryModel {
   }
   find(id) {
     if (this._cache !== null) {
-      return new Promise((resolve) => {
+      return new Promise((resolve, reject) => {
         for (let index = 0; index < this._cache.length; index++) {
           const item = this._cache[index];
           if (item.id === id) {

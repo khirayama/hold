@@ -41,7 +41,10 @@ export default class Store extends MicroStore {
 
       this.state.user = userReducer(this.state.user, action);
       this.state.accounts = accountsReducer(this.state.accounts, action);
-      this.state.transactionCategories = transactionCategoriesReducer(this.state.transactionCategories, action);
+      this.state.transactionCategories = transactionCategoriesReducer(
+        this.state.transactionCategories,
+        action
+      );
 
       logger.debug(action, this.state);
       this.dispatchChange();

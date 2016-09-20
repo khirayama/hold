@@ -5,7 +5,7 @@ import { dispatch } from '../libs/app-dispatcher';
 import UserStatus from '../resources/user-status';
 import Setting from '../resources/setting';
 
-import { formatUser }  from './formatter';
+import { formatUser } from './formatter';
 
 
 export function fetchUser(callback) {

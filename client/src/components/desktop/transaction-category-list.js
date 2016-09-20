@@ -7,7 +7,12 @@ export default function TransactionCategoryList(props) {
   return (
     <ul>
       { props.transactionCategories.map(
-        (transactionCategory) => <TransactionCategoryListItem key={transactionCategory.cid} transactionCategory={transactionCategory} />
+        (transactionCategory) => (
+          <TransactionCategoryListItem
+            key={transactionCategory.cid}
+            transactionCategory={transactionCategory}
+          />
+        )
       ) }
     </ul>
   );

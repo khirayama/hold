@@ -19,7 +19,9 @@ export function fetchTransactionCategories() {
   TransactionCategory.fetch().then((data) => {
     dispatch({
       type: types.FETCH_TRANSACTION_CATEGORIES,
-      transactionCategories: data.map((transactionCategory) => formatTransactionCategory(transactionCategory)),
+      transactionCategories: data.map((transactionCategory) => (
+        formatTransactionCategory(transactionCategory)
+      )),
     });
   });
 }

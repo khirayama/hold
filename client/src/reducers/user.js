@@ -8,8 +8,7 @@ export default function userReducer(state, action) {
     default:
       if (state == null) {
         return null;
-      } else {
-        return Object.assign({}, state);
       }
+      return Object.assign({}, state);
   }
 }

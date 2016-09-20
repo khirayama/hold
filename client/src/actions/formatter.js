@@ -14,7 +14,7 @@ export function formatUser(user, setting, error = null) {
       currencyCode: setting.currency_code,
       startDate: setting.start_date,
       startDateSkipOption: setting.start_date_skip_option,
-    }
+    },
   };
 }
 
@@ -23,7 +23,11 @@ export function formatTransactionCategory(transactionCategory, error = null) {
     cid: transactionCategory.cid || uuid(),
     id: transactionCategory.id || null,
     name: transactionCategory.name || '',
-    transactionType: transactionCategory.transaction_type || transactionCategory.transactionType ||  '',
+    transactionType: (
+      transactionCategory.transaction_type ||
+      transactionCategory.transactionType ||
+      ''
+    ),
     error,
   };
 }

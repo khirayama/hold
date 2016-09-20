@@ -6,19 +6,22 @@ export default class UserSetting extends Component {
 
     if (user == null) {
       return null;
-    } else {
-      return (
-        <ul>
-          <li><img src={user.imageUrl} /></li>
-          <li>{user.name}</li>
-          <li>
-            {user.setting.language} / {user.setting.currencyCode}
-          </li>
-          <li>
-            {user.setting.startDate} / {user.setting.startDateSkipOption}
-          </li>
-        </ul>
-      );
     }
+    return (
+      <ul>
+        <li><img src={user.imageUrl} alt="user" /></li>
+        <li>{user.name}</li>
+        <li>
+          {user.setting.language} / {user.setting.currencyCode}
+        </li>
+        <li>
+          {user.setting.startDate} / {user.setting.startDateSkipOption}
+        </li>
+      </ul>
+    );
   }
 }
+
+UserSetting.propTypes = {
+  user: React.PropTypes.object.isRequired,
+};

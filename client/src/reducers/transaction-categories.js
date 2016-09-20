@@ -18,7 +18,9 @@ export function updateTransactionCategory(transactionCategories, updatedTransact
 }
 
 export function deleteTransactionCategory(transactionCategories, deletedTransactionCategory) {
-  return transactionCategories.filter((transactionCategory) => (transactionCategory.cid !== deletedTransactionCategory.cid));
+  return transactionCategories.filter((transactionCategory) => (
+    transactionCategory.cid !== deletedTransactionCategory.cid
+  ));
 }
 
 export default function transactionCategoriesReducer(state, action) {
