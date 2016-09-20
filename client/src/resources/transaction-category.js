@@ -1,7 +1,5 @@
 import request from 'axios';
 
-import Setting from './setting';
-
 
 export class TransactionCategoryModel {
   constructor() {

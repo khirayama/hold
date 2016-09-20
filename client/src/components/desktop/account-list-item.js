@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import numeral from 'numeral';
 
 import keyCodes from '../../constants/key-codes';
 
@@ -9,15 +8,7 @@ import {
   deleteAccount,
 } from '../../actions/account-action-creators';
 
-
-function currency(num, currencyCode) {
-  // int currency code
-  if (currencyCode === '¥') {
-    return currencyCode + numeral(num).format('0,0');
-  } else {
-    return currencyCode + numeral(num).format('0,0.00');
-  }
-}
+import currency from '../../utils/currency';
 
 
 export default class AccountListItem extends Component {
