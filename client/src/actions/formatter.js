@@ -1,11 +1,13 @@
 import uuid from 'node-uuid';
 
+
 export function formatUser(user, setting, error = null) {
   return {
     cid: user.cid || uuid(),
     id: user.id || null,
     name: user.nickname || '',
     imageUrl: user.image_url || null,
+    error,
     setting: {
       cid: setting.cid || uuid(),
       language: setting.language,
