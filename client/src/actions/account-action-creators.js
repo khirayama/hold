@@ -1,33 +1,23 @@
-import uuid from 'node-uuid';
-
 import types from '../constants/action-types';
 
 import { dispatch } from '../libs/app-dispatcher';
 
 import Account from '../resources/account';
 
+import { formatAccount } from './formatter';
 
-export function _formatAccount(account, error = null) {
-  return {
-    cid: account.cid || uuid(),
-    id: account.id || null,
-    name: account.name || '',
-    amount: account.amount || 0,
-    error,
-  };
-}
 
 export function fetchAccounts() {
   Account.fetch().then((data) => {
     dispatch({
       type: types.FETCH_ACCOUNTS,
-      accounts: data.map((account) => _formatAccount(account)),
+      accounts: data.map((account) => formatAccount(account)),
     });
   });
 }
 
 export function createAccount(entity) {
-  const account = _formatAccount(entity);
+  const account = formatAccount(entity);
 
   dispatch({
     type: types.CREATE_ACCOUNT,
@@ -36,18 +26,18 @@ export function createAccount(entity) {
   Account.create(account).then((data) => {
     dispatch({
       type: types.UPDATE_ACCOUNT,
-      account: _formatAccount(Object.assign({}, account, data)),
+      account: formatAccount(Object.assign({}, account, data)),
     });
   }).catch((error) => {
     dispatch({
       type: types.FAIL_TO_CREATE_ACCOUNT,
-      account: _formatAccount(account, error),
+      account: formatAccount(account, error),
     });
   });
 }
 
 export function updateAccount(entity) {
-  const account = _formatAccount(entity);
+  const account = formatAccount(entity);
 
   dispatch({
     type: types.UPDATE_ACCOUNT,
@@ -58,7 +48,7 @@ export function updateAccount(entity) {
     Account.find(entity.id).then((data) => {
       dispatch({
         type: types.FAIL_TO_UPDATE_ACCOUNT,
-        account: _formatAccount(
+        account: formatAccount(
           Object.assign({}, account, data),
           error
         ),
@@ -68,7 +58,7 @@ export function updateAccount(entity) {
 }
 
 export function deleteAccount(entity) {
-  const account = _formatAccount(entity);
+  const account = formatAccount(entity);
 
   dispatch({
     type: types.DELETE_ACCOUNT,
@@ -78,7 +68,7 @@ export function deleteAccount(entity) {
     Account.delete(account.id).catch((error) => {
       dispatch({
         type: types.FAIL_TO_DELETE_ACCOUNT,
-        account: _formatAccount(account, error),
+        account: formatAccount(account, error),
       });
     });
   }
