@@ -61,7 +61,8 @@ module Api
             :transaction_category_id,
             :amount,
             :payment_date,
-            :transaction_date
+            :transaction_date,
+            :note
           )
         end
 
