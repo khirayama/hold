@@ -79,7 +79,7 @@ export default class TransactionCreateForm extends Component {
       this._done();
     }
   }
-  _createIdSelect(items) {
+  _createIdSelectElement(items) {
     return <select>{items.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}</select>;
   }
   render() {
@@ -90,9 +90,9 @@ export default class TransactionCreateForm extends Component {
     }
     return (
       <span>
-        from: {this._createIdSelect(dataset.accounts)}
-        to: {this._createIdSelect(dataset.accounts)}
-        category: {this._createIdSelect(dataset.transactionCategories)}
+        from: {this._createIdSelectElement(dataset.accounts)}
+        to: {this._createIdSelectElement(dataset.accounts)}
+        category: {this._createIdSelectElement(dataset.transactionCategories)}
         <input
           type="number"
           value={this.state.amount}
