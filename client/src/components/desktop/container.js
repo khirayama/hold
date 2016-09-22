@@ -12,6 +12,7 @@ import AccountList from './account-list';
 import AccountCreateForm from './account-create-form';
 import TransactionCategoryList from './transaction-category-list';
 import TransactionCategoryCreateForm from './transaction-category-create-form';
+import TransactionCreateForm from './transaction-create-form';
 
 
 export default class Container extends Component {
@@ -52,6 +53,9 @@ export default class Container extends Component {
         <a href="/logout">Sign out</a>
         <section className="transaction">
           <h2>Transaction</h2>
+          <TransactionCreateForm
+            transactionDataset={state.transactionDataset}
+          />
         </section>
         <section className="account">
           <h2>Accounts</h2>
