@@ -49,6 +49,9 @@ export default class TransactionCreateForm extends Component {
 
     return today.format('L');
   }
+  _formatDate(date) {
+    return moment(date).format('YYYY-MM-DD');
+  }
   _onClickNewButton() {
     this._new();
   }
@@ -100,12 +103,12 @@ export default class TransactionCreateForm extends Component {
         <input
           readOnly
           type="date"
-          value={moment(this.state.transactionDate).format('YYYY-MM-DD')}
+          value={this._formatDate(this.state.transactionDate)}
         />
         <input
           readOnly
           type="date"
-          value={moment(this.state.paymentDate).format('YYYY-MM-DD')}
+          value={this._formatDate(this.state.paymentDate)}
         />
         <br />
         <textarea />
