@@ -11,6 +11,8 @@ export default class TransactionCreateForm extends Component {
     super();
 
     this.state = {
+      transactionType: 'payment',
+
       fromAccountId: '',
       toAccountId: '',
       transactionCategoryId: '',
@@ -50,7 +52,7 @@ export default class TransactionCreateForm extends Component {
     return today.format('L');
   }
   _formatDate(date) {
-    return moment(date).format('YYYY-MM-DD');
+    return moment(new Date(date)).format('YYYY-MM-DD');
   }
   _onClickNewButton() {
     this._new();
@@ -88,8 +90,12 @@ export default class TransactionCreateForm extends Component {
     if (dataset == null) {
       return null;
     }
+    console.log(this.state);
     return (
       <span>
+        <div onClick={() => { this.setState({ transactionType: 'payment' }) }}>Payment</div>
+        <div onClick={() => { this.setState({ transactionType: 'income' }) }}>Income</div>
+        <div onClick={() => { this.setState({ transactionType: 'transfer' }) }}>Transfer</div>
         from: {this._createIdSelectElement(dataset.accounts)}
         to: {this._createIdSelectElement(dataset.accounts)}
         category: {this._createIdSelectElement(dataset.transactionCategories)}
