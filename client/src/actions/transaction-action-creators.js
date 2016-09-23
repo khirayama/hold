@@ -1,86 +1,56 @@
+import moment from 'moment';
+
 import types from '../constants/action-types';
 
 import { dispatch } from '../libs/app-dispatcher';
 
-// import Transaction from '../resources/transaction';
+import Transaction from '../resources/transaction';
 
-// import { formatTransaction } from './formatter';
+import { formatTransaction } from './formatter';
 
 
 export function _formatRequest(transaction) {
   return {
-    id: transactionCategory.id,
-    name: transactionCategory.name,
-    transaction_type: transactionCategory.transactionType,
+    id: transaction.id,
+    from_account_id: transaction.fromAccountId,
+    to_account_id: transaction.toAccountId,
+    transaction_category_id: transaction.transactionCategoryId,
+    amount: transaction.amount,
+    transaction_date: moment(new Date(transaction.transactionDate)).format('YYYY/MM/DD'),
+    payment_date: moment(new Date(transaction.paymentDate)).format('YYYY/MM/DD'),
+    note: '',
   };
 }
 
-export function fetchTransactionCategories() {
-  TransactionCategory.fetch().then((data) => {
+export function fetchTransactions() {
+  Transaction.fetch().then((data) => {
     dispatch({
-      type: types.FETCH_TRANSACTION_CATEGORIES,
-      transactionCategories: data.map((transactionCategory) => (
-        formatTransactionCategory(transactionCategory)
+      type: types.FETCH_TRANSACTIONS,
+      transactions: data.map((transaction) => (
+        formatTransaction(transaction)
       )),
     });
   });
 }
 
-export function createTransactionCategory(entity) {
-  const transactionCategory = formatTransactionCategory(entity);
+export function createTransaction(entity) {
+  const transaction = formatTransaction(entity);
 
   dispatch({
-    type: types.CREATE_TRANSACTION_CATEGORY,
-    transactionCategory,
+    type: types.CREATE_TRANSACTION,
+    transaction,
   });
 
-  TransactionCategory.create(_formatRequest(transactionCategory)).then((data) => {
+  Transaction.create(_formatRequest(transaction)).then((data) => {
+    // I think it is NOT need
     dispatch({
-      type: types.UPDATE_TRANSACTION_CATEGORY,
-      transactionCategory: formatTransactionCategory(Object.assign({}, transactionCategory, data)),
+      type: types.UPDATE_TRANSACTION,
+      transaction: formatTransaction(Object.assign({}, transaction, data)),
     });
   }).catch((error) => {
     dispatch({
-      type: types.FAIL_TO_CREATE_TRANSACTION_CATEGORY,
-      transactionCategory: formatTransactionCategory(transactionCategory, error),
+      type: types.FAIL_TO_CREATE_TRANSACTION,
+      transaction: formatTransaction(transaction, error),
     });
   });
-}
-
-export function updateTransactionCategory(entity) {
-  const transactionCategory = formatTransactionCategory(entity);
-
-  dispatch({
-    type: types.UPDATE_TRANSACTION_CATEGORY,
-    transactionCategory,
-  });
-  TransactionCategory.update(_formatRequest(transactionCategory)).catch((error) => {
-    // Find data to get previous transaction category state
-    TransactionCategory.find(entity.id).then((data) => {
-      dispatch({
-        type: types.FAIL_TO_UPDATE_TRANSACTION_CATEGORY,
-        transactionCategory: formatTransactionCategory(
-          Object.assign({}, transactionCategory, data),
-          error
-        ),
-      });
-    });
-  });
-}
-
-export function deleteTransactionCategory(entity) {
-  const transactionCategory = formatTransactionCategory(entity);
-
-  dispatch({
-    type: types.DELETE_TRANSACTION_CATEGORY,
-    transactionCategory,
-  });
-  if (transactionCategory.id !== null) {
-    TransactionCategory.delete(transactionCategory.id).catch((error) => {
-      dispatch({
-        type: types.FAIL_TO_DELETE_TRANSACTION_CATEGORY,
-        transactionCategory: formatTransactionCategory(transactionCategory, error),
-      });
-    });
-  }
 }

@@ -13,9 +13,9 @@ module Api
       def create
         transaction = current_user.transactions.build(transaction_params)
 
-       if transaction.save
-          from_account = current_user.accounts.find(from_account_id) if from_account_id.present?
-          to_account = current_user.accounts.find(to_account_id) if to_account_id.present?
+        if transaction.save
+          from_account = current_user.accounts.find(transaction.from_account_id) if transaction.from_account_id.present?
+          to_account = current_user.accounts.find(transaction.to_account_id) if transaction.to_account_id.present?
 
           from_account.transfer(to_account, transaction.amount)
 

@@ -43,3 +43,17 @@ export function formatAccount(account, setting, error = null) {
   };
 }
 
+export function formatTransaction(transaction, error = null) {
+  return {
+    cid: transaction.cid || uuid(),
+    id: transaction.id || null,
+    fromAccountId: transaction.fromAccountId || null,
+    toAccountId: transaction.toAccountId || null,
+    transactionCategoryId: transaction.transactionCategoryId || null,
+    amount: transaction.amount || 0,
+    transactionDate: transaction.transactionDate || null,
+    paymentDate: transaction.paymentDate || null,
+    note: transaction.note || '',
+    error,
+  };
+}

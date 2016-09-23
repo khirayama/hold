@@ -7,7 +7,7 @@ class Account < ApplicationRecord
   def transfer(to_account, amount)
     Account.transaction do
       self.decrement!(:amount, amount)
-      if to_account.presence?
+      if !to_account.nil?
         to_account.increment!(:amount, amount)
       end
     end
