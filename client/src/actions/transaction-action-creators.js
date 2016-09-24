@@ -5,21 +5,33 @@ import types from '../constants/action-types';
 import { dispatch } from '../libs/app-dispatcher';
 
 import Transaction from '../resources/transaction';
+import Account from '../resources/account';
+import TransactionCategory from '../resources/transaction-category';
 
 import { formatTransaction } from './formatter';
 
 
 export function _formatRequest(transaction) {
-  return {
+  const request = {
     id: transaction.id,
-    from_account_id: transaction.fromAccountId,
-    to_account_id: transaction.toAccountId,
-    transaction_category_id: transaction.transactionCategoryId,
+    from_account_id: null,
+    to_account_id: null,
+    transaction_category_id: null,
     amount: transaction.amount,
     transaction_date: moment(new Date(transaction.transactionDate)).format('YYYY/MM/DD'),
     payment_date: moment(new Date(transaction.paymentDate)).format('YYYY/MM/DD'),
     note: '',
   };
+  if (transaction.toAccount !== null) {
+    request.to_account_id = transaction.toAccount.id;
+  }
+  if (transaction.fromAccount !== null) {
+    request.from_account_id = transaction.fromAccount.id;
+  }
+  if (transaction.transactionCategory !== null) {
+    request.transaction_category_id = transaction.transactionCategory.id;
+  }
+  return request;
 }
 
 export function fetchTransactions() {
@@ -27,20 +39,21 @@ export function fetchTransactions() {
     dispatch({
       type: types.FETCH_TRANSACTIONS,
       transactions: data.map((transaction) => (
-        formatTransaction(transaction)
+        formatTransaction(transaction, Account.data, Transaction.data)
       )),
     });
   });
 }
 
 export function createTransaction(entity) {
-  const transaction = formatTransaction(entity);
+  const transaction = formatTransaction(entity, Account.data, Transaction.data);
 
   dispatch({
     type: types.CREATE_TRANSACTION,
     transaction,
   });
 
+  console.log(transaction);
   Transaction.create(_formatRequest(transaction)).then((data) => {
     // I think it is NOT need
     dispatch({
@@ -50,7 +63,7 @@ export function createTransaction(entity) {
   }).catch((error) => {
     dispatch({
       type: types.FAIL_TO_CREATE_TRANSACTION,
-      transaction: formatTransaction(transaction, error),
+      transaction: formatTransaction(transaction, Account.data, Transaction.data, error),
     });
   });
 }

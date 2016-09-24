@@ -44,10 +44,10 @@ export default class TransactionCreateForm extends Component {
   }
   _create() {
     createTransaction({
-      fromAccountId: (this.refs.fromAccountId) ? this.refs.fromAccountId.value : null,
-      toAccountId: (this.refs.toAccountId) ? this.refs.toAccountId.value : null,
+      fromAccountId: (this.refs.fromAccountId) ? Number(this.refs.fromAccountId.value) : null,
+      toAccountId: (this.refs.toAccountId) ? Number(this.refs.toAccountId.value) : null,
       transactionCategoryId:
-        (this.refs.transactionCategoryId) ? this.refs.transactionCategoryId.value : null,
+        (this.refs.transactionCategoryId) ? Number(this.refs.transactionCategoryId.value) : null,
       amount: this.state.amount,
       paymentDate: this.state.paymentDate,
       transactionDate: this.state.transactionDate,

@@ -9,7 +9,6 @@ export function formatUser(user, setting, error = null) {
     imageUrl: user.image_url || null,
     error,
     setting: {
-      cid: setting.cid || uuid(),
       language: setting.language,
       currencyCode: setting.currency_code,
       startDate: setting.start_date,
@@ -43,7 +42,7 @@ export function formatAccount(account, setting, error = null) {
   };
 }
 
-export function formatTransaction(transaction, error = null) {
+export function formatTransaction(transaction, accounts, transactionCategories, error = null) {
   const formattedTransaction = {
     cid: transaction.cid || uuid(),
     id: transaction.id || null,
@@ -56,22 +55,61 @@ export function formatTransaction(transaction, error = null) {
     note: transaction.note || '',
     error,
   };
-  if (transaction.from_account !== null) {
+  // from_account
+  if (transaction.from_account) {
     formattedTransaction.fromAccount = {
       id: transaction.from_account.id || null,
       name: transaction.from_account.name || '',
     };
+  } else if (transaction.fromAccountId) {
+    let fromAccount = null;
+    for (let index = 0; index < accounts.length; index++) {
+      const account = accounts[index];
+      if (transaction.fromAccountId === account.id) {
+        fromAccount = account;
+      }
+    }
+    formattedTransaction.fromAccount = {
+      id: fromAccount.id || null,
+      name: fromAccount.name || '',
+    };
   }
-  if (transaction.to_account !== null) {
+  // to_account
+  if (transaction.to_account) {
     formattedTransaction.toAccount = {
       id: transaction.to_account.id || null,
       name: transaction.to_account.name || '',
     };
+  } else if (transaction.toAccountId) {
+    let toAccount = null;
+    for (let index = 0; index < accounts.length; index++) {
+      const account = accounts[index];
+      if (transaction.toAccountId === account.id) {
+        toAccount = account;
+      }
+    }
+    formattedTransaction.toAccount = {
+      id: toAccount.id || null,
+      name: toAccount.name || '',
+    };
   }
-  if (transaction.transaction_category !== null) {
+  // transaction_category
+  if (transaction.transaction_category) {
     formattedTransaction.transactionCategory = {
       id: transaction.transaction_category.id || null,
       name: transaction.transaction_category.name || '',
+    };
+  } else if (transaction.transactionCategoryId) {
+    let transactionCategory = null;
+    for (let index = 0; index < transactionCategories.length; index++) {
+      const transactionCategory_ = transactionCategories[index];
+      if (transaction.transactionCategoryId === transactionCategory_.id) {
+        transactionCategory = transactionCategory_;
+      }
+    }
+    formattedTransaction.transactionCategory = {
+      id: transactionCategory.id || null,
+      name: transactionCategory.name || '',
     };
   }
   return formattedTransaction;
