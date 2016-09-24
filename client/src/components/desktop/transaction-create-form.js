@@ -171,5 +171,5 @@ export default class TransactionCreateForm extends Component {
 }
 
 TransactionCreateForm.propTypes = {
-  transactionDataset: React.PropTypes.object.isRequired,
+  transactionDataset: React.PropTypes.object,
 };
