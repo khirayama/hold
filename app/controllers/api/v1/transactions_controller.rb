@@ -17,7 +17,11 @@ module Api
           from_account = current_user.accounts.find(transaction.from_account_id) if transaction.from_account_id.present?
           to_account = current_user.accounts.find(transaction.to_account_id) if transaction.to_account_id.present?
 
-          from_account.transfer(to_account, transaction.amount)
+          if !from_account.nil?
+            from_account.transfer(to_account, transaction.amount)
+          else
+            to_account.increment!(:amount, transaction.amount)
+          end
 
           render json: format_transaction(transaction)
         end
@@ -67,32 +71,41 @@ module Api
         end
 
         def format_transaction(transaction)
-          transaction_category = current_user.transaction_categories.find(transaction.transaction_category_id)
           new_transaction = {
             id: transaction.id,
             from_account: nil,
             to_account: nil,
-            transaction_category: {
-              id: transaction_category.id,
-              name: transaction_category.name
-            },
+            transaction_category: nil,
             amount: transaction.amount,
             payment_date: transaction.payment_date,
             transaction_date: transaction.transaction_date
           }
-          if transaction.from_account_id.present?
-            from_account = current_user.accounts.find(transaction.from_account_id)
-            new_transaction[:from_account] = {
-              id: from_account.id,
-              name: from_account.name
-            }
+          if !transaction.transaction_category_id.nil?
+            transaction_category = current_user.transaction_categories.find(transaction.transaction_category_id)
+            if !transaction_category.nil?
+              new_transaction[:transaction_category] = {
+                id: transaction_category.id,
+                name: transaction_category.name
+              }
+            end
           end
-          if transaction.to_account_id.present?
+          if !transaction.from_account_id.nil?
+            from_account = current_user.accounts.find(transaction.from_account_id)
+            if !from_account.nil?
+              new_transaction[:from_account] = {
+                id: from_account.id,
+                name: from_account.name
+              }
+            end
+          end
+          if !transaction.to_account_id.nil?
             to_account = current_user.accounts.find(transaction.to_account_id)
-            new_transaction[:to_account] = {
-              id: to_account.id,
-              name: to_account.name
-            }
+            if !to_account.nil?
+              new_transaction[:to_account] = {
+                id: to_account.id,
+                name: to_account.name
+              }
+            end
           end
           new_transaction
         end
