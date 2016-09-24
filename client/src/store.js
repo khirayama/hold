@@ -8,6 +8,7 @@ import logger from './utils/logger';
 import userReducer from './reducers/user';
 import accountsReducer from './reducers/accounts';
 import transactionCategoriesReducer from './reducers/transaction-categories';
+import transactionsReducer from './reducers/transactions';
 
 
 export default class Store extends MicroStore {
@@ -19,6 +20,7 @@ export default class Store extends MicroStore {
       accounts: [],
       transactionCategories: [],
       transactionDataset: null,
+      transactions: [],
     };
 
     this._subscribe();
@@ -44,6 +46,10 @@ export default class Store extends MicroStore {
       this.state.accounts = accountsReducer(this.state.accounts, action);
       this.state.transactionCategories = transactionCategoriesReducer(
         this.state.transactionCategories,
+        action
+      );
+      this.state.transactions = transactionsReducer(
+        this.state.transactions,
         action
       );
       this.state.transactionDataset = {

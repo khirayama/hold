@@ -46,6 +46,7 @@
   "dependencies": {
     "axios": "^0.14.0",
     "micro-emitter": "^1.1.9",
+    "moment": "^2.14.1",
     "node-uuid": "^1.4.7",
     "numeral": "^1.5.3",
     "react": "^15.3.1",
@@ -71,7 +72,6 @@
     "gulp-sass": "^2.3.2",
     "jsdom": "^9.4.5",
     "mocha": "^3.0.2",
-    "moment": "^2.14.1",
     "power-assert": "^1.4.1",
     "react-addons-css-transition-group": "^15.3.1",
     "react-addons-test-utils": "^15.3.1",

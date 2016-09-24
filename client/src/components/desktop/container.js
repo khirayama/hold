@@ -58,6 +58,9 @@ export default class Container extends Component {
           <TransactionCreateForm
             transactionDataset={state.transactionDataset}
           />
+          <ul>{ state.transactions.map((transaction) => (
+            <li key={transaction.cid}>{JSON.stringify(transaction)}</li>
+          )) }</ul>
         </section>
         <section className="account">
           <h2>Accounts</h2>
