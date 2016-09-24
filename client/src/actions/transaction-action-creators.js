@@ -53,9 +53,7 @@ export function createTransaction(entity) {
     transaction,
   });
 
-  console.log(transaction);
   Transaction.create(_formatRequest(transaction)).then((data) => {
-    // I think it is NOT need
     dispatch({
       type: types.UPDATE_TRANSACTION,
       transaction: formatTransaction(Object.assign({}, transaction, data), Account.data, TransactionCategory.data),
