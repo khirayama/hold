@@ -65,3 +65,48 @@ export function createTransaction(entity) {
     });
   });
 }
+
+export function updateTransaction(entity) {
+  const transaction = formatTransaction(entity, Account.data, TransactionCategory.data);
+
+  dispatch({
+    type: types.UPDATE_TRANSACTION,
+    transaction,
+  });
+  Transaction.update(_formatRequest(transaction)).catch((error) => {
+    // Find data to get previous transaction state
+    Transaction.find(entity.id).then((data) => {
+      dispatch({
+        type: types.FAIL_TO_UPDATE_TRANSACTION,
+        transaction: formatTransaction(
+          Object.assign({}, transaction, data),
+          Account.data,
+          TransactionCategory.data,
+          error
+        ),
+      });
+    });
+  });
+}
+
+export function deleteTransaction(entity) {
+  const transaction = formatTransaction(entity, Account.data, TransactionCategory.data);
+
+  dispatch({
+    type: types.DELETE_TRANSACTION,
+    transaction,
+  });
+  if (transaction.id !== null) {
+    Transaction.delete(transaction.id).catch((error) => {
+      dispatch({
+        type: types.FAIL_TO_DELETE_TRANSACTION,
+        transaction: formatTransaction(
+          transaction,
+          Account.data,
+          TransactionCategory.data,
+          error
+        ),
+      });
+    });
+  }
+}

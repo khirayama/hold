@@ -3,25 +3,25 @@ import React, { Component } from 'react';
 import keyCodes from '../../constants/key-codes';
 
 import {
-  createTransactionCategory,
-  updateTransactionCategory,
-  deleteTransactionCategory,
-} from '../../actions/transaction-category-action-creators';
+  createTransaction,
+  updateTransaction,
+  deleteTransaction,
+} from '../../actions/transaction-action-creators';
 
 
-export default class TransactionCategoryListItem extends Component {
+export default class TransactionListItem extends Component {
   constructor(props) {
     super(props);
 
-    const transactionCategory = this.props.transactionCategory;
+    const transaction = this.props.transaction;
 
     this.state = {
       isEditing: false,
-      name: transactionCategory.name,
-      transactionType: transactionCategory.transactionType,
+      name: transaction.name,
+      transactionType: transaction.transactionType,
     };
 
-    this.onClickTransactionCategoryListItem = this._onClickTransactionCategoryListItem.bind(this);
+    this.onClickTransactionListItem = this._onClickTransactionListItem.bind(this);
     this.onChangeNameInput = this._onChangeNameInput.bind(this);
     this.onChangeTransactionTypeSelect = this._onChangeTransactionTypeSelect.bind(this);
     this.onClickUpdateButton = this._onClickUpdateButton.bind(this);
@@ -30,34 +30,34 @@ export default class TransactionCategoryListItem extends Component {
     this.onClickErrorIcon = this._onClickErrorIcon.bind(this);
   }
   _edit() {
-    const transactionCategory = this.props.transactionCategory;
+    const transaction = this.props.transaction;
 
     this.setState({
       isEditing: true,
-      name: transactionCategory.name,
-      transactionType: transactionCategory.transactionType,
+      name: transaction.name,
+      transactionType: transaction.transactionType,
     });
   }
   _done() {
     this.setState({ isEditing: false });
   }
   _update() {
-    updateTransactionCategory(Object.assign({}, this.props.transactionCategory, {
+    updateTransaction(Object.assign({}, this.props.transaction, {
       name: this.state.name,
       transactionType: this.state.transactionType,
     }));
   }
   _recreate() {
-    createTransactionCategory(Object.assign({}, this.props.transactionCategory, {
+    createTransaction(Object.assign({}, this.props.transaction, {
       name: this.state.name,
       transactionType: this.state.transactionType,
-      error: this.props.transactionCategory.error,
+      error: this.props.transaction.error,
     }));
   }
   _delete() {
-    deleteTransactionCategory(this.props.transactionCategory);
+    deleteTransaction(this.props.transaction);
   }
-  _onClickTransactionCategoryListItem() {
+  _onClickTransactionListItem() {
     this._edit();
   }
   _onChangeNameInput(event) {
@@ -67,7 +67,7 @@ export default class TransactionCategoryListItem extends Component {
     this.setState({ transactionType: event.target.value });
   }
   _onClickUpdateButton() {
-    if (this.props.transactionCategory.id) {
+    if (this.props.transaction.id) {
       this._update();
     } else {
       this._recreate();
@@ -83,7 +83,7 @@ export default class TransactionCategoryListItem extends Component {
     const ctrl = event.ctrlKey || event.metaKey;
 
     if (keyCodes.ENTER === keyCode && !shift && !ctrl) {
-      if (this.props.transactionCategory.id) {
+      if (this.props.transaction.id) {
         this._update();
       } else {
         this._recreate();
@@ -92,15 +92,15 @@ export default class TransactionCategoryListItem extends Component {
     }
   }
   _onClickErrorIcon() {
-    if (this.props.transactionCategory.id) {
+    if (this.props.transaction.id) {
       this._update();
     } else {
       this._edit();
     }
   }
   render() {
-    const transactionCategory = this.props.transactionCategory;
-    const errorIconElement = (transactionCategory.error) ? (
+    const transaction = this.props.transaction;
+    const errorIconElement = (transaction.error) ? (
       <span onClick={this.onClickErrorIcon}>E</span>
     ) : null;
 
@@ -130,9 +130,9 @@ export default class TransactionCategoryListItem extends Component {
     return (
       <li>
         <span
-          onClick={this.onClickTransactionCategoryListItem}
+          onClick={this.onClickTransactionListItem}
         >
-          {transactionCategory.name} / {transactionCategory.transactionType}
+          {(transaction.fromAccount || {}).name} / {(transaction.toAccount || {}).name} / {(transaction.transactionCategory || {}).name} / {transaction.amount}
         </span>
         <span
           onClick={this.onClickDeleteButton}
@@ -143,6 +143,7 @@ export default class TransactionCategoryListItem extends Component {
   }
 }
 
-TransactionCategoryListItem.propTypes = {
-  transactionCategory: React.PropTypes.object.isRequired,
+TransactionListItem.propTypes = {
+  transaction: React.PropTypes.object.isRequired,
 };
+

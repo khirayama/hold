@@ -9,11 +9,12 @@ import { fetchTransactionCategories } from '../../actions/transaction-category-a
 import { fetchTransactions } from '../../actions/transaction-action-creators';
 
 import UserSetting from './user-setting';
+import TransactionList from './transaction-list';
+import TransactionCreateForm from './transaction-create-form';
 import AccountList from './account-list';
 import AccountCreateForm from './account-create-form';
 import TransactionCategoryList from './transaction-category-list';
 import TransactionCategoryCreateForm from './transaction-category-create-form';
-import TransactionCreateForm from './transaction-create-form';
 
 
 export default class Container extends Component {
@@ -58,9 +59,7 @@ export default class Container extends Component {
           <TransactionCreateForm
             transactionDataset={state.transactionDataset}
           />
-          <ul>{ state.transactions.map((transaction) => (
-            <li key={transaction.cid}>{JSON.stringify(transaction)}</li>
-          )) }</ul>
+          <TransactionList transactions={state.transactions} />
         </section>
         <section className="account">
           <h2>Accounts</h2>
