@@ -12,7 +12,7 @@ export class SettingModel {
     }
     return this._resourceUrl;
   }
-  get setting() {
+  get data() {
     return this._cache;
   }
   fetch(cache = true) {

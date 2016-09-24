@@ -12,7 +12,7 @@ export class TransactionCategoryModel {
     }
     return this._resourceUrl;
   }
-  get transactionCategories() {
+  get data() {
     return this._cache;
   }
   fetch(cache = true) {

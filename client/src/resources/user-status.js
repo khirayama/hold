@@ -12,7 +12,7 @@ export class UserStatusModel {
     }
     return this._resourceUrl;
   }
-  get userStatus() {
+  get data() {
     return this._cache;
   }
   fetch(cache = true) {

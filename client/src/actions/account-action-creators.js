@@ -12,13 +12,13 @@ export function fetchAccounts() {
   Account.fetch().then((data) => {
     dispatch({
       type: types.FETCH_ACCOUNTS,
-      accounts: data.map((account) => formatAccount(account, Setting.setting)),
+      accounts: data.map((account) => formatAccount(account, Setting.data)),
     });
   });
 }
 
 export function createAccount(entity) {
-  const account = formatAccount(entity, Setting.setting);
+  const account = formatAccount(entity, Setting.data);
 
   dispatch({
     type: types.CREATE_ACCOUNT,
@@ -27,18 +27,18 @@ export function createAccount(entity) {
   Account.create(account).then((data) => {
     dispatch({
       type: types.UPDATE_ACCOUNT,
-      account: formatAccount(Object.assign({}, account, data), Setting.setting),
+      account: formatAccount(Object.assign({}, account, data), Setting.data),
     });
   }).catch((error) => {
     dispatch({
       type: types.FAIL_TO_CREATE_ACCOUNT,
-      account: formatAccount(account, Setting.setting, error),
+      account: formatAccount(account, Setting.data, error),
     });
   });
 }
 
 export function updateAccount(entity) {
-  const account = formatAccount(entity, Setting.setting);
+  const account = formatAccount(entity, Setting.data);
 
   dispatch({
     type: types.UPDATE_ACCOUNT,
@@ -51,7 +51,7 @@ export function updateAccount(entity) {
         type: types.FAIL_TO_UPDATE_ACCOUNT,
         account: formatAccount(
           Object.assign({}, account, data),
-          Setting.setting,
+          Setting.data,
           error
         ),
       });
@@ -60,7 +60,7 @@ export function updateAccount(entity) {
 }
 
 export function deleteAccount(entity) {
-  const account = formatAccount(entity, Setting.setting);
+  const account = formatAccount(entity, Setting.data);
 
   dispatch({
     type: types.DELETE_ACCOUNT,
@@ -70,7 +70,7 @@ export function deleteAccount(entity) {
     Account.delete(account.id).catch((error) => {
       dispatch({
         type: types.FAIL_TO_DELETE_ACCOUNT,
-        account: formatAccount(account, Setting.setting, error),
+        account: formatAccount(account, Setting.data, error),
       });
     });
   }

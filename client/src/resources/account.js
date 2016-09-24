@@ -12,7 +12,7 @@ export class AccountModel {
     }
     return this._resourceUrl;
   }
-  get accounts() {
+  get data() {
     return this._cache;
   }
   fetch(cache = true) {
