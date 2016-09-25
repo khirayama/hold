@@ -50,7 +50,12 @@ export function fetchTransactions() {
 }
 
 export function createTransaction(entity) {
-  const transaction = formatTransaction(entity, Account.data, TransactionCategory.data, Setting.data);
+  const transaction = formatTransaction(
+    entity,
+    Account.data,
+    TransactionCategory.data,
+    Setting.data
+  );
 
   dispatch({
     type: types.CREATE_TRANSACTION,
@@ -60,24 +65,40 @@ export function createTransaction(entity) {
   Transaction.create(_formatRequest(transaction)).then((data) => {
     dispatch({
       type: types.UPDATE_TRANSACTION,
-      transaction: formatTransaction(Object.assign({}, transaction, data), Account.data, TransactionCategory.data, Setting.data),
+      transaction: formatTransaction(
+        Object.assign({}, transaction, data),
+        Account.data,
+        TransactionCategory.data,
+        Setting.data
+      ),
     });
-    Account.fetch(false).then((data) => {
+    Account.fetch(false).then((data_) => {
       dispatch({
         type: types.FETCH_ACCOUNTS,
-        accounts: data.map((account) => formatAccount(account, Setting.data)),
+        accounts: data_.map((account) => formatAccount(account, Setting.data)),
       });
     });
   }).catch((error) => {
     dispatch({
       type: types.FAIL_TO_CREATE_TRANSACTION,
-      transaction: formatTransaction(transaction, Account.data, TransactionCategory.data, Setting.data, error),
+      transaction: formatTransaction(
+        transaction,
+        Account.data,
+        TransactionCategory.data,
+        Setting.data,
+        error
+      ),
     });
   });
 }
 
 export function updateTransaction(entity) {
-  const transaction = formatTransaction(entity, Account.data, TransactionCategory.data, Setting.data);
+  const transaction = formatTransaction(
+    entity,
+    Account.data,
+    TransactionCategory.data,
+    Setting.data
+  );
 
   dispatch({
     type: types.UPDATE_TRANSACTION,
@@ -108,7 +129,12 @@ export function updateTransaction(entity) {
 }
 
 export function deleteTransaction(entity) {
-  const transaction = formatTransaction(entity, Account.data, TransactionCategory.data, Setting.data);
+  const transaction = formatTransaction(
+    entity,
+    Account.data,
+    TransactionCategory.data,
+    Setting.data
+  );
 
   dispatch({
     type: types.DELETE_TRANSACTION,

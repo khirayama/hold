@@ -43,8 +43,13 @@ export function formatAccount(account, setting, error = null) {
   };
 }
 
-export function formatTransaction(transaction, accounts, transactionCategories, setting, error = null) {
-  console.log(setting);
+export function formatTransaction(
+  transaction,
+  accounts,
+  transactionCategories,
+  setting,
+  error = null
+) {
   const formattedTransaction = {
     cid: transaction.cid || uuid(),
     id: transaction.id || null,
