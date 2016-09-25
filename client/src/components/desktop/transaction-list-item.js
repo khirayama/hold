@@ -24,6 +24,7 @@ export default class TransactionListItem extends Component {
     };
 
     this.onClickTransactionListItem = this._onClickTransactionListItem.bind(this);
+    this.onClickCancelButton = this._onClickCancelButton.bind(this);
     this.onChangeNameInput = this._onChangeNameInput.bind(this);
     this.onChangeTransactionTypeSelect = this._onChangeTransactionTypeSelect.bind(this);
     this.onClickUpdateButton = this._onClickUpdateButton.bind(this);
@@ -61,6 +62,9 @@ export default class TransactionListItem extends Component {
   }
   _onClickTransactionListItem() {
     this._edit();
+  }
+  _onClickCancelButton() {
+    this._done();
   }
   _onChangeNameInput(event) {
     this.setState({ name: event.target.value });
@@ -119,8 +123,16 @@ export default class TransactionListItem extends Component {
     }
     return null;
   }
+  _createIdSelectElement(items, ref = null) {
+    return (
+      <select ref={ref} >
+        {items.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}
+      </select>
+    );
+  }
   render() {
     const transaction = this.props.transaction;
+    const dataset = this.props.transactionDataset;
     const errorIconElement = (transaction.error) ? (
       <span onClick={this.onClickErrorIcon}>E</span>
     ) : null;
@@ -132,19 +144,28 @@ export default class TransactionListItem extends Component {
         case 'payment':
           return (
             <li>
-              fromAccount / transactionCategory / amount
+              from: {this._createIdSelectElement(dataset.accounts)}
+              category: {this._createIdSelectElement(dataset.transactionCategories.filter((transactionCategory) => transactionCategory.transactionType === transactionType))}
+              <input type="number" />
+              <span onClick={this.onClickCancelButton}>Cancel</span>
             </li>
           );
         case 'income':
           return (
             <li>
-              toAccount / transactionCategory / amount
+              to: {this._createIdSelectElement(dataset.accounts)}
+              category: {this._createIdSelectElement(dataset.transactionCategories.filter((transactionCategory) => transactionCategory.transactionType === transactionType))}
+              <input type="number" />
+              <span onClick={this.onClickCancelButton}>Cancel</span>
             </li>
           );
         case 'transfer':
           return (
             <li>
-              fromAccount / toAccount / amount
+              from: {this._createIdSelectElement(dataset.accounts)}
+              to: {this._createIdSelectElement(dataset.accounts)}
+              <input type="number" />
+              <span onClick={this.onClickCancelButton}>Cancel</span>
             </li>
           );
         default:
@@ -173,5 +194,6 @@ export default class TransactionListItem extends Component {
 
 TransactionListItem.propTypes = {
   transaction: React.PropTypes.object.isRequired,
+  transactionDataset: React.PropTypes.object,
 };
 

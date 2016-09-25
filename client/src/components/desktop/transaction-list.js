@@ -11,6 +11,7 @@ export default function TransactionList(props) {
           <TransactionListItem
             key={transaction.cid}
             transaction={transaction}
+            transactionDataset={props.transactionDataset}
           />
         )
       ) }
@@ -20,4 +21,5 @@ export default function TransactionList(props) {
 
 TransactionList.propTypes = {
   transactions: React.PropTypes.array.isRequired,
+  transactionDataset: React.PropTypes.object,
 };

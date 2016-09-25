@@ -54,7 +54,10 @@ export default class Container extends Component {
           <TransactionCreateForm
             transactionDataset={state.transactionDataset}
           />
-          <TransactionList transactions={state.transactions} />
+          <TransactionList
+            transactions={state.transactions}
+            transactionDataset={state.transactionDataset}
+          />
         </section>
         <section className="account">
           <h2>Accounts</h2>
