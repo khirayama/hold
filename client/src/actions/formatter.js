@@ -1,4 +1,5 @@
 import uuid from 'node-uuid';
+import moment from 'moment';
 
 
 export function formatUser(user, setting, error = null) {
@@ -50,8 +51,8 @@ export function formatTransaction(transaction, accounts, transactionCategories, 
     toAccount: null,
     transactionCategory: null,
     amount: transaction.amount || 0,
-    transactionDate: transaction.transactionDate || null,
-    paymentDate: transaction.paymentDate || null,
+    transactionDate: moment(new Date(transaction.transactionDate)).format('YYYY/MM/DD') || null,
+    paymentDate: moment(new Date(transaction.paymentDate)).format('YYYY/MM/DD') || null,
     note: transaction.note || '',
     error,
   };
