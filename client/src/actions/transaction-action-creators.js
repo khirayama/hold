@@ -6,9 +6,13 @@ import { dispatch } from '../libs/app-dispatcher';
 
 import Transaction from '../resources/transaction';
 import Account from '../resources/account';
+import Setting from '../resources/setting';
 import TransactionCategory from '../resources/transaction-category';
 
-import { formatTransaction } from './formatter';
+import {
+  formatAccount,
+  formatTransaction,
+} from './formatter';
 
 
 export function _formatRequest(transaction) {
@@ -58,6 +62,12 @@ export function createTransaction(entity) {
       type: types.UPDATE_TRANSACTION,
       transaction: formatTransaction(Object.assign({}, transaction, data), Account.data, TransactionCategory.data),
     });
+    Account.fetch(false).then((data) => {
+      dispatch({
+        type: types.FETCH_ACCOUNTS,
+        accounts: data.map((account) => formatAccount(account, Setting.data)),
+      });
+    });
   }).catch((error) => {
     dispatch({
       type: types.FAIL_TO_CREATE_TRANSACTION,
@@ -73,7 +83,14 @@ export function updateTransaction(entity) {
     type: types.UPDATE_TRANSACTION,
     transaction,
   });
-  Transaction.update(_formatRequest(transaction)).catch((error) => {
+  Transaction.update(_formatRequest(transaction)).then(() => {
+    Account.fetch(false).then((data) => {
+      dispatch({
+        type: types.FETCH_ACCOUNTS,
+        accounts: data.map((account) => formatAccount(account, Setting.data)),
+      });
+    });
+  }).catch((error) => {
     // Find data to get previous transaction state
     Transaction.find(entity.id).then((data) => {
       dispatch({
@@ -97,7 +114,14 @@ export function deleteTransaction(entity) {
     transaction,
   });
   if (transaction.id !== null) {
-    Transaction.delete(transaction.id).catch((error) => {
+    Transaction.delete(transaction.id).then(() => {
+      Account.fetch(false).then((data) => {
+        dispatch({
+          type: types.FETCH_ACCOUNTS,
+          accounts: data.map((account) => formatAccount(account, Setting.data)),
+        });
+      });
+    }).catch((error) => {
       dispatch({
         type: types.FAIL_TO_DELETE_TRANSACTION,
         transaction: formatTransaction(

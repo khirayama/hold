@@ -8,14 +8,13 @@ import Setting from '../resources/setting';
 import { formatUser } from './formatter';
 
 
-export function fetchUser(callback) {
+export function fetchUser() {
   UserStatus.fetch().then((user) => {
     Setting.fetch().then((setting) => {
       dispatch({
         type: types.FETCH_USER,
         user: formatUser(user, setting),
       });
-      callback();
     });
   });
 }
