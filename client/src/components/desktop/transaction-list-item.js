@@ -8,6 +8,8 @@ import {
   deleteTransaction,
 } from '../../actions/transaction-action-creators';
 
+import currency from '../../utils/currency';
+
 
 export default class TransactionListItem extends Component {
   constructor(props) {
@@ -154,7 +156,7 @@ export default class TransactionListItem extends Component {
         <span
           onClick={this.onClickTransactionListItem}
         >
-          {transactionType} / {(transaction.fromAccount || {}).name} / {(transaction.toAccount || {}).name} / {(transaction.transactionCategory || {}).name} / {transaction.amount}
+          {transactionType} / {(transaction.fromAccount || {}).name} / {(transaction.toAccount || {}).name} / {(transaction.transactionCategory || {}).name} / {currency(transaction.amount, transaction.currencyCode)}
         </span>
         <span
           onClick={this.onClickDeleteButton}

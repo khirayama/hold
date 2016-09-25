@@ -43,7 +43,8 @@ export function formatAccount(account, setting, error = null) {
   };
 }
 
-export function formatTransaction(transaction, accounts, transactionCategories, error = null) {
+export function formatTransaction(transaction, accounts, transactionCategories, setting, error = null) {
+  console.log(setting);
   const formattedTransaction = {
     cid: transaction.cid || uuid(),
     id: transaction.id || null,
@@ -54,6 +55,7 @@ export function formatTransaction(transaction, accounts, transactionCategories, 
     transactionDate: moment(new Date(transaction.transactionDate)).format('YYYY/MM/DD') || null,
     paymentDate: moment(new Date(transaction.paymentDate)).format('YYYY/MM/DD') || null,
     note: transaction.note || '',
+    currencyCode: setting.currency_code || '',
     error,
   };
   // from_account

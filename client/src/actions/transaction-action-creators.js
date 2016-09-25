@@ -43,14 +43,14 @@ export function fetchTransactions() {
     dispatch({
       type: types.FETCH_TRANSACTIONS,
       transactions: data.map((transaction) => (
-        formatTransaction(transaction, Account.data, TransactionCategory.data)
+        formatTransaction(transaction, Account.data, TransactionCategory.data, Setting.data)
       )),
     });
   });
 }
 
 export function createTransaction(entity) {
-  const transaction = formatTransaction(entity, Account.data, TransactionCategory.data);
+  const transaction = formatTransaction(entity, Account.data, TransactionCategory.data, Setting.data);
 
   dispatch({
     type: types.CREATE_TRANSACTION,
@@ -60,7 +60,7 @@ export function createTransaction(entity) {
   Transaction.create(_formatRequest(transaction)).then((data) => {
     dispatch({
       type: types.UPDATE_TRANSACTION,
-      transaction: formatTransaction(Object.assign({}, transaction, data), Account.data, TransactionCategory.data),
+      transaction: formatTransaction(Object.assign({}, transaction, data), Account.data, TransactionCategory.data, Setting.data),
     });
     Account.fetch(false).then((data) => {
       dispatch({
@@ -71,13 +71,13 @@ export function createTransaction(entity) {
   }).catch((error) => {
     dispatch({
       type: types.FAIL_TO_CREATE_TRANSACTION,
-      transaction: formatTransaction(transaction, Account.data, TransactionCategory.data, error),
+      transaction: formatTransaction(transaction, Account.data, TransactionCategory.data, Setting.data, error),
     });
   });
 }
 
 export function updateTransaction(entity) {
-  const transaction = formatTransaction(entity, Account.data, TransactionCategory.data);
+  const transaction = formatTransaction(entity, Account.data, TransactionCategory.data, Setting.data);
 
   dispatch({
     type: types.UPDATE_TRANSACTION,
@@ -99,6 +99,7 @@ export function updateTransaction(entity) {
           Object.assign({}, transaction, data),
           Account.data,
           TransactionCategory.data,
+          Setting.data,
           error
         ),
       });
@@ -107,7 +108,7 @@ export function updateTransaction(entity) {
 }
 
 export function deleteTransaction(entity) {
-  const transaction = formatTransaction(entity, Account.data, TransactionCategory.data);
+  const transaction = formatTransaction(entity, Account.data, TransactionCategory.data, Setting.data);
 
   dispatch({
     type: types.DELETE_TRANSACTION,
@@ -128,6 +129,7 @@ export function deleteTransaction(entity) {
           transaction,
           Account.data,
           TransactionCategory.data,
+          Setting.data,
           error
         ),
       });

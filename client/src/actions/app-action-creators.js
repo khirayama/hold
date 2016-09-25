@@ -62,7 +62,7 @@ export function fetchInitialResources() {
         dispatch({
           type: types.FETCH_TRANSACTIONS,
           transactions: data.map((transaction) => (
-            formatTransaction(transaction, Account.data, TransactionCategory.data)
+            formatTransaction(transaction, Account.data, TransactionCategory.data, Setting.data)
           )),
         });
       });
