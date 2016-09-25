@@ -140,7 +140,7 @@ export default class TransactionCreateForm extends Component {
             this.state.transactionType === 'income'
           ) ? (
           <span>category: {
-            this._createIdSelectElement(dataset.transactionCategories, 'transactionCategoryId')
+            this._createIdSelectElement(dataset.transactionCategories.filter((transactionCategory) => transactionCategory.transactionType === this.state.transactionType), 'transactionCategoryId')
           }</span>
         ) : null }
         <input
