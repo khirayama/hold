@@ -98,41 +98,63 @@ export default class TransactionListItem extends Component {
       this._edit();
     }
   }
+  _determineTransactionType(transaction) {
+    if (
+      transaction.toAccount === null &&
+      transaction.fromAccount !== null
+    ) {
+      return 'payment';
+    } else if (
+      transaction.toAccount !== null &&
+      transaction.fromAccount === null
+    ) {
+      return 'income';
+    } else if (
+      transaction.toAccount !== null &&
+      transaction.fromAccount !== null
+    ) {
+      return 'transfer';
+    }
+    return null;
+  }
   render() {
     const transaction = this.props.transaction;
     const errorIconElement = (transaction.error) ? (
       <span onClick={this.onClickErrorIcon}>E</span>
     ) : null;
 
+    const transactionType = this._determineTransactionType(transaction);
+
     if (this.state.isEditing) {
-      return (
-        <li>
-          <input
-            autoFocus
-            type="text"
-            value={this.state.name}
-            onChange={this.onChangeNameInput}
-            onKeyDown={this.onKeyDownNameInput}
-          />
-          <select
-            defaultValue={this.state.transactionType}
-            onChange={this.onChangeTransactionTypeSelect}
-          >
-            <option value="payment">Payment</option>
-            <option value="income">Income</option>
-          </select>
-          <span
-            onClick={this.onClickUpdateButton}
-          >Update</span>
-        </li>
-      );
+      switch(transactionType) {
+        case 'payment':
+          return (
+            <li>
+              fromAccount / transactionCategory / amount
+            </li>
+          );
+        case 'income':
+          return (
+            <li>
+              toAccount / transactionCategory / amount
+            </li>
+          );
+        case 'transfer':
+          return (
+            <li>
+              fromAccount / toAccount / amount
+            </li>
+          );
+        default:
+          return null;
+      }
     }
     return (
       <li>
         <span
           onClick={this.onClickTransactionListItem}
         >
-          {(transaction.fromAccount || {}).name} / {(transaction.toAccount || {}).name} / {(transaction.transactionCategory || {}).name} / {transaction.amount}
+          {transactionType} / {(transaction.fromAccount || {}).name} / {(transaction.toAccount || {}).name} / {(transaction.transactionCategory || {}).name} / {transaction.amount}
         </span>
         <span
           onClick={this.onClickDeleteButton}
