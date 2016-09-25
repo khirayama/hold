@@ -151,14 +151,12 @@ export default class TransactionCreateForm extends Component {
         />
         <br />
         <input
-          readOnly
           type="date"
-          value={this._formatDate(this.state.transactionDate)}
+          defaultValue={this._formatDate(this.state.transactionDate)}
         />
         <input
-          readOnly
           type="date"
-          value={this._formatDate(this.state.paymentDate)}
+          defaultValue={this._formatDate(this.state.transactionDate)}
         />
         <br />
         <textarea />

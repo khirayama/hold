@@ -177,6 +177,11 @@ export default class TransactionListItem extends Component {
         <span
           onClick={this.onClickTransactionListItem}
         >
+          {transaction.transactionDate} /
+          {
+            (transaction.transactionDate !== transaction.paymentDate) ? (
+              `(${transaction.paymentDate})`
+            ) : null}
           {transactionType} /
           {(transaction.fromAccount || {}).name} /
           {(transaction.toAccount || {}).name} /
