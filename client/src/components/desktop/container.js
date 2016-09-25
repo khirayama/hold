@@ -2,11 +2,10 @@
 
 import React, { Component } from 'react';
 
-import { startDesktopApp } from '../../actions/app-action-creators';
-import { fetchUser } from '../../actions/user-action-creators';
-import { fetchAccounts } from '../../actions/account-action-creators';
-import { fetchTransactionCategories } from '../../actions/transaction-category-action-creators';
-import { fetchTransactions } from '../../actions/transaction-action-creators';
+import {
+  startDesktopApp,
+  fetchInitialResources,
+} from '../../actions/app-action-creators';
 
 import UserSetting from './user-setting';
 import TransactionList from './transaction-list';
@@ -31,11 +30,7 @@ export default class Container extends Component {
   componentDidMount() {
     this.props.store.addChangeListener(this.updateState);
     startDesktopApp(location.pathname);
-    fetchUser(() => {
-      fetchAccounts();
-      fetchTransactionCategories();
-      fetchTransactions();
-    });
+    fetchInitialResources();
   }
 
   componentWillUnmount() {
