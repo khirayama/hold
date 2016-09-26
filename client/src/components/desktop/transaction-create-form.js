@@ -23,13 +23,12 @@ export default class TransactionCreateForm extends Component {
     };
 
     this.onClickNewButton = this._onClickNewButton.bind(this);
-    this.onChangeNameInput = this._onChangeNameInput.bind(this);
-    this.onChangeAmountInput = this._onChangeAmountInput.bind(this);
     this.onClickCreateButton = this._onClickCreateButton.bind(this);
     this.onKeyDownNameAndAmountInputs = this._onKeyDownNameAndAmountInputs.bind(this);
     this.onClickPaymentTab = this._onClickPaymentTab.bind(this);
     this.onClickIncomeTab = this._onClickIncomeTab.bind(this);
     this.onClickTransferTab = this._onClickTransferTab.bind(this);
+    this.onChangeInput = this._onChangeInput.bind(this);
   }
   _new() {
     this.setState({
@@ -65,12 +64,6 @@ export default class TransactionCreateForm extends Component {
   _onClickNewButton() {
     this._new();
   }
-  _onChangeNameInput(event) {
-    this.setState({ name: event.target.value });
-  }
-  _onChangeAmountInput(event) {
-    this.setState({ amount: event.target.value });
-  }
   _onClickCreateButton() {
     this._create();
   }
@@ -100,6 +93,18 @@ export default class TransactionCreateForm extends Component {
       transactionType: 'transfer',
       transactionCategoryId: null,
     });
+  }
+  _onChangeInput(event) {
+    let value = event.currentTarget.value;
+    const key = event.currentTarget.name;
+    const type = event.currentTarget.type;
+    const state = {};
+
+    if (type === 'date') {
+      value = moment(new Date(value)).format('L');
+    }
+    state[key] = value;
+    this.setState(state);
   }
   _createIdSelectElement(items, ref = null) {
     return (
@@ -145,18 +150,23 @@ export default class TransactionCreateForm extends Component {
         ) : null }
         <input
           type="number"
+          name="amount"
           value={this.state.amount}
-          onChange={this.onChangeAmountInput}
+          onChange={this.onChangeInput}
           onKeyDown={this.onKeyDownNameAndAmountInputs}
         />
         <br />
         <input
           type="date"
-          defaultValue={this._formatDate(this.state.transactionDate)}
+          name="transactionDate"
+          value={this._formatDate(this.state.transactionDate)}
+          onChange={this.onChangeInput}
         />
         <input
           type="date"
-          defaultValue={this._formatDate(this.state.transactionDate)}
+          name="paymentDate"
+          value={this._formatDate(this.state.paymentDate)}
+          onChange={this.onChangeInput}
         />
         <br />
         <textarea />
