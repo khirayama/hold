@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 
 import keyCodes from '../../constants/key-codes';
 
@@ -20,7 +21,12 @@ export default class TransactionListItem extends Component {
     this.state = {
       isEditing: false,
       name: transaction.name,
+      amount: transaction.amount,
+      transactionDate: transaction.transactionDate,
       transactionType: transaction.transactionType,
+      transactionCategoryId: (transaction.transactionCategory || {}).id || null,
+      fromAccountId: (transaction.fromAccount || {}).id || null,
+      toAccountId: (transaction.toAccount || {}).id || null,
     };
 
     this.onClickTransactionListItem = this._onClickTransactionListItem.bind(this);
@@ -31,6 +37,7 @@ export default class TransactionListItem extends Component {
     this.onClickDeleteButton = this._onClickDeleteButton.bind(this);
     this.onKeyDownNameInput = this._onKeyDownNameInput.bind(this);
     this.onClickErrorIcon = this._onClickErrorIcon.bind(this);
+    this.onChangeInput = this._onChangeInput.bind(this);
   }
   _edit() {
     const transaction = this.props.transaction;
@@ -38,7 +45,12 @@ export default class TransactionListItem extends Component {
     this.setState({
       isEditing: true,
       name: transaction.name,
+      amount: transaction.amount,
+      transactionDate: transaction.transactionDate,
       transactionType: transaction.transactionType,
+      transactionCategoryId: (transaction.transactionCategory || {}).id || null,
+      fromAccountId: (transaction.fromAccount || {}).id || null,
+      toAccountId: (transaction.toAccount || {}).id || null,
     });
   }
   _done() {
@@ -104,6 +116,21 @@ export default class TransactionListItem extends Component {
       this._edit();
     }
   }
+  _onChangeInput(event) {
+    let value = event.currentTarget.value;
+    const key = event.currentTarget.name;
+    const type = event.currentTarget.type;
+    const state = {};
+
+    if (type === 'date') {
+      value = moment(new Date(value)).format('L');
+    }
+    state[key] = value;
+    this.setState(state);
+  }
+  _formatDate(date) {
+    return moment(new Date(date)).format('YYYY-MM-DD');
+  }
   _determineTransactionType(transaction) {
     if (
       transaction.toAccount === null &&
@@ -123,9 +150,9 @@ export default class TransactionListItem extends Component {
     }
     return null;
   }
-  _createIdSelectElement(items, ref = null) {
+  _createIdSelectElement(items, initialValue = '', name = null) {
     return (
-      <select ref={ref} >
+      <select value={initialValue} name={name} onChange={this.onChangeInput}>
         {items.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}
       </select>
     );
@@ -144,15 +171,17 @@ export default class TransactionListItem extends Component {
         case 'payment':
           return (
             <li>
-              from: {this._createIdSelectElement(dataset.accounts)}
-              category: {this._createIdSelectElement(dataset.transactionCategories.filter((transactionCategory) => transactionCategory.transactionType === transactionType))}
-              <input type="number" />
+              <input type="date" name="transactionDate" value={this._formatDate(this.state.transactionDate)} onChange={this.onChangeInput} />
+              from: {this._createIdSelectElement(dataset.accounts, this.state.fromAccountId, 'fromAccountId')}
+              category: {this._createIdSelectElement(dataset.transactionCategories.filter((transactionCategory) => transactionCategory.transactionType === transactionType), this.state.transactionCategoryId, 'transactionCategoryId')}
+              <input type="number" name="amount" onChange={this.onChangeInput}/>
               <span onClick={this.onClickCancelButton}>Cancel</span>
             </li>
           );
         case 'income':
           return (
             <li>
+              <input type="date" name="transactionDate" value={this._formatDate(this.state.transactionDate)} onChange={this.onChangeInput} />
               to: {this._createIdSelectElement(dataset.accounts)}
               category: {this._createIdSelectElement(dataset.transactionCategories.filter((transactionCategory) => transactionCategory.transactionType === transactionType))}
               <input type="number" />
@@ -162,6 +191,7 @@ export default class TransactionListItem extends Component {
         case 'transfer':
           return (
             <li>
+              <input type="date" name="transactionDate" value={this._formatDate(this.state.transactionDate)} onChange={this.onChangeInput} />
               from: {this._createIdSelectElement(dataset.accounts)}
               to: {this._createIdSelectElement(dataset.accounts)}
               <input type="number" />
