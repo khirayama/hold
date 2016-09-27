@@ -11,10 +11,6 @@ RSpec.describe Transaction, type: :model do
     it { should validate_numericality_of(:amount).is_greater_than_or_equal_to(0) }
   end
 
-  describe "#payment_date" do
-    it { should validate_presence_of(:payment_date) }
-  end
-
   describe "#transaction_date" do
     it { should validate_presence_of(:transaction_date) }
   end

@@ -58,7 +58,6 @@ export function formatTransaction(
     transactionCategory: null,
     amount: transaction.amount || 0,
     transactionDate: moment(new Date(transaction.transaction_date || transaction.transactionDate)).format('YYYY/MM/DD') || null,
-    paymentDate: moment(new Date(transaction.payment_date || transaction.paymentDate)).format('YYYY/MM/DD') || null,
     note: transaction.note || '',
     currencyCode: setting.currency_code || '',
     error,

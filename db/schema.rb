@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(version: 20160913125154) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer  "user_id",    null: false
-    t.string   "name"
+    t.string   "name",       null: false
     t.float    "amount",     null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -47,7 +47,6 @@ ActiveRecord::Schema.define(version: 20160913125154) do
     t.string   "to_account_id"
     t.string   "transaction_category_id"
     t.float    "amount",                  null: false
-    t.date     "payment_date"
     t.date     "transaction_date"
     t.string   "note"
     t.datetime "created_at",              null: false

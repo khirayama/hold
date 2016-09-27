@@ -18,7 +18,6 @@ export default class TransactionCreateForm extends Component {
       transactionCategoryId: null,
       amount: 0,
       transactionDate: this._getToday(),
-      paymentDate: this._getToday(),
       note: '',
     };
 
@@ -37,7 +36,6 @@ export default class TransactionCreateForm extends Component {
       transactionCategoryId: null,
       amount: 0,
       transactionDate: this._getToday(),
-      paymentDate: this._getToday(),
       note: '',
     });
   }
@@ -48,7 +46,6 @@ export default class TransactionCreateForm extends Component {
       transactionCategoryId:
         (this.refs.transactionCategoryId) ? Number(this.refs.transactionCategoryId.value) : null,
       amount: this.state.amount,
-      paymentDate: this.state.paymentDate,
       transactionDate: this.state.transactionDate,
       note: this.state.note,
     });
@@ -160,12 +157,6 @@ export default class TransactionCreateForm extends Component {
           type="date"
           name="transactionDate"
           value={this._formatDate(this.state.transactionDate)}
-          onChange={this.onChangeInput}
-        />
-        <input
-          type="date"
-          name="paymentDate"
-          value={this._formatDate(this.state.paymentDate)}
           onChange={this.onChangeInput}
         />
         <br />

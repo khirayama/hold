@@ -71,7 +71,6 @@ module Api
             :to_account_id,
             :transaction_category_id,
             :amount,
-            :payment_date,
             :transaction_date,
             :note
           )
@@ -84,7 +83,6 @@ module Api
             to_account: nil,
             transaction_category: nil,
             amount: transaction.amount,
-            payment_date: transaction.payment_date,
             transaction_date: transaction.transaction_date
           }
           if !transaction.transaction_category_id.nil?

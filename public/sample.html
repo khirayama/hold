@@ -186,7 +186,6 @@ crud($transactionCategories, 'transaction_categories', transactionCategoryTempla
       to:<div class="js-select-accounts" name="to_account_id"></div>
       transaction category:<div class="js-select-transaction-categories" name="transaction_category_id"></div>
       <input type="number" name="amount" />
-      <input type="date" name="payment_date" />
       <input type="date" name="transaction_date" />
       <div class="create-button">Create</div>
     </div>
@@ -196,7 +195,6 @@ crud($transactionCategories, 'transaction_categories', transactionCategoryTempla
       to:<div class="js-select-accounts" name="to_account_id"></div>
       transaction category:<div class="js-select-transaction-categories" name="transaction_category_id"></div>
       <input type="number" name="amount" />
-      <input type="date" name="payment_date"/>
       <input type="date" name="transaction_date" />
       <div class="update-button">Update</div>
       <div class="cancel-edit-button">Cancel</div>
@@ -213,7 +211,7 @@ function transactionTemplate(transaction) {
       ${(transaction.to_account) ? transaction.to_account.name : ' - '} /
       ${transaction.amount} /
       ${(transaction.transaction_category) ? transaction.transaction_category.name : ' - '} /
-      ${transaction.payment_date} / ${transaction.transaction_date}
+      ${transaction.transaction_date}
       <div class="edit-button" data-content='${JSON.stringify(transaction)}'>Edit</div>
       <div class="delete-button" data-id="${transaction.id}">Delete</div>
     </li>
