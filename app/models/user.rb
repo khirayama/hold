@@ -15,9 +15,7 @@ class User < ApplicationRecord
       user.image_url = image_url
       user.setting = Setting.create(
         language: I18n.locale,
-        currency_code: Setting.currency(I18n.locale),
-        start_date: 1,
-        start_date_skip_option: 0
+        currency_code: Setting.currency(I18n.locale)
       )
     end
   end

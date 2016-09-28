@@ -14,9 +14,6 @@ export default class UserSetting extends Component {
         <li>
           {user.setting.language} / {user.setting.currencyCode}
         </li>
-        <li>
-          {user.setting.startDate} / {user.setting.startDateSkipOption}
-        </li>
       </ul>
     );
   }

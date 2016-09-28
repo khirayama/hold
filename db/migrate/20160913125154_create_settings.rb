@@ -4,8 +4,6 @@ class CreateSettings < ActiveRecord::Migration[5.0]
       t.integer :user_id, null: false
       t.string :language, null: false
       t.string :currency_code, null: false
-      t.integer :start_date, null: false
-      t.integer :start_date_skip_option, null: false
 
       t.timestamps
     end

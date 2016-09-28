@@ -11,9 +11,7 @@ export function formatUser(user, setting, error = null) {
     error,
     setting: {
       language: setting.language,
-      currencyCode: setting.currency_code,
-      startDate: setting.start_date,
-      startDateSkipOption: setting.start_date_skip_option,
+      currencyCode: setting.currency_code
     },
   };
 }
