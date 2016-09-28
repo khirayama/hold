@@ -9,11 +9,11 @@ class SessionsController < ApplicationController
       TransactionCategory.create_initial_transaction_categories(user)
     end
 
-    redirect_to root_path
+    redirect_to dashboard_path
   end
 
   def destroy
     reset_session
-    redirect_to root_path
+    redirect_to dashboard_path
   end
 end
