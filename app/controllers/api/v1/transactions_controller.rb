@@ -32,16 +32,24 @@ module Api
         # TODO: transaction
         transaction = current_user.transactions.find(params[:id])
 
-        from_account = current_user.accounts.find(from_account_id) if from_account_id.present?
-        to_account = current_user.accounts.find(to_account_id) if to_account_id.present?
+        from_account = current_user.accounts.find(transaction.from_account_id) if transaction.from_account_id.present?
+        to_account = current_user.accounts.find(transaction.to_account_id) if transaction.to_account_id.present?
 
-        to_account.transfer(from_account, transaction.amount)
+        if !to_account.nil?
+          to_account.transfer(from_account, transaction.amount)
+        else
+          from_account.increment!(:amount, transaction.amount)
+        end
 
         if transaction.update(transaction_params)
-          from_account = current_user.accounts.find(from_account_id) if from_account_id.present?
-          to_account = current_user.accounts.find(to_account_id) if to_account_id.present?
+          from_account = current_user.accounts.find(transaction.from_account_id) if transaction.from_account_id.present?
+          to_account = current_user.accounts.find(transaction.to_account_id) if transaction.to_account_id.present?
 
-          from_account.transfer(to_account, transaction.amount)
+          if !from_account.nil?
+            from_account.transfer(to_account, transaction.amount)
+          else
+            to_account.increment!(:amount, transaction.amount)
+          end
 
           render json: format_transaction(transaction)
         end

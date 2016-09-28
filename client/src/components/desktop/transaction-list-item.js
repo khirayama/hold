@@ -23,7 +23,6 @@ export default class TransactionListItem extends Component {
       name: transaction.name,
       amount: transaction.amount,
       transactionDate: transaction.transactionDate,
-      transactionType: transaction.transactionType,
       transactionCategoryId: (transaction.transactionCategory || {}).id || null,
       fromAccountId: (transaction.fromAccount || {}).id || null,
       toAccountId: (transaction.toAccount || {}).id || null,
@@ -32,7 +31,6 @@ export default class TransactionListItem extends Component {
     this.onClickTransactionListItem = this._onClickTransactionListItem.bind(this);
     this.onClickCancelButton = this._onClickCancelButton.bind(this);
     this.onChangeNameInput = this._onChangeNameInput.bind(this);
-    this.onChangeTransactionTypeSelect = this._onChangeTransactionTypeSelect.bind(this);
     this.onClickUpdateButton = this._onClickUpdateButton.bind(this);
     this.onClickDeleteButton = this._onClickDeleteButton.bind(this);
     this.onKeyDownNameInput = this._onKeyDownNameInput.bind(this);
@@ -47,7 +45,6 @@ export default class TransactionListItem extends Component {
       name: transaction.name,
       amount: transaction.amount,
       transactionDate: transaction.transactionDate,
-      transactionType: transaction.transactionType,
       transactionCategoryId: (transaction.transactionCategory || {}).id || null,
       fromAccountId: (transaction.fromAccount || {}).id || null,
       toAccountId: (transaction.toAccount || {}).id || null,
@@ -57,17 +54,27 @@ export default class TransactionListItem extends Component {
     this.setState({ isEditing: false });
   }
   _update() {
-    updateTransaction(Object.assign({}, this.props.transaction, {
-      name: this.state.name,
-      transactionType: this.state.transactionType,
-    }));
+    updateTransaction({
+      id: this.props.transaction.id,
+      cid: this.props.transaction.cid,
+      fromAccountId: this.state.fromAccountId,
+      toAccountId: this.state.toAccountId,
+      transactionCategoryId: this.state.transactionCategoryId,
+      amount: this.state.amount,
+      transactionDate: this.state.transactionDate,
+      note: this.state.note,
+    });
   }
   _recreate() {
-    createTransaction(Object.assign({}, this.props.transaction, {
-      name: this.state.name,
-      transactionType: this.state.transactionType,
-      error: this.props.transaction.error,
-    }));
+    createTransaction({
+      cid: this.props.transaction.cid,
+      fromAccountId: this.state.fromAccountId,
+      toAccountId: this.state.toAccountId,
+      transactionCategoryId: this.state.transactionCategoryId,
+      amount: this.state.amount,
+      transactionDate: this.state.transactionDate,
+      note: this.state.note,
+    });
   }
   _delete() {
     deleteTransaction(this.props.transaction);
@@ -80,9 +87,6 @@ export default class TransactionListItem extends Component {
   }
   _onChangeNameInput(event) {
     this.setState({ name: event.target.value });
-  }
-  _onChangeTransactionTypeSelect(event) {
-    this.setState({ transactionType: event.target.value });
   }
   _onClickUpdateButton() {
     if (this.props.transaction.id) {
@@ -174,7 +178,8 @@ export default class TransactionListItem extends Component {
               <input type="date" name="transactionDate" value={this._formatDate(this.state.transactionDate)} onChange={this.onChangeInput} />
               from: {this._createIdSelectElement(dataset.accounts, this.state.fromAccountId, 'fromAccountId')}
               category: {this._createIdSelectElement(dataset.transactionCategories.filter((transactionCategory) => transactionCategory.transactionType === transactionType), this.state.transactionCategoryId, 'transactionCategoryId')}
-              <input type="number" name="amount" onChange={this.onChangeInput}/>
+              <input type="number" name="amount" onChange={this.onChangeInput} value={this.state.amount} />
+              <span onClick={this.onClickUpdateButton}>Update</span>
               <span onClick={this.onClickCancelButton}>Cancel</span>
             </li>
           );
@@ -184,7 +189,8 @@ export default class TransactionListItem extends Component {
               <input type="date" name="transactionDate" value={this._formatDate(this.state.transactionDate)} onChange={this.onChangeInput} />
               to: {this._createIdSelectElement(dataset.accounts)}
               category: {this._createIdSelectElement(dataset.transactionCategories.filter((transactionCategory) => transactionCategory.transactionType === transactionType))}
-              <input type="number" />
+              <input type="number" name="amount" onChange={this.onChangeInput} value={this.state.amount} />
+              <span onClick={this.onClickUpdateButton}>Update</span>
               <span onClick={this.onClickCancelButton}>Cancel</span>
             </li>
           );
@@ -194,7 +200,8 @@ export default class TransactionListItem extends Component {
               <input type="date" name="transactionDate" value={this._formatDate(this.state.transactionDate)} onChange={this.onChangeInput} />
               from: {this._createIdSelectElement(dataset.accounts)}
               to: {this._createIdSelectElement(dataset.accounts)}
-              <input type="number" />
+              <input type="number" name="amount" onChange={this.onChangeInput} value={this.state.amount} />
+              <span onClick={this.onClickUpdateButton}>Update</span>
               <span onClick={this.onClickCancelButton}>Cancel</span>
             </li>
           );
