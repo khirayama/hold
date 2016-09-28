@@ -2,7 +2,7 @@ import types from '../constants/action-types';
 
 import { dispatch } from '../libs/app-dispatcher';
 
-import UserStatus from '../resources/user-status';
+import User from '../resources/user';
 import Setting from '../resources/setting';
 import Account from '../resources/account';
 import TransactionCategory from '../resources/transaction-category';
@@ -38,7 +38,7 @@ export function startMobileApp(pathname = '') {
 }
 
 export function fetchInitialResources() {
-  UserStatus.fetch().then((user) => {
+  User.fetch().then((user) => {
     Setting.fetch().then((setting) => {
       dispatch({
         type: types.FETCH_USER,

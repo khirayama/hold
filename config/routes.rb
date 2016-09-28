@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   namespace :api, { format: 'json' } do
     namespace :v1 do
-      get '/user_status' => 'application#user_status'
+      get '/user' => 'application#user'
 
       resource :setting
 

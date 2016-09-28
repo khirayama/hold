@@ -2,10 +2,9 @@ module Api
   module V1
     class ApplicationController < ActionController::API
 
-      def user_status
+      def user
         authenticate
         current_user ||= User.find(session[:user_id])
-        setting = current_user.setting
         render json: {
           id: current_user.id,
           provider: current_user.provider,

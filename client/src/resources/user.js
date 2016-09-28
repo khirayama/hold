@@ -1,10 +1,10 @@
 import request from 'axios';
 
 
-export class UserStatusModel {
+export class UserModel {
   constructor() {
     this._cache = null;
-    this._resourceUrl = '/api/v1/user_status';
+    this._resourceUrl = '/api/v1/user';
   }
   _url(id = null) {
     if (id != null) {
@@ -32,4 +32,4 @@ export class UserStatusModel {
   }
 }
 
-export default new UserStatusModel();
+export default new UserModel();
