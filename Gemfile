@@ -11,6 +11,7 @@ gem 'omniauth-twitter'
 gem 'slim-rails'
 
 group :development, :test do
+  gem 'rb-readline'
   gem 'pry-rails'
   gem 'pry-doc'
   gem 'pry-byebug'
