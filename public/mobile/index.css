@@ -50,10 +50,13 @@ a {
 .icon {
   font-family: 'Material Icons';
   font-style: normal;
+  font-size: inherit;
   display: inline;
   text-rendering: optimizeLegibility;
   font-smoothing: antialiased;
-  font-feature-settings: 'liga'; }
+  font-feature-settings: 'liga';
+  vertical-align: text-bottom;
+  line-height: 1.4; }
 
 html {
   color: #424242;
@@ -70,4 +73,4 @@ body {
   width: 100%;
   height: 100%;
   overflow: scroll;
-  background: #fafafa; }
+  background: #fff; }

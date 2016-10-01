@@ -5,7 +5,7 @@ import AccountListItem from './account-list-item';
 
 export default function AccountList(props) {
   return (
-    <ul>
+    <ul className="account-list">
       { props.accounts.map(
         (account) => (
           <AccountListItem

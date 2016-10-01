@@ -23,6 +23,7 @@ export default class AccountListItem extends Component {
       amount: account.amount,
     };
 
+    this.select = this._select.bind(this);
     this.onClickAccountListItem = this._onClickAccountListItem.bind(this);
     this.onChangeNameInput = this._onChangeNameInput.bind(this);
     this.onChangeAmountInput = this._onChangeAmountInput.bind(this);
@@ -30,6 +31,9 @@ export default class AccountListItem extends Component {
     this.onClickDeleteButton = this._onClickDeleteButton.bind(this);
     this.onKeyDownNameAndAmountInputs = this._onKeyDownNameAndAmountInputs.bind(this);
     this.onClickErrorIcon = this._onClickErrorIcon.bind(this);
+  }
+  _select(event) {
+    event.currentTarget.select();
   }
   _edit() {
     const account = this.props.account;
@@ -108,36 +112,58 @@ export default class AccountListItem extends Component {
 
     if (this.state.isEditing) {
       return (
-        <li>
-          <input
-            autoFocus
-            type="text"
-            value={this.state.name}
-            onChange={this.onChangeNameInput}
-            onKeyDown={this.onKeyDownNameAndAmountInputs}
-          />
-          <input
-            type="number"
-            value={this.state.amount}
-            onChange={this.onChangeAmountInput}
-            onKeyDown={this.onKeyDownNameAndAmountInputs}
-          />
+        <li className="account-list-item">
           <span
+            className="account-list-item-content"
+            onClick={this.onClickAccountListItem}
+          >
+            <span className="account-list-item-content-name">
+              <input
+                autoFocus
+                type="text"
+                value={this.state.name}
+                onChange={this.onChangeNameInput}
+                onKeyDown={this.onKeyDownNameAndAmountInputs}
+                onFocus={this.select}
+              />
+            </span>
+            <span className="account-list-item-content-amount">
+              <input
+                type="number"
+                value={this.state.amount}
+                onChange={this.onChangeAmountInput}
+                onKeyDown={this.onKeyDownNameAndAmountInputs}
+                onFocus={this.select}
+              />
+            </span>
+          </span>
+          <span
+            className="account-list-item-done-button"
             onClick={this.onClickUpdateButton}
-          >Update</span>
+          ><span className="icon">done</span></span>
         </li>
       );
     }
     return (
-      <li>
+      <li className="account-list-item">
         <span
+          className="account-list-item-content"
           onClick={this.onClickAccountListItem}
         >
-          {account.name} / {currency(account.amount, account.currencyCode)}
+          <span className="account-list-item-content-name">
+            {account.name}
+            <span
+              className="account-list-item-delete-button"
+              onClick={this.onClickDeleteButton}
+            ><span className="icon">delete</span></span>
+          </span>
+          <span className="account-list-item-content-amount">
+            <span className="account-list-item-content-amount-currency-code">
+              {account.currencyCode}
+            </span>
+            {currency(account.amount, '', true)}
+          </span>
         </span>
-        <span
-          onClick={this.onClickDeleteButton}
-        >Delete</span>
         {errorIconElement}
       </li>
     );

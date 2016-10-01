@@ -11,7 +11,7 @@ export default function Dashboard(props) {
 
   return (
     <div>
-      <section className="account">
+      <section className="account-section">
         <h2>Accounts</h2>
         <AccountList accounts={state.accounts} />
         <AccountCreateForm />

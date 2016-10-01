@@ -1,0 +1,63 @@
+.account-section
+  display: inline-block
+  padding: 8px
+  h2
+    font-weight: 100
+    padding: 8px
+    margin-bottom: 12px
+
+.account-list
+  width: 300px
+
+.account-list-item
+  position: relative
+  .account-list-item-content
+    display: inline-block
+    width: 100%
+    cursor: pointer
+    .account-list-item-content-name
+      display: inline-block
+      width: 100%
+      padding: 4px
+      font-size: .8rem
+      color: $color-text-secondary
+      input
+        width: 100%
+      .account-list-item-delete-button
+        display: inline-block
+        cursor: pointer
+        margin-left: 4px
+        opacity: 0
+        transition: opacity .2s ease-out
+        span
+          color: $color-text-secondary
+          transition: color .2s ease-out
+          &:hover
+            color: $color-text
+      &:hover
+        .account-list-item-delete-button
+          opacity: 1
+    .account-list-item-content-amount
+      display: inline-block
+      width: 100%
+      padding: 4px
+      text-align: right
+      font-size: 1.2rem
+      input
+        width: 100%
+        text-align: right
+      .account-list-item-content-amount-currency-code
+        font-size: .8rem
+        margin-right: 4px
+        color: $color-text-secondary
+  .account-list-item-done-button
+    position: absolute
+    top: 0
+    right: 0
+    display: inline-block
+    cursor: pointer
+    span
+      color: $color-text-secondary
+      transition: color .2s ease-out
+      &:hover
+        color: $color-text
