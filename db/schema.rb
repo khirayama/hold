@@ -22,13 +22,11 @@ ActiveRecord::Schema.define(version: 20160913125154) do
   end
 
   create_table "settings", force: :cascade do |t|
-    t.integer  "user_id",                null: false
-    t.string   "language",               null: false
-    t.string   "currency_code",          null: false
-    t.integer  "start_date",             null: false
-    t.integer  "start_date_skip_option", null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "user_id",       null: false
+    t.string   "language",      null: false
+    t.string   "currency_code", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.index ["user_id"], name: "index_settings_on_user_id"
   end
 
