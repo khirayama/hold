@@ -17,6 +17,8 @@ export default class Store extends MicroStore {
 
     this.state = {
       ready: false,
+      pathname: '/',
+
       user: { setting: {} },
       accounts: [],
       transactionCategories: [],
@@ -32,14 +34,17 @@ export default class Store extends MicroStore {
       switch (action.type) {
         case types.CHANGE_HISTORY:
           logger.info('Change histroy');
+          this.state.pathname = action.pathname;
           break;
         case types.START_DESKTOP_APP:
-          this.state.ready = true;
           logger.info('Start desktop app');
+          this.state.ready = true;
+          this.state.pathname = action.pathname;
           break;
         case types.START_MOBILE_APP:
-          this.state.ready = true;
           logger.info('Start mobile app');
+          this.state.ready = true;
+          this.state.pathname = action.pathname;
           break;
         default:
           break;

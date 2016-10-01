@@ -17,6 +17,9 @@ import {
 
 
 export function changeHistory(pathname = '') {
+  if (history) {
+    history.pushState(null, null, pathname);
+  }
   dispatch({
     type: types.CHANGE_HISTORY,
     pathname,

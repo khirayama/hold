@@ -2,7 +2,10 @@
 
 import React, { Component } from 'react';
 
-import { fetchInitialDesktopResources } from '../../actions/app-action-creators';
+import {
+  changeHistory,
+  fetchInitialDesktopResources,
+} from '../../actions/app-action-creators';
 
 import UserSetting from './user-setting';
 import TransactionList from './transaction-list';
@@ -39,40 +42,83 @@ export default class Container extends Component {
     });
   }
 
+  _createPageElement(pathname, state) {
+    switch(pathname) {
+      case '/dashboard':
+        return (
+          <div>
+            <section className="account">
+              <h2>Accounts</h2>
+              <AccountList accounts={state.accounts} />
+              <AccountCreateForm />
+            </section>
+            <section className="transaction">
+              <h2>Transactions</h2>
+              <TransactionCreateForm
+                transactionDataset={state.transactionDataset}
+              />
+              <TransactionList
+                transactions={state.transactions}
+                transactionDataset={state.transactionDataset}
+              />
+            </section>
+          </div>
+        );
+      case '/transactions':
+        return (
+          <div>
+            <section className="transaction">
+              <h2>Transactions</h2>
+              <TransactionCreateForm
+                transactionDataset={state.transactionDataset}
+              />
+              <TransactionList
+                transactions={state.transactions}
+                transactionDataset={state.transactionDataset}
+              />
+            </section>
+          </div>
+        );
+      case '/transaction_categories':
+        return (
+          <div>
+            <section className="transaction-category">
+              <h2>Transaction category</h2>
+              <TransactionCategoryList transactionCategories={state.transactionCategories} />
+              <TransactionCategoryCreateForm />
+            </section>
+          </div>
+        );
+      case '/setting':
+        return (
+          <div>
+            <section className="setting">
+              <h2>Setting</h2>
+              <UserSetting user={state.user} />
+              <a href="/logout">Sign out</a>
+            </section>
+          </div>
+        );
+      default:
+        return <div>404</div>;
+    }
+  }
+
   render() {
     const state = this.state.store.getState();
 
     if (!state.ready) {
       return null;
     }
+    const pageElement = this._createPageElement(state.pathname, state);
     return (
-      <div>
-        <a href="/logout">Sign out</a>
-        <section className="transaction">
-          <h2>Transaction</h2>
-          <TransactionCreateForm
-            transactionDataset={state.transactionDataset}
-          />
-          <TransactionList
-            transactions={state.transactions}
-            transactionDataset={state.transactionDataset}
-          />
-        </section>
-        <section className="account">
-          <h2>Accounts</h2>
-          <AccountList accounts={state.accounts} />
-          <AccountCreateForm />
-        </section>
-        <section className="transaction-category">
-          <h2>Transaction category</h2>
-          <TransactionCategoryList transactionCategories={state.transactionCategories} />
-          <TransactionCategoryCreateForm />
-        </section>
-        <section className="setting">
-          <h2>Setting</h2>
-          <UserSetting user={state.user} />
-        </section>
-      </div>
+      <section>
+        <span onClick={() => changeHistory('/dashboard')}>Dashboard</span>
+        <span onClick={() => changeHistory('/transactions')}>Transactions</span>
+        <span onClick={() => changeHistory('/transaction_categories')}>Transaction Categories</span>
+        <span onClick={() => changeHistory('/setting')}>Setting</span>
+        {pageElement}
+      </section>
     );
   }
 }

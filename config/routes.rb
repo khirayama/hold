@@ -8,6 +8,9 @@ Rails.application.routes.draw do
 
   # application
   get '/dashboard' => 'static_pages#application'
+  get '/transactions' => 'static_pages#application'
+  get '/transaction_categories' => 'static_pages#application'
+  get '/setting' => 'static_pages#application'
 
   namespace :api, { format: 'json' } do
     namespace :v1 do
