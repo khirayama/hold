@@ -67,33 +67,42 @@ export default class AccountCreateForm extends Component {
   render() {
     if (this.state.isNew) {
       return (
-        <span>
-          <input
-            autoFocus
-            type="text"
-            value={this.state.name}
-            onChange={this.onChangeNameInput}
-            onKeyDown={this.onKeyDownNameAndAmountInputs}
-          />
-          <input
-            type="number"
-            value={this.state.amount}
-            onChange={this.onChangeAmountInput}
-            onKeyDown={this.onKeyDownNameAndAmountInputs}
-          />
-          <div
-            onClick={this.onClickCreateButton}
-          >Create</div>
-          <div
-            onClick={this.onClickCancelButton}
-          >Cancel</div>
-        </span>
+        <div className="account-create-form">
+          <span className="account-create-form-content">
+            <span className="account-create-form-content-name">
+              <input
+                autoFocus
+                type="text"
+                value={this.state.name}
+                onChange={this.onChangeNameInput}
+                onKeyDown={this.onKeyDownNameAndAmountInputs}
+              />
+            </span>
+            <span className="account-create-form-content-amount">
+              <input
+                type="number"
+                value={this.state.amount}
+                onChange={this.onChangeAmountInput}
+                onKeyDown={this.onKeyDownNameAndAmountInputs}
+              />
+            </span>
+          </span>
+          <span className="account-create-form-button-box">
+            <span
+              onClick={this.onClickCreateButton}
+            ><span className="icon">done</span></span>
+            <span
+              onClick={this.onClickCancelButton}
+            ><span className="icon">clear</span></span>
+          </span>
+        </div>
       );
     }
     return (
       <div
+        className="account-create-button"
         onClick={this.onClickNewButton}
-      >Add account</div>
+      ><span className="icon">add_circle_outline</span>add an account</div>
     );
   }
 }

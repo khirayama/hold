@@ -1,13 +1,11 @@
 .account-section
   display: inline-block
   padding: 8px
+  width: 300px
   h2
     font-weight: 100
     padding: 8px
-    margin-bottom: 12px
-
-.account-list
-  width: 300px
+    margin-bottom: 8px
 
 .account-list-item
   position: relative
@@ -51,6 +49,52 @@
         margin-right: 4px
         color: $color-text-secondary
   .account-list-item-done-button
+    position: absolute
+    top: 0
+    right: 0
+    display: inline-block
+    cursor: pointer
+    span
+      color: $color-text-secondary
+      transition: color .2s ease-out
+      &:hover
+        color: $color-text
+
+.account-create-button
+  color: $color-text-secondary
+  text-align: right
+  font-size: .8rem
+  transition: color .2s ease-out
+  span
+    margin-right: 4px
+  &:hover
+    color: $color-text
+
+.account-create-form
+  position: relative
+  display: inline-block
+  .account-create-form-content
+    display: inline-block
+    width: 100%
+    cursor: pointer
+    .account-create-form-content-name
+      display: inline-block
+      width: 100%
+      padding: 4px
+      font-size: .8rem
+      color: $color-text-secondary
+      input
+        width: 100%
+    .account-create-form-content-amount
+      display: inline-block
+      width: 100%
+      padding: 4px
+      text-align: right
+      font-size: 1.2rem
+      input
+        width: 100%
+        text-align: right
+  .account-create-form-button-box
     position: absolute
     top: 0
     right: 0

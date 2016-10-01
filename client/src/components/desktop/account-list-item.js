@@ -113,10 +113,7 @@ export default class AccountListItem extends Component {
     if (this.state.isEditing) {
       return (
         <li className="account-list-item">
-          <span
-            className="account-list-item-content"
-            onClick={this.onClickAccountListItem}
-          >
+          <span className="account-list-item-content">
             <span className="account-list-item-content-name">
               <input
                 autoFocus
