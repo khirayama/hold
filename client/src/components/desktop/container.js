@@ -7,13 +7,11 @@ import {
   fetchInitialDesktopResources,
 } from '../../actions/app-action-creators';
 
-import UserSetting from './user-setting';
-import TransactionList from './transaction-list';
-import TransactionCreateForm from './transaction-create-form';
-import AccountList from './account-list';
-import AccountCreateForm from './account-create-form';
-import TransactionCategoryList from './transaction-category-list';
-import TransactionCategoryCreateForm from './transaction-category-create-form';
+import Dashboard from './dashboard';
+import Transactions from './transactions';
+import TransactionCategories from './transaction-categories';
+import Setting from './setting';
+import NotFound from './not-found';
 
 
 export default class Container extends Component {
@@ -45,62 +43,15 @@ export default class Container extends Component {
   _createPageElement(pathname, state) {
     switch(pathname) {
       case '/dashboard':
-        return (
-          <div>
-            <section className="account">
-              <h2>Accounts</h2>
-              <AccountList accounts={state.accounts} />
-              <AccountCreateForm />
-            </section>
-            <section className="transaction">
-              <h2>Transactions</h2>
-              <TransactionCreateForm
-                transactionDataset={state.transactionDataset}
-              />
-              <TransactionList
-                transactions={state.transactions}
-                transactionDataset={state.transactionDataset}
-              />
-            </section>
-          </div>
-        );
+        return <Dashboard state={state} />;
       case '/transactions':
-        return (
-          <div>
-            <section className="transaction">
-              <h2>Transactions</h2>
-              <TransactionCreateForm
-                transactionDataset={state.transactionDataset}
-              />
-              <TransactionList
-                transactions={state.transactions}
-                transactionDataset={state.transactionDataset}
-              />
-            </section>
-          </div>
-        );
+        return <Transactions state={state} />;
       case '/transaction_categories':
-        return (
-          <div>
-            <section className="transaction-category">
-              <h2>Transaction category</h2>
-              <TransactionCategoryList transactionCategories={state.transactionCategories} />
-              <TransactionCategoryCreateForm />
-            </section>
-          </div>
-        );
+        return <TransactionCategories state={state} />;
       case '/setting':
-        return (
-          <div>
-            <section className="setting">
-              <h2>Setting</h2>
-              <UserSetting user={state.user} />
-              <a href="/logout">Sign out</a>
-            </section>
-          </div>
-        );
+        return <Setting state={state} />;
       default:
-        return <div>404</div>;
+        return <NotFound state={state} />;
     }
   }
 
