@@ -57,9 +57,9 @@ export default class TransactionListItem extends Component {
     updateTransaction({
       id: this.props.transaction.id,
       cid: this.props.transaction.cid,
-      fromAccountId: this.state.fromAccountId,
-      toAccountId: this.state.toAccountId,
-      transactionCategoryId: this.state.transactionCategoryId,
+      fromAccountId: Number(this.state.fromAccountId),
+      toAccountId: Number(this.state.toAccountId),
+      transactionCategoryId: Number(this.state.transactionCategoryId),
       amount: this.state.amount,
       transactionDate: this.state.transactionDate,
       note: this.state.note,
