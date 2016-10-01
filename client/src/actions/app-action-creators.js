@@ -23,13 +23,6 @@ export function changeHistory(pathname = '') {
   });
 }
 
-export function startDesktopApp(pathname = '') {
-  dispatch({
-    type: types.START_DESKTOP_APP,
-    pathname,
-  });
-}
-
 export function startMobileApp(pathname = '') {
   dispatch({
     type: types.START_MOBILE_APP,
@@ -37,33 +30,40 @@ export function startMobileApp(pathname = '') {
   });
 }
 
-export function fetchInitialResources() {
+export function fetchInitialDesktopResources(pathname) {
   User.fetch().then((user) => {
     Setting.fetch().then((setting) => {
       dispatch({
         type: types.FETCH_USER,
         user: formatUser(user, setting),
       });
-      Account.fetch().then((data) => {
+      Promise.all([
+        Account.fetch().then((data) => {
+          dispatch({
+            type: types.FETCH_ACCOUNTS,
+            accounts: data.map((account) => formatAccount(account, Setting.data)),
+          });
+        }),
+        TransactionCategory.fetch().then((data) => {
+          dispatch({
+            type: types.FETCH_TRANSACTION_CATEGORIES,
+            transactionCategories: data.map((transactionCategory) => (
+              formatTransactionCategory(transactionCategory)
+            )),
+          });
+        }),
+        Transaction.fetch().then((data) => {
+          dispatch({
+            type: types.FETCH_TRANSACTIONS,
+            transactions: data.map((transaction) => (
+              formatTransaction(transaction, Account.data, TransactionCategory.data, Setting.data)
+            )),
+          });
+        })
+      ]).then(() => {
         dispatch({
-          type: types.FETCH_ACCOUNTS,
-          accounts: data.map((account) => formatAccount(account, Setting.data)),
-        });
-      });
-      TransactionCategory.fetch().then((data) => {
-        dispatch({
-          type: types.FETCH_TRANSACTION_CATEGORIES,
-          transactionCategories: data.map((transactionCategory) => (
-            formatTransactionCategory(transactionCategory)
-          )),
-        });
-      });
-      Transaction.fetch().then((data) => {
-        dispatch({
-          type: types.FETCH_TRANSACTIONS,
-          transactions: data.map((transaction) => (
-            formatTransaction(transaction, Account.data, TransactionCategory.data, Setting.data)
-          )),
+          type: types.START_DESKTOP_APP,
+          pathname,
         });
       });
     });

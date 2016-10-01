@@ -2,10 +2,7 @@
 
 import React, { Component } from 'react';
 
-import {
-  startDesktopApp,
-  fetchInitialResources,
-} from '../../actions/app-action-creators';
+import { fetchInitialDesktopResources } from '../../actions/app-action-creators';
 
 import UserSetting from './user-setting';
 import TransactionList from './transaction-list';
@@ -29,8 +26,7 @@ export default class Container extends Component {
 
   componentDidMount() {
     this.props.store.addChangeListener(this.updateState);
-    startDesktopApp(location.pathname);
-    fetchInitialResources();
+    fetchInitialDesktopResources(location.pathname);
   }
 
   componentWillUnmount() {
@@ -46,6 +42,9 @@ export default class Container extends Component {
   render() {
     const state = this.state.store.getState();
 
+    if (!state.ready) {
+      return null;
+    }
     return (
       <div>
         <a href="/logout">Sign out</a>

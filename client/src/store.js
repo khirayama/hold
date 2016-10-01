@@ -16,6 +16,7 @@ export default class Store extends MicroStore {
     super();
 
     this.state = {
+      ready: false,
       user: { setting: {} },
       accounts: [],
       transactionCategories: [],
@@ -33,9 +34,11 @@ export default class Store extends MicroStore {
           logger.info('Change histroy');
           break;
         case types.START_DESKTOP_APP:
+          this.state.ready = true;
           logger.info('Start desktop app');
           break;
         case types.START_MOBILE_APP:
+          this.state.ready = true;
           logger.info('Start mobile app');
           break;
         default:

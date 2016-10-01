@@ -6,8 +6,9 @@ import {
   promiseStub,
 } from '../test-helper';
 
+import { formatAccount } from '../../src/actions/formatter';
+
 import {
-  _formatAccount,
   fetchAccounts,
   createAccount,
   updateAccount,
@@ -36,9 +37,9 @@ describe('app-action-creators', () => {
     unsubscribeAll();
   });
 
-  describe('_formatAccount', () => {
+  describe('formatAccount', () => {
     it('formatted account without error', () => {
-      const account = _formatAccount(createSampleAccount());
+      const account = formatAccount(createSampleAccount());
 
       assert.notStrictEqual(account.cid, null);
       assert.deepStrictEqual(account, {
@@ -51,7 +52,7 @@ describe('app-action-creators', () => {
     });
 
     it('formatted account with error', () => {
-      const account = _formatAccount(createSampleAccount(), createError());
+      const account = formatAccount(createSampleAccount(), createError());
 
       assert.notStrictEqual(account.cid, null);
       assert.deepStrictEqual(account, {

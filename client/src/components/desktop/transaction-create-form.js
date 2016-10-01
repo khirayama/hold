@@ -7,21 +7,21 @@ import { createTransaction } from '../../actions/transaction-action-creators';
 
 
 export default class TransactionCreateForm extends Component {
-  constructor() {
+  constructor(props) {
     super();
+
+    const dataset = props.transactionDataset;
 
     this.state = {
       transactionType: 'payment',
-
-      fromAccountId: null,
+      fromAccountId: (dataset.accounts[0] || {}).id || null,
       toAccountId: null,
-      transactionCategoryId: null,
+      transactionCategoryId: (dataset.transactionCategories[0] || {}).id || null,
       amount: 0,
       transactionDate: this._getToday(),
       note: '',
     };
 
-    this.onClickNewButton = this._onClickNewButton.bind(this);
     this.onClickCreateButton = this._onClickCreateButton.bind(this);
     this.onKeyDownNameAndAmountInputs = this._onKeyDownNameAndAmountInputs.bind(this);
     this.onClickPaymentTab = this._onClickPaymentTab.bind(this);
@@ -29,22 +29,16 @@ export default class TransactionCreateForm extends Component {
     this.onClickTransferTab = this._onClickTransferTab.bind(this);
     this.onChangeInput = this._onChangeInput.bind(this);
   }
-  _new() {
-    this.setState({
-      fromAccountId: null,
-      toAccountId: null,
-      transactionCategoryId: null,
-      amount: 0,
-      transactionDate: this._getToday(),
-      note: '',
-    });
+  _filterTransactionCategory(transactionCategories, transactionType) {
+    return transactionCategories.filter((transactionCategory) => transactionCategory.transactionType === transactionType);
   }
   _create() {
+    const dataset = this.props.transactionDataset;
+
     createTransaction({
-      fromAccountId: (this.refs.fromAccountId) ? Number(this.refs.fromAccountId.value) : null,
-      toAccountId: (this.refs.toAccountId) ? Number(this.refs.toAccountId.value) : null,
-      transactionCategoryId:
-        (this.refs.transactionCategoryId) ? Number(this.refs.transactionCategoryId.value) : null,
+      fromAccountId: Number(this.state.fromAccountId) || null,
+      toAccountId: Number(this.state.toAccountId) || null,
+      transactionCategoryId: Number(this.state.transactionCategoryId || dataset.transactionCategories[0].id) || null,
       amount: this.state.amount,
       transactionDate: this.state.transactionDate,
       note: this.state.note,
@@ -57,9 +51,6 @@ export default class TransactionCreateForm extends Component {
   }
   _formatDate(date) {
     return moment(new Date(date)).format('YYYY-MM-DD');
-  }
-  _onClickNewButton() {
-    this._new();
   }
   _onClickCreateButton() {
     this._create();
@@ -74,20 +65,32 @@ export default class TransactionCreateForm extends Component {
     }
   }
   _onClickPaymentTab() {
+    const dataset = this.props.transactionDataset;
+
     this.setState({
       transactionType: 'payment',
+      fromAccountId: (dataset.accounts[0] || {}).id || null,
       toAccountId: null,
+      transactionCategoryId: (dataset.transactionCategories[0] || {}).id || null,
     });
   }
   _onClickIncomeTab() {
+    const dataset = this.props.transactionDataset;
+
     this.setState({
       transactionType: 'income',
       fromAccountId: null,
+      toAccountId: (dataset.accounts[0] || {}).id || null,
+      transactionCategoryId: (dataset.transactionCategories[0] || {}).id || null,
     });
   }
   _onClickTransferTab() {
+    const dataset = this.props.transactionDataset;
+
     this.setState({
       transactionType: 'transfer',
+      fromAccountId: (dataset.accounts[0] || {}).id || null,
+      toAccountId: (dataset.accounts[1] || {}).id || null,
       transactionCategoryId: null,
     });
   }
@@ -103,9 +106,9 @@ export default class TransactionCreateForm extends Component {
     state[key] = value;
     this.setState(state);
   }
-  _createIdSelectElement(items, ref = null) {
+  _createIdSelectElement(items, initialValue = '', name = null) {
     return (
-      <select ref={ref} >
+      <select value={initialValue} name={name} onChange={this.onChangeInput}>
         {items.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}
       </select>
     );
@@ -126,7 +129,7 @@ export default class TransactionCreateForm extends Component {
             this.state.transactionType === 'transfer'
           ) ? (
           <span>from: {
-            this._createIdSelectElement(dataset.accounts, 'fromAccountId')
+            this._createIdSelectElement(dataset.accounts, this.state.fromAccountId, 'fromAccountId')
           }</span>
         ) : null }
         { (
@@ -134,7 +137,7 @@ export default class TransactionCreateForm extends Component {
             this.state.transactionType === 'transfer'
           ) ? (
           <span>to: {
-            this._createIdSelectElement(dataset.accounts, 'toAccountId')
+            this._createIdSelectElement(dataset.accounts, this.state.toAccountId, 'toAccountId')
           }</span>
         ) : null }
         { (
@@ -142,7 +145,11 @@ export default class TransactionCreateForm extends Component {
             this.state.transactionType === 'income'
           ) ? (
           <span>category: {
-            this._createIdSelectElement(dataset.transactionCategories.filter((transactionCategory) => transactionCategory.transactionType === this.state.transactionType), 'transactionCategoryId')
+            this._createIdSelectElement(
+              this._filterTransactionCategory(dataset.transactionCategories, this.state.transactionType),
+              this.state.transactionCategoryId,
+              'transactionCategoryId'
+            )
           }</span>
         ) : null }
         <input
