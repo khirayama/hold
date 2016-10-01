@@ -33,16 +33,13 @@ export default class Store extends MicroStore {
     subscribe((action) => {
       switch (action.type) {
         case types.CHANGE_HISTORY:
-          logger.info('Change histroy');
           this.state.pathname = action.pathname;
           break;
         case types.START_DESKTOP_APP:
-          logger.info('Start desktop app');
           this.state.ready = true;
           this.state.pathname = action.pathname;
           break;
         case types.START_MOBILE_APP:
-          logger.info('Start mobile app');
           this.state.ready = true;
           this.state.pathname = action.pathname;
           break;
