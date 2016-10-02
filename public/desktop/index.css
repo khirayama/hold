@@ -78,7 +78,8 @@ body {
 .account-section {
   display: inline-block;
   padding: 8px;
-  width: 300px; }
+  width: 300px;
+  vertical-align: top; }
   .account-section h2 {
     font-weight: 100;
     padding: 8px;
@@ -194,3 +195,13 @@ body {
       transition: color .2s ease-out; }
       .account-create-form .account-create-form-button-box span:hover {
         color: #424242; }
+
+.transaction-section {
+  display: inline-block;
+  padding: 8px;
+  width: 300px;
+  vertical-align: top; }
+  .transaction-section h2 {
+    font-weight: 100;
+    padding: 8px;
+    margin-bottom: 8px; }
