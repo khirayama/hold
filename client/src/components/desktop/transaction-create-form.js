@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import moment from 'moment';
 
 import keyCodes from '../../constants/key-codes';
@@ -116,14 +117,13 @@ export default class TransactionCreateForm extends Component {
   render() {
     const dataset = this.props.transactionDataset;
 
-    if (dataset == null) {
-      return null;
-    }
     return (
       <span>
-        <div onClick={this.onClickPaymentTab}>Payment</div>
-        <div onClick={this.onClickIncomeTab}>Income</div>
-        <div onClick={this.onClickTransferTab}>Transfer</div>
+        <ul className="transaction-create-form-tab">
+          <li className={classNames("transaction-create-form-tab-item", {"transaction-create-form-tab-item__active": this.state.transactionType === 'payment'})} onClick={this.onClickPaymentTab}>Payment</li>
+          <li className={classNames("transaction-create-form-tab-item", {"transaction-create-form-tab-item__active": this.state.transactionType === 'income'})} onClick={this.onClickIncomeTab}>Income</li>
+          <li className={classNames("transaction-create-form-tab-item", {"transaction-create-form-tab-item__active": this.state.transactionType === 'transfer'})} onClick={this.onClickTransferTab}>Transfer</li>
+        </ul>
         { (
             this.state.transactionType === 'payment' ||
             this.state.transactionType === 'transfer'
