@@ -122,35 +122,37 @@ export default class TransactionCreateForm extends Component {
         <ul className="transaction-create-form-tab">
           <li className={classNames("transaction-create-form-tab-item", {"transaction-create-form-tab-item__active": this.state.transactionType === 'payment'})} onClick={this.onClickPaymentTab}>Payment</li>
           <li className={classNames("transaction-create-form-tab-item", {"transaction-create-form-tab-item__active": this.state.transactionType === 'income'})} onClick={this.onClickIncomeTab}>Income</li>
-          <li className={classNames("transaction-create-form-tab-item", {"transaction-create-form-tab-item__active": this.state.transactionType === 'transfer'})} onClick={this.onClickTransferTab}>Transfer</li>
+          { (dataset.accounts.length >= 2) ? (
+            <li className={classNames("transaction-create-form-tab-item", {"transaction-create-form-tab-item__active": this.state.transactionType === 'transfer'})} onClick={this.onClickTransferTab}>Transfer</li>
+            ) : null }
         </ul>
         { (
             this.state.transactionType === 'payment' ||
             this.state.transactionType === 'transfer'
           ) ? (
-          <span>from: {
+          <div>from: {
             this._createIdSelectElement(dataset.accounts, this.state.fromAccountId, 'fromAccountId')
-          }</span>
+          }</div>
         ) : null }
         { (
             this.state.transactionType === 'income' ||
             this.state.transactionType === 'transfer'
           ) ? (
-          <span>to: {
+          <div>to: {
             this._createIdSelectElement(dataset.accounts, this.state.toAccountId, 'toAccountId')
-          }</span>
+          }</div>
         ) : null }
         { (
             this.state.transactionType === 'payment' ||
             this.state.transactionType === 'income'
           ) ? (
-          <span>category: {
+          <div>category: {
             this._createIdSelectElement(
               this._filterTransactionCategory(dataset.transactionCategories, this.state.transactionType),
               this.state.transactionCategoryId,
               'transactionCategoryId'
             )
-          }</span>
+          }</div>
         ) : null }
         <input
           type="number"

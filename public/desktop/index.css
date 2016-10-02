@@ -205,12 +205,28 @@ body {
     font-weight: 100;
     padding: 8px;
     margin-bottom: 8px; }
+  .transaction-section select {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    background-color: #fff;
+    border: solid 1px #9e9e9e;
+    padding: 3px 6px;
+    border-radius: 2px;
+    text-align: left;
+    cursor: pointer; }
 
 .transaction-create-form-tab {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   margin-bottom: 12px; }
   .transaction-create-form-tab .transaction-create-form-tab-item {
-    display: inline-block;
-    width: 33.3%;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
     padding: 8px 0;
     text-align: center; }
     .transaction-create-form-tab .transaction-create-form-tab-item.transaction-create-form-tab-item__active {
