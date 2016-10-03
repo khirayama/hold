@@ -18,6 +18,8 @@ ul,
 li,
 label,
 input,
+textarea,
+select,
 i {
   padding: 0;
   margin: 0;
@@ -39,7 +41,9 @@ h1 {
   font-size: 32px;
   font-size: 2rem; }
 
-input {
+input,
+textarea,
+select {
   font-size: inherit;
   font-family: inherit; }
 
@@ -75,6 +79,38 @@ body {
   overflow: scroll;
   background: #fff; }
 
+select {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-color: #fff;
+  border: solid 1px #9e9e9e;
+  padding: 3px 6px;
+  border-radius: 2px;
+  text-align: left;
+  cursor: pointer;
+  font-size: inherit; }
+
+textarea,
+input {
+  border: solid 1px #9e9e9e;
+  border-radius: 2px;
+  padding: 3px 6px; }
+
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none; }
+
+input[type=date]::-webkit-inner-spin-button {
+  -webkit-appearance: none; }
+
+input[type=date]::-webkit-clear-button {
+  -webkit-appearance: none; }
+
+select:focus,
+input:focus,
+textarea:focus {
+  border: solid 1px #00bcd4; }
+
 .account-section {
   display: inline-block;
   padding: 8px;
@@ -99,7 +135,8 @@ body {
       font-size: .8rem;
       color: #9e9e9e; }
       .account-list-item .account-list-item-content .account-list-item-content-name input {
-        width: 100%; }
+        width: 100%;
+        border: none; }
       .account-list-item .account-list-item-content .account-list-item-content-name .account-list-item-delete-button {
         display: inline-block;
         cursor: pointer;
@@ -126,7 +163,8 @@ body {
       font-size: 1.2rem; }
       .account-list-item .account-list-item-content .account-list-item-content-amount input {
         width: 100%;
-        text-align: right; }
+        text-align: right;
+        border: none; }
       .account-list-item .account-list-item-content .account-list-item-content-amount .account-list-item-content-amount-currency-code {
         font-size: 12.8px;
         font-size: .8rem;
@@ -172,7 +210,8 @@ body {
       font-size: .8rem;
       color: #9e9e9e; }
       .account-create-form .account-create-form-content .account-create-form-content-name input {
-        width: 100%; }
+        width: 100%;
+        border: none; }
     .account-create-form .account-create-form-content .account-create-form-content-amount {
       display: inline-block;
       width: 100%;
@@ -182,7 +221,8 @@ body {
       font-size: 1.2rem; }
       .account-create-form .account-create-form-content .account-create-form-content-amount input {
         width: 100%;
-        text-align: right; }
+        text-align: right;
+        border: none; }
   .account-create-form .account-create-form-button-box {
     position: absolute;
     top: 0;
@@ -205,16 +245,6 @@ body {
     font-weight: 100;
     padding: 8px;
     margin-bottom: 8px; }
-  .transaction-section select {
-    -webkit-appearance: none;
-       -moz-appearance: none;
-            appearance: none;
-    background-color: #fff;
-    border: solid 1px #9e9e9e;
-    padding: 3px 6px;
-    border-radius: 2px;
-    text-align: left;
-    cursor: pointer; }
 
 .transaction-create-form-tab {
   display: -webkit-box;
@@ -228,6 +258,24 @@ body {
         -ms-flex: 1;
             flex: 1;
     padding: 8px 0;
-    text-align: center; }
+    text-align: center;
+    color: #9e9e9e;
+    cursor: pointer; }
     .transaction-create-form-tab .transaction-create-form-tab-item.transaction-create-form-tab-item__active {
+      color: #424242;
       border-bottom: solid 2px #80deea; }
+
+.transaction-create-form-table {
+  width: 100%; }
+  .transaction-create-form-table tr td input[type="number"] {
+    width: 100%;
+    text-align: right;
+    font-size: 19.2px;
+    font-size: 1.2rem; }
+  .transaction-create-form-table tr td input[type="date"] {
+    width: 100%; }
+  .transaction-create-form-table tr td select {
+    width: 100%; }
+  .transaction-create-form-table tr td textarea {
+    width: 100%;
+    resize: none; }

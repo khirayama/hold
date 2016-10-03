@@ -7,14 +7,6 @@
     font-weight: 100
     padding: 8px
     margin-bottom: 8px
-  select
-    appearance: none
-    background-color: #fff
-    border: solid 1px $color-divider
-    padding: 3px 6px
-    border-radius: 2px
-    text-align: left
-    cursor: pointer
 
 .transaction-create-form-tab
   display: flex
@@ -23,5 +15,24 @@
     flex: 1
     padding: 8px 0
     text-align: center
+    color: $color-text-secondary
+    cursor: pointer
     &.transaction-create-form-tab-item__active
+      color: $color-text
       border-bottom: solid 2px $color-primary
+
+.transaction-create-form-table
+  width: 100%
+  tr
+    td
+      input[type="number"]
+        width: 100%
+        text-align: right
+        font-size: 1.2rem
+      input[type="date"]
+        width: 100%
+      select
+        width: 100%
+      textarea
+        width: 100%
+        resize: none

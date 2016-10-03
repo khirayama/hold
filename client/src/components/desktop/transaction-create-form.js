@@ -33,6 +33,9 @@ export default class TransactionCreateForm extends Component {
   _filterTransactionCategory(transactionCategories, transactionType) {
     return transactionCategories.filter((transactionCategory) => transactionCategory.transactionType === transactionType);
   }
+  _select(event) {
+    event.target.select();
+  }
   _create() {
     const dataset = this.props.transactionDataset;
 
@@ -126,50 +129,67 @@ export default class TransactionCreateForm extends Component {
             <li className={classNames("transaction-create-form-tab-item", {"transaction-create-form-tab-item__active": this.state.transactionType === 'transfer'})} onClick={this.onClickTransferTab}>Transfer</li>
             ) : null }
         </ul>
-        { (
-            this.state.transactionType === 'payment' ||
-            this.state.transactionType === 'transfer'
-          ) ? (
-          <div>from: {
-            this._createIdSelectElement(dataset.accounts, this.state.fromAccountId, 'fromAccountId')
-          }</div>
-        ) : null }
-        { (
-            this.state.transactionType === 'income' ||
-            this.state.transactionType === 'transfer'
-          ) ? (
-          <div>to: {
-            this._createIdSelectElement(dataset.accounts, this.state.toAccountId, 'toAccountId')
-          }</div>
-        ) : null }
-        { (
-            this.state.transactionType === 'payment' ||
-            this.state.transactionType === 'income'
-          ) ? (
-          <div>category: {
-            this._createIdSelectElement(
-              this._filterTransactionCategory(dataset.transactionCategories, this.state.transactionType),
-              this.state.transactionCategoryId,
-              'transactionCategoryId'
-            )
-          }</div>
-        ) : null }
-        <input
-          type="number"
-          name="amount"
-          value={this.state.amount}
-          onChange={this.onChangeInput}
-          onKeyDown={this.onKeyDownNameAndAmountInputs}
-        />
-        <br />
-        <input
-          type="date"
-          name="transactionDate"
-          value={this._formatDate(this.state.transactionDate)}
-          onChange={this.onChangeInput}
-        />
-        <br />
-        <textarea />
+        <table className="transaction-create-form-table">
+          <tbody>
+            { (
+                this.state.transactionType === 'payment' ||
+                this.state.transactionType === 'transfer'
+              ) ? (
+              <tr>
+                <td>from:</td>
+                <td>{
+                  this._createIdSelectElement(dataset.accounts, this.state.fromAccountId, 'fromAccountId')
+                }</td>
+              </tr>
+            ) : null }
+            { (
+                this.state.transactionType === 'income' ||
+                this.state.transactionType === 'transfer'
+              ) ? (
+              <tr>
+                <td>to:</td>
+                <td>{
+                  this._createIdSelectElement(dataset.accounts, this.state.toAccountId, 'toAccountId')
+                }</td>
+              </tr>
+            ) : null }
+            { (
+                this.state.transactionType === 'payment' ||
+                this.state.transactionType === 'income'
+              ) ? (
+              <tr>
+                <td>category:</td>
+                <td>{
+                  this._createIdSelectElement(
+                    this._filterTransactionCategory(dataset.transactionCategories, this.state.transactionType),
+                    this.state.transactionCategoryId,
+                    'transactionCategoryId'
+                  )
+                }</td>
+              </tr>
+            ) : null }
+            <tr>
+              <td colSpan="2">
+                <input
+                  type="number"
+                  name="amount"
+                  value={this.state.amount}
+                  onChange={this.onChangeInput}
+                  onKeyDown={this.onKeyDownNameAndAmountInputs}
+                  onFocus={this._select}
+                  placeholder="amount"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td colSpan="2">
+                <textarea
+                  placeholder="note"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
         <div
           onClick={this.onClickCreateButton}
         >Create</div>

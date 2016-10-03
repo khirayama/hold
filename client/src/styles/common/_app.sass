@@ -32,3 +32,35 @@ body,
   height: 100%
   overflow: scroll
   background: $color-background
+
+select
+  appearance: none
+  background-color: #fff
+  border: solid 1px $color-divider
+  padding: 3px 6px
+  border-radius: 2px
+  text-align: left
+  cursor: pointer
+  font-size: inherit
+
+textarea,
+input
+  border: solid 1px $color-divider
+  border-radius: 2px
+  padding: 3px 6px
+
+input[type=number]
+  &::-webkit-inner-spin-button
+    -webkit-appearance: none
+
+input[type=date]
+  &::-webkit-inner-spin-button
+    -webkit-appearance: none
+  &::-webkit-clear-button
+    -webkit-appearance: none
+
+select,
+input,
+textarea
+  &:focus
+    border: solid 1px $color-primary-dark

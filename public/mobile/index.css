@@ -18,6 +18,8 @@ ul,
 li,
 label,
 input,
+textarea,
+select,
 i {
   padding: 0;
   margin: 0;
@@ -39,7 +41,9 @@ h1 {
   font-size: 32px;
   font-size: 2rem; }
 
-input {
+input,
+textarea,
+select {
   font-size: inherit;
   font-family: inherit; }
 
@@ -74,3 +78,35 @@ body {
   height: 100%;
   overflow: scroll;
   background: #fff; }
+
+select {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-color: #fff;
+  border: solid 1px #9e9e9e;
+  padding: 3px 6px;
+  border-radius: 2px;
+  text-align: left;
+  cursor: pointer;
+  font-size: inherit; }
+
+textarea,
+input {
+  border: solid 1px #9e9e9e;
+  border-radius: 2px;
+  padding: 3px 6px; }
+
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none; }
+
+input[type=date]::-webkit-inner-spin-button {
+  -webkit-appearance: none; }
+
+input[type=date]::-webkit-clear-button {
+  -webkit-appearance: none; }
+
+select:focus,
+input:focus,
+textarea:focus {
+  border: solid 1px #00bcd4; }
