@@ -136,7 +136,7 @@ export default class TransactionCreateForm extends Component {
                 this.state.transactionType === 'transfer'
               ) ? (
               <tr>
-                <td>from:</td>
+                <td>FROM</td>
                 <td>{
                   this._createIdSelectElement(dataset.accounts, this.state.fromAccountId, 'fromAccountId')
                 }</td>
@@ -147,7 +147,7 @@ export default class TransactionCreateForm extends Component {
                 this.state.transactionType === 'transfer'
               ) ? (
               <tr>
-                <td>to:</td>
+                <td>TO</td>
                 <td>{
                   this._createIdSelectElement(dataset.accounts, this.state.toAccountId, 'toAccountId')
                 }</td>
@@ -158,7 +158,7 @@ export default class TransactionCreateForm extends Component {
                 this.state.transactionType === 'income'
               ) ? (
               <tr>
-                <td>category:</td>
+                <td>CATEGORY</td>
                 <td>{
                   this._createIdSelectElement(
                     this._filterTransactionCategory(dataset.transactionCategories, this.state.transactionType),
@@ -169,9 +169,10 @@ export default class TransactionCreateForm extends Component {
               </tr>
             ) : null }
             <tr>
-              <td>date:</td>
+              <td>DATE</td>
               <td>
                 <input
+                  className="simple-input"
                   type="date"
                   name="transactionDate"
                   value={this._formatDate(this.state.transactionDate)}
@@ -180,43 +181,45 @@ export default class TransactionCreateForm extends Component {
               </td>
             </tr>
             <tr>
-              <td colSpan="2">
-                <div className="cell-container">
-                  <input
-                    type="number"
-                    name="amount"
-                    placeholder="Enter amount"
-                    value={this.state.amount}
-                    onChange={this.onChangeInput}
-                    onKeyDown={this.onKeyDownNameAndAmountInputs}
-                    onFocus={this._select}
-                  />
-                  <label>Amount</label>
-                </div>
+              <td>AMOUNT</td>
+              <td>
+                <input
+                  className="simple-input"
+                  type="number"
+                  name="amount"
+                  placeholder="Enter amount"
+                  value={this.state.amount}
+                  onChange={this.onChangeInput}
+                  onKeyDown={this.onKeyDownNameAndAmountInputs}
+                  onFocus={this._select}
+                />
               </td>
             </tr>
             <tr>
               <td colSpan="2">
-                <div className="cell-container">
-                  <input
-                    type="text"
-                    name="note"
-                    placeholder="Enter note"
-                    value={this.state.note}
-                    onChange={this.onChangeInput}
-                    onKeyDown={this.onKeyDownNameAndAmountInputs}
-                    onFocus={this._select}
-                  />
-                  <label>Note</label>
+                <div className="floating-input-container">
+                  <span className="floating-input">
+                    <input
+                      className="simple-input"
+                      type="text"
+                      name="note"
+                      placeholder="Enter note"
+                      value={this.state.note}
+                      onChange={this.onChangeInput}
+                      onKeyDown={this.onKeyDownNameAndAmountInputs}
+                      onFocus={this._select}
+                    />
+                    <label>NOTE</label>
+                  </span>
                 </div>
               </td>
             </tr>
           </tbody>
         </table>
-        <div
+        <button
           className="transaction-create-button"
           onClick={this.onClickCreateButton}
-        >Enter</div>
+        >Enter</button>
       </span>
     );
   }

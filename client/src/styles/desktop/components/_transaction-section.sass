@@ -25,26 +25,9 @@
   width: 100%
   tr
     td
-      .cell-container
-        display: inline-block
-        position: relative
-        width: 100%
-        height: 100%
-      label
-        display: inline-block
-        position: absolute
-        top: 0
-        left: 0
-        transition: font-size .2s ease-out, top .2s ease-out
-      input[value=""] + label
-        font-size: 1rem
-        top: 0
-      label,
-      input:focus + label
-        font-size: .8rem
-        top: -1rem
-      select,
-      input,
+      &:nth-of-type(2n)
+        width: 66%
+      select
         width: 100%
         border: none
         border-bottom: solid 1px $color-primary
@@ -63,18 +46,23 @@
         font-size: 1.2rem
       input[type="date"]
         text-align: right
+      select,
+      input
+        margin-bottom: 12px
+      .floating-input-container
+        margin-top: 8px
 
 .transaction-create-button
+  display: inline-block
+  width: 100%
   background-color: $color-primary
   padding: 4px
   text-align: center
   border-radius: 2px
   color: #fff
   cursor: pointer
-  transition: background .2s ease-out
-  &:hover
+  transition: box-shadow .2s ease-out, background .2s ease-out
+  &:hover,
+  &:focus
     background-color: $color-primary-light
-      // select
-      //   width: 100%
-      // textarea
-      //   width: 100%
+    box-shadow: 0 3px 0 0 rgba($color-primary-light, .3)
