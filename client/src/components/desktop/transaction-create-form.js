@@ -169,30 +169,52 @@ export default class TransactionCreateForm extends Component {
               </tr>
             ) : null }
             <tr>
-              <td colSpan="2">
+              <td>date:</td>
+              <td>
                 <input
-                  type="number"
-                  name="amount"
-                  value={this.state.amount}
+                  type="date"
+                  name="transactionDate"
+                  value={this._formatDate(this.state.transactionDate)}
                   onChange={this.onChangeInput}
-                  onKeyDown={this.onKeyDownNameAndAmountInputs}
-                  onFocus={this._select}
-                  placeholder="amount"
                 />
               </td>
             </tr>
             <tr>
               <td colSpan="2">
-                <textarea
-                  placeholder="note"
+                <input
+                  type="number"
+                  name="amount"
+                  placeholder="Enter amount"
+                  value={this.state.amount}
+                  onChange={this.onChangeInput}
+                  onKeyDown={this.onKeyDownNameAndAmountInputs}
+                  onFocus={this._select}
                 />
+                <label>Amount</label>
+              </td>
+            </tr>
+            <tr>
+              <td colSpan="2">
+                <div className="cell-container">
+                  <input
+                    type="text"
+                    name="note"
+                    placeholder="Enter note"
+                    value={this.state.note}
+                    onChange={this.onChangeInput}
+                    onKeyDown={this.onKeyDownNameAndAmountInputs}
+                    onFocus={this._select}
+                  />
+                  <label>Note</label>
+                </div>
               </td>
             </tr>
           </tbody>
         </table>
         <div
+          className="transaction-create-button"
           onClick={this.onClickCreateButton}
-        >Create</div>
+        >Enter</div>
       </span>
     );
   }
