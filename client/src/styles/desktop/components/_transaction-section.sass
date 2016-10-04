@@ -30,12 +30,16 @@
         position: relative
         width: 100%
         height: 100%
-      input[value] + label
+      label
         display: inline-block
         position: absolute
         top: 0
         left: 0
         transition: font-size .2s ease-out, top .2s ease-out
+      input[value=""] + label
+        font-size: 1rem
+        top: 0
+      label,
       input:focus + label
         font-size: .8rem
         top: -1rem

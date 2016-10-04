@@ -274,13 +274,18 @@ textarea:focus {
     position: relative;
     width: 100%;
     height: 100%; }
-  .transaction-create-form-table tr td input[value] + label {
+  .transaction-create-form-table tr td label {
     display: inline-block;
     position: absolute;
     top: 0;
     left: 0;
     -webkit-transition: font-size .2s ease-out, top .2s ease-out;
     transition: font-size .2s ease-out, top .2s ease-out; }
+  .transaction-create-form-table tr td input[value=""] + label {
+    font-size: 16px;
+    font-size: 1rem;
+    top: 0; }
+  .transaction-create-form-table tr td label,
   .transaction-create-form-table tr td input:focus + label {
     font-size: 12.8px;
     font-size: .8rem;

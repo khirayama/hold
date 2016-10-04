@@ -181,16 +181,18 @@ export default class TransactionCreateForm extends Component {
             </tr>
             <tr>
               <td colSpan="2">
-                <input
-                  type="number"
-                  name="amount"
-                  placeholder="Enter amount"
-                  value={this.state.amount}
-                  onChange={this.onChangeInput}
-                  onKeyDown={this.onKeyDownNameAndAmountInputs}
-                  onFocus={this._select}
-                />
-                <label>Amount</label>
+                <div className="cell-container">
+                  <input
+                    type="number"
+                    name="amount"
+                    placeholder="Enter amount"
+                    value={this.state.amount}
+                    onChange={this.onChangeInput}
+                    onKeyDown={this.onKeyDownNameAndAmountInputs}
+                    onFocus={this._select}
+                  />
+                  <label>Amount</label>
+                </div>
               </td>
             </tr>
             <tr>
