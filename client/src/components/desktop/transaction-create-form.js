@@ -136,7 +136,7 @@ export default class TransactionCreateForm extends Component {
                 this.state.transactionType === 'transfer'
               ) ? (
               <tr>
-                <td>FROM</td>
+                <th>FROM</th>
                 <td>{
                   this._createIdSelectElement(dataset.accounts, this.state.fromAccountId, 'fromAccountId')
                 }</td>
@@ -147,7 +147,7 @@ export default class TransactionCreateForm extends Component {
                 this.state.transactionType === 'transfer'
               ) ? (
               <tr>
-                <td>TO</td>
+                <th>TO</th>
                 <td>{
                   this._createIdSelectElement(dataset.accounts, this.state.toAccountId, 'toAccountId')
                 }</td>
@@ -158,7 +158,7 @@ export default class TransactionCreateForm extends Component {
                 this.state.transactionType === 'income'
               ) ? (
               <tr>
-                <td>CATEGORY</td>
+                <th>CATEGORY</th>
                 <td>{
                   this._createIdSelectElement(
                     this._filterTransactionCategory(dataset.transactionCategories, this.state.transactionType),
@@ -169,7 +169,7 @@ export default class TransactionCreateForm extends Component {
               </tr>
             ) : null }
             <tr>
-              <td>DATE</td>
+              <th>DATE</th>
               <td>
                 <input
                   className="simple-input"
@@ -181,7 +181,7 @@ export default class TransactionCreateForm extends Component {
               </td>
             </tr>
             <tr>
-              <td>AMOUNT</td>
+              <th>AMOUNT</th>
               <td>
                 <input
                   className="simple-input"

@@ -17,16 +17,23 @@
     text-align: center
     color: $color-text-secondary
     cursor: pointer
+    transition: color .2s ease-out, box-shadow .2s ease-out
+    &:hover
+      color: $color-text
     &.transaction-create-form-tab-item__active
       color: $color-text
-      border-bottom: solid 2px $color-primary
+      box-shadow: 0 2px 0 0 $color-primary
+      cursor: default
 
 .transaction-create-form-table
   width: 100%
   tr
+    th
+      font-weight: inherit
+      text-align: left
+      color: $color-text-secondary
     td
-      &:nth-of-type(2n)
-        width: 66%
+      width: 33%
       select
         width: 100%
         border: none
