@@ -9,7 +9,7 @@ export default function Transactions(props) {
 
   return (
     <div>
-      <section className="transaction">
+      <section className="transaction-section">
         <h2>Transactions</h2>
         <TransactionCreateForm
           transactionDataset={state.transactionDataset}
