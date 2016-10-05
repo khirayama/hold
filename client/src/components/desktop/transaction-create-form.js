@@ -24,10 +24,13 @@ export default class TransactionCreateForm extends Component {
     };
 
     this.onClickCreateButton = this._onClickCreateButton.bind(this);
-    this.onKeyDownNameAndAmountInputs = this._onKeyDownNameAndAmountInputs.bind(this);
+    this.onKeyDownInputWithEnterCreate = this._onKeyDownInputWithEnterCreate.bind(this);
     this.onClickPaymentTab = this._onClickPaymentTab.bind(this);
+    this.onKeyDownPaymentTab = this._onKeyDownPaymentTab.bind(this);
     this.onClickIncomeTab = this._onClickIncomeTab.bind(this);
+    this.onKeyDownIncomeTab = this._onKeyDownIncomeTab.bind(this);
     this.onClickTransferTab = this._onClickTransferTab.bind(this);
+    this.onKeyDownTransferTab = this._onKeyDownTransferTab.bind(this);
     this.onChangeInput = this._onChangeInput.bind(this);
   }
   _filterTransactionCategory(transactionCategories, transactionType) {
@@ -59,13 +62,14 @@ export default class TransactionCreateForm extends Component {
   _onClickCreateButton() {
     this._create();
   }
-  _onKeyDownNameAndAmountInputs(event) {
+  _onKeyDownInputWithEnterCreate(event) {
     const keyCode = event.keyCode;
     const shift = event.shiftKey;
     const ctrl = event.ctrlKey || event.metaKey;
 
     if (keyCodes.ENTER === keyCode && !shift && !ctrl) {
       this._create();
+      this._select(event);
     }
   }
   _onClickPaymentTab() {
@@ -78,6 +82,22 @@ export default class TransactionCreateForm extends Component {
       transactionCategoryId: (dataset.transactionCategories[0] || {}).id || null,
     });
   }
+  _onKeyDownPaymentTab(event) {
+    const keyCode = event.keyCode;
+    const shift = event.shiftKey;
+    const ctrl = event.ctrlKey || event.metaKey;
+
+    if (keyCodes.ENTER === keyCode && !shift && !ctrl) {
+      const dataset = this.props.transactionDataset;
+
+      this.setState({
+        transactionType: 'payment',
+        fromAccountId: (dataset.accounts[0] || {}).id || null,
+        toAccountId: null,
+        transactionCategoryId: (dataset.transactionCategories[0] || {}).id || null,
+      });
+    }
+  }
   _onClickIncomeTab() {
     const dataset = this.props.transactionDataset;
 
@@ -88,6 +108,22 @@ export default class TransactionCreateForm extends Component {
       transactionCategoryId: (dataset.transactionCategories[0] || {}).id || null,
     });
   }
+  _onKeyDownIncomeTab(event) {
+    const keyCode = event.keyCode;
+    const shift = event.shiftKey;
+    const ctrl = event.ctrlKey || event.metaKey;
+
+    if (keyCodes.ENTER === keyCode && !shift && !ctrl) {
+      const dataset = this.props.transactionDataset;
+
+      this.setState({
+        transactionType: 'income',
+        fromAccountId: null,
+        toAccountId: (dataset.accounts[0] || {}).id || null,
+        transactionCategoryId: (dataset.transactionCategories[0] || {}).id || null,
+      });
+    }
+  }
   _onClickTransferTab() {
     const dataset = this.props.transactionDataset;
 
@@ -97,6 +133,22 @@ export default class TransactionCreateForm extends Component {
       toAccountId: (dataset.accounts[1] || {}).id || null,
       transactionCategoryId: null,
     });
+  }
+  _onKeyDownTransferTab(event) {
+    const keyCode = event.keyCode;
+    const shift = event.shiftKey;
+    const ctrl = event.ctrlKey || event.metaKey;
+
+    if (keyCodes.ENTER === keyCode && !shift && !ctrl) {
+      const dataset = this.props.transactionDataset;
+
+      this.setState({
+        transactionType: 'transfer',
+        fromAccountId: (dataset.accounts[0] || {}).id || null,
+        toAccountId: (dataset.accounts[1] || {}).id || null,
+        transactionCategoryId: null,
+      });
+    }
   }
   _onChangeInput(event) {
     let value = event.currentTarget.value;
@@ -112,7 +164,13 @@ export default class TransactionCreateForm extends Component {
   }
   _createIdSelectElement(items, initialValue = '', name = null) {
     return (
-      <select value={initialValue} name={name} onChange={this.onChangeInput}>
+      <select
+        className="simple-select"
+        value={initialValue}
+        name={name}
+        onChange={this.onChangeInput}
+        onKeyDown={this.onKeyDownInputWithEnterCreate}
+      >
         {items.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}
       </select>
     );
@@ -123,11 +181,35 @@ export default class TransactionCreateForm extends Component {
     return (
       <span>
         <ul className="transaction-create-form-tab">
-          <li className={classNames("transaction-create-form-tab-item", {"transaction-create-form-tab-item__active": this.state.transactionType === 'payment'})} onClick={this.onClickPaymentTab}>Payment</li>
-          <li className={classNames("transaction-create-form-tab-item", {"transaction-create-form-tab-item__active": this.state.transactionType === 'income'})} onClick={this.onClickIncomeTab}>Income</li>
+          <li
+            className={classNames(
+              "transaction-create-form-tab-item",
+              {"transaction-create-form-tab-item__active": this.state.transactionType === 'payment'}
+            )}
+            onClick={this.onClickPaymentTab}
+            onKeyDown={this.onKeyDownPaymentTab}
+            tabIndex={(this.state.transactionType === 'payment') ? -1 : 0}
+          >Payment</li>
+          <li
+            className={classNames(
+              "transaction-create-form-tab-item",
+              {"transaction-create-form-tab-item__active": this.state.transactionType === 'income'}
+            )}
+            onClick={this.onClickIncomeTab}
+            onKeyDown={this.onKeyDownIncomeTab}
+            tabIndex={(this.state.transactionType === 'income') ? -1 : 0}
+          >Income</li>
           { (dataset.accounts.length >= 2) ? (
-            <li className={classNames("transaction-create-form-tab-item", {"transaction-create-form-tab-item__active": this.state.transactionType === 'transfer'})} onClick={this.onClickTransferTab}>Transfer</li>
-            ) : null }
+            <li
+              className={classNames(
+                "transaction-create-form-tab-item",
+                {"transaction-create-form-tab-item__active": this.state.transactionType === 'transfer'}
+              )}
+              onClick={this.onClickTransferTab}
+              onKeyDown={this.onKeyDownTransferTab}
+              tabIndex={(this.state.transactionType === 'transfer') ? -1 : 0}
+            >Transfer</li>
+          ) : null }
         </ul>
         <table className="transaction-create-form-table">
           <tbody>
@@ -190,7 +272,7 @@ export default class TransactionCreateForm extends Component {
                   placeholder="Enter amount"
                   value={this.state.amount}
                   onChange={this.onChangeInput}
-                  onKeyDown={this.onKeyDownNameAndAmountInputs}
+                  onKeyDown={this.onKeyDownInputWithEnterCreate}
                   onFocus={this._select}
                 />
               </td>
@@ -206,7 +288,7 @@ export default class TransactionCreateForm extends Component {
                       placeholder="Enter note"
                       value={this.state.note}
                       onChange={this.onChangeInput}
-                      onKeyDown={this.onKeyDownNameAndAmountInputs}
+                      onKeyDown={this.onKeyDownInputWithEnterCreate}
                       onFocus={this._select}
                     />
                     <label>NOTE</label>

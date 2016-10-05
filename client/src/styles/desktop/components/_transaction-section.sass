@@ -18,8 +18,10 @@
     color: $color-text-secondary
     cursor: pointer
     transition: color .2s ease-out, box-shadow .2s ease-out
+    &:focus,
     &:hover
       color: $color-text
+      box-shadow: 0 2px 0 0 $color-primary-light
     &.transaction-create-form-tab-item__active
       color: $color-text
       box-shadow: 0 2px 0 0 $color-primary
@@ -34,20 +36,6 @@
       color: $color-text-secondary
     td
       width: 33%
-      select
-        width: 100%
-        border: none
-        border-bottom: solid 1px $color-primary
-        border-radius: 0
-        transition: box-shadow .2s ease-out, background .2s ease-out
-        &::-webkit-input-placeholder
-          color: rgba(0, 0, 0, 0)
-        &:hover
-          box-shadow: 0 1px 0 0 $color-primary
-        &:focus
-          background: $color-mask
-          &::-webkit-input-placeholder
-            color: $color-text-secondary
       input[type="number"]
         text-align: right
         font-size: 1.2rem
@@ -58,6 +46,8 @@
         margin-bottom: 12px
       .floating-input-container
         margin-top: 8px
+      label
+        color: $color-text-secondary
 
 .transaction-create-button
   display: inline-block
