@@ -15,8 +15,8 @@ import MobileContainer from './components/mobile/container';
 import { changeHistory } from './actions/app-action-creators';
 
 
-window.addEventListener('popstate', () => {
-  changeHistory(location.pathname);
+window.addEventListener('popstate', (event) => {
+  changeHistory(location.pathname, false);
 });
 
 window.addEventListener('load', () => {

@@ -16,8 +16,8 @@ import {
 } from './formatter';
 
 
-export function changeHistory(pathname = '') {
-  if (history) {
+export function changeHistory(pathname = '', pushState = true) {
+  if (history && pushState) {
     history.pushState(null, null, pathname);
   }
   dispatch({
