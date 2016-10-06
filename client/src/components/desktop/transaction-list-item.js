@@ -174,58 +174,72 @@ export default class TransactionListItem extends Component {
       switch (transactionType) {
         case 'payment':
           return (
-            <li>
-              <input type="date" name="transactionDate" value={this._formatDate(this.state.transactionDate)} onChange={this.onChangeInput} />
-              from: {this._createIdSelectElement(dataset.accounts, this.state.fromAccountId, 'fromAccountId')}
-              category: {this._createIdSelectElement(dataset.transactionCategories.filter((transactionCategory) => transactionCategory.transactionType === transactionType), this.state.transactionCategoryId, 'transactionCategoryId')}
-              <input type="number" name="amount" onChange={this.onChangeInput} value={this.state.amount} />
-              <span onClick={this.onClickUpdateButton}>Update</span>
-              <span onClick={this.onClickCancelButton}>Cancel</span>
-            </li>
+            <tr>
+              <td>
+                <input type="date" name="transactionDate" value={this._formatDate(this.state.transactionDate)} onChange={this.onChangeInput} />
+                from: {this._createIdSelectElement(dataset.accounts, this.state.fromAccountId, 'fromAccountId')}
+                category: {this._createIdSelectElement(dataset.transactionCategories.filter((transactionCategory) => transactionCategory.transactionType === transactionType), this.state.transactionCategoryId, 'transactionCategoryId')}
+                <input type="number" name="amount" onChange={this.onChangeInput} value={this.state.amount} />
+                <span onClick={this.onClickUpdateButton}>Update</span>
+                <span onClick={this.onClickCancelButton}>Cancel</span>
+              </td>
+            </tr>
           );
         case 'income':
           return (
-            <li>
-              <input type="date" name="transactionDate" value={this._formatDate(this.state.transactionDate)} onChange={this.onChangeInput} />
-              to: {this._createIdSelectElement(dataset.accounts)}
-              category: {this._createIdSelectElement(dataset.transactionCategories.filter((transactionCategory) => transactionCategory.transactionType === transactionType))}
-              <input type="number" name="amount" onChange={this.onChangeInput} value={this.state.amount} />
-              <span onClick={this.onClickUpdateButton}>Update</span>
-              <span onClick={this.onClickCancelButton}>Cancel</span>
-            </li>
+            <tr>
+              <td>
+                <input type="date" name="transactionDate" value={this._formatDate(this.state.transactionDate)} onChange={this.onChangeInput} />
+                to: {this._createIdSelectElement(dataset.accounts)}
+                category: {this._createIdSelectElement(dataset.transactionCategories.filter((transactionCategory) => transactionCategory.transactionType === transactionType))}
+                <input type="number" name="amount" onChange={this.onChangeInput} value={this.state.amount} />
+                <span onClick={this.onClickUpdateButton}>Update</span>
+                <span onClick={this.onClickCancelButton}>Cancel</span>
+              </td>
+            </tr>
           );
         case 'transfer':
           return (
-            <li>
-              <input type="date" name="transactionDate" value={this._formatDate(this.state.transactionDate)} onChange={this.onChangeInput} />
-              from: {this._createIdSelectElement(dataset.accounts)}
-              to: {this._createIdSelectElement(dataset.accounts)}
-              <input type="number" name="amount" onChange={this.onChangeInput} value={this.state.amount} />
-              <span onClick={this.onClickUpdateButton}>Update</span>
-              <span onClick={this.onClickCancelButton}>Cancel</span>
-            </li>
+            <tr>
+              <td>
+                <input type="date" name="transactionDate" value={this._formatDate(this.state.transactionDate)} onChange={this.onChangeInput} />
+                from: {this._createIdSelectElement(dataset.accounts)}
+                to: {this._createIdSelectElement(dataset.accounts)}
+                <input type="number" name="amount" onChange={this.onChangeInput} value={this.state.amount} />
+                <span onClick={this.onClickUpdateButton}>Update</span>
+                <span onClick={this.onClickCancelButton}>Cancel</span>
+              </td>
+            </tr>
           );
         default:
           return null;
       }
     }
     return (
-      <li>
-        <span
-          onClick={this.onClickTransactionListItem}
-        >
-          {transaction.transactionDate} /
-          {transactionType} /
-          {(transaction.fromAccount || {}).name} /
-          {(transaction.toAccount || {}).name} /
-          {(transaction.transactionCategory || {}).name} /
+      <tr>
+        <td onClick={this.onClickTransactionListItem}>
+          {transaction.transactionDate}
+        </td>
+        <td onClick={this.onClickTransactionListItem}>
+          {transactionType}
+        </td>
+        <td onClick={this.onClickTransactionListItem}>
+          {(transaction.fromAccount || {}).name}
+        </td>
+        <td onClick={this.onClickTransactionListItem}>
+          {(transaction.toAccount || {}).name}
+        </td>
+        <td onClick={this.onClickTransactionListItem}>
+          {(transaction.transactionCategory || {}).name}
+        </td>
+        <td onClick={this.onClickTransactionListItem}>
           {currency(transaction.amount, transaction.currencyCode)}
-        </span>
-        <span
+        </td>
+        <td
           onClick={this.onClickDeleteButton}
-        >Delete</span>
-        {errorIconElement}
-      </li>
+        >Delete</td>
+        <td>{errorIconElement}</td>
+      </tr>
     );
   }
 }
