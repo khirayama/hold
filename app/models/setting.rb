@@ -3,9 +3,9 @@ class Setting < ApplicationRecord
 
   def self.currency(language)
     if language == :ja
-      '¥'
+      'JPY'
     else
-      '$'
+      'USD'
     end
   end
 end
