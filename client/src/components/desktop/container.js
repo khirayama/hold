@@ -7,11 +7,11 @@ import {
   fetchInitialDesktopResources,
 } from '../../actions/app-action-creators';
 
-import Dashboard from './dashboard';
-import Transactions from './transactions';
-import TransactionCategories from './transaction-categories';
-import Setting from './setting';
-import NotFound from './not-found';
+import DashboardPage from './dashboard-page';
+import TransactionsPage from './transactions-page';
+import TransactionCategoriesPage from './transaction-categories-page';
+import SettingPage from './setting-page';
+import NotFoundPage from './not-found-page';
 
 
 export default class Container extends Component {
@@ -43,15 +43,15 @@ export default class Container extends Component {
   _createPageElement(pathname, state) {
     switch(pathname) {
       case '/dashboard':
-        return <Dashboard state={state} />;
+        return <DashboardPage state={state} />;
       case '/transactions':
-        return <Transactions state={state} />;
+        return <TransactionsPage state={state} />;
       case '/transaction_categories':
-        return <TransactionCategories state={state} />;
+        return <TransactionCategoriesPage state={state} />;
       case '/setting':
-        return <Setting state={state} />;
+        return <SettingPage state={state} />;
       default:
-        return <NotFound state={state} />;
+        return <NotFoundPage state={state} />;
     }
   }
 
