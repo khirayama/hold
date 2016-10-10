@@ -307,81 +307,81 @@ textarea:focus {
       .account-create-form .account-create-form-button-box span:hover {
         color: #424242; }
 
-.transaction-section {
+.transaction-create-form-container {
   display: inline-block;
   padding: 8px;
-  width: 320px;
-  vertical-align: top; }
-  .transaction-section h2 {
+  width: 320px; }
+  .transaction-create-form-container h2 {
     font-weight: 100;
     padding: 8px;
     margin-bottom: 8px; }
 
-.transaction-create-form-tab {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  margin-bottom: 12px; }
-  .transaction-create-form-tab .transaction-create-form-tab-item {
-    -webkit-box-flex: 1;
-    -webkit-flex: 1;
-        -ms-flex: 1;
-            flex: 1;
-    padding: 8px 0;
-    text-align: center;
-    color: #9e9e9e;
-    cursor: pointer;
-    -webkit-transition: color .2s ease-out, -webkit-box-shadow .2s ease-out;
-    transition: color .2s ease-out, -webkit-box-shadow .2s ease-out;
-    transition: color .2s ease-out, box-shadow .2s ease-out;
-    transition: color .2s ease-out, box-shadow .2s ease-out, -webkit-box-shadow .2s ease-out; }
-    .transaction-create-form-tab .transaction-create-form-tab-item:focus, .transaction-create-form-tab .transaction-create-form-tab-item:hover {
-      color: #424242;
-      -webkit-box-shadow: 0 2px 0 0 #b2ebf2;
-              box-shadow: 0 2px 0 0 #b2ebf2; }
-    .transaction-create-form-tab .transaction-create-form-tab-item.transaction-create-form-tab-item__active {
-      color: #424242;
-      -webkit-box-shadow: 0 2px 0 0 #80deea;
-              box-shadow: 0 2px 0 0 #80deea;
-      cursor: default; }
-
-.transaction-create-form-table {
-  width: 100%; }
-  .transaction-create-form-table tr th {
-    font-weight: inherit;
-    text-align: left;
-    color: #9e9e9e; }
-  .transaction-create-form-table tr td {
-    width: 33%; }
-    .transaction-create-form-table tr td input[type="number"] {
-      text-align: right;
-      font-size: 19.2px;
-      font-size: 1.2rem; }
-    .transaction-create-form-table tr td input[type="date"] {
-      text-align: right; }
-    .transaction-create-form-table tr td select,
-    .transaction-create-form-table tr td input {
-      margin-bottom: 12px; }
-    .transaction-create-form-table tr td .floating-input-container {
-      margin-top: 8px; }
-    .transaction-create-form-table tr td label {
-      color: #9e9e9e; }
-
-.transaction-create-button {
+.transaction-create-form {
   display: inline-block;
-  width: 100%;
-  background-color: #80deea;
-  padding: 4px;
-  text-align: center;
-  border-radius: 2px;
-  color: #fff;
-  cursor: pointer;
-  -webkit-transition: background .2s ease-out, -webkit-box-shadow .2s ease-out;
-  transition: background .2s ease-out, -webkit-box-shadow .2s ease-out;
-  transition: box-shadow .2s ease-out, background .2s ease-out;
-  transition: box-shadow .2s ease-out, background .2s ease-out, -webkit-box-shadow .2s ease-out; }
-  .transaction-create-button:hover, .transaction-create-button:focus {
-    background-color: #b2ebf2;
-    -webkit-box-shadow: 0 3px 0 0 rgba(178, 235, 242, 0.3);
-            box-shadow: 0 3px 0 0 rgba(178, 235, 242, 0.3); }
+  width: 100%; }
+  .transaction-create-form .transaction-create-form-tab {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    margin-bottom: 12px; }
+    .transaction-create-form .transaction-create-form-tab .transaction-create-form-tab-item {
+      -webkit-box-flex: 1;
+      -webkit-flex: 1;
+          -ms-flex: 1;
+              flex: 1;
+      padding: 8px 0;
+      text-align: center;
+      color: #9e9e9e;
+      cursor: pointer;
+      -webkit-transition: color .2s ease-out, -webkit-box-shadow .2s ease-out;
+      transition: color .2s ease-out, -webkit-box-shadow .2s ease-out;
+      transition: color .2s ease-out, box-shadow .2s ease-out;
+      transition: color .2s ease-out, box-shadow .2s ease-out, -webkit-box-shadow .2s ease-out; }
+      .transaction-create-form .transaction-create-form-tab .transaction-create-form-tab-item:focus, .transaction-create-form .transaction-create-form-tab .transaction-create-form-tab-item:hover {
+        color: #424242;
+        -webkit-box-shadow: 0 2px 0 0 #b2ebf2;
+                box-shadow: 0 2px 0 0 #b2ebf2; }
+      .transaction-create-form .transaction-create-form-tab .transaction-create-form-tab-item.transaction-create-form-tab-item__active {
+        color: #424242;
+        -webkit-box-shadow: 0 2px 0 0 #80deea;
+                box-shadow: 0 2px 0 0 #80deea;
+        cursor: default; }
+  .transaction-create-form .transaction-create-form-table {
+    width: 100%; }
+    .transaction-create-form .transaction-create-form-table tr th {
+      font-weight: inherit;
+      text-align: left;
+      color: #9e9e9e; }
+    .transaction-create-form .transaction-create-form-table tr td {
+      width: 33%; }
+      .transaction-create-form .transaction-create-form-table tr td input[type="number"] {
+        text-align: right;
+        font-size: 19.2px;
+        font-size: 1.2rem; }
+      .transaction-create-form .transaction-create-form-table tr td input[type="date"] {
+        text-align: right; }
+      .transaction-create-form .transaction-create-form-table tr td select,
+      .transaction-create-form .transaction-create-form-table tr td input {
+        margin-bottom: 12px; }
+      .transaction-create-form .transaction-create-form-table tr td .floating-input-container {
+        margin-top: 8px; }
+      .transaction-create-form .transaction-create-form-table tr td label {
+        color: #9e9e9e; }
+  .transaction-create-form .transaction-create-button {
+    display: inline-block;
+    width: 100%;
+    background-color: #80deea;
+    padding: 4px;
+    text-align: center;
+    border-radius: 2px;
+    color: #fff;
+    cursor: pointer;
+    -webkit-transition: background .2s ease-out, -webkit-box-shadow .2s ease-out;
+    transition: background .2s ease-out, -webkit-box-shadow .2s ease-out;
+    transition: box-shadow .2s ease-out, background .2s ease-out;
+    transition: box-shadow .2s ease-out, background .2s ease-out, -webkit-box-shadow .2s ease-out; }
+    .transaction-create-form .transaction-create-button:hover, .transaction-create-form .transaction-create-button:focus {
+      background-color: #b2ebf2;
+      -webkit-box-shadow: 0 3px 0 0 rgba(178, 235, 242, 0.3);
+              box-shadow: 0 3px 0 0 rgba(178, 235, 242, 0.3); }

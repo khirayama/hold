@@ -16,11 +16,13 @@ export default function Dashboard(props) {
         <AccountList accounts={state.accounts} />
         <AccountCreateForm />
       </section>
-      <section className="transaction-section">
-        <h2>Transactions</h2>
+      <section className="transaction-create-form-container">
         <TransactionCreateForm
           transactionDataset={state.transactionDataset}
         />
+      </section>
+      <section>
+        <h2>Transactions</h2>
         <TransactionTable
           transactions={state.transactions}
           transactionDataset={state.transactionDataset}

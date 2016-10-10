@@ -181,7 +181,7 @@ export default class TransactionCreateForm extends Component {
     const dataset = this.props.transactionDataset;
 
     return (
-      <span>
+      <span className="transaction-create-form">
         <ul className="transaction-create-form-tab">
           <li
             className={classNames(

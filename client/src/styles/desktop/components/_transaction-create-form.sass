@@ -1,0 +1,56 @@
+.transaction-create-form
+  display: inline-block
+  width: 100%
+  .transaction-create-form-tab
+    display: flex
+    margin-bottom: 12px
+    .transaction-create-form-tab-item
+      flex: 1
+      padding: 8px 0
+      text-align: center
+      color: $color-text-secondary
+      cursor: pointer
+      transition: color .2s ease-out, box-shadow .2s ease-out
+      &:focus,
+      &:hover
+        color: $color-text
+        box-shadow: 0 2px 0 0 $color-primary-light
+      &.transaction-create-form-tab-item__active
+        color: $color-text
+        box-shadow: 0 2px 0 0 $color-primary
+        cursor: default
+  .transaction-create-form-table
+    width: 100%
+    tr
+      th
+        font-weight: inherit
+        text-align: left
+        color: $color-text-secondary
+      td
+        width: 33%
+        input[type="number"]
+          text-align: right
+          font-size: 1.2rem
+        input[type="date"]
+          text-align: right
+        select,
+        input
+          margin-bottom: 12px
+        .floating-input-container
+          margin-top: 8px
+        label
+          color: $color-text-secondary
+  .transaction-create-button
+    display: inline-block
+    width: 100%
+    background-color: $color-primary
+    padding: 4px
+    text-align: center
+    border-radius: 2px
+    color: #fff
+    cursor: pointer
+    transition: box-shadow .2s ease-out, background .2s ease-out
+    &:hover,
+    &:focus
+      background-color: $color-primary-light
+      box-shadow: 0 3px 0 0 rgba($color-primary-light, .3)
