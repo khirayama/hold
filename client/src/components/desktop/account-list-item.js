@@ -8,7 +8,7 @@ import {
   deleteAccount,
 } from '../../actions/account-action-creators';
 
-import currency from '../../utils/currency';
+import {amount} from '../../utils/currency';
 
 
 export default class AccountListItem extends Component {
@@ -158,7 +158,7 @@ export default class AccountListItem extends Component {
             <span className="account-list-item-content-amount-currency-code">
               {account.currencyCode}
             </span>
-            {currency(account.amount, '', true)}
+            {amount(account.amount, account.currencyCode)}
           </span>
         </span>
         {errorIconElement}
