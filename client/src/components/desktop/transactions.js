@@ -1,6 +1,6 @@
 import React from 'react';
 
-import TransactionList from './transaction-list';
+import TransactionTable from './transaction-table';
 import TransactionCreateForm from './transaction-create-form';
 
 
@@ -14,7 +14,7 @@ export default function Transactions(props) {
         <TransactionCreateForm
           transactionDataset={state.transactionDataset}
         />
-        <TransactionList
+        <TransactionTable
           transactions={state.transactions}
           transactionDataset={state.transactionDataset}
         />

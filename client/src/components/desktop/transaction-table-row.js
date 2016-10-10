@@ -12,7 +12,7 @@ import {
 import currency from '../../utils/currency';
 
 
-export default class TransactionListItem extends Component {
+export default class TransactionTableRow extends Component {
   constructor(props) {
     super(props);
 
@@ -244,7 +244,7 @@ export default class TransactionListItem extends Component {
   }
 }
 
-TransactionListItem.propTypes = {
+TransactionTableRow.propTypes = {
   transaction: React.PropTypes.object.isRequired,
   transactionDataset: React.PropTypes.object,
 };

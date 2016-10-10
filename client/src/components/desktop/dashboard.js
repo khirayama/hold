@@ -2,7 +2,7 @@ import React from 'react';
 
 import AccountList from './account-list';
 import AccountCreateForm from './account-create-form';
-import TransactionList from './transaction-list';
+import TransactionTable from './transaction-table';
 import TransactionCreateForm from './transaction-create-form';
 
 
@@ -21,7 +21,7 @@ export default function Dashboard(props) {
         <TransactionCreateForm
           transactionDataset={state.transactionDataset}
         />
-        <TransactionList
+        <TransactionTable
           transactions={state.transactions}
           transactionDataset={state.transactionDataset}
         />

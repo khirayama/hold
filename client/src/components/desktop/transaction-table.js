@@ -1,9 +1,9 @@
 import React from 'react';
 
-import TransactionListItem from './transaction-list-item';
+import TransactionTableRow from './transaction-table-row';
 
 
-export default function TransactionList(props) {
+export default function TransactionTable(props) {
   return (
     <table>
       <thead>
@@ -11,7 +11,7 @@ export default function TransactionList(props) {
       <tbody>
         { props.transactions.map(
           (transaction) => (
-            <TransactionListItem
+            <TransactionTableRow
               key={transaction.cid}
               transaction={transaction}
               transactionDataset={props.transactionDataset}
@@ -23,7 +23,7 @@ export default function TransactionList(props) {
   );
 }
 
-TransactionList.propTypes = {
+TransactionTable.propTypes = {
   transactions: React.PropTypes.array.isRequired,
   transactionDataset: React.PropTypes.object,
 };
