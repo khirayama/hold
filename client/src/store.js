@@ -58,6 +58,7 @@ export default class Store extends MicroStore {
         action
       );
       this.state.transactionDataset = {
+        currencyCode: this.state.user.setting.currencyCode,
         accounts: this.state.accounts,
         transactionCategories: this.state.transactionCategories,
       };

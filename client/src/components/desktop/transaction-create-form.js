@@ -265,7 +265,7 @@ export default class TransactionCreateForm extends Component {
               </td>
             </tr>
             <tr>
-              <th>AMOUNT</th>
+              <th>AMOUNT({dataset.currencyCode})</th>
               <td>
                 <input
                   className="simple-input"
