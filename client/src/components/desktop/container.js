@@ -9,7 +9,6 @@ import {
 
 import DashboardPage from './dashboard-page';
 import TransactionsPage from './transactions-page';
-import TransactionCategoriesPage from './transaction-categories-page';
 import SettingPage from './setting-page';
 import NotFoundPage from './not-found-page';
 
@@ -46,8 +45,6 @@ export default class Container extends Component {
         return <DashboardPage state={state} />;
       case '/transactions':
         return <TransactionsPage state={state} />;
-      case '/transaction_categories':
-        return <TransactionCategoriesPage state={state} />;
       case '/setting':
         return <SettingPage state={state} />;
       default:

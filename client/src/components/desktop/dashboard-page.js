@@ -17,23 +17,30 @@ export default function Dashboard(props) {
 
   return (
     <div className="dashboard-page">
-      <section className="account-section">
-        <h2>Accounts</h2>
-        <AccountList accounts={state.accounts} />
-        <AccountCreateForm />
-      </section>
-      <section className="transaction-create-section">
-        <TransactionCreateForm transactionDataset={state.transactionDataset} />
-      </section>
-      <section className="transaction-section">
-        <h2>Transactions</h2>
-        <span onClick={() => changeHistory('/transactions')}>more</span>
-        <TransactionTable
-          transactions={state.transactions}
-          transactionDataset={state.transactionDataset}
-        />
-      </section>
-      <span onClick={() => changeHistory('/setting')}>Setting</span>
+      <div className="dashboard-page-content">
+        <div className="dashboard-page-sub-column">
+          <section className="transaction-create-section">
+            <h2>Input</h2>
+            <TransactionCreateForm transactionDataset={state.transactionDataset} />
+          </section>
+          <section className="account-section">
+            <h2>Accounts</h2>
+            <AccountList accounts={state.accounts} />
+            <AccountCreateForm />
+          </section>
+          <span onClick={() => changeHistory('/setting')}>Setting</span>
+        </div>
+        <div className="dashboard-page-main-column">
+          <section className="transaction-section">
+            <h2>Transactions</h2>
+            <TransactionTable
+              transactions={state.transactions}
+              transactionDataset={state.transactionDataset}
+            />
+            <span onClick={() => changeHistory('/transactions')}>more</span>
+          </section>
+        </div>
+      </div>
       <Modal
         isShown={state.isTransactionCategoryModalShown}
         onCloseButtonClick={hideTransactionCategoryModal}

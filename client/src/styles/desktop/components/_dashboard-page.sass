@@ -1,21 +1,35 @@
 .dashboard-page
   h2
-    font-weight: 100
-    padding: 8px
-    margin-bottom: 8px
+    margin-bottom: 32px
 
-  .account-section
-    display: inline-block
-    padding: 8px
-    width: 320px
-    vertical-align: top
+  .dashboard-page-content
+    $width-main-column: 780px
+    $width-sub-column: 320px
 
-  .transaction-create-section
-    display: inline-block
-    padding: 8px
-    width: 320px
+    width: $width-main-column + $width-sub-column
+    margin: 32px auto
 
-  .transaction-section
-    display: inline-block
-    padding: 8px
-    width: 780px
+    .dashboard-page-sub-column
+      display: inline-block
+      width: $width-sub-column
+      vertical-align: top
+
+    .dashboard-page-main-column
+      display: inline-block
+      width: $width-main-column
+      vertical-align: top
+
+    .transaction-create-section
+      display: inline-block
+      width: 100%
+      padding: 8px
+
+    .transaction-section
+      display: inline-block
+      width: 100%
+      padding: 8px
+
+    .account-section
+      display: inline-block
+      width: 100%
+      padding: 8px
