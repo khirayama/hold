@@ -10,7 +10,7 @@ export default function Dashboard(props) {
   const state = props.state;
 
   return (
-    <div>
+    <div className="dashboard-page">
       <section className="account-section">
         <h2>Accounts</h2>
         <AccountList accounts={state.accounts} />
