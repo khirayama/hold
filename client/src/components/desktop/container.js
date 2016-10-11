@@ -66,7 +66,6 @@ export default class Container extends Component {
       <section>
         <span onClick={() => changeHistory('/dashboard')}>Dashboard</span>
         <span onClick={() => changeHistory('/transactions')}>Transactions</span>
-        <span onClick={() => changeHistory('/transaction_categories')}>Transaction Categories</span>
         <span onClick={() => changeHistory('/setting')}>Setting</span>
         {pageElement}
       </section>

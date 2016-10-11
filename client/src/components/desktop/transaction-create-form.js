@@ -4,6 +4,7 @@ import moment from 'moment';
 
 import keyCodes from '../../constants/key-codes';
 
+import { changeHistory } from '../../actions/app-action-creators';
 import { createTransaction } from '../../actions/transaction-action-creators';
 
 
@@ -47,7 +48,7 @@ export default class TransactionCreateForm extends Component {
     createTransaction({
       fromAccountId: Number(this.state.fromAccountId) || null,
       toAccountId: Number(this.state.toAccountId) || null,
-      transactionCategoryId: Number(this.state.transactionCategoryId || dataset.transactionCategories[0].id) || null,
+      transactionCategoryId: Number(this.state.transactionCategoryId) || null,
       amount: this.state.amount,
       transactionDate: this.state.transactionDate,
       note: this.state.note,
@@ -76,12 +77,13 @@ export default class TransactionCreateForm extends Component {
   }
   _onClickPaymentTab() {
     const dataset = this.props.transactionDataset;
+    const transactionCategories = this._filterTransactionCategory(dataset.transactionCategories, 'payment');
 
     this.setState({
       transactionType: 'payment',
       fromAccountId: (dataset.accounts[0] || {}).id || null,
       toAccountId: null,
-      transactionCategoryId: (dataset.transactionCategories[0] || {}).id || null,
+      transactionCategoryId: (transactionCategories[0] || {}).id || null,
     });
   }
   _onKeyDownPaymentTab(event) {
@@ -91,23 +93,25 @@ export default class TransactionCreateForm extends Component {
 
     if (keyCodes.ENTER === keyCode && !shift && !ctrl) {
       const dataset = this.props.transactionDataset;
+      const transactionCategories = this._filterTransactionCategory(dataset.transactionCategories, 'payment');
 
       this.setState({
         transactionType: 'payment',
         fromAccountId: (dataset.accounts[0] || {}).id || null,
         toAccountId: null,
-        transactionCategoryId: (dataset.transactionCategories[0] || {}).id || null,
+        transactionCategoryId: (transactionCategories[0] || {}).id || null,
       });
     }
   }
   _onClickIncomeTab() {
     const dataset = this.props.transactionDataset;
+    const transactionCategories = this._filterTransactionCategory(dataset.transactionCategories, 'income');
 
     this.setState({
       transactionType: 'income',
       fromAccountId: null,
       toAccountId: (dataset.accounts[0] || {}).id || null,
-      transactionCategoryId: (dataset.transactionCategories[0] || {}).id || null,
+      transactionCategoryId: (transactionCategories[0] || {}).id || null,
     });
   }
   _onKeyDownIncomeTab(event) {
@@ -117,12 +121,13 @@ export default class TransactionCreateForm extends Component {
 
     if (keyCodes.ENTER === keyCode && !shift && !ctrl) {
       const dataset = this.props.transactionDataset;
+      const transactionCategories = this._filterTransactionCategory(dataset.transactionCategories, 'income');
 
       this.setState({
         transactionType: 'income',
         fromAccountId: null,
         toAccountId: (dataset.accounts[0] || {}).id || null,
-        transactionCategoryId: (dataset.transactionCategories[0] || {}).id || null,
+        transactionCategoryId: (transactionCategories[0] || {}).id || null,
       });
     }
   }
@@ -242,7 +247,9 @@ export default class TransactionCreateForm extends Component {
                 this.state.transactionType === 'income'
               ) ? (
               <tr>
-                <th>CATEGORY</th>
+                <th>
+                  CATEGORY
+                </th>
                 <td>{
                   this._createIdSelectElement(
                     this._filterTransactionCategory(dataset.transactionCategories, this.state.transactionType),
@@ -304,6 +311,7 @@ export default class TransactionCreateForm extends Component {
           className="transaction-create-button"
           onClick={this.onClickCreateButton}
         >Enter</button>
+        <span onClick={() => changeHistory('/transaction_categories')}>manage transaction categories</span>
       </span>
     );
   }
