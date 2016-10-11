@@ -9,6 +9,7 @@ import userReducer from './reducers/user';
 import accountsReducer from './reducers/accounts';
 import transactionCategoriesReducer from './reducers/transaction-categories';
 import transactionsReducer from './reducers/transactions';
+import isTransactionCategoryModalShownReducer from './reducers/is-transaction-category-modal-shown';
 
 
 export default class Store extends MicroStore {
@@ -24,6 +25,8 @@ export default class Store extends MicroStore {
       transactionCategories: [],
       transactionDataset: null,
       transactions: [],
+
+      isTransactionCategoryModalShown: false,
     };
 
     this._subscribe();
@@ -62,6 +65,10 @@ export default class Store extends MicroStore {
         accounts: this.state.accounts,
         transactionCategories: this.state.transactionCategories,
       };
+      this.state.isTransactionCategoryModalShown = isTransactionCategoryModalShownReducer(
+        this.state.isTransactionCategoryModalShown,
+        action
+      );
 
       logger.debug(action, this.state);
       this.dispatchChange();

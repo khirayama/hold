@@ -4,7 +4,7 @@ import moment from 'moment';
 
 import keyCodes from '../../constants/key-codes';
 
-import { changeHistory } from '../../actions/app-action-creators';
+import { showTransactionCategoryModal } from '../../actions/modal-action-creators';
 import { createTransaction } from '../../actions/transaction-action-creators';
 
 
@@ -311,7 +311,7 @@ export default class TransactionCreateForm extends Component {
           className="transaction-create-button"
           onClick={this.onClickCreateButton}
         >Enter</button>
-        <span onClick={() => changeHistory('/transaction_categories')}>manage transaction categories</span>
+        <span onClick={showTransactionCategoryModal}>Edit transaction categories</span>
       </span>
     );
   }
