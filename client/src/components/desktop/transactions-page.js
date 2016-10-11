@@ -6,6 +6,7 @@ import TransactionCategoryList from './transaction-category-list';
 import TransactionCategoryCreateForm from './transaction-category-create-form';
 import Modal from './modal';
 
+import { changeHistory } from '../../actions/app-action-creators';
 import { hideTransactionCategoryModal } from '../../actions/modal-action-creators';
 
 
@@ -14,6 +15,7 @@ export default function Transactions(props) {
 
   return (
     <div>
+      <span onClick={() => changeHistory('/dashboard')}>Dashboard</span>
       <section className="transaction-section">
         <h2>Transactions</h2>
         <TransactionCreateForm

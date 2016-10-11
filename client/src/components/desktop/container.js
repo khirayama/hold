@@ -62,14 +62,7 @@ export default class Container extends Component {
       return null;
     }
     const pageElement = this._createPageElement(state.pathname, state);
-    return (
-      <section>
-        <span onClick={() => changeHistory('/dashboard')}>Dashboard</span>
-        <span onClick={() => changeHistory('/transactions')}>Transactions</span>
-        <span onClick={() => changeHistory('/setting')}>Setting</span>
-        {pageElement}
-      </section>
-    );
+    return <section>{pageElement}</section>;
   }
 }
 

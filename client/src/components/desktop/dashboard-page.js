@@ -8,6 +8,7 @@ import TransactionCategoryList from './transaction-category-list';
 import TransactionCategoryCreateForm from './transaction-category-create-form';
 import Modal from './modal';
 
+import { changeHistory } from '../../actions/app-action-creators';
 import { hideTransactionCategoryModal } from '../../actions/modal-action-creators';
 
 
@@ -26,11 +27,13 @@ export default function Dashboard(props) {
       </section>
       <section className="transaction-section">
         <h2>Transactions</h2>
+        <span onClick={() => changeHistory('/transactions')}>more</span>
         <TransactionTable
           transactions={state.transactions}
           transactionDataset={state.transactionDataset}
         />
       </section>
+      <span onClick={() => changeHistory('/setting')}>Setting</span>
       <Modal
         isShown={state.isTransactionCategoryModalShown}
         onCloseButtonClick={hideTransactionCategoryModal}
