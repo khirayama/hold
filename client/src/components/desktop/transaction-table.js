@@ -5,8 +5,18 @@ import TransactionTableRow from './transaction-table-row';
 
 export default function TransactionTable(props) {
   return (
-    <table>
+    <table className="transaction-table">
       <thead>
+        <tr>
+          <th>TYPE</th>
+          <th>DATE</th>
+          <th>FROM</th>
+          <th>TO</th>
+          <th>CATEGORY</th>
+          <th>AMOUNT</th>
+          <th>NOTE</th>
+          <th></th>
+        </tr>
       </thead>
       <tbody>
         { props.transactions.map(

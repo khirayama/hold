@@ -23,7 +23,7 @@ export function _formatRequest(transaction) {
     transaction_category_id: null,
     amount: transaction.amount,
     transaction_date: moment(new Date(transaction.transactionDate)).format('YYYY/MM/DD'),
-    note: '',
+    note: transaction.note,
   };
   if (transaction.toAccount !== null) {
     request.to_account_id = transaction.toAccount.id;

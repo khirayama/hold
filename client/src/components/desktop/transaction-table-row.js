@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import classNames from 'classnames';
 
 import keyCodes from '../../constants/key-codes';
 
@@ -218,10 +219,19 @@ export default class TransactionTableRow extends Component {
     return (
       <tr>
         <td onClick={this.onClickTransactionListItem}>
-          {transaction.transactionDate}
+          <span
+            className={classNames(
+              'transaction-type-label',
+              { 'transaction-type-label__payment': transactionType === 'payment'},
+              { 'transaction-type-label__income': transactionType === 'income'},
+              { 'transaction-type-label__transfer': transactionType === 'transfer'}
+            )}
+          >
+          {transactionType}
+          </span>
         </td>
         <td onClick={this.onClickTransactionListItem}>
-          {transactionType}
+          {transaction.transactionDate}
         </td>
         <td onClick={this.onClickTransactionListItem}>
           {(transaction.fromAccount || {}).name}
@@ -235,10 +245,16 @@ export default class TransactionTableRow extends Component {
         <td onClick={this.onClickTransactionListItem}>
           {currency(transaction.amount, transaction.currencyCode)}
         </td>
-        <td
-          onClick={this.onClickDeleteButton}
-        >Delete</td>
-        <td>{errorIconElement}</td>
+        <td onClick={this.onClickTransactionListItem}>
+          {transaction.note}
+        </td>
+        <td>
+          <span
+            className="icon"
+            onClick={this.onClickDeleteButton}
+          >delete</span>
+          {errorIconElement}
+        </td>
       </tr>
     );
   }

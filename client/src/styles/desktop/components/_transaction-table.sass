@@ -1,0 +1,70 @@
+.transaction-table
+  width: 100%
+  border-collapse: collapse
+  thead
+    tr
+      th
+        font-weight: inherit
+        color: $color-text-secondary
+        padding: 4px
+        border-bottom: solid 1px $color-divider
+        & + th
+          border-left: solid 1px $color-divider
+  tbody
+    tr
+      td
+        $width-cell: 88px
+        padding: 8px
+        cursor: pointer
+        & + td
+          border-left: solid 1px $color-divider
+        // type
+        &:nth-of-type(8n+1)
+          width: $width-cell
+          text-align: center
+          .transaction-type-label
+            display: inline-block
+            width: 64px
+            color: $color-text
+            border: solid 1px $color-text
+            border-radius: 2px
+            padding: 0 4px
+            font-size: .8rem
+            #{&}__payment
+              $color: #ef5350
+              color: $color
+              border: solid 1px $color
+            #{&}__income
+              $color: #42a5f5
+              color: $color
+              border: solid 1px $color
+            #{&}__transfer
+              $color: #66bb6a
+              color: $color
+              border: solid 1px $color
+        // date
+        &:nth-of-type(8n+2)
+          width: $width-cell
+          text-align: right
+        // to
+        &:nth-of-type(8n+3)
+          width: $width-cell
+          word-break: break-all
+        // from
+        &:nth-of-type(8n+4)
+          width: $width-cell
+          word-break: break-all
+        // category
+        &:nth-of-type(8n+5)
+          width: $width-cell
+          word-break: break-all
+        // amount
+        &:nth-of-type(8n+6)
+          width: $width-cell
+          text-align: right
+        &:nth-of-type(8n+7)
+          word-break: break-all
+        // delete
+        &:nth-of-type(8n)
+          width: 22px
+          text-align: center
