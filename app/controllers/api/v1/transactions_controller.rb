@@ -91,6 +91,7 @@ module Api
             to_account: nil,
             transaction_category: nil,
             amount: transaction.amount,
+            note: transaction.note,
             transaction_date: transaction.transaction_date
           }
           if !transaction.transaction_category_id.nil?
