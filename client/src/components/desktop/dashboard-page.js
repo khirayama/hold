@@ -49,8 +49,10 @@ export default function Dashboard(props) {
         isShown={state.isTransactionCategoryModalShown}
         onCloseButtonClick={hideTransactionCategoryModal}
       >
-        <h2>Transaction categories</h2>
-        <TransactionCategoryList transactionCategories={state.transactionCategories} />
+        <h3>Transaction categories: payment</h3>
+        <TransactionCategoryList transactionCategories={state.transactionCategories.filter((transactionCategory) => transactionCategory.transactionType === 'payment')} />
+        <h3>Transaction categories: income</h3>
+        <TransactionCategoryList transactionCategories={state.transactionCategories.filter((transactionCategory) => transactionCategory.transactionType === 'income')} />
         <TransactionCategoryCreateForm />
       </Modal>
     </div>

@@ -15,7 +15,7 @@ export default function Transactions(props) {
 
   return (
     <div>
-      <span onClick={() => changeHistory('/dashboard')}>Dashboard</span>
+      <span onClick={() => changeHistory('/dashboard')}>Back</span>
       <section className="transaction-section">
         <h2>Transactions</h2>
         <TransactionCreateForm

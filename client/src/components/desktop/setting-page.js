@@ -10,7 +10,7 @@ export default function Setting(props) {
 
   return (
     <div>
-      <span onClick={() => changeHistory('/dashboard')}>Dashboard</span>
+      <span onClick={() => changeHistory('/dashboard')}>Back</span>
       <section className="setting">
         <h2>Setting</h2>
         <UserSetting user={state.user} />

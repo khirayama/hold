@@ -6,9 +6,11 @@ export default class Modal extends Component {
     const isShown = this.props.isShown;
     if (isShown) {
       return (
-        <div>
-          <div onClick={this.props.onCloseButtonClick}>Close</div>
-          {this.props.children}
+        <div className="modal-mask">
+          <div className="modal">
+            <div onClick={this.props.onCloseButtonClick}>Close</div>
+            {this.props.children}
+          </div>
         </div>
       );
     }
