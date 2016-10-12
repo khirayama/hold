@@ -7,29 +7,45 @@
     $width-sub-column: 320px
 
     width: $width-main-column + $width-sub-column
-    margin: 32px auto
+    margin: 64px auto 32px
 
     .dashboard-page-sub-column
       display: inline-block
       width: $width-sub-column
+      padding: 8px 12px
       vertical-align: top
 
     .dashboard-page-main-column
       display: inline-block
       width: $width-main-column
+      padding: 8px 12px
       vertical-align: top
 
     .transaction-create-section
       display: inline-block
-      width: 100%
+      width: 320px
       padding: 8px
+      vertical-align: top
+
+    .summary-section
+      display: inline-block
+      width: calc(100% - 320px)
+      height: 400px
+      line-height: 400px
+      text-align: center
+      color: #fff
+      padding: 8px
+      background: gray
+      vertical-align: top
 
     .transaction-section
       display: inline-block
       width: 100%
       padding: 8px
+      vertical-align: top
 
     .account-section
       display: inline-block
       width: 100%
       padding: 8px
+      vertical-align: top

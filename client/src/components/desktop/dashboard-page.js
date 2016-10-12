@@ -19,18 +19,22 @@ export default function Dashboard(props) {
     <div className="dashboard-page">
       <div className="dashboard-page-content">
         <div className="dashboard-page-sub-column">
-          <section className="transaction-create-section">
-            <h2>Input</h2>
-            <TransactionCreateForm transactionDataset={state.transactionDataset} />
-          </section>
+          <h2>Balance</h2>
           <section className="account-section">
-            <h2>Accounts</h2>
+            <div>TODO: Total assets: </div>
             <AccountList accounts={state.accounts} />
             <AccountCreateForm />
           </section>
           <span onClick={() => changeHistory('/setting')}>Setting</span>
         </div>
         <div className="dashboard-page-main-column">
+          <h2>Statement</h2>
+          <section className="transaction-create-section">
+            <TransactionCreateForm transactionDataset={state.transactionDataset} />
+          </section>
+          <section className="summary-section">
+            TODO: Summary
+          </section>
           <section className="transaction-section">
             <h2>Transactions</h2>
             <TransactionTable
