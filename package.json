@@ -45,7 +45,9 @@
   "homepage": "https://github.com/khirayama/hold#readme",
   "dependencies": {
     "axios": "^0.14.0",
+    "gulp-minify-html": "^1.0.6",
     "micro-emitter": "^1.1.9",
+    "mime": "^1.3.4",
     "moment": "^2.15.1",
     "node-uuid": "^1.4.7",
     "numeral": "^1.5.3",

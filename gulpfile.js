@@ -1,6 +1,6 @@
 'use strict';
 var gulp = require('gulp');
-var jade = require('gulp-jade');
+var minifyHTML = require('gulp-minify-html');
 var sass = require('gulp-sass');
 var please = require('gulp-pleeease');
 var browserify = require('browserify');
@@ -50,16 +50,16 @@ var options = {
 function buildMarkups(isWatch) {
   function build() {
     console.log('build: markups');
-    return gulp.src([SRC_ROOT + '/app.jade', SRC_ROOT + '/styleguide.jade'])
+    return gulp.src([SRC_ROOT + '/app.html'])
       .pipe(plumber())
-      .pipe(jade())
+      .pipe(minifyHTML({ empty: true }))
       .pipe(gulp.dest(DIST_ROOT));
   }
 
   if (isWatch) {
     return function() {
       build();
-      gulp.watch([SRC_ROOT + '/app.jade', SRC_ROOT + '/styleguide.jade'], build);
+      gulp.watch([SRC_ROOT + '/app.html'], build);
     };
   } else {
     return function() {
