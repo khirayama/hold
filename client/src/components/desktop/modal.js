@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 export default class Modal extends Component {
   render() {
     const isShown = this.props.isShown;
+
     if (isShown) {
       return (
         <div className="modal-mask">
@@ -18,7 +19,7 @@ export default class Modal extends Component {
 }
 
 Modal.propTypes = {
-  isShown: React.PropTypes.boolean.isRequired,
-  onCloseButtonClick: React.PropTypes.function.isRequired,
-  children: React.PropTypes.element.isRequired,
+  isShown: React.PropTypes.bool.isRequired,
+  onCloseButtonClick: React.PropTypes.func.isRequired,
+  children: React.PropTypes.array.isRequired,
 };

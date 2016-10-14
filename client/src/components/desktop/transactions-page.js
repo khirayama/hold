@@ -1,5 +1,7 @@
 import React from 'react';
 
+import transactionTypes from '../../constants/transaction-types';
+
 import TransactionTable from './transaction-table';
 import TransactionCreateForm from './transaction-create-form';
 import TransactionCategoryList from './transaction-category-list';
@@ -45,9 +47,9 @@ export default function TransactionsPage(props) {
         <h2>Transaction categories</h2>
         <TransactionCategoryCreateForm/>
         <h3>Payment</h3>
-        <TransactionCategoryList transactionCategories={state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === 'payment')}/>
+        <TransactionCategoryList transactionCategories={state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.PAYMENT)}/>
         <h3>Income</h3>
-        <TransactionCategoryList transactionCategories={state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === 'income')}/>
+        <TransactionCategoryList transactionCategories={state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.INCOME)}/>
       </Modal>
     </div>
   );

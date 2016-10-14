@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import moment from 'moment';
 
 import keyCodes from '../../constants/key-codes';
+import transactionTypes from '../../constants/transaction-types';
 
 import {showTransactionCategoryModal} from '../../actions/modal-action-creators';
 import {createTransaction} from '../../actions/transaction-action-creators';
@@ -14,7 +15,7 @@ export default class TransactionCreateForm extends Component {
     const dataset = props.transactionDataset;
 
     this.state = {
-      transactionType: 'payment',
+      transactionType: transactionTypes.PAYMENT,
       fromAccountId: (dataset.accounts[0] || {}).id || null,
       toAccountId: null,
       transactionCategoryId: (dataset.transactionCategories[0] || {}).id || null,
@@ -75,10 +76,10 @@ export default class TransactionCreateForm extends Component {
   }
   _handleClickPaymentTab() {
     const dataset = this.props.transactionDataset;
-    const transactionCategories = this._filterTransactionCategory(dataset.transactionCategories, 'payment');
+    const transactionCategories = this._filterTransactionCategory(dataset.transactionCategories, transactionTypes.PAYMENT);
 
     this.setState({
-      transactionType: 'payment',
+      transactionType: transactionTypes.PAYMENT,
       fromAccountId: (dataset.accounts[0] || {}).id || null,
       toAccountId: null,
       transactionCategoryId: (transactionCategories[0] || {}).id || null,
@@ -91,10 +92,10 @@ export default class TransactionCreateForm extends Component {
 
     if (keyCodes.ENTER === keyCode && !shift && !ctrl) {
       const dataset = this.props.transactionDataset;
-      const transactionCategories = this._filterTransactionCategory(dataset.transactionCategories, 'payment');
+      const transactionCategories = this._filterTransactionCategory(dataset.transactionCategories, transactionTypes.PAYMENT);
 
       this.setState({
-        transactionType: 'payment',
+        transactionType: transactionTypes.PAYMENT,
         fromAccountId: (dataset.accounts[0] || {}).id || null,
         toAccountId: null,
         transactionCategoryId: (transactionCategories[0] || {}).id || null,
@@ -103,10 +104,10 @@ export default class TransactionCreateForm extends Component {
   }
   _handleClickIncomeTab() {
     const dataset = this.props.transactionDataset;
-    const transactionCategories = this._filterTransactionCategory(dataset.transactionCategories, 'income');
+    const transactionCategories = this._filterTransactionCategory(dataset.transactionCategories, transactionTypes.INCOME);
 
     this.setState({
-      transactionType: 'income',
+      transactionType: transactionTypes.INCOME,
       fromAccountId: null,
       toAccountId: (dataset.accounts[0] || {}).id || null,
       transactionCategoryId: (transactionCategories[0] || {}).id || null,
@@ -119,10 +120,10 @@ export default class TransactionCreateForm extends Component {
 
     if (keyCodes.ENTER === keyCode && !shift && !ctrl) {
       const dataset = this.props.transactionDataset;
-      const transactionCategories = this._filterTransactionCategory(dataset.transactionCategories, 'income');
+      const transactionCategories = this._filterTransactionCategory(dataset.transactionCategories, transactionTypes.INCOME);
 
       this.setState({
-        transactionType: 'income',
+        transactionType: transactionTypes.INCOME,
         fromAccountId: null,
         toAccountId: (dataset.accounts[0] || {}).id || null,
         transactionCategoryId: (transactionCategories[0] || {}).id || null,
@@ -133,7 +134,7 @@ export default class TransactionCreateForm extends Component {
     const dataset = this.props.transactionDataset;
 
     this.setState({
-      transactionType: 'transfer',
+      transactionType: transactionTypes.TRANSFER,
       fromAccountId: (dataset.accounts[0] || {}).id || null,
       toAccountId: (dataset.accounts[1] || {}).id || null,
       transactionCategoryId: null,
@@ -148,7 +149,7 @@ export default class TransactionCreateForm extends Component {
       const dataset = this.props.transactionDataset;
 
       this.setState({
-        transactionType: 'transfer',
+        transactionType: transactionTypes.TRANSFER,
         fromAccountId: (dataset.accounts[0] || {}).id || null,
         toAccountId: (dataset.accounts[1] || {}).id || null,
         transactionCategoryId: null,
@@ -192,38 +193,38 @@ export default class TransactionCreateForm extends Component {
           <li
             className={classNames(
               'transaction-create-form-tab-item',
-              {'transaction-create-form-tab-item__active': this.state.transactionType === 'payment'}
+              {'transaction-create-form-tab-item__active': this.state.transactionType === transactionTypes.PAYMENT}
             )}
             onClick={this.handleClickPaymentTab}
             onKeyDown={this.handleKeyDownPaymentTab}
-            tabIndex={(this.state.transactionType === 'payment') ? -1 : 0}
+            tabIndex={(this.state.transactionType === transactionTypes.PAYMENT) ? -1 : 0}
             >Payment</li>
           <li
             className={classNames(
               'transaction-create-form-tab-item',
-              {'transaction-create-form-tab-item__active': this.state.transactionType === 'income'}
+              {'transaction-create-form-tab-item__active': this.state.transactionType === transactionTypes.INCOME}
             )}
             onClick={this.handleClickIncomeTab}
             onKeyDown={this.handleKeyDownIncomeTab}
-            tabIndex={(this.state.transactionType === 'income') ? -1 : 0}
+            tabIndex={(this.state.transactionType === transactionTypes.INCOME) ? -1 : 0}
             >Income</li>
           { (dataset.accounts.length >= 2) ? (
             <li
               className={classNames(
                 'transaction-create-form-tab-item',
-                {'transaction-create-form-tab-item__active': this.state.transactionType === 'transfer'}
+                {'transaction-create-form-tab-item__active': this.state.transactionType === transactionTypes.TRANSFER}
               )}
               onClick={this.handleClickTransferTab}
               onKeyDown={this.handleKeyDownTransferTab}
-              tabIndex={(this.state.transactionType === 'transfer') ? -1 : 0}
+              tabIndex={(this.state.transactionType === transactionTypes.TRANSFER) ? -1 : 0}
               >Transfer</li>
           ) : null }
         </ul>
         <table className="transaction-create-form-table">
           <tbody>
             { (
-                this.state.transactionType === 'payment' ||
-                this.state.transactionType === 'transfer'
+                this.state.transactionType === transactionTypes.PAYMENT ||
+                this.state.transactionType === transactionTypes.TRANSFER
               ) ? (
                 <tr>
                   <th>FROM</th>
@@ -233,8 +234,8 @@ export default class TransactionCreateForm extends Component {
                 </tr>
             ) : null }
             { (
-                this.state.transactionType === 'income' ||
-                this.state.transactionType === 'transfer'
+                this.state.transactionType === transactionTypes.INCOME ||
+                this.state.transactionType === transactionTypes.TRANSFER
               ) ? (
                 <tr>
                   <th>TO</th>
@@ -244,8 +245,8 @@ export default class TransactionCreateForm extends Component {
                 </tr>
             ) : null }
             { (
-                this.state.transactionType === 'payment' ||
-                this.state.transactionType === 'income'
+                this.state.transactionType === transactionTypes.PAYMENT ||
+                this.state.transactionType === transactionTypes.INCOME
               ) ? (
                 <tr>
                   <th>

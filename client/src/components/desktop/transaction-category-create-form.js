@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
 import keyCodes from '../../constants/key-codes';
+import transactionTypes from '../../constants/transaction-types';
 
 import {createTransactionCategory} from '../../actions/transaction-category-action-creators';
 
@@ -11,7 +12,7 @@ export default class TransactionCategoryCreateForm extends Component {
     this.state = {
       isNew: false,
       name: '',
-      transactionType: 'payment',
+      transactionType: transactionTypes.PAYMENT,
     };
 
     this.handleClickNewButton = this._handleClickNewButton.bind(this);
@@ -25,7 +26,7 @@ export default class TransactionCategoryCreateForm extends Component {
     this.setState({
       isNew: true,
       name: '',
-      transactionType: 'payment',
+      transactionType: transactionTypes.PAYMENT,
     });
   }
   _done() {

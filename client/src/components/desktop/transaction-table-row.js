@@ -3,6 +3,7 @@ import moment from 'moment';
 import classNames from 'classnames';
 
 import keyCodes from '../../constants/key-codes';
+import transactionTypes from '../../constants/transaction-types';
 
 import {
   createTransaction,
@@ -140,17 +141,17 @@ export default class TransactionTableRow extends Component {
       transaction.toAccount === null &&
       transaction.fromAccount !== null
     ) {
-      return 'payment';
+      return transactionTypes.PAYMENT;
     } else if (
       transaction.toAccount !== null &&
       transaction.fromAccount === null
     ) {
-      return 'income';
+      return transactionTypes.INCOME;
     } else if (
       transaction.toAccount !== null &&
       transaction.fromAccount !== null
     ) {
-      return 'transfer';
+      return transactionTypes.TRANSFER;
     }
     return null;
   }
@@ -172,7 +173,7 @@ export default class TransactionTableRow extends Component {
 
     if (this.state.isEditing) {
       switch (transactionType) {
-        case 'payment':
+        case transactionTypes.PAYMENT:
           return (
             <tr>
               <td>
@@ -185,7 +186,7 @@ export default class TransactionTableRow extends Component {
               </td>
             </tr>
           );
-        case 'income':
+        case transactionTypes.INCOME:
           return (
             <tr>
               <td>
@@ -198,7 +199,7 @@ export default class TransactionTableRow extends Component {
               </td>
             </tr>
           );
-        case 'transfer':
+        case transactionTypes.TRANSFER:
           return (
             <tr>
               <td>
@@ -221,9 +222,9 @@ export default class TransactionTableRow extends Component {
           <span
             className={classNames(
               'transaction-type-label',
-              {'transaction-type-label__payment': transactionType === 'payment'},
-              {'transaction-type-label__income': transactionType === 'income'},
-              {'transaction-type-label__transfer': transactionType === 'transfer'}
+              {'transaction-type-label__payment': transactionType === transactionTypes.PAYMENT},
+              {'transaction-type-label__income': transactionType === transactionTypes.INCOME},
+              {'transaction-type-label__transfer': transactionType === transactionTypes.TRANSFER}
             )}
             >
             {transactionType}
