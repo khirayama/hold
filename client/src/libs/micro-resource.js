@@ -1,9 +1,10 @@
-import request from 'axios';
+import axios from 'axios';
 
 export class EntryResource {
-  constructor() {
+  constructor(resourceUrl) {
     this._cache = null;
-    this._resourceUrl = null;
+    this._resourceUrl = resourceUrl || null;
+    this._request = axios.create();
   }
   _url(id = null) {
     if (id !== null) {
@@ -21,7 +22,7 @@ export class EntryResource {
       });
     }
     return new Promise((resolve, reject) => {
-      request.get(this._url()).then(res => {
+      this._request.get(this._url()).then(res => {
         this._cache = res.data;
         resolve(res.data);
       }).catch(error => {
@@ -32,9 +33,10 @@ export class EntryResource {
 }
 
 export class CollectionResource {
-  constructor() {
+  constructor(resourceUrl) {
     this._cache = null;
-    this._resourceUrl = null;
+    this._resourceUrl = resourceUrl || null;
+    this._request = axios.create();
   }
   _url(id = null) {
     if (id !== null) {
@@ -52,7 +54,7 @@ export class CollectionResource {
       });
     }
     return new Promise((resolve, reject) => {
-      request.get(this._url()).then(res => {
+      this._request.get(this._url()).then(res => {
         this._cache = res.data;
         resolve(res.data);
       }).catch(error => reject(error));
@@ -60,7 +62,7 @@ export class CollectionResource {
   }
   create(entity) {
     return new Promise((resolve, reject) => {
-      request.post(this._url(), entity).then(res => {
+      this._request.post(this._url(), entity).then(res => {
         this._create(res.data);
         resolve(res.data);
       }).catch(error => reject(error));
@@ -68,7 +70,7 @@ export class CollectionResource {
   }
   update(entity) {
     return new Promise((resolve, reject) => {
-      request.put(this._url(entity.id), entity).then(res => {
+      this._request.put(this._url(entity.id), entity).then(res => {
         this._update(res.data);
         resolve(res.data);
       }).catch(error => reject(error));
@@ -76,7 +78,7 @@ export class CollectionResource {
   }
   delete(id) {
     return new Promise((resolve, reject) => {
-      request.delete(this._url(id)).then(res => {
+      this._request.delete(this._url(id)).then(res => {
         this._delete(res.data);
         resolve(res.data);
       }).catch(error => reject(error));
@@ -99,7 +101,7 @@ export class CollectionResource {
     });
   }
   _find(id, resolve, reject) {
-    request.get(this._url(id)).then(res => {
+    this._request.get(this._url(id)).then(res => {
       this._create(res.data);
       resolve(res.data);
     }).catch(error => reject(error));
