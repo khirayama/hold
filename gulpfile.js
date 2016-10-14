@@ -53,7 +53,7 @@ function buildMarkups(isWatch) {
     console.log('build: markups');
     return gulp.src([`${SRC_ROOT}/app.html`])
       .pipe(plumber())
-      .pipe(minifyHTML({ empty: true }))
+      .pipe(minifyHTML({empty: true}))
       .pipe(gulp.dest(DIST_ROOT));
   }
 
@@ -96,7 +96,7 @@ function buildScripts(isWatch) {
   function build() {
     return () => {
       console.log('build: scripts');
-      bundler.bundle().on('error', (error) => {
+      bundler.bundle().on('error', error => {
         console.error(error.message);
       })
       .pipe(source('bundle.js'))
