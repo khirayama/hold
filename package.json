@@ -19,25 +19,13 @@
     "develop": "gulp develop",
     "lint": "eslint -c=package.json",
     "lint:fix": "eslint -c=package.json --fix",
-    "test": "mocha --require=babel-core/register client/test/**/*.js",
+    "test": "ava",
     "watch:test": "npm test -- --watch",
     "start": "npm run watch"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/khirayama/hold.git"
-  },
-  "eslintConfig": {
-    "extends": [
-      "xo-space/esnext",
-      "xo-react/space"
-    ],
-    "rules": {
-      "comma-dangle": [
-        "error",
-        "always-multiline"
-      ]
-    }
   },
   "author": "khirayama",
   "license": "ISC",
@@ -50,6 +38,7 @@
   },
   "homepage": "https://github.com/khirayama/hold#readme",
   "dependencies": {
+    "ava": "^0.16.0",
     "axios": "^0.15.0",
     "micro-emitter": "^1.1.9",
     "moment": "^2.15.1",
@@ -86,5 +75,15 @@
     "sinon": "^1.17.6",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0"
+  },
+  "ava": {
+    "files": [ "client/test/**/*.js" ],
+    "require": [ "babel-core/register" ]
+  },
+  "eslintConfig": {
+    "extends": [ "xo-space/esnext", "xo-react/space" ],
+    "rules": {
+      "comma-dangle": [ "error", "always-multiline" ]
+    }
   }
 }
