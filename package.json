@@ -77,7 +77,7 @@
     "watchify": "^3.7.0"
   },
   "ava": {
-    "files": [ "client/test/**/*.js" ],
+    "files": [ "client/**/*.test.js" ],
     "require": [ "babel-core/register" ]
   },
   "eslintConfig": {
