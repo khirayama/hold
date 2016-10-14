@@ -1,21 +1,22 @@
-'use strict';
-var gulp = require('gulp');
-var minifyHTML = require('gulp-minify-html');
-var sass = require('gulp-sass');
-var please = require('gulp-pleeease');
-var browserify = require('browserify');
-var watchify = require('watchify');
-var source = require('vinyl-source-stream');
-var plumber = require('gulp-plumber');
+/* eslint "no-console": 0, "import/no-extraneous-dependencies": 0 */
 
-var SRC_ROOT = 'client/src';
-var DIST_ROOT = 'public';
+const gulp = require('gulp');
+const minifyHTML = require('gulp-minify-html');
+const sass = require('gulp-sass');
+const please = require('gulp-pleeease');
+const browserify = require('browserify');
+const watchify = require('watchify');
+const source = require('vinyl-source-stream');
+const plumber = require('gulp-plumber');
 
-var options = {
+const SRC_ROOT = 'client/src';
+const DIST_ROOT = 'public';
+
+const options = {
   styles: {
     sass: {
       errLogToConsole: true,
-      indentedSyntax: true
+      indentedSyntax: true,
     },
     please: {
       minifier: false,
@@ -24,54 +25,53 @@ var options = {
           'last 4 version',
           'ie 8',
           'iOS 4',
-          'Android 2.3'
-        ]
-      }
-    }
+          'Android 2.3',
+        ],
+      },
+    },
   },
   scripts: {
     browserify: {
-      entries: [SRC_ROOT + '/index.js'],
+      entries: [`${SRC_ROOT}/index.js`],
       transform: ['babelify'],
-      extensions: ['.jsx', '.js']
+      extensions: ['.jsx', '.js'],
     },
     watchify: {
-      entries: [SRC_ROOT + '/index.js'],
+      entries: [`${SRC_ROOT}/index.js`],
       transform: ['babelify'],
       debug: true,
       extensions: ['.jsx', '.js'],
       cache: {},
       packageCache: {},
-      plugin: [watchify]
-    }
-  }
+      plugin: [watchify],
+    },
+  },
 };
 
 function buildMarkups(isWatch) {
   function build() {
     console.log('build: markups');
-    return gulp.src([SRC_ROOT + '/app.html'])
+    return gulp.src([`${SRC_ROOT}/app.html`])
       .pipe(plumber())
       .pipe(minifyHTML({ empty: true }))
       .pipe(gulp.dest(DIST_ROOT));
   }
 
   if (isWatch) {
-    return function() {
+    return () => {
       build();
-      gulp.watch([SRC_ROOT + '/app.html'], build);
-    };
-  } else {
-    return function() {
-      build();
+      gulp.watch([`${SRC_ROOT}/app.html`], build);
     };
   }
+  return () => {
+    build();
+  };
 }
 
 function buildStyles(isWatch) {
   function build() {
     console.log('build: styles');
-    return gulp.src(SRC_ROOT + '/styles/**/index.sass')
+    return gulp.src(`${SRC_ROOT}/styles/**/index.sass`)
       .pipe(plumber())
       .pipe(sass(options.styles.sass))
       .pipe(please(options.styles.please))
@@ -79,31 +79,28 @@ function buildStyles(isWatch) {
   }
 
   if (isWatch) {
-    return function() {
+    return () => {
       build();
-      gulp.watch(SRC_ROOT + '/styles/**/*.sass', build);
-    };
-  } else {
-    return function() {
-      build();
+      gulp.watch(`${SRC_ROOT}/styles/**/*.sass`, build);
     };
   }
+  return () => {
+    build();
+  };
 }
 
 function buildScripts(isWatch) {
-  var options_ = (isWatch) ? options.scripts.watchify : options.scripts.browserify;
-  var bundler = browserify(options_);
+  const options_ = (isWatch) ? options.scripts.watchify : options.scripts.browserify;
+  const bundler = browserify(options_);
 
   function build() {
-    return function() {
+    return () => {
       console.log('build: scripts');
-      bundler
-        .bundle()
-        .on('error', function(error) {
-          console.error(error.message);
-        })
-        .pipe(source('bundle.js'))
-        .pipe(gulp.dest(DIST_ROOT));
+      bundler.bundle().on('error', (error) => {
+        console.error(error.message);
+      })
+      .pipe(source('bundle.js'))
+      .pipe(gulp.dest(DIST_ROOT));
     };
   }
 
@@ -112,13 +109,13 @@ function buildScripts(isWatch) {
 }
 
 function buildImages() {
-  return gulp.src([SRC_ROOT + '/**/*.{png,jpg,gif}'])
+  return gulp.src([`${SRC_ROOT}/**/*.{png,jpg,gif}`])
     .pipe(plumber())
     .pipe(gulp.dest(DIST_ROOT));
 }
 
 function buildFiles() {
-  return gulp.src([SRC_ROOT + '/**/*.{csv,json}'])
+  return gulp.src([`${SRC_ROOT}/**/*.{csv,json}`])
     .pipe(gulp.dest(DIST_ROOT));
 }
 
