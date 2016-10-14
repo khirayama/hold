@@ -7,6 +7,6 @@ export function amount(num, currencyCode) {
   return numeral(num).format('0,0.00');
 }
 
-export default function currency(num, currencyCode) {
+export default function currency(num, currencyCode = '') {
   return currencyCode + amount(num, currencyCode);
 }

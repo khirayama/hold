@@ -1,89 +1,89 @@
-import assert from 'power-assert';
+import test from 'ava';
 
 import isMobileUI from '../../src/utils/is-mobile-ui';
 
 
 global.window = {};
 
-describe('isMobileUI', () => {
-  // TODO: Mac / Win / Win tablet / Win Phone /
-  // iPhone / iPad / Android Phone / Android tablet
-  beforeEach(() => {
-    global.window.navigator = window.navigator || {};
+// TODO: Mac / Win / Win tablet / Win Phone /
+// iPhone / iPad / Android Phone / Android tablet
+test.before(() => {
+  global.window.navigator = window.navigator || {};
+});
 
-    global.window.navigator.userAgent = '';
-    global.window.ontouchstart = undefined;
-  });
+test.beforeEach(() => {
+  global.window.navigator.userAgent = '';
+  global.window.ontouchstart = undefined;
+});
 
-  it('ua: Macintosh, ontouchstart: undefined', () => {
-    global.window.navigator.userAgent = 'hogehogeMacintosh';
-    global.window.ontouchstart = undefined;
+test('ua: Macintosh, ontouchstart: undefined', t => {
+  global.window.navigator.userAgent = 'hogehogeMacintosh';
+  global.window.ontouchstart = undefined;
 
-    const result = isMobileUI();
+  const result = isMobileUI();
 
-    assert.strictEqual(result, false);
-  });
+  t.false(result);
+});
 
-  it('ua: Windows, ontouchstart: undefined', () => {
-    global.window.navigator.userAgent = 'hogehogeWindows';
-    global.window.ontouchstart = undefined;
+test('ua: Windows, ontouchstart: undefined', t => {
+  global.window.navigator.userAgent = 'hogehogeWindows';
+  global.window.ontouchstart = undefined;
 
-    const result = isMobileUI();
+  const result = isMobileUI();
 
-    assert.strictEqual(result, false);
-  });
+  t.false(result);
+});
 
-  it('ua: Android, ontouchstart: undefined', () => {
-    global.window.navigator.userAgent = 'hogehogeAndroid';
-    global.window.ontouchstart = undefined;
+test('ua: Android, ontouchstart: undefined', t => {
+  global.window.navigator.userAgent = 'hogehogeAndroid';
+  global.window.ontouchstart = undefined;
 
-    const result = isMobileUI();
+  const result = isMobileUI();
 
-    assert.strictEqual(result, false);
-  });
+  t.false(result);
+});
 
-  it('ua: iPhone, ontouchstart: undefined', () => {
-    global.window.navigator.userAgent = 'hogehogeiPhone';
-    global.window.ontouchstart = undefined;
+test('ua: iPhone, ontouchstart: undefined', t => {
+  global.window.navigator.userAgent = 'hogehogeiPhone';
+  global.window.ontouchstart = undefined;
 
-    const result = isMobileUI();
+  const result = isMobileUI();
 
-    assert.strictEqual(result, false);
-  });
+  t.false(result);
+});
 
-  it('ua: Macintosh, ontouchstart: null', () => {
-    global.window.navigator.userAgent = 'hogehogeMacintosh';
-    global.window.ontouchstart = null;
+test('ua: Macintosh, ontouchstart: null', t => {
+  global.window.navigator.userAgent = 'hogehogeMacintosh';
+  global.window.ontouchstart = null;
 
-    const result = isMobileUI();
+  const result = isMobileUI();
 
-    assert.strictEqual(result, false);
-  });
+  t.false(result);
+});
 
-  it('ua: Windows, ontouchstart: null', () => {
-    global.window.navigator.userAgent = 'hogehogeWindows';
-    global.window.ontouchstart = null;
+test('ua: Windows, ontouchstart: null', t => {
+  global.window.navigator.userAgent = 'hogehogeWindows';
+  global.window.ontouchstart = null;
 
-    const result = isMobileUI();
+  const result = isMobileUI();
 
-    assert.strictEqual(result, false);
-  });
+  t.false(result);
+});
 
-  it('ua: Android, ontouchstart: null', () => {
-    global.window.navigator.userAgent = 'hogehogeAndroid';
-    global.window.ontouchstart = null;
+test('ua: Android, ontouchstart: null', t => {
+  global.window.navigator.userAgent = 'hogehogeAndroid';
+  global.window.ontouchstart = null;
 
-    const result = isMobileUI();
+  const result = isMobileUI();
 
-    assert.strictEqual(result, true);
-  });
+  t.true(result);
+});
 
-  it('ua: iPhone, ontouchstart: null', () => {
-    global.window.navigator.userAgent = 'hogehogeiPhone';
-    global.window.ontouchstart = null;
+test('ua: iPhone, ontouchstart: null', t => {
+  global.window.navigator.userAgent = 'hogehogeiPhone';
+  global.window.ontouchstart = null;
 
-    const result = isMobileUI();
+  const result = isMobileUI();
 
-    assert.strictEqual(result, true);
-  });
+  t.true(result);
 });
