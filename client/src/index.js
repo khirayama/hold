@@ -23,7 +23,7 @@ window.addEventListener('load', () => {
 
   const store = new Store();
 
-  if (isMobileUI()) {
+  if (isMobileUI(window.navigator.userAgent, window.ontouchstart)) {
     logger.info(`Start app for mobile at ${new Date()}`);
     loadStyle('/mobile/index.css');
     ReactDOM.render(<MobileContainer store={store}/>, document.querySelector('#app'));

@@ -1,13 +1,11 @@
 /* eslint-env browser */
 
-export default function isMobileUI() {
-  const ua = window.navigator.userAgent;
-
+export default function isMobileUI(ua, onTouchStartCallback) {
   let isTouchable = false;
   let osName = 'unknown';
 
   // get is touchable
-  if (window.ontouchstart === null) {
+  if (onTouchStartCallback === null) {
     isTouchable = true;
   }
 
