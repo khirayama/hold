@@ -2,7 +2,6 @@ import test from 'ava';
 
 import isMobileUI from '../../src/utils/is-mobile-ui';
 
-
 global.window = {};
 
 // TODO: Mac / Win / Win tablet / Win Phone /
