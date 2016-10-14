@@ -14,17 +14,26 @@ export default function Transactions(props) {
   const state = props.state;
 
   return (
-    <div>
+    <div className="transactions-page">
       <span onClick={() => changeHistory('/dashboard')}>Back</span>
-      <section className="transaction-section">
-        <h2>Transactions</h2>
-        <TransactionCreateForm
-          transactionDataset={state.transactionDataset}
-        />
-        <TransactionTable
-          transactions={state.transactions}
-          transactionDataset={state.transactionDataset}
-        />
+      <section className="transactions-page-content">
+        <div className="transactions-page-sub-column">
+          <section className="transaction-create-section">
+            <TransactionCreateForm transactionDataset={state.transactionDataset} />
+          </section>
+        </div>
+        <div className="transactions-page-main-column">
+          <h2>Transactions</h2>
+          <section className="search-section">
+            TODO: search
+          </section>
+          <section className="transaction-section">
+            <TransactionTable
+              transactions={state.transactions}
+              transactionDataset={state.transactionDataset}
+            />
+          </section>
+        </div>
       </section>
       <Modal
         isShown={state.isTransactionCategoryModalShown}
