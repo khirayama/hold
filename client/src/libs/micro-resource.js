@@ -2,7 +2,6 @@ import request from 'axios';
 
 export class EntryResource {
   constructor() {
-    console.log('extends! entry');
     this._cache = null;
     this._resourceUrl = null;
   }
@@ -34,7 +33,6 @@ export class EntryResource {
 
 export class CollectionResource {
   constructor() {
-    console.log('extends! collection');
     this._cache = null;
     this._resourceUrl = null;
   }

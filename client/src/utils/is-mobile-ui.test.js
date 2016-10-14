@@ -1,11 +1,11 @@
+/* eslint-env browser */
+
 import test from 'ava';
 
 import isMobileUI from '../../src/utils/is-mobile-ui';
 
 global.window = {};
 
-// TODO: Mac / Win / Win tablet / Win Phone /
-// iPhone / iPad / Android Phone / Android tablet
 test.before(() => {
   global.window.navigator = window.navigator || {};
 });
