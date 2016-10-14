@@ -1,7 +1,6 @@
 import uuid from 'node-uuid';
 import moment from 'moment';
 
-
 export function formatUser(user, setting, error = null) {
   return {
     cid: user.cid || uuid(),
@@ -11,7 +10,7 @@ export function formatUser(user, setting, error = null) {
     error,
     setting: {
       language: setting.language,
-      currencyCode: setting.currency_code
+      currencyCode: setting.currency_code,
     },
   };
 }

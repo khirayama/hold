@@ -1,17 +1,13 @@
-/* global location */
+/* eslint-env browser */
 
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
-import {
-  changeHistory,
-  fetchInitialDesktopResources,
-} from '../../actions/app-action-creators';
+import {fetchInitialDesktopResources} from '../../actions/app-action-creators';
 
 import DashboardPage from './dashboard-page';
 import TransactionsPage from './transactions-page';
 import SettingPage from './setting-page';
 import NotFoundPage from './not-found-page';
-
 
 export default class Container extends Component {
   constructor(props) {
@@ -40,15 +36,15 @@ export default class Container extends Component {
   }
 
   _createPageElement(pathname, state) {
-    switch(pathname) {
+    switch (pathname) {
       case '/dashboard':
-        return <DashboardPage state={state} />;
+        return <DashboardPage state={state}/>;
       case '/transactions':
-        return <TransactionsPage state={state} />;
+        return <TransactionsPage state={state}/>;
       case '/setting':
-        return <SettingPage state={state} />;
+        return <SettingPage state={state}/>;
       default:
-        return <NotFoundPage state={state} />;
+        return <NotFoundPage state={state}/>;
     }
   }
 

@@ -1,7 +1,6 @@
 import types from '../constants/action-types';
 
-import { dispatch } from '../libs/app-dispatcher';
-
+import {dispatch} from '../libs/app-dispatcher';
 
 export function showTransactionCategoryModal() {
   dispatch({

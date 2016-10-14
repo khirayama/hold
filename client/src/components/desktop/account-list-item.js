@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 import keyCodes from '../../constants/key-codes';
 
@@ -9,7 +9,6 @@ import {
 } from '../../actions/account-action-creators';
 
 import {amount} from '../../utils/currency';
-
 
 export default class AccountListItem extends Component {
   constructor(props) {
@@ -23,17 +22,19 @@ export default class AccountListItem extends Component {
       amount: account.amount,
     };
 
-    this.select = this._select.bind(this);
-    this.onClickAccountListItem = this._onClickAccountListItem.bind(this);
-    this.onChangeNameInput = this._onChangeNameInput.bind(this);
-    this.onChangeAmountInput = this._onChangeAmountInput.bind(this);
-    this.onClickUpdateButton = this._onClickUpdateButton.bind(this);
-    this.onClickDeleteButton = this._onClickDeleteButton.bind(this);
-    this.onKeyDownNameAndAmountInputs = this._onKeyDownNameAndAmountInputs.bind(this);
-    this.onClickErrorIcon = this._onClickErrorIcon.bind(this);
+    this.handleClickAccountListItem = this._handleClickAccountListItem.bind(this);
+    this.handleChangeNameInput = this._handleChangeNameInput.bind(this);
+    this.handleChangeAmountInput = this._handleChangeAmountInput.bind(this);
+    this.handleClickUpdateButton = this._handleClickUpdateButton.bind(this);
+    this.handleClickDeleteButton = this._handleClickDeleteButton.bind(this);
+    this.handleKeyDownNameAndAmountInputs = this._handleKeyDownNameAndAmountInputs.bind(this);
+    this.handleClickErrorIcon = this._handleClickErrorIcon.bind(this);
+    this.handleFocusInput = this._handleFocusInput.bind(this);
   }
-  _select(event) {
-    event.currentTarget.select();
+  _select(target) {
+    if (target.select) {
+      target.select();
+    }
   }
   _edit() {
     const account = this.props.account;
@@ -45,7 +46,7 @@ export default class AccountListItem extends Component {
     });
   }
   _done() {
-    this.setState({ isEditing: false });
+    this.setState({isEditing: false});
   }
   _update() {
     updateAccount(Object.assign({}, this.props.account, {
@@ -63,16 +64,16 @@ export default class AccountListItem extends Component {
   _delete() {
     deleteAccount(this.props.account);
   }
-  _onClickAccountListItem() {
+  _handleClickAccountListItem() {
     this._edit();
   }
-  _onChangeNameInput(event) {
-    this.setState({ name: event.target.value });
+  _handleChangeNameInput(event) {
+    this.setState({name: event.target.value});
   }
-  _onChangeAmountInput(event) {
-    this.setState({ amount: event.target.value });
+  _handleChangeAmountInput(event) {
+    this.setState({amount: event.target.value});
   }
-  _onClickUpdateButton() {
+  _handleClickUpdateButton() {
     if (this.props.account.id) {
       this._update();
     } else {
@@ -80,10 +81,10 @@ export default class AccountListItem extends Component {
     }
     this._done();
   }
-  _onClickDeleteButton() {
+  _handleClickDeleteButton() {
     this._delete();
   }
-  _onKeyDownNameAndAmountInputs(event) {
+  _handleKeyDownNameAndAmountInputs(event) {
     const keyCode = event.keyCode;
     const shift = event.shiftKey;
     const ctrl = event.ctrlKey || event.metaKey;
@@ -97,17 +98,20 @@ export default class AccountListItem extends Component {
       this._done();
     }
   }
-  _onClickErrorIcon() {
+  _handleClickErrorIcon() {
     if (this.props.account.id) {
       this._update();
     } else {
       this._edit();
     }
   }
+  _handleFocusInput(event) {
+    this._select(event.target);
+  }
   render() {
     const account = this.props.account;
     const errorIconElement = (account.error) ? (
-      <span onClick={this.onClickErrorIcon}>E</span>
+      <span onClick={this.handleClickErrorIcon}>E</span>
     ) : null;
 
     if (this.state.isEditing) {
@@ -119,25 +123,25 @@ export default class AccountListItem extends Component {
                 autoFocus
                 type="text"
                 value={this.state.name}
-                onChange={this.onChangeNameInput}
-                onKeyDown={this.onKeyDownNameAndAmountInputs}
-                onFocus={this.select}
-              />
+                onChange={this.handleChangeNameInput}
+                onKeyDown={this.handleKeyDownNameAndAmountInputs}
+                onFocus={this.handleFocusInput}
+                />
             </span>
             <span className="account-list-item-content-amount">
               <input
                 type="number"
                 value={this.state.amount}
-                onChange={this.onChangeAmountInput}
-                onKeyDown={this.onKeyDownNameAndAmountInputs}
-                onFocus={this.select}
-              />
+                onChange={this.handleChangeAmountInput}
+                onKeyDown={this.handleKeyDownNameAndAmountInputs}
+                onFocus={this.handleFocusInput}
+                />
             </span>
           </span>
           <span
             className="account-list-item-done-button"
-            onClick={this.onClickUpdateButton}
-          ><span className="icon">done</span></span>
+            onClick={this.handleClickUpdateButton}
+            ><span className="icon">done</span></span>
         </li>
       );
     }
@@ -145,14 +149,14 @@ export default class AccountListItem extends Component {
       <li className="account-list-item">
         <span
           className="account-list-item-content"
-          onClick={this.onClickAccountListItem}
-        >
+          onClick={this.handleClickAccountListItem}
+          >
           <span className="account-list-item-content-name">
             {account.name}
             <span
               className="account-list-item-delete-button"
-              onClick={this.onClickDeleteButton}
-            ><span className="icon">delete</span></span>
+              onClick={this.handleClickDeleteButton}
+              ><span className="icon">delete</span></span>
           </span>
           <span className="account-list-item-content-amount">
             <span className="account-list-item-content-amount-currency-code">

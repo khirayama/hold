@@ -1,6 +1,5 @@
 import MicoEmitter from 'micro-emitter';
 
-
 const ACTION_DISPATCH = '_ACTION_DISPATCH';
 
 const appDispatcher = new MicoEmitter();

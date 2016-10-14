@@ -8,12 +8,18 @@ import TransactionCategoryList from './transaction-category-list';
 import TransactionCategoryCreateForm from './transaction-category-create-form';
 import Modal from './modal';
 
-import { changeHistory } from '../../actions/app-action-creators';
-import { hideTransactionCategoryModal } from '../../actions/modal-action-creators';
+import {changeHistory} from '../../actions/app-action-creators';
+import {hideTransactionCategoryModal} from '../../actions/modal-action-creators';
 
-
-export default function Dashboard(props) {
+export default function DashboardPage(props) {
   const state = props.state;
+
+  const toSetting = () => {
+    changeHistory('/setting');
+  };
+  const toTransactions = () => {
+    changeHistory('/transactions');
+  };
 
   return (
     <div className="dashboard-page">
@@ -22,15 +28,15 @@ export default function Dashboard(props) {
           <h2>Balance</h2>
           <section className="account-section">
             <div>TODO: Total assets: </div>
-            <AccountList accounts={state.accounts} />
-            <AccountCreateForm />
+            <AccountList accounts={state.accounts}/>
+            <AccountCreateForm/>
           </section>
-          <span onClick={() => changeHistory('/setting')}>Setting</span>
+          <span onClick={toSetting}>Setting</span>
         </div>
         <div className="dashboard-page-main-column">
           <h2>Statement</h2>
           <section className="transaction-create-section">
-            <TransactionCreateForm transactionDataset={state.transactionDataset} />
+            <TransactionCreateForm transactionDataset={state.transactionDataset}/>
           </section>
           <section className="summary-section">
             TODO: Summary
@@ -40,22 +46,26 @@ export default function Dashboard(props) {
             <TransactionTable
               transactions={state.transactions}
               transactionDataset={state.transactionDataset}
-            />
-            <span onClick={() => changeHistory('/transactions')}>more</span>
+              />
+            <span onClick={toTransactions}>more</span>
           </section>
         </div>
       </div>
       <Modal
         isShown={state.isTransactionCategoryModalShown}
         onCloseButtonClick={hideTransactionCategoryModal}
-      >
+        >
         <h2>Transaction categories</h2>
-        <TransactionCategoryCreateForm />
+        <TransactionCategoryCreateForm/>
         <h3>Payment</h3>
-        <TransactionCategoryList transactionCategories={state.transactionCategories.filter((transactionCategory) => transactionCategory.transactionType === 'payment')} />
+        <TransactionCategoryList transactionCategories={state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === 'payment')}/>
         <h3>Income</h3>
-        <TransactionCategoryList transactionCategories={state.transactionCategories.filter((transactionCategory) => transactionCategory.transactionType === 'income')} />
+        <TransactionCategoryList transactionCategories={state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === 'income')}/>
       </Modal>
     </div>
   );
 }
+
+DashboardPage.propTypes = {
+  state: React.PropTypes.object.isRequired,
+};

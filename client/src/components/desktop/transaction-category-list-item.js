@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 import keyCodes from '../../constants/key-codes';
 
@@ -7,7 +7,6 @@ import {
   updateTransactionCategory,
   deleteTransactionCategory,
 } from '../../actions/transaction-category-action-creators';
-
 
 export default class TransactionCategoryListItem extends Component {
   constructor(props) {
@@ -21,13 +20,13 @@ export default class TransactionCategoryListItem extends Component {
       transactionType: transactionCategory.transactionType,
     };
 
-    this.onClickTransactionCategoryListItem = this._onClickTransactionCategoryListItem.bind(this);
-    this.onChangeNameInput = this._onChangeNameInput.bind(this);
-    this.onChangeTransactionTypeSelect = this._onChangeTransactionTypeSelect.bind(this);
-    this.onClickUpdateButton = this._onClickUpdateButton.bind(this);
-    this.onClickDeleteButton = this._onClickDeleteButton.bind(this);
-    this.onKeyDownNameInput = this._onKeyDownNameInput.bind(this);
-    this.onClickErrorIcon = this._onClickErrorIcon.bind(this);
+    this.handleClickTransactionCategoryListItem = this._handleClickTransactionCategoryListItem.bind(this);
+    this.handleChangeNameInput = this._handleChangeNameInput.bind(this);
+    this.handleChangeTransactionTypeSelect = this._handleChangeTransactionTypeSelect.bind(this);
+    this.handleClickUpdateButton = this._handleClickUpdateButton.bind(this);
+    this.handleClickDeleteButton = this._handleClickDeleteButton.bind(this);
+    this.handleKeyDownNameInput = this._handleKeyDownNameInput.bind(this);
+    this.handleClickErrorIcon = this._handleClickErrorIcon.bind(this);
   }
   _edit() {
     const transactionCategory = this.props.transactionCategory;
@@ -39,7 +38,7 @@ export default class TransactionCategoryListItem extends Component {
     });
   }
   _done() {
-    this.setState({ isEditing: false });
+    this.setState({isEditing: false});
   }
   _update() {
     updateTransactionCategory(Object.assign({}, this.props.transactionCategory, {
@@ -57,16 +56,16 @@ export default class TransactionCategoryListItem extends Component {
   _delete() {
     deleteTransactionCategory(this.props.transactionCategory);
   }
-  _onClickTransactionCategoryListItem() {
+  _handleClickTransactionCategoryListItem() {
     this._edit();
   }
-  _onChangeNameInput(event) {
-    this.setState({ name: event.target.value });
+  _handleChangeNameInput(event) {
+    this.setState({name: event.target.value});
   }
-  _onChangeTransactionTypeSelect(event) {
-    this.setState({ transactionType: event.target.value });
+  _handleChangeTransactionTypeSelect(event) {
+    this.setState({transactionType: event.target.value});
   }
-  _onClickUpdateButton() {
+  _handleClickUpdateButton() {
     if (this.props.transactionCategory.id) {
       this._update();
     } else {
@@ -74,10 +73,10 @@ export default class TransactionCategoryListItem extends Component {
     }
     this._done();
   }
-  _onClickDeleteButton() {
+  _handleClickDeleteButton() {
     this._delete();
   }
-  _onKeyDownNameInput(event) {
+  _handleKeyDownNameInput(event) {
     const keyCode = event.keyCode;
     const shift = event.shiftKey;
     const ctrl = event.ctrlKey || event.metaKey;
@@ -91,7 +90,7 @@ export default class TransactionCategoryListItem extends Component {
       this._done();
     }
   }
-  _onClickErrorIcon() {
+  _handleClickErrorIcon() {
     if (this.props.transactionCategory.id) {
       this._update();
     } else {
@@ -101,7 +100,7 @@ export default class TransactionCategoryListItem extends Component {
   render() {
     const transactionCategory = this.props.transactionCategory;
     const errorIconElement = (transactionCategory.error) ? (
-      <span onClick={this.onClickErrorIcon}>E</span>
+      <span onClick={this.handleClickErrorIcon}>E</span>
     ) : null;
 
     if (this.state.isEditing) {
@@ -111,32 +110,28 @@ export default class TransactionCategoryListItem extends Component {
             autoFocus
             type="text"
             value={this.state.name}
-            onChange={this.onChangeNameInput}
-            onKeyDown={this.onKeyDownNameInput}
-          />
+            onChange={this.handleChangeNameInput}
+            onKeyDown={this.handleKeyDownNameInput}
+            />
           <select
             defaultValue={this.state.transactionType}
-            onChange={this.onChangeTransactionTypeSelect}
-          >
+            onChange={this.handleChangeTransactionTypeSelect}
+            >
             <option value="payment">Payment</option>
             <option value="income">Income</option>
           </select>
           <span
-            onClick={this.onClickUpdateButton}
-          >Update</span>
+            onClick={this.handleClickUpdateButton}
+            >Update</span>
         </li>
       );
     }
     return (
       <li>
-        <span
-          onClick={this.onClickTransactionCategoryListItem}
-        >
+        <span onClick={this.handleClickTransactionCategoryListItem}>
           {transactionCategory.name} / {transactionCategory.transactionType}
         </span>
-        <span
-          onClick={this.onClickDeleteButton}
-        >Delete</span>
+        <span onClick={this.handleClickDeleteButton}>Delete</span>
         {errorIconElement}
       </li>
     );

@@ -1,6 +1,5 @@
 import MicroEmitter from 'micro-emitter';
 
-
 const EVENT_CHANGE = 'CHANGE_STORE';
 
 export default class MicroStore extends MicroEmitter {

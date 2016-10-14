@@ -2,7 +2,6 @@ import React from 'react';
 
 import TransactionTableRow from './transaction-table-row';
 
-
 export default function TransactionTable(props) {
   return (
     <table className="transaction-table">
@@ -15,17 +14,17 @@ export default function TransactionTable(props) {
           <th>CATEGORY</th>
           <th>AMOUNT</th>
           <th>NOTE</th>
-          <th></th>
+          <th/>
         </tr>
       </thead>
       <tbody>
         { props.transactions.map(
-          (transaction) => (
+          transaction => (
             <TransactionTableRow
               key={transaction.cid}
               transaction={transaction}
               transactionDataset={props.transactionDataset}
-            />
+              />
           )
         ) }
       </tbody>

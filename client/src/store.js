@@ -1,7 +1,7 @@
 import types from './constants/action-types';
 
 import MicroStore from './libs/micro-store';
-import { subscribe } from './libs/app-dispatcher';
+import {subscribe} from './libs/app-dispatcher';
 
 import logger from './utils/logger';
 
@@ -11,7 +11,6 @@ import transactionCategoriesReducer from './reducers/transaction-categories';
 import transactionsReducer from './reducers/transactions';
 import isTransactionCategoryModalShownReducer from './reducers/is-transaction-category-modal-shown';
 
-
 export default class Store extends MicroStore {
   constructor() {
     super();
@@ -20,7 +19,7 @@ export default class Store extends MicroStore {
       ready: false,
       pathname: '/',
 
-      user: { setting: {} },
+      user: {setting: {}},
       accounts: [],
       transactionCategories: [],
       transactionDataset: null,
@@ -33,7 +32,7 @@ export default class Store extends MicroStore {
   }
 
   _subscribe() {
-    subscribe((action) => {
+    subscribe(action => {
       switch (action.type) {
         case types.CHANGE_HISTORY:
           this.state.pathname = action.pathname;

@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 import keyCodes from '../../constants/key-codes';
 
-import { createAccount } from '../../actions/account-action-creators';
-
+import {createAccount} from '../../actions/account-action-creators';
 
 export default class AccountCreateForm extends Component {
   constructor() {
@@ -15,12 +14,12 @@ export default class AccountCreateForm extends Component {
       amount: 0,
     };
 
-    this.onClickNewButton = this._onClickNewButton.bind(this);
-    this.onChangeNameInput = this._onChangeNameInput.bind(this);
-    this.onChangeAmountInput = this._onChangeAmountInput.bind(this);
-    this.onClickCreateButton = this._onClickCreateButton.bind(this);
-    this.onClickCancelButton = this._onClickCancelButton.bind(this);
-    this.onKeyDownNameAndAmountInputs = this._onKeyDownNameAndAmountInputs.bind(this);
+    this.handleClickNewButton = this._handleClickNewButton.bind(this);
+    this.handleChangeNameInput = this._handleChangeNameInput.bind(this);
+    this.handleChangeAmountInput = this._handleChangeAmountInput.bind(this);
+    this.handleClickCreateButton = this._handleClickCreateButton.bind(this);
+    this.handleClickCancelButton = this._handleClickCancelButton.bind(this);
+    this.handleKeyDownNameAndAmountInputs = this._handleKeyDownNameAndAmountInputs.bind(this);
   }
   _new() {
     this.setState({
@@ -30,7 +29,7 @@ export default class AccountCreateForm extends Component {
     });
   }
   _done() {
-    this.setState({ isNew: false });
+    this.setState({isNew: false});
   }
   _create() {
     createAccount({
@@ -38,23 +37,23 @@ export default class AccountCreateForm extends Component {
       amount: this.state.amount,
     });
   }
-  _onClickNewButton() {
+  _handleClickNewButton() {
     this._new();
   }
-  _onChangeNameInput(event) {
-    this.setState({ name: event.target.value });
+  _handleChangeNameInput(event) {
+    this.setState({name: event.target.value});
   }
-  _onChangeAmountInput(event) {
-    this.setState({ amount: event.target.value });
+  _handleChangeAmountInput(event) {
+    this.setState({amount: event.target.value});
   }
-  _onClickCreateButton() {
+  _handleClickCreateButton() {
     this._create();
     this._done();
   }
-  _onClickCancelButton() {
+  _handleClickCancelButton() {
     this._done();
   }
-  _onKeyDownNameAndAmountInputs(event) {
+  _handleKeyDownNameAndAmountInputs(event) {
     const keyCode = event.keyCode;
     const shift = event.shiftKey;
     const ctrl = event.ctrlKey || event.metaKey;
@@ -75,27 +74,27 @@ export default class AccountCreateForm extends Component {
                 autoFocus
                 type="text"
                 value={this.state.name}
-                onChange={this.onChangeNameInput}
-                onKeyDown={this.onKeyDownNameAndAmountInputs}
-              />
+                onChange={this.handleChangeNameInput}
+                onKeyDown={this.handleKeyDownNameAndAmountInputs}
+                />
             </span>
             <span className="account-create-form-content-amount">
               <input
                 className="simple-input"
                 type="number"
                 value={this.state.amount}
-                onChange={this.onChangeAmountInput}
-                onKeyDown={this.onKeyDownNameAndAmountInputs}
-              />
+                onChange={this.handleChangeAmountInput}
+                onKeyDown={this.handleKeyDownNameAndAmountInputs}
+                />
             </span>
           </span>
           <span className="account-create-form-button-box">
             <span
-              onClick={this.onClickCreateButton}
-            ><span className="icon">done</span></span>
+              onClick={this.handleClickCreateButton}
+              ><span className="icon">done</span></span>
             <span
-              onClick={this.onClickCancelButton}
-            ><span className="icon">clear</span></span>
+              onClick={this.handleClickCancelButton}
+              ><span className="icon">clear</span></span>
           </span>
         </div>
       );
@@ -103,8 +102,8 @@ export default class AccountCreateForm extends Component {
     return (
       <div
         className="account-create-button"
-        onClick={this.onClickNewButton}
-      ><span className="icon">add_circle_outline</span>add an account</div>
+        onClick={this.handleClickNewButton}
+        ><span className="icon">add_circle_outline</span>add an account</div>
     );
   }
 }

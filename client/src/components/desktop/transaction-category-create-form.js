@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 import keyCodes from '../../constants/key-codes';
 
-import { createTransactionCategory } from '../../actions/transaction-category-action-creators';
-
+import {createTransactionCategory} from '../../actions/transaction-category-action-creators';
 
 export default class TransactionCategoryCreateForm extends Component {
   constructor() {
@@ -15,12 +14,12 @@ export default class TransactionCategoryCreateForm extends Component {
       transactionType: 'payment',
     };
 
-    this.onClickNewButton = this._onClickNewButton.bind(this);
-    this.onChangeNameInput = this._onChangeNameInput.bind(this);
-    this.onChangeTransactionCategorySelect = this._onChangeTransactionCategorySelect.bind(this);
-    this.onClickCreateButton = this._onClickCreateButton.bind(this);
-    this.onClickCancelButton = this._onClickCancelButton.bind(this);
-    this.onKeyDownNameInput = this._onKeyDownNameInput.bind(this);
+    this.handleClickNewButton = this._handleClickNewButton.bind(this);
+    this.handleChangeNameInput = this._handleChangeNameInput.bind(this);
+    this.handleChangeTransactionCategorySelect = this._handleChangeTransactionCategorySelect.bind(this);
+    this.handleClickCreateButton = this._handleClickCreateButton.bind(this);
+    this.handleClickCancelButton = this._handleClickCancelButton.bind(this);
+    this.handleKeyDownNameInput = this._handleKeyDownNameInput.bind(this);
   }
   _new() {
     this.setState({
@@ -30,7 +29,7 @@ export default class TransactionCategoryCreateForm extends Component {
     });
   }
   _done() {
-    this.setState({ isNew: false });
+    this.setState({isNew: false});
   }
   _create() {
     createTransactionCategory({
@@ -38,23 +37,23 @@ export default class TransactionCategoryCreateForm extends Component {
       transactionType: this.state.transactionType,
     });
   }
-  _onClickNewButton() {
+  _handleClickNewButton() {
     this._new();
   }
-  _onChangeNameInput(event) {
-    this.setState({ name: event.target.value });
+  _handleChangeNameInput(event) {
+    this.setState({name: event.target.value});
   }
-  _onChangeTransactionCategorySelect(event) {
-    this.setState({ transactionType: event.target.value });
+  _handleChangeTransactionCategorySelect(event) {
+    this.setState({transactionType: event.target.value});
   }
-  _onClickCreateButton() {
+  _handleClickCreateButton() {
     this._create();
     this._done();
   }
-  _onClickCancelButton() {
+  _handleClickCancelButton() {
     this._done();
   }
-  _onKeyDownNameInput(event) {
+  _handleKeyDownNameInput(event) {
     const keyCode = event.keyCode;
     const shift = event.shiftKey;
     const ctrl = event.ctrlKey || event.metaKey;
@@ -72,29 +71,29 @@ export default class TransactionCategoryCreateForm extends Component {
             autoFocus
             type="text"
             value={this.state.name}
-            onChange={this.onChangeNameInput}
-            onKeyDown={this.onKeyDownNameInput}
-          />
+            onChange={this.handleChangeNameInput}
+            onKeyDown={this.handleKeyDownNameInput}
+            />
           <select
             defaultValue={this.state.transactionType}
-            onChange={this.onChangeTransactionCategorySelect}
-          >
+            onChange={this.handleChangeTransactionCategorySelect}
+            >
             <option value="payment">Payment</option>
             <option value="income">Income</option>
           </select>
           <div
-            onClick={this.onClickCreateButton}
-          >Create</div>
+            onClick={this.handleClickCreateButton}
+            >Create</div>
           <div
-            onClick={this.onClickCancelButton}
-          >Cancel</div>
+            onClick={this.handleClickCancelButton}
+            >Cancel</div>
         </span>
       );
     }
     return (
       <div
-        onClick={this.onClickNewButton}
-      >Add transaction category</div>
+        onClick={this.handleClickNewButton}
+        >Add transaction category</div>
     );
   }
 }

@@ -1,4 +1,4 @@
-/* global window, document, location */
+/* eslint-env browser */
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -12,10 +12,9 @@ import Store from './store';
 import DesktopContainer from './components/desktop/container';
 import MobileContainer from './components/mobile/container';
 
-import { changeHistory } from './actions/app-action-creators';
+import {changeHistory} from './actions/app-action-creators';
 
-
-window.addEventListener('popstate', (event) => {
+window.addEventListener('popstate', () => {
   changeHistory(location.pathname, false);
 });
 
@@ -27,10 +26,10 @@ window.addEventListener('load', () => {
   if (isMobileUI()) {
     logger.info(`Start app for mobile at ${new Date()}`);
     loadStyle('/mobile/index.css');
-    ReactDOM.render(<MobileContainer store={store} />, document.querySelector('#app'));
+    ReactDOM.render(<MobileContainer store={store}/>, document.querySelector('#app'));
   } else {
     logger.info(`Start app for desktop at ${new Date()}`);
     loadStyle('/desktop/index.css');
-    ReactDOM.render(<DesktopContainer store={store} />, document.querySelector('#app'));
+    ReactDOM.render(<DesktopContainer store={store}/>, document.querySelector('#app'));
   }
 });

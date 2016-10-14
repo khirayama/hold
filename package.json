@@ -18,6 +18,7 @@
     "server": "gulp server",
     "develop": "gulp develop",
     "lint": "eslint -c=package.json",
+    "lint:fix": "eslint -c=package.json --fix",
     "test": "mocha --require=babel-core/register client/test/**/*.js",
     "watch:test": "npm test -- --watch",
     "start": "npm run watch"
@@ -27,9 +28,15 @@
     "url": "git+https://github.com/khirayama/hold.git"
   },
   "eslintConfig": {
-    "extends": "xo-space/esnext",
+    "extends": [
+      "xo-space/esnext",
+      "xo-react/space"
+    ],
     "rules": {
-      "comma-dangle": ["error", "always-multiline"]
+      "comma-dangle": [
+        "error",
+        "always-multiline"
+      ]
     }
   },
   "author": "khirayama",
@@ -60,6 +67,7 @@
     "browserify": "^13.1.0",
     "classnames": "^2.2.5",
     "eslint": "^3.7.1",
+    "eslint-config-xo-react": "^0.10.0",
     "eslint-config-xo-space": "^0.15.0",
     "eslint-plugin-import": "^2.0.1",
     "eslint-plugin-jsx-a11y": "^2.2.3",

@@ -1,6 +1,8 @@
+/* eslint-env browser */
+
 import types from '../constants/action-types';
 
-import { dispatch } from '../libs/app-dispatcher';
+import {dispatch} from '../libs/app-dispatcher';
 
 import User from '../resources/user';
 import Setting from '../resources/setting';
@@ -14,7 +16,6 @@ import {
   formatTransactionCategory,
   formatTransaction,
 } from './formatter';
-
 
 export function changeHistory(pathname = '', pushState = true) {
   if (history && pushState) {
@@ -34,35 +35,35 @@ export function startMobileApp(pathname = '') {
 }
 
 export function fetchInitialDesktopResources(pathname) {
-  User.fetch().then((user) => {
-    Setting.fetch().then((setting) => {
+  User.fetch().then(user => {
+    Setting.fetch().then(setting => {
       dispatch({
         type: types.FETCH_USER,
         user: formatUser(user, setting),
       });
       Promise.all([
-        Account.fetch().then((data) => {
+        Account.fetch().then(data => {
           dispatch({
             type: types.FETCH_ACCOUNTS,
-            accounts: data.map((account) => formatAccount(account, Setting.data)),
+            accounts: data.map(account => formatAccount(account, Setting.data)),
           });
         }),
-        TransactionCategory.fetch().then((data) => {
+        TransactionCategory.fetch().then(data => {
           dispatch({
             type: types.FETCH_TRANSACTION_CATEGORIES,
-            transactionCategories: data.map((transactionCategory) => (
+            transactionCategories: data.map(transactionCategory => (
               formatTransactionCategory(transactionCategory)
             )),
           });
         }),
-        Transaction.fetch().then((data) => {
+        Transaction.fetch().then(data => {
           dispatch({
             type: types.FETCH_TRANSACTIONS,
-            transactions: data.map((transaction) => (
+            transactions: data.map(transaction => (
               formatTransaction(transaction, Account.data, TransactionCategory.data, Setting.data)
             )),
           });
-        })
+        }),
       ]).then(() => {
         dispatch({
           type: types.START_DESKTOP_APP,

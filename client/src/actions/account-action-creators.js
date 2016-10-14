@@ -1,18 +1,17 @@
 import types from '../constants/action-types';
 
-import { dispatch } from '../libs/app-dispatcher';
+import {dispatch} from '../libs/app-dispatcher';
 
 import Account from '../resources/account';
 import Setting from '../resources/setting';
 
-import { formatAccount } from './formatter';
-
+import {formatAccount} from './formatter';
 
 export function fetchAccounts() {
-  Account.fetch().then((data) => {
+  Account.fetch().then(data => {
     dispatch({
       type: types.FETCH_ACCOUNTS,
-      accounts: data.map((account) => formatAccount(account, Setting.data)),
+      accounts: data.map(account => formatAccount(account, Setting.data)),
     });
   });
 }
@@ -24,12 +23,12 @@ export function createAccount(entity) {
     type: types.CREATE_ACCOUNT,
     account,
   });
-  Account.create(account).then((data) => {
+  Account.create(account).then(data => {
     dispatch({
       type: types.UPDATE_ACCOUNT,
       account: formatAccount(Object.assign({}, account, data), Setting.data),
     });
-  }).catch((error) => {
+  }).catch(error => {
     dispatch({
       type: types.FAIL_TO_CREATE_ACCOUNT,
       account: formatAccount(account, Setting.data, error),
@@ -44,9 +43,9 @@ export function updateAccount(entity) {
     type: types.UPDATE_ACCOUNT,
     account,
   });
-  Account.update(account).catch((error) => {
+  Account.update(account).catch(error => {
     // Find data to get previous account state
-    Account.find(entity.id).then((data) => {
+    Account.find(entity.id).then(data => {
       dispatch({
         type: types.FAIL_TO_UPDATE_ACCOUNT,
         account: formatAccount(
@@ -67,7 +66,7 @@ export function deleteAccount(entity) {
     account,
   });
   if (account.id !== null) {
-    Account.delete(account.id).catch((error) => {
+    Account.delete(account.id).catch(error => {
       dispatch({
         type: types.FAIL_TO_DELETE_ACCOUNT,
         account: formatAccount(account, Setting.data, error),

@@ -1,6 +1,5 @@
 import types from '../constants/action-types';
 
-
 export function createAccount(accounts, createdAccount) {
   const newAccounts = accounts.concat();
 
@@ -9,7 +8,7 @@ export function createAccount(accounts, createdAccount) {
 }
 
 export function updateAccount(accounts, updatedAccount) {
-  return accounts.map((account) => {
+  return accounts.map(account => {
     if (account.cid === updatedAccount.cid) {
       return updatedAccount;
     }
@@ -18,7 +17,7 @@ export function updateAccount(accounts, updatedAccount) {
 }
 
 export function deleteAccount(accounts, deletedAccount) {
-  return accounts.filter((account) => (account.cid !== deletedAccount.cid));
+  return accounts.filter(account => (account.cid !== deletedAccount.cid));
 }
 
 export default function accountsReducer(state, action) {

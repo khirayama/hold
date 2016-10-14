@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import moment from 'moment';
 import classNames from 'classnames';
 
@@ -11,7 +11,6 @@ import {
 } from '../../actions/transaction-action-creators';
 
 import currency from '../../utils/currency';
-
 
 export default class TransactionTableRow extends Component {
   constructor(props) {
@@ -29,14 +28,14 @@ export default class TransactionTableRow extends Component {
       toAccountId: (transaction.toAccount || {}).id || null,
     };
 
-    this.onClickTransactionListItem = this._onClickTransactionListItem.bind(this);
-    this.onClickCancelButton = this._onClickCancelButton.bind(this);
-    this.onChangeNameInput = this._onChangeNameInput.bind(this);
-    this.onClickUpdateButton = this._onClickUpdateButton.bind(this);
-    this.onClickDeleteButton = this._onClickDeleteButton.bind(this);
+    this.handleClickTransactionListItem = this._handleClickTransactionListItem.bind(this);
+    this.handleClickCancelButton = this._handleClickCancelButton.bind(this);
+    this.handleChangeNameInput = this._handleChangeNameInput.bind(this);
+    this.handleClickUpdateButton = this._handleClickUpdateButton.bind(this);
+    this.handleClickDeleteButton = this._handleClickDeleteButton.bind(this);
     this.onKeyDownNameInput = this._onKeyDownNameInput.bind(this);
-    this.onClickErrorIcon = this._onClickErrorIcon.bind(this);
-    this.onChangeInput = this._onChangeInput.bind(this);
+    this.handleClickErrorIcon = this._handleClickErrorIcon.bind(this);
+    this.handleChangeInput = this._handleChangeInput.bind(this);
   }
   _edit() {
     const transaction = this.props.transaction;
@@ -52,7 +51,7 @@ export default class TransactionTableRow extends Component {
     });
   }
   _done() {
-    this.setState({ isEditing: false });
+    this.setState({isEditing: false});
   }
   _update() {
     updateTransaction({
@@ -80,16 +79,16 @@ export default class TransactionTableRow extends Component {
   _delete() {
     deleteTransaction(this.props.transaction);
   }
-  _onClickTransactionListItem() {
+  _handleClickTransactionListItem() {
     this._edit();
   }
-  _onClickCancelButton() {
+  _handleClickCancelButton() {
     this._done();
   }
-  _onChangeNameInput(event) {
-    this.setState({ name: event.target.value });
+  _handleChangeNameInput(event) {
+    this.setState({name: event.target.value});
   }
-  _onClickUpdateButton() {
+  _handleClickUpdateButton() {
     if (this.props.transaction.id) {
       this._update();
     } else {
@@ -97,7 +96,7 @@ export default class TransactionTableRow extends Component {
     }
     this._done();
   }
-  _onClickDeleteButton() {
+  _handleClickDeleteButton() {
     this._delete();
   }
   _onKeyDownNameInput(event) {
@@ -114,14 +113,14 @@ export default class TransactionTableRow extends Component {
       this._done();
     }
   }
-  _onClickErrorIcon() {
+  _handleClickErrorIcon() {
     if (this.props.transaction.id) {
       this._update();
     } else {
       this._edit();
     }
   }
-  _onChangeInput(event) {
+  _handleChangeInput(event) {
     let value = event.currentTarget.value;
     const key = event.currentTarget.name;
     const type = event.currentTarget.type;
@@ -157,8 +156,8 @@ export default class TransactionTableRow extends Component {
   }
   _createIdSelectElement(items, initialValue = '', name = null) {
     return (
-      <select value={initialValue} name={name} onChange={this.onChangeInput}>
-        {items.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}
+      <select value={initialValue} name={name} onChange={this.handleChangeInput}>
+        {items.map(item => <option key={item.id} value={item.id}>{item.name}</option>)}
       </select>
     );
   }
@@ -166,7 +165,7 @@ export default class TransactionTableRow extends Component {
     const transaction = this.props.transaction;
     const dataset = this.props.transactionDataset;
     const errorIconElement = (transaction.error) ? (
-      <span onClick={this.onClickErrorIcon}>E</span>
+      <span onClick={this.handleClickErrorIcon}>E</span>
     ) : null;
 
     const transactionType = this._determineTransactionType(transaction);
@@ -177,12 +176,12 @@ export default class TransactionTableRow extends Component {
           return (
             <tr>
               <td>
-                <input type="date" name="transactionDate" value={this._formatDate(this.state.transactionDate)} onChange={this.onChangeInput} />
+                <input type="date" name="transactionDate" value={this._formatDate(this.state.transactionDate)} onChange={this.handleChangeInput}/>
                 from: {this._createIdSelectElement(dataset.accounts, this.state.fromAccountId, 'fromAccountId')}
-                category: {this._createIdSelectElement(dataset.transactionCategories.filter((transactionCategory) => transactionCategory.transactionType === transactionType), this.state.transactionCategoryId, 'transactionCategoryId')}
-                <input type="number" name="amount" onChange={this.onChangeInput} value={this.state.amount} />
-                <span onClick={this.onClickUpdateButton}>Update</span>
-                <span onClick={this.onClickCancelButton}>Cancel</span>
+                category: {this._createIdSelectElement(dataset.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionType), this.state.transactionCategoryId, 'transactionCategoryId')}
+                <input type="number" name="amount" onChange={this.handleChangeInput} value={this.state.amount}/>
+                <span onClick={this.handleClickUpdateButton}>Update</span>
+                <span onClick={this.handleClickCancelButton}>Cancel</span>
               </td>
             </tr>
           );
@@ -190,12 +189,12 @@ export default class TransactionTableRow extends Component {
           return (
             <tr>
               <td>
-                <input type="date" name="transactionDate" value={this._formatDate(this.state.transactionDate)} onChange={this.onChangeInput} />
+                <input type="date" name="transactionDate" value={this._formatDate(this.state.transactionDate)} onChange={this.handleChangeInput}/>
                 to: {this._createIdSelectElement(dataset.accounts)}
-                category: {this._createIdSelectElement(dataset.transactionCategories.filter((transactionCategory) => transactionCategory.transactionType === transactionType))}
-                <input type="number" name="amount" onChange={this.onChangeInput} value={this.state.amount} />
-                <span onClick={this.onClickUpdateButton}>Update</span>
-                <span onClick={this.onClickCancelButton}>Cancel</span>
+                category: {this._createIdSelectElement(dataset.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionType))}
+                <input type="number" name="amount" onChange={this.handleChangeInput} value={this.state.amount}/>
+                <span onClick={this.handleClickUpdateButton}>Update</span>
+                <span onClick={this.handleClickCancelButton}>Cancel</span>
               </td>
             </tr>
           );
@@ -203,12 +202,12 @@ export default class TransactionTableRow extends Component {
           return (
             <tr>
               <td>
-                <input type="date" name="transactionDate" value={this._formatDate(this.state.transactionDate)} onChange={this.onChangeInput} />
+                <input type="date" name="transactionDate" value={this._formatDate(this.state.transactionDate)} onChange={this.handleChangeInput}/>
                 from: {this._createIdSelectElement(dataset.accounts)}
                 to: {this._createIdSelectElement(dataset.accounts)}
-                <input type="number" name="amount" onChange={this.onChangeInput} value={this.state.amount} />
-                <span onClick={this.onClickUpdateButton}>Update</span>
-                <span onClick={this.onClickCancelButton}>Cancel</span>
+                <input type="number" name="amount" onChange={this.handleChangeInput} value={this.state.amount}/>
+                <span onClick={this.handleClickUpdateButton}>Update</span>
+                <span onClick={this.handleClickCancelButton}>Cancel</span>
               </td>
             </tr>
           );
@@ -218,41 +217,41 @@ export default class TransactionTableRow extends Component {
     }
     return (
       <tr>
-        <td onClick={this.onClickTransactionListItem}>
+        <td onClick={this.handleClickTransactionListItem}>
           <span
             className={classNames(
               'transaction-type-label',
-              { 'transaction-type-label__payment': transactionType === 'payment'},
-              { 'transaction-type-label__income': transactionType === 'income'},
-              { 'transaction-type-label__transfer': transactionType === 'transfer'}
+              {'transaction-type-label__payment': transactionType === 'payment'},
+              {'transaction-type-label__income': transactionType === 'income'},
+              {'transaction-type-label__transfer': transactionType === 'transfer'}
             )}
-          >
-          {transactionType}
+            >
+            {transactionType}
           </span>
         </td>
-        <td onClick={this.onClickTransactionListItem}>
+        <td onClick={this.handleClickTransactionListItem}>
           {transaction.transactionDate}
         </td>
-        <td onClick={this.onClickTransactionListItem}>
+        <td onClick={this.handleClickTransactionListItem}>
           {(transaction.fromAccount || {}).name}
         </td>
-        <td onClick={this.onClickTransactionListItem}>
+        <td onClick={this.handleClickTransactionListItem}>
           {(transaction.toAccount || {}).name}
         </td>
-        <td onClick={this.onClickTransactionListItem}>
+        <td onClick={this.handleClickTransactionListItem}>
           {(transaction.transactionCategory || {}).name}
         </td>
-        <td onClick={this.onClickTransactionListItem}>
+        <td onClick={this.handleClickTransactionListItem}>
           {currency(transaction.amount, transaction.currencyCode)}
         </td>
-        <td onClick={this.onClickTransactionListItem}>
+        <td onClick={this.handleClickTransactionListItem}>
           {transaction.note}
         </td>
         <td>
           <span
             className="icon"
-            onClick={this.onClickDeleteButton}
-          >delete</span>
+            onClick={this.handleClickDeleteButton}
+            >delete</span>
           {errorIconElement}
         </td>
       </tr>

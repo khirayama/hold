@@ -1,9 +1,8 @@
-/* global location */
+/* eslint-env browser */
 
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
-import { startMobileApp } from '../../actions/app-action-creators';
-
+import {startMobileApp} from '../../actions/app-action-creators';
 
 const propTypes = {
   store: React.PropTypes.object.isRequired,

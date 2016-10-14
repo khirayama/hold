@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-
+import React, {Component} from 'react';
 
 export default class Modal extends Component {
   render() {
@@ -17,3 +16,9 @@ export default class Modal extends Component {
     return null;
   }
 }
+
+Modal.propTypes = {
+  isShown: React.PropTypes.boolean.isRequired,
+  onCloseButtonClick: React.PropTypes.function.isRequired,
+  children: React.PropTypes.element.isRequired,
+};

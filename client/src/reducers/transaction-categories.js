@@ -1,6 +1,5 @@
 import types from '../constants/action-types';
 
-
 export function createTransactionCategory(transactionCategories, createdTransactionCategory) {
   const newTransactionCategories = transactionCategories.concat();
 
@@ -9,7 +8,7 @@ export function createTransactionCategory(transactionCategories, createdTransact
 }
 
 export function updateTransactionCategory(transactionCategories, updatedTransactionCategory) {
-  return transactionCategories.map((transactionCategory) => {
+  return transactionCategories.map(transactionCategory => {
     if (transactionCategory.cid === updatedTransactionCategory.cid) {
       return updatedTransactionCategory;
     }
@@ -18,7 +17,7 @@ export function updateTransactionCategory(transactionCategories, updatedTransact
 }
 
 export function deleteTransactionCategory(transactionCategories, deletedTransactionCategory) {
-  return transactionCategories.filter((transactionCategory) => (
+  return transactionCategories.filter(transactionCategory => (
     transactionCategory.cid !== deletedTransactionCategory.cid
   ));
 }

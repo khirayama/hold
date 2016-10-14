@@ -1,10 +1,10 @@
-/* global window */
+/* eslint-env browser */
 
 export default function isMobileUI() {
   const ua = window.navigator.userAgent;
 
   let isTouchable = false;
-  let osName = null;
+  let osName = 'unknown';
 
   // get is touchable
   if (window.ontouchstart === null) {
@@ -20,8 +20,6 @@ export default function isMobileUI() {
     osName = 'android';
   } else if (ua.indexOf('iPhone') !== -1) {
     osName = 'ios';
-  } else {
-    osName = 'unknown';
   }
 
   // judgement ui
