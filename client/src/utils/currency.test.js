@@ -1,6 +1,6 @@
 import test from 'ava';
 
-import currency, {amount} from '../../src/utils/currency';
+import currency, {amount} from './currency';
 
 test('amount:USD', t => {
   t.same(amount(100, 'USD'), '100.00');

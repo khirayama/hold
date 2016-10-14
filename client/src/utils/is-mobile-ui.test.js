@@ -1,6 +1,6 @@
 import test from 'ava';
 
-import isMobileUI from '../../src/utils/is-mobile-ui';
+import isMobileUI from './is-mobile-ui';
 
 test('ua: Macintosh, ontouchstart: undefined', t => {
   t.false(isMobileUI('hogehogeMacintosh', undefined));
