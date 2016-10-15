@@ -19,12 +19,12 @@ test.beforeEach(t => {
 
 // _url
 test('CollectionResource > _url > call without id', t => {
-  t.same(t.context.item._url(), '/api/v1/items');
+  t.deepEqual(t.context.item._url(), '/api/v1/items');
 });
 
 test('CollectionResource > _url > call with id', t => {
-  t.same(t.context.item._url(1), '/api/v1/items/1');
-  t.same(t.context.item._url('1'), '/api/v1/items/1');
+  t.deepEqual(t.context.item._url(1), '/api/v1/items/1');
+  t.deepEqual(t.context.item._url('1'), '/api/v1/items/1');
 });
 
 // fetch
@@ -34,8 +34,8 @@ test('CollectionResource > fetch > success without cache', t => {
   }));
 
   return t.context.item.fetch().then((res) => {
-    t.same(res, [{id: 54, name: "Test1"}, {id: 57, name: "Test2"}]);
-    t.same(t.context.item.data, [{id: 54, name: "Test1"}, {id: 57, name: "Test2"}]);
+    t.deepEqual(res, [{id: 54, name: "Test1"}, {id: 57, name: "Test2"}]);
+    t.deepEqual(t.context.item.data, [{id: 54, name: "Test1"}, {id: 57, name: "Test2"}]);
     t.context.item._request.get.restore();
   });
 });
@@ -47,7 +47,7 @@ test('CollectionResource > fetch > success with cache', t => {
 
   return t.context.item.fetch().then((res) => {
     return t.context.item.fetch().then((cache) => {
-      t.same(res, cache);
+      t.deepEqual(res, cache);
       t.context.item._request.get.restore();
     });
   });
@@ -57,8 +57,8 @@ test('CollectionResource > fetch > error with cache', t => {
   sinon.stub(t.context.item._request, 'get', promiseStub('error', createError()));
 
   return t.context.item.fetch().catch((res) => {
-    t.same(res, createError());
-    t.same(t.context.item._cache, null);
+    t.deepEqual(res, createError());
+    t.deepEqual(t.context.item._cache, null);
     t.context.item._request.get.restore();
   });
 });
@@ -70,8 +70,8 @@ test('CollectionResource > create > success', t => {
   }));
 
   return t.context.item.create({name: 'Test'}).then((res) => {
-    t.same(res, { id: 1, name: 'Test' });
-    t.same(t.context.item.data, [{ id: 1, name: 'Test' }]);
+    t.deepEqual(res, { id: 1, name: 'Test' });
+    t.deepEqual(t.context.item.data, [{ id: 1, name: 'Test' }]);
     t.context.item._request.post.restore();
   });
 });
@@ -80,8 +80,8 @@ test('CollectionResource > create > error', t => {
   sinon.stub(t.context.item._request, 'post', promiseStub('error', createError()));
 
   return t.context.item.create({name: 'Test'}).catch((error) => {
-    t.same(error, createError());
-    t.same(t.context.item.data, null);
+    t.deepEqual(error, createError());
+    t.deepEqual(t.context.item.data, null);
     t.context.item._request.post.restore();
   });
 });
@@ -93,8 +93,8 @@ test('CollectionResource > update > success', t => {
   }));
 
   return t.context.item.update({name: 'Test'}).then((res) => {
-    t.same(res, { id: 1, name: 'Test' });
-    t.same(t.context.item.data, [{ id: 1, name: 'Test' }]);
+    t.deepEqual(res, { id: 1, name: 'Test' });
+    t.deepEqual(t.context.item.data, [{ id: 1, name: 'Test' }]);
     t.context.item._request.put.restore();
   });
 });
@@ -103,8 +103,8 @@ test('CollectionResource > update > error', t => {
   sinon.stub(t.context.item._request, 'put', promiseStub('error', createError()));
 
   return t.context.item.update({name: 'Test'}).catch((error) => {
-    t.same(error, createError());
-    t.same(t.context.item.data, null);
+    t.deepEqual(error, createError());
+    t.deepEqual(t.context.item.data, null);
     t.context.item._request.put.restore();
   });
 });
@@ -116,8 +116,8 @@ test('CollectionResource > delete > success', t => {
   }));
 
   return t.context.item.delete().then((res) => {
-    t.same(res, { id: 1 });
-    t.same(t.context.item.data, null);
+    t.deepEqual(res, { id: 1 });
+    t.deepEqual(t.context.item.data, null);
     t.context.item._request.delete.restore();
   });
 });
@@ -126,8 +126,8 @@ test('CollectionResource > delete > error', t => {
   sinon.stub(t.context.item._request, 'delete', promiseStub('error', createError()));
 
   return t.context.item.delete().catch((error) => {
-    t.same(error, createError());
-    t.same(t.context.item.data, null);
+    t.deepEqual(error, createError());
+    t.deepEqual(t.context.item.data, null);
     t.context.item._request.delete.restore();
   });
 });
@@ -139,7 +139,7 @@ test('CollectionResource > find > success', t => {
   }));
 
   return t.context.item.find(1).then((res) => {
-    t.same(res, { id: 1, name: 'Test' });
+    t.deepEqual(res, { id: 1, name: 'Test' });
     t.context.item._request.get.restore();
   });
 });
@@ -153,6 +153,6 @@ test('CollectionResource > find > success', t => {
 //   });
 //   test('CollectionResource: calc total value', () => {
 //     const totalAmount = t.context.item.calcTotalAmount();
-//     t.same(totalAmount, 2000);
+//     t.deepEqual(totalAmount, 2000);
 //   });
 // });
