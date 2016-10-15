@@ -1,6 +1,6 @@
 import test from 'ava';
 
-import { UserResource } from './user';
+import {UserResource} from './user';
 
 test.beforeEach(t => {
   t.context.user = new UserResource();

@@ -1,6 +1,6 @@
 import test from 'ava';
 
-import { TransactionCategoryResource } from './transaction-category';
+import {TransactionCategoryResource} from './transaction-category';
 
 test.beforeEach(t => {
   t.context.transactionCategory = new TransactionCategoryResource();

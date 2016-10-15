@@ -22,7 +22,7 @@ test('MicroStore: addChangeListener', t => {
   const callback = () => {};
 
   store.addChangeListener(callback);
-  t.is(store._listeners['__CHANGE_STORE'].length, 1);
+  t.is(store._listeners.__CHANGE_STORE.length, 1);
 });
 
 test('MicroStore: removeChangeListener', t => {
@@ -31,7 +31,7 @@ test('MicroStore: removeChangeListener', t => {
 
   store.addChangeListener(callback);
   store.removeChangeListener(callback);
-  t.is(store._listeners['__CHANGE_STORE'].length, 0);
+  t.is(store._listeners.__CHANGE_STORE.length, 0);
 });
 
 test('MicroStore: getState', t => {

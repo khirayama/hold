@@ -1,5 +1,5 @@
 export function createError() {
-  return { message: 'something wrong' };
+  return {message: 'something wrong'};
 }
 
 export function promiseStub(status, res) {

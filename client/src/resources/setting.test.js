@@ -1,6 +1,6 @@
 import test from 'ava';
 
-import { SettingResource } from './setting';
+import {SettingResource} from './setting';
 
 test.beforeEach(t => {
   t.context.setting = new SettingResource();

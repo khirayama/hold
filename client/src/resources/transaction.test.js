@@ -1,6 +1,6 @@
 import test from 'ava';
 
-import { TransactionResource } from './transaction';
+import {TransactionResource} from './transaction';
 
 test.beforeEach(t => {
   t.context.transaction = new TransactionResource();
