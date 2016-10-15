@@ -77,3 +77,53 @@ test('formatUser > with user, setting and error', t => {
     },
   });
 });
+
+// formatTransactionCategory
+test('formatTransactionCategory > without transactionCategory and error', t => {
+  const transactionCategory = {};
+  const result = formatTransactionCategory(transactionCategory);
+
+  t.deepEqual(result, {
+    cid: result.cid,
+    id: null,
+    name: '',
+    transactionType: '',
+    error: null,
+  });
+});
+
+test('formatTransactionCategory > with snake case transactionCategory and error', t => {
+  const transactionCategory = {
+    cid: 'cid',
+    id: 1,
+    name: 'transaction category',
+    transaction_type: 'payment',
+  };
+  const result = formatTransactionCategory(transactionCategory, {message: 'error'});
+
+  t.deepEqual(result, {
+    cid: 'cid',
+    id: 1,
+    name: 'transaction category',
+    transactionType: 'payment',
+    error: {message: 'error'},
+  });
+});
+
+test('formatTransactionCategory > with camel case transactionCategory and error', t => {
+  const transactionCategory = {
+    cid: 'cid',
+    id: 1,
+    name: 'transaction category',
+    transactionType: 'payment',
+  };
+  const result = formatTransactionCategory(transactionCategory, {message: 'error'});
+
+  t.deepEqual(result, {
+    cid: 'cid',
+    id: 1,
+    name: 'transaction category',
+    transactionType: 'payment',
+    error: {message: 'error'},
+  });
+});
