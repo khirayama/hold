@@ -2,8 +2,7 @@ import {CollectionResource} from '../libs/micro-resource';
 
 export class AccountResource extends CollectionResource {
   constructor() {
-    super();
-    this._resourceUrl = '/api/v1/accounts';
+    super('/api/v1/accounts');
   }
 
   calcTotalAmount() {
