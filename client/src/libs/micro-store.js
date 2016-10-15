@@ -1,6 +1,6 @@
 import MicroEmitter from 'micro-emitter';
 
-const EVENT_CHANGE = 'CHANGE_STORE';
+const EVENT_CHANGE = '__CHANGE_STORE';
 
 export default class MicroStore extends MicroEmitter {
   constructor() {
@@ -19,12 +19,6 @@ export default class MicroStore extends MicroEmitter {
 
   removeChangeListener(listener) {
     this.removeListener(EVENT_CHANGE, listener);
-  }
-
-  register(dispatcher, actionType, callback) {
-    dispatcher.addListener(actionType, data => {
-      callback(data);
-    });
   }
 
   getState() {
