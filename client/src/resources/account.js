@@ -8,8 +8,9 @@ export class AccountResource extends CollectionResource {
 
   calcTotalAmount() {
     let totalAmount = 0;
-    if (this._cache !== null) {
-      this.accounts.forEach(account => {
+
+    if (this.data !== null) {
+      this.data.forEach(account => {
         totalAmount += account.amount || 0;
       });
     }
