@@ -127,3 +127,41 @@ test('formatTransactionCategory > with camel case transactionCategory and error'
     error: {message: 'error'},
   });
 });
+
+// formatAccount
+test('formatAccount > without account, setting and error', t => {
+  const account = {};
+  const setting ={};
+  const result = formatAccount(account, setting);
+
+  t.deepEqual(result, {
+    cid: result.cid,
+    id: null,
+    name: '',
+    amount: 0,
+    currencyCode: '',
+    error: null,
+  });
+});
+
+test('formatAccount > with account, setting and error', t => {
+  const account = {
+    cid: 'cid',
+    id: 1,
+    name: 'account',
+    amount: 1000,
+  };
+  const setting ={
+    currency_code: 'JPY',
+  };
+  const result = formatAccount(account, setting, {message: 'error'});
+
+  t.deepEqual(result, {
+    cid: 'cid',
+    id: 1,
+    name: 'account',
+    amount: 1000,
+    currencyCode: 'JPY',
+    error: {message: 'error'},
+  });
+});
