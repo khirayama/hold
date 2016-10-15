@@ -165,3 +165,171 @@ test('formatAccount > with account, setting and error', t => {
     error: {message: 'error'},
   });
 });
+
+// formatTransaction
+test('formatTransaction > without resources and error', t => {
+  const transaction = {};
+  const accounts = [];
+  const transactionCategories = [];
+  const setting = {};
+  const result = formatTransaction(
+    transaction,
+    accounts,
+    transactionCategories,
+    setting
+  );
+
+  t.deepEqual(result, {
+    cid: result.cid,
+    id: null,
+    fromAccount: null,
+    toAccount: null,
+    transactionCategory: null,
+    amount: 0,
+    transactionDate: null,
+    note: '',
+    currencyCode: '',
+    error: null,
+  });
+});
+
+test('formatTransaction > with resources(entity) and error', t => {
+  const transaction = {
+    cid: 'cid',
+    id: 1,
+    transaction_date: '2016-06-02',
+    amount: 1000,
+    note: 'note text',
+    from_account: {
+      id: 2,
+      name: 'from account',
+    },
+    to_account: {
+      id: 3,
+      name: 'to account',
+    },
+    transaction_category: {
+      id: 4,
+      name: 'transaction category',
+    }
+  };
+  const accounts = [];
+  const transactionCategories = [];
+  const setting = {currency_code: 'USD'};
+  const result = formatTransaction(
+    transaction,
+    accounts,
+    transactionCategories,
+    setting,
+    {message: 'error'}
+  );
+
+  t.deepEqual(result, {
+    cid: 'cid',
+    id: 1,
+    fromAccount: {
+      id: 2,
+      name: 'from account',
+    },
+    toAccount: {
+      id: 3,
+      name: 'to account',
+    },
+    transactionCategory: {
+      id: 4,
+      name: 'transaction category',
+    },
+    amount: 1000,
+    transactionDate: '2016/06/02',
+    note: 'note text',
+    currencyCode: 'USD',
+    error: {message: 'error'},
+  });
+});
+
+test('formatTransaction > with resources(id) and error', t => {
+  const transaction = {
+    cid: 'cid',
+    id: 1,
+    transaction_date: '2016-06-02',
+    amount: 1000,
+    note: 'note text',
+    fromAccountId: 2,
+    toAccountId: 3,
+    transactionCategoryId: 4,
+  };
+  const accounts = [
+    {id: 2, name: 'from account'},
+    {id: 3, name: 'to account'},
+  ];
+  const transactionCategories =[{id: 4, name: 'transaction category'}];
+  const setting = {currency_code: 'USD'};
+  const result = formatTransaction(
+    transaction,
+    accounts,
+    transactionCategories,
+    setting,
+    {message: 'error'}
+  );
+
+  t.deepEqual(result, {
+    cid: 'cid',
+    id: 1,
+    fromAccount: {
+      id: 2,
+      name: 'from account',
+    },
+    toAccount: {
+      id: 3,
+      name: 'to account',
+    },
+    transactionCategory: {
+      id: 4,
+      name: 'transaction category',
+    },
+    amount: 1000,
+    transactionDate: '2016/06/02',
+    note: 'note text',
+    currencyCode: 'USD',
+    error: {message: 'error'},
+  });
+});
+
+test('formatTransaction > with resources(not match id) and error', t => {
+  const transaction = {
+    cid: 'cid',
+    id: 1,
+    transaction_date: '2016-06-02',
+    amount: 1000,
+    note: 'note text',
+    fromAccountId: 2,
+    toAccountId: 3,
+    transactionCategoryId: 4,
+  };
+  const accounts = [
+    {id: 4, name: 'from account'},
+    {id: 5, name: 'to account'},
+  ];
+  const transactionCategories =[{id: 6, name: 'transaction category'}];
+  const setting = {currency_code: 'USD'};
+  const result = formatTransaction(
+    transaction,
+    accounts,
+    transactionCategories,
+    setting,
+    {message: 'error'}
+  );
+
+  t.deepEqual(result, {
+    cid: 'cid',
+    id: 1,
+    fromAccount: null,
+    toAccount: null,
+    transactionCategory: null,
+    amount: 1000,
+    transactionDate: '2016/06/02',
+    note: 'note text',
+    currencyCode: 'USD',
+    error: {message: 'error'},
+  });
+});

@@ -54,11 +54,14 @@ export function formatTransaction(
     toAccount: null,
     transactionCategory: null,
     amount: transaction.amount || 0,
-    transactionDate: moment(new Date(transaction.transaction_date || transaction.transactionDate)).format('YYYY/MM/DD') || null,
+    transactionDate: null,
     note: transaction.note || '',
     currencyCode: setting.currency_code || '',
     error,
   };
+  if (transaction.transaction_date || transaction.transactionDate) {
+    formattedTransaction['transactionDate'] = moment(new Date(transaction.transaction_date || transaction.transactionDate)).format('YYYY/MM/DD');
+  }
   // from_account
   if (transaction.from_account) {
     formattedTransaction.fromAccount = {
@@ -73,10 +76,12 @@ export function formatTransaction(
         fromAccount = account;
       }
     }
-    formattedTransaction.fromAccount = {
-      id: fromAccount.id || null,
-      name: fromAccount.name || '',
-    };
+    if (fromAccount !== null) {
+      formattedTransaction.fromAccount = {
+        id: fromAccount.id || null,
+        name: fromAccount.name || '',
+      };
+    }
   }
   // to_account
   if (transaction.to_account) {
@@ -92,10 +97,12 @@ export function formatTransaction(
         toAccount = account;
       }
     }
-    formattedTransaction.toAccount = {
-      id: toAccount.id || null,
-      name: toAccount.name || '',
-    };
+    if (toAccount !== null) {
+      formattedTransaction.toAccount = {
+        id: toAccount.id || null,
+        name: toAccount.name || '',
+      };
+    }
   }
   // transaction_category
   if (transaction.transaction_category) {
@@ -111,10 +118,12 @@ export function formatTransaction(
         transactionCategory = transactionCategory_;
       }
     }
-    formattedTransaction.transactionCategory = {
-      id: transactionCategory.id || null,
-      name: transactionCategory.name || '',
-    };
+    if (transactionCategory !== null) {
+      formattedTransaction.transactionCategory = {
+        id: transactionCategory.id || null,
+        name: transactionCategory.name || '',
+      };
+    }
   }
   return formattedTransaction;
 }
