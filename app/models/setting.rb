@@ -1,7 +1,7 @@
 class Setting < ApplicationRecord
   belongs_to :user, class_name: 'User'
 
-  def self.currency(language)
+  def self.currency(language = :en)
     if language == :ja
       'JPY'
     else
