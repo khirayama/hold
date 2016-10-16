@@ -1,3 +1,5 @@
+ /* eslint camelcase: ["error", { "properties": "never" }] */
+
 import test from 'ava';
 
 import {
@@ -131,7 +133,7 @@ test('formatTransactionCategory > with camel case transactionCategory and error'
 // formatAccount
 test('formatAccount > without account, setting and error', t => {
   const account = {};
-  const setting ={};
+  const setting = {};
   const result = formatAccount(account, setting);
 
   t.deepEqual(result, {
@@ -151,7 +153,7 @@ test('formatAccount > with account, setting and error', t => {
     name: 'account',
     amount: 1000,
   };
-  const setting ={
+  const setting = {
     currency_code: 'JPY',
   };
   const result = formatAccount(account, setting, {message: 'error'});
@@ -211,7 +213,7 @@ test('formatTransaction > with resources(entity) and error', t => {
     transaction_category: {
       id: 4,
       name: 'transaction category',
-    }
+    },
   };
   const accounts = [];
   const transactionCategories = [];
@@ -262,7 +264,7 @@ test('formatTransaction > with resources(id) and error', t => {
     {id: 2, name: 'from account'},
     {id: 3, name: 'to account'},
   ];
-  const transactionCategories =[{id: 4, name: 'transaction category'}];
+  const transactionCategories = [{id: 4, name: 'transaction category'}];
   const setting = {currency_code: 'USD'};
   const result = formatTransaction(
     transaction,
@@ -310,7 +312,7 @@ test('formatTransaction > with resources(not match id) and error', t => {
     {id: 4, name: 'from account'},
     {id: 5, name: 'to account'},
   ];
-  const transactionCategories =[{id: 6, name: 'transaction category'}];
+  const transactionCategories = [{id: 6, name: 'transaction category'}];
   const setting = {currency_code: 'USD'};
   const result = formatTransaction(
     transaction,

@@ -60,7 +60,7 @@ export function formatTransaction(
     error,
   };
   if (transaction.transaction_date || transaction.transactionDate) {
-    formattedTransaction['transactionDate'] = moment(new Date(transaction.transaction_date || transaction.transactionDate)).format('YYYY/MM/DD');
+    formattedTransaction.transactionDate = moment(new Date(transaction.transaction_date || transaction.transactionDate)).format('YYYY/MM/DD');
   }
   // from_account
   if (transaction.from_account) {
