@@ -8,7 +8,7 @@ export default class Modal extends Component {
       return (
         <div className="modal-mask">
           <div className="modal">
-            <div onClick={this.props.onCloseButtonClick}>Close</div>
+            <div className="modal-close-button" onClick={this.props.onCloseButtonClick}>Close</div>
             {this.props.children}
           </div>
         </div>
