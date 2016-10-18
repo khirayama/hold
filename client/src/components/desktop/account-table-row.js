@@ -116,57 +116,48 @@ export default class AccountListItem extends Component {
 
     if (this.state.isEditing) {
       return (
-        <li className="account-list-item">
-          <span className="account-list-item-content">
-            <span className="account-list-item-content-name">
-              <input
-                autoFocus
-                type="text"
-                value={this.state.name}
-                onChange={this.handleChangeNameInput}
-                onKeyDown={this.handleKeyDownNameAndAmountInputs}
-                onFocus={this.handleFocusInput}
-                />
-            </span>
-            <span className="account-list-item-content-amount">
-              <input
-                type="number"
-                value={this.state.amount}
-                onChange={this.handleChangeAmountInput}
-                onKeyDown={this.handleKeyDownNameAndAmountInputs}
-                onFocus={this.handleFocusInput}
-                />
-            </span>
-          </span>
-          <span
-            className="account-list-item-done-button"
-            onClick={this.handleClickUpdateButton}
-            ><span className="icon">done</span></span>
-        </li>
+        <tr>
+          <td>
+            <input
+              className="simple-input"
+              type="text"
+              value={this.state.name}
+              onChange={this.handleChangeNameInput}
+              onKeyDown={this.handleKeyDownNameAndAmountInputs}
+              onFocus={this.handleFocusInput}
+            />
+          </td>
+          <td>
+            <input
+              autoFocus
+              className="simple-input"
+              type="number"
+              value={this.state.amount}
+              onChange={this.handleChangeAmountInput}
+              onKeyDown={this.handleKeyDownNameAndAmountInputs}
+              onFocus={this.handleFocusInput}
+            />
+          </td>
+          <td onClick={this.handleClickUpdateButton}>
+            <span className="icon">done</span>
+          </td>
+        </tr>
       );
     }
     return (
-      <li className="account-list-item">
-        <span
-          className="account-list-item-content"
-          onClick={this.handleClickAccountListItem}
-          >
-          <span className="account-list-item-content-name">
-            {account.name}
-            <span
-              className="account-list-item-delete-button"
-              onClick={this.handleClickDeleteButton}
-              ><span className="icon">delete</span></span>
-          </span>
-          <span className="account-list-item-content-amount">
-            <span className="account-list-item-content-amount-currency-code">
-              {account.currencyCode}
-            </span>
-            {amount(account.amount, account.currencyCode)}
-          </span>
-        </span>
-        {errorIconElement}
-      </li>
+      <tr>
+        <td onClick={this.handleClickAccountListItem} >
+          {account.name}
+        </td>
+        <td onClick={this.handleClickAccountListItem} >
+          <span>{account.currencyCode}</span>
+          {amount(account.amount, account.currencyCode)}
+        </td>
+        <td onClick={this.handleClickDeleteButton}>
+          <span className="icon">delete</span>
+        </td>
+        <td>{errorIconElement}</td>
+      </tr>
     );
   }
 }
