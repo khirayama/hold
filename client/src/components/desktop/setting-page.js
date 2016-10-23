@@ -8,9 +8,9 @@ export default function SettingPage(props) {
   const state = props.state;
 
   return (
-    <div>
+    <div className="setting-page">
       <Link href="/dashboard">Back</Link>
-      <section className="setting">
+      <section className="setting-page-content">
         <h2>Setting</h2>
         <UserSetting user={state.user}/>
         <a href="/logout">Sign out</a>
