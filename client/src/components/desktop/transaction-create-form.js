@@ -227,10 +227,10 @@ export default class TransactionCreateForm extends Component {
                 this.state.transactionType === transactionTypes.TRANSFER
               ) ? (
                 <tr>
-                  <th>FROM</th>
+                  <th>From</th>
                   <td>{
-                  this._createIdSelectElement(dataset.accounts, this.state.fromAccountId, 'fromAccountId')
-                }</td>
+                    this._createIdSelectElement(dataset.accounts, this.state.fromAccountId, 'fromAccountId')
+                  }</td>
                 </tr>
             ) : null }
             { (
@@ -238,10 +238,10 @@ export default class TransactionCreateForm extends Component {
                 this.state.transactionType === transactionTypes.TRANSFER
               ) ? (
                 <tr>
-                  <th>TO</th>
+                  <th>To</th>
                   <td>{
-                  this._createIdSelectElement(dataset.accounts, this.state.toAccountId, 'toAccountId')
-                }</td>
+                    this._createIdSelectElement(dataset.accounts, this.state.toAccountId, 'toAccountId')
+                  }</td>
                 </tr>
             ) : null }
             { (
@@ -249,9 +249,7 @@ export default class TransactionCreateForm extends Component {
                 this.state.transactionType === transactionTypes.INCOME
               ) ? (
                 <tr>
-                  <th>
-                  CATEGORY
-                  </th>
+                  <th>Category</th>
                   <td>{
                   this._createIdSelectElement(
                     this._filterTransactionCategory(dataset.transactionCategories, this.state.transactionType),
@@ -262,7 +260,7 @@ export default class TransactionCreateForm extends Component {
                 </tr>
             ) : null }
             <tr>
-              <th>DATE</th>
+              <th>Date</th>
               <td>
                 <input
                   className="simple-input"
@@ -274,7 +272,7 @@ export default class TransactionCreateForm extends Component {
               </td>
             </tr>
             <tr>
-              <th>AMOUNT({dataset.currencyCode})</th>
+              <th>Amount({dataset.currencyCode})</th>
               <td>
                 <input
                   className="simple-input"
@@ -302,7 +300,7 @@ export default class TransactionCreateForm extends Component {
                       onKeyDown={this.handleKeyDownInputWithEnterCreate}
                       onFocus={this.handleFocusInput}
                       />
-                    <label>NOTE</label>
+                    <label>Note</label>
                   </span>
                 </div>
               </td>

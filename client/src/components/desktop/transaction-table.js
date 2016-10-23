@@ -7,13 +7,13 @@ export default function TransactionTable(props) {
     <table className="transaction-table">
       <thead>
         <tr>
-          <th>TYPE</th>
-          <th>DATE</th>
-          <th>FROM</th>
-          <th>TO</th>
-          <th>CATEGORY</th>
-          <th>AMOUNT</th>
-          <th>NOTE</th>
+          <th>Type</th>
+          <th>Date</th>
+          <th>From</th>
+          <th>To</th>
+          <th>Category</th>
+          <th>Amount</th>
+          <th>Note</th>
           <th/>
         </tr>
       </thead>
