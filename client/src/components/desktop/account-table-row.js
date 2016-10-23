@@ -8,6 +8,7 @@ import {
   deleteAccount,
 } from '../../actions/account-action-creators';
 
+import FloatingInput from './floating-input';
 import AmountLabel from './amount-label';
 
 export default class AccountListItem extends Component {
@@ -125,20 +126,22 @@ export default class AccountListItem extends Component {
       return (
         <tr className="account-table-row account-table-row__editing">
           <td>
-            <input
-              className="flat-input"
+            <FloatingInput
               type="text"
               value={this.state.name}
+              label="Name"
+              placeholder="Enter account name"
               onChange={this.handleChangeNameInput}
               onKeyDown={this.handleKeyDownInputs}
               onFocus={this.handleFocusInput}
             />
           </td>
           <td>
-            <input
+            <FloatingInput
               autoFocus
-              className="flat-input"
               type="number"
+              label="Amount"
+              placeholder="Enter amount"
               value={this.state.amount}
               onChange={this.handleChangeAmountInput}
               onKeyDown={this.handleKeyDownInputs}
