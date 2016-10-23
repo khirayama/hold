@@ -102,7 +102,7 @@ export default class AccountCreateForm extends Component {
     return (
       <div className="account-create-button-container">
         <div
-          className="account-create-button"
+          className="flat-button"
           onClick={this.handleClickNewButton}
         >ADD ACCOUNT</div>
       </div>
