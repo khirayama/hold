@@ -126,7 +126,7 @@ export default class AccountListItem extends Component {
         <tr className="account-table-row account-table-row__editing">
           <td>
             <input
-              className="simple-input"
+              className="flat-input"
               type="text"
               value={this.state.name}
               onChange={this.handleChangeNameInput}
@@ -137,7 +137,7 @@ export default class AccountListItem extends Component {
           <td>
             <input
               autoFocus
-              className="simple-input"
+              className="flat-input"
               type="number"
               value={this.state.amount}
               onChange={this.handleChangeAmountInput}

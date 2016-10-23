@@ -57,6 +57,7 @@ input
   border: $border
   border-radius: $radius
   padding: 3px 6px
+  line-height: 1.4
 
 input[type=number]
   text-align: right
@@ -90,7 +91,8 @@ textarea
     top: 0
     left: 0
     pointer-events: none
-    transition: font-size .2s ease-out, top .2s ease-out
+    transition: .2s ease-out
+    transition-property: font-size, top
   input[value=""] + label
     font-size: 1rem
     top: 0
@@ -104,8 +106,9 @@ textarea
     &:focus::-webkit-input-placeholder
       color: $color-text-secondary
 
-.simple-input
+.flat-input
   width: 100%
+  padding: 4px 0
   border: none
   border-bottom: solid 1px $color-primary
   border-radius: 0
@@ -118,8 +121,9 @@ textarea
     background: $color-mask
     box-shadow: 0 1px 0 0 $color-primary
 
-.simple-select
+.flat-select
   width: 100%
+  padding: 4px 0
   border: none
   border-bottom: solid 1px $color-primary
   border-radius: 0

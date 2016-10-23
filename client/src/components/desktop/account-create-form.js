@@ -70,7 +70,7 @@ export default class AccountCreateForm extends Component {
           <span className="account-create-form-content">
             <span className="account-create-form-content-name">
               <input
-                className="simple-input"
+                className="flat-input"
                 autoFocus
                 type="text"
                 value={this.state.name}
@@ -80,7 +80,7 @@ export default class AccountCreateForm extends Component {
             </span>
             <span className="account-create-form-content-amount">
               <input
-                className="simple-input"
+                className="flat-input"
                 type="number"
                 value={this.state.amount}
                 onChange={this.handleChangeAmountInput}
