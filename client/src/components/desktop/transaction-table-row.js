@@ -332,10 +332,10 @@ export default class TransactionTableRow extends Component {
           {transaction.note}
         </td>
         <td>
-          <span
-            className="icon"
+          <button
+            className="icon icon-button"
             onClick={this.handleClickDeleteButton}
-            >delete</span>
+            >delete</button>
           {errorIconElement}
         </td>
       </tr>

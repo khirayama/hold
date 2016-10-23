@@ -129,8 +129,8 @@ export default class TransactionCategoryListItem extends Component {
               <option value="income">Income</option>
             </select>
           </td>
-          <td onClick={this.handleClickUpdateButton}>
-            <span className="icon">done</span>
+          <td>
+            <button className="icon icon-button" onClick={this.handleClickUpdateButton}>done</button>
           </td>
           <td></td>
         </tr>
@@ -144,8 +144,8 @@ export default class TransactionCategoryListItem extends Component {
         <td onClick={this.handleClickTransactionCategoryListItem}>
           <TransactionTypeLabel transactionType={transactionCategory.transactionType} />
         </td>
-        <td onClick={this.handleClickDeleteButton}>
-          <span className="icon">delete</span>
+        <td>
+          <button onClick={this.handleClickDeleteButton} className="icon icon-button">delete</button>
         </td>
         <td>{errorIconElement}</td>
       </tr>

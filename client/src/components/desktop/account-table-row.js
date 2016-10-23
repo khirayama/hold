@@ -148,8 +148,8 @@ export default class AccountListItem extends Component {
               onFocus={this.handleFocusInput}
             />
           </td>
-          <td onClick={this.handleClickUpdateButton}>
-            <span className="icon">done</span>
+          <td>
+            <button className="icon icon-button" onClick={this.handleClickUpdateButton}>done</button>
           </td>
           <td>{errorIconElement}</td>
         </tr>
@@ -166,8 +166,8 @@ export default class AccountListItem extends Component {
             amount={account.amount}
           />
         </td>
-        <td onClick={this.handleClickDeleteButton}>
-          <span className="icon">delete</span>
+        <td>
+          <button className="icon icon-button" onClick={this.handleClickDeleteButton}>delete</button>
         </td>
         <td>{errorIconElement}</td>
       </tr>

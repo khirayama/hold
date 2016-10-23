@@ -101,11 +101,11 @@ export default class AccountTableCreateRow extends Component {
               onFocus={this.handleFocusInput}
             />
           </td>
-          <td onClick={this.handleClickCreateButton}>
-            <span className="icon">done</span>
+          <td>
+            <button onClick={this.handleClickCreateButton} className="icon icon-button">done</button>
           </td>
-          <td onClick={this.handleClickCancelButton}>
-            <span className="icon">clear</span>
+          <td>
+            <button onClick={this.handleClickCancelButton} className="icon icon-button">clear</button>
           </td>
         </tr>
       );
