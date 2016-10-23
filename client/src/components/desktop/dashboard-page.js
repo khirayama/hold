@@ -3,7 +3,6 @@ import React from 'react';
 import transactionTypes from '../../constants/transaction-types';
 
 import AccountTable from './account-table';
-import AccountCreateForm from './account-create-form';
 import TransactionTable from './transaction-table';
 import TransactionCreateForm from './transaction-create-form';
 import TransactionCategoryList from './transaction-category-list';
@@ -24,7 +23,6 @@ export default function DashboardPage(props) {
           <section className="account-section">
             <div>TODO: Total assets: </div>
             <AccountTable accounts={state.accounts}/>
-            <AccountCreateForm/>
           </section>
           <Link href="/setting">Setting</Link>
         </div>

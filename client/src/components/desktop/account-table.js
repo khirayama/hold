@@ -1,6 +1,7 @@
 import React from 'react';
 
 import AccountTableRow from './account-table-row';
+import AccountTableCreateRow from './account-table-create-row';
 
 export default function AccountTable(props) {
   return (
@@ -14,6 +15,7 @@ export default function AccountTable(props) {
             />
           )
         ) }
+        <AccountTableCreateRow />
       </tbody>
     </table>
   );
