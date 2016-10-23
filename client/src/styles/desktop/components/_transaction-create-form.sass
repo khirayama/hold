@@ -21,6 +21,10 @@
         font-weight: $font-weight-bold
         box-shadow: 0 2px 0 0 $color-primary
         cursor: default
+  .transaction-category-edit-button-container
+    text-align: right
+    padding: 16px 0;
+
   .transaction-create-form-table
     width: 100%
     tr
@@ -39,17 +43,3 @@
           margin-top: 8px
         label
           color: $color-text-secondary
-  .transaction-create-button
-    display: inline-block
-    width: 100%
-    background-color: $color-primary
-    padding: 4px
-    text-align: center
-    border-radius: $radius
-    color: #fff
-    cursor: pointer
-    transition: box-shadow .2s ease-out, background .2s ease-out
-    &:hover,
-    &:focus
-      background-color: $color-primary-light
-      box-shadow: 0 3px 0 0 rgba($color-primary-light, .3)

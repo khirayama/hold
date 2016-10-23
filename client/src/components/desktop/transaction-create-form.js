@@ -310,10 +310,12 @@ export default class TransactionCreateForm extends Component {
           </tbody>
         </table>
         <button
-          className="transaction-create-button"
+          className="floating-button button__spread"
           onClick={this.handleClickCreateButton}
-          >Enter</button>
-        <span onClick={showTransactionCategoryModal}>Edit transaction categories</span>
+        >ENTER</button>
+        <div className="transaction-category-edit-button-container">
+          <span className="flat-button" onClick={showTransactionCategoryModal}>EDIT TRANSACTION CATEGORY</span>
+        </div>
       </span>
     );
   }
