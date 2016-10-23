@@ -34,7 +34,7 @@ export function formatAccount(account, setting, error = null) {
     cid: account.cid || uuid(),
     id: account.id || null,
     name: account.name || '',
-    amount: account.amount || 0,
+    amount: Number(account.amount) || 0,
     currencyCode: setting.currency_code || '',
     error,
   };
@@ -53,7 +53,7 @@ export function formatTransaction(
     fromAccount: null,
     toAccount: null,
     transactionCategory: null,
-    amount: transaction.amount || 0,
+    amount: Number(transaction.amount) || 0,
     transactionDate: null,
     note: transaction.note || '',
     currencyCode: setting.currency_code || '',
