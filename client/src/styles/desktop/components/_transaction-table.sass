@@ -7,9 +7,9 @@
         font-weight: inherit
         color: $color-text-secondary
         padding: 4px
-        border-bottom: solid 1px $color-divider
+        border-bottom: $border
         & + th
-          border-left: solid 1px $color-divider
+          border-left: $border
   tbody
     tr
       td
@@ -17,7 +17,7 @@
         padding: 8px
         cursor: pointer
         & + td
-          border-left: solid 1px $color-divider
+          border-left: $border
         // type
         &:nth-of-type(8n+1)
           width: $width-cell
@@ -27,7 +27,7 @@
             width: 64px
             color: $color-text
             border: solid 1px $color-text
-            border-radius: 2px
+            border-radius: $radius
             padding: 0 4px
             font-size: .8rem
             #{&}__payment

@@ -4,6 +4,11 @@ $timing-basic: 100ms ease-out
 $timing-slow: 200ms ease-out
 
 $font-base-size: 16px
+$font-weight-normal: 200
+$font-weight-bold: 400
+
+$radius: 2px
+$border: solid 1px $color-divider
 
 .icon
   font-family: 'Material Icons'
@@ -21,7 +26,7 @@ html
   color: $color-text
   font-size: $font-base-size
   font-family: 'Noto Sans Japanese', sans-serif
-  font-weight: 200
+  font-weight: $font-weight-normal
 
 html,
 body,
@@ -38,16 +43,16 @@ body,
 select
   appearance: none
   background-color: #fff
-  border: solid 1px $color-divider
+  border: $border
   padding: 3px 6px
-  border-radius: 2px
+  border-radius: $radius
   text-align: left
   cursor: pointer
 
 textarea,
 input
-  border: solid 1px $color-divider
-  border-radius: 2px
+  border: $border
+  border-radius: $radius
   padding: 3px 6px
 
 input[type=number]
@@ -69,6 +74,7 @@ textarea
     border: solid 1px $color-primary-dark
 
 // application components
+// input
 .floating-input
   display: inline-block
   position: relative
@@ -123,13 +129,17 @@ textarea
     background: $color-mask
     box-shadow: 0 1px 0 0 $color-primary
 
+// button
+.button__spread
+  width: 100%
+
 .flat-button
   display: inline-block
   padding: 4px 8px
-  border-radius: 2px
+  border-radius: $radius
   color: $color-text-primary
   background-color: inherit
-  font-weight: 400
+  font-weight: $font-weight-bold
   text-align: right
   cursor: pointer
   transition: .2s ease-out

@@ -4,6 +4,7 @@
   .transaction-create-form-tab
     display: flex
     margin-bottom: 12px
+    border-bottom: $border
     .transaction-create-form-tab-item
       flex: 1
       padding: 8px 0
@@ -17,6 +18,7 @@
         box-shadow: 0 2px 0 0 $color-primary-light
       #{&}__active
         color: $color-text
+        font-weight: $font-weight-bold
         box-shadow: 0 2px 0 0 $color-primary
         cursor: default
   .transaction-create-form-table
@@ -43,7 +45,7 @@
     background-color: $color-primary
     padding: 4px
     text-align: center
-    border-radius: 2px
+    border-radius: $radius
     color: #fff
     cursor: pointer
     transition: box-shadow .2s ease-out, background .2s ease-out
