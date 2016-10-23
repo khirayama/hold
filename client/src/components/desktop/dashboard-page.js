@@ -5,9 +5,8 @@ import transactionTypes from '../../constants/transaction-types';
 import AccountTable from './account-table';
 import TransactionTable from './transaction-table';
 import TransactionCreateForm from './transaction-create-form';
-import TransactionCategoryTable from './transaction-category-table';
 import Link from './link';
-import Modal from './modal';
+import TransactionCategoryModal from './transaction-category-modal';
 
 import {hideTransactionCategoryModal} from '../../actions/modal-action-creators';
 
@@ -45,14 +44,11 @@ export default function DashboardPage(props) {
           </section>
         </div>
       </div>
-      <Modal
+      <TransactionCategoryModal
         isShown={state.isTransactionCategoryModalShown}
         onCloseButtonClick={hideTransactionCategoryModal}
-        >
-        <TransactionCategoryTable
-          transactionCategories={paymentTransactionCategory.concat(incomeTransactionCategory)}
-        />
-      </Modal>
+        transactionCategories={paymentTransactionCategory.concat(incomeTransactionCategory)}
+      />
     </div>
   );
 }

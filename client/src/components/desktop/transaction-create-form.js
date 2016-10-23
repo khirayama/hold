@@ -312,7 +312,7 @@ export default class TransactionCreateForm extends Component {
           onClick={this.handleClickCreateButton}
         >ENTER</button>
         <div className="transaction-category-edit-button-container">
-          <span className="flat-button" onClick={showTransactionCategoryModal}>EDIT TRANSACTION CATEGORY</span>
+          <button className="flat-button" onClick={showTransactionCategoryModal}>EDIT TRANSACTION CATEGORY</button>
         </div>
       </span>
     );

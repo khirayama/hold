@@ -4,15 +4,15 @@ import transactionTypes from '../../constants/transaction-types';
 
 import TransactionTable from './transaction-table';
 import TransactionCreateForm from './transaction-create-form';
-import TransactionCategoryList from './transaction-category-list';
-import TransactionCategoryCreateForm from './transaction-category-create-form';
-import Modal from './modal';
+import TransactionCategoryModal from './transaction-category-modal';
 
 import {changeHistory} from '../../actions/app-action-creators';
 import {hideTransactionCategoryModal} from '../../actions/modal-action-creators';
 
 export default function TransactionsPage(props) {
   const state = props.state;
+  const paymentTransactionCategory = state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.PAYMENT);
+  const incomeTransactionCategory = state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.INCOME)
 
   const toDashboard = () => {
     changeHistory('/dashboard');
@@ -40,17 +40,11 @@ export default function TransactionsPage(props) {
           </section>
         </div>
       </section>
-      <Modal
+      <TransactionCategoryModal
         isShown={state.isTransactionCategoryModalShown}
         onCloseButtonClick={hideTransactionCategoryModal}
-        >
-        <h2>Transaction categories</h2>
-        <TransactionCategoryCreateForm/>
-        <h3>Payment</h3>
-        <TransactionCategoryList transactionCategories={state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.PAYMENT)}/>
-        <h3>Income</h3>
-        <TransactionCategoryList transactionCategories={state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.INCOME)}/>
-      </Modal>
+        transactionCategories={paymentTransactionCategory.concat(incomeTransactionCategory)}
+      />
     </div>
   );
 }
