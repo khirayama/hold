@@ -8,6 +8,8 @@ import {
   deleteTransactionCategory,
 } from '../../actions/transaction-category-action-creators';
 
+import TransactionTypeLabel from './transaction-type-label';
+
 export default class TransactionCategoryListItem extends Component {
   constructor(props) {
     super(props);
@@ -105,35 +107,48 @@ export default class TransactionCategoryListItem extends Component {
 
     if (this.state.isEditing) {
       return (
-        <li>
-          <input
-            autoFocus
-            type="text"
-            value={this.state.name}
-            onChange={this.handleChangeNameInput}
-            onKeyDown={this.handleKeyDownNameInput}
-            />
-          <select
-            defaultValue={this.state.transactionType}
-            onChange={this.handleChangeTransactionTypeSelect}
+        <tr>
+          <td>
+            <input
+              autoFocus
+              className="flat-input"
+              type="text"
+              placeholder="Enter transaction category name"
+              value={this.state.name}
+              onChange={this.handleChangeNameInput}
+              onKeyDown={this.handleKeyDownNameInput}
+              />
+          </td>
+          <td>
+            <select
+              className="flat-select"
+              defaultValue={this.state.transactionType}
+              onChange={this.handleChangeTransactionTypeSelect}
             >
-            <option value="payment">Payment</option>
-            <option value="income">Income</option>
-          </select>
-          <span
-            onClick={this.handleClickUpdateButton}
-            >Update</span>
-        </li>
+              <option value="payment">Payment</option>
+              <option value="income">Income</option>
+            </select>
+          </td>
+          <td onClick={this.handleClickUpdateButton}>
+            <span className="icon">done</span>
+          </td>
+          <td></td>
+        </tr>
       );
     }
     return (
-      <li>
-        <span onClick={this.handleClickTransactionCategoryListItem}>
-          {transactionCategory.name} / {transactionCategory.transactionType}
-        </span>
-        <span onClick={this.handleClickDeleteButton}>Delete</span>
-        {errorIconElement}
-      </li>
+      <tr>
+        <td onClick={this.handleClickTransactionCategoryListItem}>
+          {transactionCategory.name}
+        </td>
+        <td onClick={this.handleClickTransactionCategoryListItem}>
+          <TransactionTypeLabel transactionType={transactionCategory.transactionType} />
+        </td>
+        <td onClick={this.handleClickDeleteButton}>
+          <span className="icon">delete</span>
+        </td>
+        <td>{errorIconElement}</td>
+      </tr>
     );
   }
 }

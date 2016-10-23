@@ -5,41 +5,25 @@ import transactionTypes from '../../constants/transaction-types';
 
 import {createTransactionCategory} from '../../actions/transaction-category-action-creators';
 
-export default class TransactionCategoryCreateForm extends Component {
+export default class TransactionCategoryTableCreateRow extends Component {
   constructor() {
     super();
 
     this.state = {
-      isNew: false,
       name: '',
       transactionType: transactionTypes.PAYMENT,
     };
 
-    this.handleClickNewButton = this._handleClickNewButton.bind(this);
     this.handleChangeNameInput = this._handleChangeNameInput.bind(this);
     this.handleChangeTransactionCategorySelect = this._handleChangeTransactionCategorySelect.bind(this);
     this.handleClickCreateButton = this._handleClickCreateButton.bind(this);
-    this.handleClickCancelButton = this._handleClickCancelButton.bind(this);
     this.handleKeyDownNameInput = this._handleKeyDownNameInput.bind(this);
-  }
-  _new() {
-    this.setState({
-      isNew: true,
-      name: '',
-      transactionType: transactionTypes.PAYMENT,
-    });
-  }
-  _done() {
-    this.setState({isNew: false});
   }
   _create() {
     createTransactionCategory({
       name: this.state.name,
       transactionType: this.state.transactionType,
     });
-  }
-  _handleClickNewButton() {
-    this._new();
   }
   _handleChangeNameInput(event) {
     this.setState({name: event.target.value});
@@ -49,10 +33,6 @@ export default class TransactionCategoryCreateForm extends Component {
   }
   _handleClickCreateButton() {
     this._create();
-    this._done();
-  }
-  _handleClickCancelButton() {
-    this._done();
   }
   _handleKeyDownNameInput(event) {
     const keyCode = event.keyCode;
@@ -61,42 +41,41 @@ export default class TransactionCategoryCreateForm extends Component {
 
     if (keyCodes.ENTER === keyCode && !shift && !ctrl) {
       this._create();
-      this._done();
     }
   }
   render() {
-    if (this.state.isNew) {
-      return (
-        <span>
+    return (
+      <tr>
+        <td>
           <input
             autoFocus
+            className="flat-input"
             type="text"
+            placeholder="Enter transaction category name"
             value={this.state.name}
             onChange={this.handleChangeNameInput}
             onKeyDown={this.handleKeyDownNameInput}
-            />
+          />
+        </td>
+        <td>
           <select
+            className="flat-select"
             defaultValue={this.state.transactionType}
             onChange={this.handleChangeTransactionCategorySelect}
-            >
+          >
             <option value="payment">Payment</option>
             <option value="income">Income</option>
           </select>
+        </td>
+        <td>
           <div
+            className="floating-button"
             onClick={this.handleClickCreateButton}
-            >Create</div>
-          <div
-            onClick={this.handleClickCancelButton}
-            >Cancel</div>
-        </span>
-      );
-    }
-    return (
-      <div
-        onClick={this.handleClickNewButton}
-        >Add transaction category</div>
+          >CREATE</div>
+        </td>
+      </tr>
     );
   }
 }
 
-TransactionCategoryCreateForm.propTypes = {};
+TransactionCategoryTableCreateRow.propTypes = {};

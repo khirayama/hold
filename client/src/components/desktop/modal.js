@@ -8,7 +8,7 @@ export default class Modal extends Component {
       return (
         <div className="modal-mask">
           <div className="modal">
-            <div className="modal-close-button" onClick={this.props.onCloseButtonClick}>Close</div>
+            <div className="flat-button modal-close-button" onClick={this.props.onCloseButtonClick}>CLOSE</div>
             {this.props.children}
           </div>
         </div>
@@ -19,7 +19,7 @@ export default class Modal extends Component {
 }
 
 Modal.propTypes = {
+  children: React.PropTypes.node.isRequired,
   isShown: React.PropTypes.bool.isRequired,
   onCloseButtonClick: React.PropTypes.func.isRequired,
-  children: React.PropTypes.array.isRequired,
 };

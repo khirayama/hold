@@ -5,8 +5,7 @@ import transactionTypes from '../../constants/transaction-types';
 import AccountTable from './account-table';
 import TransactionTable from './transaction-table';
 import TransactionCreateForm from './transaction-create-form';
-import TransactionCategoryList from './transaction-category-list';
-import TransactionCategoryCreateForm from './transaction-category-create-form';
+import TransactionCategoryTable from './transaction-category-table';
 import Link from './link';
 import Modal from './modal';
 
@@ -14,6 +13,8 @@ import {hideTransactionCategoryModal} from '../../actions/modal-action-creators'
 
 export default function DashboardPage(props) {
   const state = props.state;
+  const paymentTransactionCategory = state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.PAYMENT);
+  const incomeTransactionCategory = state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.INCOME)
 
   return (
     <div className="dashboard-page">
@@ -40,7 +41,7 @@ export default function DashboardPage(props) {
               transactions={state.transactions}
               transactionDataset={state.transactionDataset}
               />
-            <Link href="/transactions">more</Link>
+            <Link href="/transactions">More</Link>
           </section>
         </div>
       </div>
@@ -48,12 +49,9 @@ export default function DashboardPage(props) {
         isShown={state.isTransactionCategoryModalShown}
         onCloseButtonClick={hideTransactionCategoryModal}
         >
-        <h2>Transaction categories</h2>
-        <TransactionCategoryCreateForm/>
-        <h3>Payment</h3>
-        <TransactionCategoryList transactionCategories={state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.PAYMENT)}/>
-        <h3>Income</h3>
-        <TransactionCategoryList transactionCategories={state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.INCOME)}/>
+        <TransactionCategoryTable
+          transactionCategories={paymentTransactionCategory.concat(incomeTransactionCategory)}
+        />
       </Modal>
     </div>
   );
