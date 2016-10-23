@@ -8,6 +8,8 @@ import transactionTypes from '../../constants/transaction-types';
 import {showTransactionCategoryModal} from '../../actions/modal-action-creators';
 import {createTransaction} from '../../actions/transaction-action-creators';
 
+import FloatingInput from './floating-input';
+
 export default class TransactionCreateForm extends Component {
   constructor(props) {
     super();
@@ -289,19 +291,17 @@ export default class TransactionCreateForm extends Component {
             <tr>
               <td colSpan="2">
                 <div className="floating-input-container">
-                  <span className="floating-input">
-                    <input
-                      className="flat-input"
-                      type="text"
-                      name="note"
-                      placeholder="Enter note"
-                      value={this.state.note}
-                      onChange={this.handleChangeInput}
-                      onKeyDown={this.handleKeyDownInputWithEnterCreate}
-                      onFocus={this.handleFocusInput}
-                      />
-                    <label>Note</label>
-                  </span>
+                  <FloatingInput
+                    className="flat-input"
+                    type="text"
+                    name="note"
+                    label="Note"
+                    placeholder="Enter note"
+                    value={this.state.note}
+                    onChange={this.handleChangeInput}
+                    onKeyDown={this.handleKeyDownInputWithEnterCreate}
+                    onFocus={this.handleFocusInput}
+                  />
                 </div>
               </td>
             </tr>
