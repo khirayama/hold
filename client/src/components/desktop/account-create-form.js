@@ -100,10 +100,12 @@ export default class AccountCreateForm extends Component {
       );
     }
     return (
-      <div
-        className="account-create-button"
-        onClick={this.handleClickNewButton}
-        ><span className="icon">add_circle_outline</span>add an account</div>
+      <div className="account-create-button-container">
+        <div
+          className="account-create-button"
+          onClick={this.handleClickNewButton}
+        >ADD ACCOUNT</div>
+      </div>
     );
   }
 }
