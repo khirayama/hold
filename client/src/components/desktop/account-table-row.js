@@ -8,7 +8,7 @@ import {
   deleteAccount,
 } from '../../actions/account-action-creators';
 
-import {amount} from '../../utils/currency';
+import AmountLabel from './amount-label';
 
 export default class AccountListItem extends Component {
   constructor(props) {
@@ -27,7 +27,7 @@ export default class AccountListItem extends Component {
     this.handleChangeAmountInput = this._handleChangeAmountInput.bind(this);
     this.handleClickUpdateButton = this._handleClickUpdateButton.bind(this);
     this.handleClickDeleteButton = this._handleClickDeleteButton.bind(this);
-    this.handleKeyDownNameAndAmountInputs = this._handleKeyDownNameAndAmountInputs.bind(this);
+    this.handleKeyDownInputs = this._handleKeyDownInputs.bind(this);
     this.handleClickErrorIcon = this._handleClickErrorIcon.bind(this);
     this.handleFocusInput = this._handleFocusInput.bind(this);
   }
@@ -82,20 +82,27 @@ export default class AccountListItem extends Component {
     this._done();
   }
   _handleClickDeleteButton() {
-    this._delete();
+    if (confirm('delete it?')) {
+      this._delete();
+    }
   }
-  _handleKeyDownNameAndAmountInputs(event) {
+  _handleKeyDownInputs(event) {
     const keyCode = event.keyCode;
     const shift = event.shiftKey;
     const ctrl = event.ctrlKey || event.metaKey;
 
-    if (keyCodes.ENTER === keyCode && !shift && !ctrl) {
-      if (this.props.account.id) {
-        this._update();
-      } else {
-        this._recreate();
-      }
-      this._done();
+    switch(true) {
+      case (keyCodes.ENTER === keyCode && !shift && !ctrl):
+        if (this.props.account.id) {
+          this._update();
+        } else {
+          this._recreate();
+        }
+        this._done();
+        break;
+      case (keyCodes.ESC === keyCode && !shift && !ctrl):
+        this._done();
+        break;
     }
   }
   _handleClickErrorIcon() {
@@ -116,14 +123,14 @@ export default class AccountListItem extends Component {
 
     if (this.state.isEditing) {
       return (
-        <tr>
+        <tr className="account-table-row account-table-row__editing">
           <td>
             <input
               className="simple-input"
               type="text"
               value={this.state.name}
               onChange={this.handleChangeNameInput}
-              onKeyDown={this.handleKeyDownNameAndAmountInputs}
+              onKeyDown={this.handleKeyDownInputs}
               onFocus={this.handleFocusInput}
             />
           </td>
@@ -134,24 +141,27 @@ export default class AccountListItem extends Component {
               type="number"
               value={this.state.amount}
               onChange={this.handleChangeAmountInput}
-              onKeyDown={this.handleKeyDownNameAndAmountInputs}
+              onKeyDown={this.handleKeyDownInputs}
               onFocus={this.handleFocusInput}
             />
           </td>
           <td onClick={this.handleClickUpdateButton}>
             <span className="icon">done</span>
           </td>
+          <td>{errorIconElement}</td>
         </tr>
       );
     }
     return (
-      <tr>
+      <tr className="account-table-row">
         <td onClick={this.handleClickAccountListItem} >
-          {account.name}
+          <span>{account.name}</span>
         </td>
         <td onClick={this.handleClickAccountListItem} >
-          <span>{account.currencyCode}</span>
-          {amount(account.amount, account.currencyCode)}
+          <AmountLabel
+            currencyCode={account.currencyCode}
+            amount={account.amount}
+          />
         </td>
         <td onClick={this.handleClickDeleteButton}>
           <span className="icon">delete</span>

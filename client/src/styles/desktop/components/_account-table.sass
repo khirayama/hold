@@ -1,2 +1,32 @@
 .account-table
   width: 100%
+  .account-table-row
+    td
+      cursor: pointer
+      &:nth-of-type(4n+1)
+        width: 45%
+        padding: 16px 6px
+      &:nth-of-type(4n+2)
+        width: 45%
+        padding: 16px 0
+        text-align: right
+      &:nth-of-type(4n+3)
+        width: 5%
+        padding: 16px 0
+        text-align: center
+        .icon
+          margin-left: 16px
+          color: $color-text-secondary
+          transition: color .2s ease-out
+          &:hover
+            color: $color-text
+      &:nth-of-type(4n)
+        width: 5%
+        padding: 16px 0
+        text-align: center
+    &.account-table-row__editing
+      td
+        &:nth-of-type(4n+1)
+          padding: 15px 0 14px
+        &:nth-of-type(4n+2)
+          padding: 15px 0 14px
