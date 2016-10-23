@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import moment from 'moment';
-import classNames from 'classnames';
 
 import keyCodes from '../../constants/key-codes';
 import transactionTypes from '../../constants/transaction-types';
@@ -12,6 +11,9 @@ import {
 } from '../../actions/transaction-action-creators';
 
 import currency from '../../utils/currency';
+
+import AmountLabel from './amount-label';
+import TransactionTypeLabel from './transaction-type-label';
 
 export default class TransactionTableRow extends Component {
   constructor(props) {
@@ -219,16 +221,7 @@ export default class TransactionTableRow extends Component {
     return (
       <tr>
         <td onClick={this.handleClickTransactionListItem}>
-          <span
-            className={classNames(
-              'transaction-type-label',
-              {'transaction-type-label__payment': transactionType === transactionTypes.PAYMENT},
-              {'transaction-type-label__income': transactionType === transactionTypes.INCOME},
-              {'transaction-type-label__transfer': transactionType === transactionTypes.TRANSFER}
-            )}
-            >
-            {transactionType}
-          </span>
+          <TransactionTypeLabel transactionType={transactionType} />
         </td>
         <td onClick={this.handleClickTransactionListItem}>
           {transaction.transactionDate}
@@ -243,7 +236,10 @@ export default class TransactionTableRow extends Component {
           {(transaction.transactionCategory || {}).name}
         </td>
         <td onClick={this.handleClickTransactionListItem}>
-          {currency(transaction.amount, transaction.currencyCode)}
+          <AmountLabel
+            currencyCode={transaction.currencyCode}
+            amount={transaction.amount}
+          />
         </td>
         <td onClick={this.handleClickTransactionListItem}>
           {transaction.note}
