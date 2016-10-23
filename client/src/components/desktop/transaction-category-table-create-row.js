@@ -55,14 +55,14 @@ export default class TransactionCategoryTableCreateRow extends Component {
             value={this.state.name}
             onChange={this.handleChangeNameInput}
             onKeyDown={this.handleKeyDownNameInput}
-          />
+            />
         </td>
         <td>
           <select
             className="flat-select"
             defaultValue={this.state.transactionType}
             onChange={this.handleChangeTransactionCategorySelect}
-          >
+            >
             <option value="payment">Payment</option>
             <option value="income">Income</option>
           </select>
@@ -71,7 +71,7 @@ export default class TransactionCategoryTableCreateRow extends Component {
           <div
             className="floating-button"
             onClick={this.handleClickCreateButton}
-          >CREATE</div>
+            >CREATE</div>
         </td>
       </tr>
     );

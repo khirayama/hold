@@ -124,7 +124,7 @@ export default class TransactionCategoryListItem extends Component {
               className="flat-select"
               defaultValue={this.state.transactionType}
               onChange={this.handleChangeTransactionTypeSelect}
-            >
+              >
               <option value="payment">Payment</option>
               <option value="income">Income</option>
             </select>
@@ -132,7 +132,7 @@ export default class TransactionCategoryListItem extends Component {
           <td>
             <button className="icon icon-button" onClick={this.handleClickUpdateButton}>done</button>
           </td>
-          <td></td>
+          <td/>
         </tr>
       );
     }
@@ -142,7 +142,7 @@ export default class TransactionCategoryListItem extends Component {
           {transactionCategory.name}
         </td>
         <td onClick={this.handleClickTransactionCategoryListItem}>
-          <TransactionTypeLabel transactionType={transactionCategory.transactionType} />
+          <TransactionTypeLabel transactionType={transactionCategory.transactionType}/>
         </td>
         <td>
           <button onClick={this.handleClickDeleteButton} className="icon icon-button">delete</button>

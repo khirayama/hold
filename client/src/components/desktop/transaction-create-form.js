@@ -292,7 +292,7 @@ export default class TransactionCreateForm extends Component {
               <td colSpan="2">
                 <div className="floating-input-container">
                   <FloatingInput
-                    className="size__spread"
+                    addedClassName="size__spread"
                     type="text"
                     name="note"
                     label="Note"
@@ -301,7 +301,7 @@ export default class TransactionCreateForm extends Component {
                     onChange={this.handleChangeInput}
                     onKeyDown={this.handleKeyDownInputWithEnterCreate}
                     onFocus={this.handleFocusInput}
-                  />
+                    />
                 </div>
               </td>
             </tr>
@@ -310,7 +310,7 @@ export default class TransactionCreateForm extends Component {
         <button
           className="floating-button size__spread"
           onClick={this.handleClickCreateButton}
-        >ENTER</button>
+          >ENTER</button>
         <div className="transaction-category-edit-button-container">
           <button className="flat-button" onClick={showTransactionCategoryModal}>EDIT TRANSACTION CATEGORY</button>
         </div>

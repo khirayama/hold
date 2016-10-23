@@ -7,13 +7,12 @@ import TransactionCreateForm from './transaction-create-form';
 import TransactionCategoryModal from './transaction-category-modal';
 import Link from './link';
 
-import {changeHistory} from '../../actions/app-action-creators';
 import {hideTransactionCategoryModal} from '../../actions/modal-action-creators';
 
 export default function TransactionsPage(props) {
   const state = props.state;
   const paymentTransactionCategory = state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.PAYMENT);
-  const incomeTransactionCategory = state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.INCOME)
+  const incomeTransactionCategory = state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.INCOME);
 
   return (
     <div className="transactions-page">
@@ -41,7 +40,7 @@ export default function TransactionsPage(props) {
         isShown={state.isTransactionCategoryModalShown}
         onCloseButtonClick={hideTransactionCategoryModal}
         transactionCategories={paymentTransactionCategory.concat(incomeTransactionCategory)}
-      />
+        />
     </div>
   );
 }

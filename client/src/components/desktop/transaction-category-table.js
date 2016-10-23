@@ -7,13 +7,13 @@ export default function TransactionCategoryTable(props) {
   return (
     <table>
       <tbody>
-        <TransactionCategoryTableCreateRow />
+        <TransactionCategoryTableCreateRow/>
         { props.transactionCategories.map(
           transactionCategory => (
             <TransactionCategoryTableRow
               key={transactionCategory.cid}
               transactionCategory={transactionCategory}
-            />
+              />
           )
         ) }
       </tbody>

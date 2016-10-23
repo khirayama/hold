@@ -6,7 +6,7 @@ import {
   promiseStub,
 } from '../test-helper';
 
-import { formatAccount } from '../../src/actions/formatter';
+import {formatAccount} from '../../src/actions/formatter';
 
 import {
   fetchAccounts,
@@ -23,7 +23,6 @@ import {
 import types from '../../src/constants/action-types';
 
 import Account from '../../src/resources/account';
-
 
 function createSampleAccount(entity) {
   return Object.assign({}, {
@@ -61,15 +60,15 @@ describe('app-action-creators', () => {
         name: 'test',
         amount: 1000,
         error: {
-          message: 'something wrong'
+          message: 'something wrong',
         },
       });
     });
   });
 
   describe('fetchAccounts', () => {
-    it('dispatch FETCH_ACCOUNTS action', (done) => {
-      subscribe((action) => {
+    it('dispatch FETCH_ACCOUNTS action', done => {
+      subscribe(action => {
         switch (action.type) {
           case types.FETCH_ACCOUNTS:
             assert.strictEqual(action.accounts.length, 0);
@@ -86,8 +85,8 @@ describe('app-action-creators', () => {
   });
 
   describe('createAccount', () => {
-    it('dispatch CREATE_ACCOUNT action', (done) => {
-      subscribe((action) => {
+    it('dispatch CREATE_ACCOUNT action', done => {
+      subscribe(action => {
         switch (action.type) {
           case types.CREATE_ACCOUNT:
             assert.deepStrictEqual(action.account, {
@@ -112,13 +111,13 @@ describe('app-action-creators', () => {
         }
       });
 
-      sinon.stub(Account, 'create', promiseStub('success', createSampleAccount({ id: 1 })));
+      sinon.stub(Account, 'create', promiseStub('success', createSampleAccount({id: 1})));
 
       createAccount(createSampleAccount());
     });
 
-    it('dispatch FAIL_TO_CREATE_ACCOUNT action', (done) => {
-      subscribe((action) => {
+    it('dispatch FAIL_TO_CREATE_ACCOUNT action', done => {
+      subscribe(action => {
         switch (action.type) {
           case types.CREATE_ACCOUNT:
             assert.deepStrictEqual(action.account, {
@@ -152,8 +151,8 @@ describe('app-action-creators', () => {
   });
 
   describe('updateAccount', () => {
-    it('dispatch UPDATE_ACCOUNT action', (done) => {
-      subscribe((action) => {
+    it('dispatch UPDATE_ACCOUNT action', done => {
+      subscribe(action => {
         switch (action.type) {
           case types.UPDATE_ACCOUNT:
             assert.deepStrictEqual(action.account, {
@@ -168,11 +167,11 @@ describe('app-action-creators', () => {
         }
       });
 
-      updateAccount(createSampleAccount({ id: 1 }));
+      updateAccount(createSampleAccount({id: 1}));
     });
 
-    it('dispatch FAIL_TO_UPDATE_ACCOUNT action', (done) => {
-      subscribe((action) => {
+    it('dispatch FAIL_TO_UPDATE_ACCOUNT action', done => {
+      subscribe(action => {
         switch (action.type) {
           case types.UPDATE_ACCOUNT:
             assert.deepStrictEqual(action.account, {
@@ -200,10 +199,10 @@ describe('app-action-creators', () => {
         }
       });
 
-      sinon.stub(Account, 'find', promiseStub('success', createSampleAccount({ id: 1 })));
+      sinon.stub(Account, 'find', promiseStub('success', createSampleAccount({id: 1})));
       sinon.stub(Account, 'update', promiseStub('error', createError()));
 
-      updateAccount(createSampleAccount({ id: 1 }));
+      updateAccount(createSampleAccount({id: 1}));
     });
   });
 });

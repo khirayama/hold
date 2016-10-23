@@ -4,14 +4,13 @@ import {
   createAccount,
   updateAccount,
   deleteAccount,
-} from '../../src/reducers/accounts'
-
+} from '../../src/reducers/accounts';
 
 describe('accounts reducers', () => {
   const accounts = [{
     cid: 1,
     name: 'test',
-    amount: 1000
+    amount: 1000,
   }];
 
   describe('createAccount', () => {
@@ -19,22 +18,22 @@ describe('accounts reducers', () => {
       const newAccounts = createAccount(accounts, {
         cid: 2,
         name: 'test 2',
-        amount: 2000
+        amount: 2000,
       });
 
       assert.deepStrictEqual(accounts, [{
         cid: 1,
         name: 'test',
-        amount: 1000
+        amount: 1000,
       }]);
       assert.deepStrictEqual(newAccounts, [{
         cid: 1,
         name: 'test',
-        amount: 1000
+        amount: 1000,
       }, {
         cid: 2,
         name: 'test 2',
-        amount: 2000
+        amount: 2000,
       }]);
     });
   });
@@ -44,18 +43,18 @@ describe('accounts reducers', () => {
       const newAccounts = updateAccount(accounts, {
         cid: 1,
         name: 'test 2',
-        amount: 2000
+        amount: 2000,
       });
 
       assert.deepStrictEqual(accounts, [{
         cid: 1,
         name: 'test',
-        amount: 1000
+        amount: 1000,
       }]);
       assert.deepStrictEqual(newAccounts, [{
         cid: 1,
         name: 'test 2',
-        amount: 2000
+        amount: 2000,
       }]);
     });
 
@@ -63,46 +62,46 @@ describe('accounts reducers', () => {
       const newAccounts = updateAccount(accounts, {
         cid: 2,
         name: 'test 2',
-        amount: 2000
+        amount: 2000,
       });
 
       assert.deepStrictEqual(accounts, [{
         cid: 1,
         name: 'test',
-        amount: 1000
+        amount: 1000,
       }]);
       assert.deepStrictEqual(newAccounts, [{
         cid: 1,
         name: 'test',
-        amount: 1000
+        amount: 1000,
       }]);
     });
   });
 
   describe('delete', () => {
     it('Delete account', () => {
-      const newAccounts = deleteAccount(accounts, { cid: 1 });
+      const newAccounts = deleteAccount(accounts, {cid: 1});
 
       assert.deepStrictEqual(accounts, [{
         cid: 1,
         name: 'test',
-        amount: 1000
+        amount: 1000,
       }]);
       assert.deepStrictEqual(newAccounts, []);
     });
 
     it('Delete not exist id account', () => {
-      const newAccounts = updateAccount(accounts, { cid: 2 });
+      const newAccounts = updateAccount(accounts, {cid: 2});
 
       assert.deepStrictEqual(accounts, [{
         cid: 1,
         name: 'test',
-        amount: 1000
+        amount: 1000,
       }]);
       assert.deepStrictEqual(newAccounts, [{
         cid: 1,
         name: 'test',
-        amount: 1000
+        amount: 1000,
       }]);
     });
   });

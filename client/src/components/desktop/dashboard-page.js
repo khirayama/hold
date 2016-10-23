@@ -13,7 +13,7 @@ import {hideTransactionCategoryModal} from '../../actions/modal-action-creators'
 export default function DashboardPage(props) {
   const state = props.state;
   const paymentTransactionCategory = state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.PAYMENT);
-  const incomeTransactionCategory = state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.INCOME)
+  const incomeTransactionCategory = state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.INCOME);
 
   return (
     <div className="dashboard-page">
@@ -48,7 +48,7 @@ export default function DashboardPage(props) {
         isShown={state.isTransactionCategoryModalShown}
         onCloseButtonClick={hideTransactionCategoryModal}
         transactionCategories={paymentTransactionCategory.concat(incomeTransactionCategory)}
-      />
+        />
     </div>
   );
 }

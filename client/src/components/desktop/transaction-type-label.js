@@ -12,8 +12,12 @@ export default function TransactionTypeLabel(props) {
         {'transaction-type-label__income': props.transactionType === transactionTypes.INCOME},
         {'transaction-type-label__transfer': props.transactionType === transactionTypes.TRANSFER}
       )}
-    >
-    {props.transactionType}
+      >
+      {props.transactionType}
     </span>
   );
 }
+
+TransactionTypeLabel.propTypes = {
+  transactionType: React.PropTypes.string.isRequired,
+};

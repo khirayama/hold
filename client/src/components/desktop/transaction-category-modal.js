@@ -11,7 +11,13 @@ export default function TransactionCategoryModal(props) {
       >
       <TransactionCategoryTable
         transactionCategories={props.transactionCategories}
-      />
+        />
     </Modal>
   );
 }
+
+TransactionCategoryModal.propTypes = {
+  isShown: React.PropTypes.bool.isRequired,
+  onCloseButtonClick: React.PropTypes.func.isRequired,
+  transactionCategories: React.PropTypes.array.isRequired,
+};

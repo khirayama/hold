@@ -10,8 +10,6 @@ import {
   deleteTransaction,
 } from '../../actions/transaction-action-creators';
 
-import currency from '../../utils/currency';
-
 import AmountLabel from './amount-label';
 import TransactionTypeLabel from './transaction-type-label';
 
@@ -174,7 +172,7 @@ export default class TransactionTableRow extends Component {
         case transactionTypes.PAYMENT:
           return (
             <tr>
-              <td><TransactionTypeLabel transactionType={transactionType} /></td>
+              <td><TransactionTypeLabel transactionType={transactionType}/></td>
               <td>
                 <input
                   autoFocus
@@ -183,7 +181,7 @@ export default class TransactionTableRow extends Component {
                   name="transactionDate"
                   value={this._formatDate(this.state.transactionDate)}
                   onChange={this.handleChangeInput}
-                />
+                  />
               </td>
               <td>
                 {this._createIdSelectElement(
@@ -192,7 +190,7 @@ export default class TransactionTableRow extends Component {
                   'fromAccountId'
                 )}
               </td>
-              <td></td>
+              <td/>
               <td>
                 {this._createIdSelectElement(
                   dataset.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionType),
@@ -206,9 +204,9 @@ export default class TransactionTableRow extends Component {
                   name="amount"
                   value={this.state.amount}
                   onChange={this.handleChangeInput}
-                />
+                  />
               </td>
-              <td></td>
+              <td/>
               <td>
                 <button className="icon icon-button" onClick={this.handleClickUpdateButton}>done</button>
               </td>
@@ -217,7 +215,7 @@ export default class TransactionTableRow extends Component {
         case transactionTypes.INCOME:
           return (
             <tr>
-              <td><TransactionTypeLabel transactionType={transactionType} /></td>
+              <td><TransactionTypeLabel transactionType={transactionType}/></td>
               <td>
                 <input
                   autoFocus
@@ -226,9 +224,9 @@ export default class TransactionTableRow extends Component {
                   name="transactionDate"
                   value={this._formatDate(this.state.transactionDate)}
                   onChange={this.handleChangeInput}
-                />
+                  />
               </td>
-              <td></td>
+              <td/>
               <td>
                 {this._createIdSelectElement(
                   dataset.accounts,
@@ -249,9 +247,9 @@ export default class TransactionTableRow extends Component {
                   name="amount"
                   value={this.state.amount}
                   onChange={this.handleChangeInput}
-                />
+                  />
               </td>
-              <td></td>
+              <td/>
               <td>
                 <button className="icon icon-button" onClick={this.handleClickUpdateButton}>done</button>
               </td>
@@ -260,7 +258,7 @@ export default class TransactionTableRow extends Component {
         case transactionTypes.TRANSFER:
           return (
             <tr>
-              <td><TransactionTypeLabel transactionType={transactionType} /></td>
+              <td><TransactionTypeLabel transactionType={transactionType}/></td>
               <td>
                 <input
                   autoFocus
@@ -269,7 +267,7 @@ export default class TransactionTableRow extends Component {
                   name="transactionDate"
                   value={this._formatDate(this.state.transactionDate)}
                   onChange={this.handleChangeInput}
-                />
+                  />
               </td>
               <td>
                 {this._createIdSelectElement(
@@ -285,7 +283,7 @@ export default class TransactionTableRow extends Component {
                   'fromAccountId'
                 )}
               </td>
-              <td></td>
+              <td/>
               <td>
                 <input
                   className="flat-input"
@@ -293,9 +291,9 @@ export default class TransactionTableRow extends Component {
                   name="amount"
                   onChange={this.handleChangeInput}
                   value={this.state.amount}
-                />
+                  />
               </td>
-              <td></td>
+              <td/>
               <td>
                 <button className="icon icon-button" onClick={this.handleClickUpdateButton}>done</button>
               </td>
@@ -308,7 +306,7 @@ export default class TransactionTableRow extends Component {
     return (
       <tr>
         <td onClick={this.handleClickTransactionListItem}>
-          <TransactionTypeLabel transactionType={transactionType} />
+          <TransactionTypeLabel transactionType={transactionType}/>
         </td>
         <td onClick={this.handleClickTransactionListItem}>
           {transaction.transactionDate}
@@ -326,7 +324,7 @@ export default class TransactionTableRow extends Component {
           <AmountLabel
             currencyCode={transaction.currencyCode}
             amount={transaction.amount}
-          />
+            />
         </td>
         <td onClick={this.handleClickTransactionListItem}>
           {transaction.note}

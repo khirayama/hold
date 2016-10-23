@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React from 'react';
 
 import {changeHistory} from '../../actions/app-action-creators';
 
 export default function Link(props) {
-  const handleClickLink = (event) => {
+  const handleClickLink = event => {
     event.preventDefault();
     changeHistory(props.href);
   };

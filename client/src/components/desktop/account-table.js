@@ -12,10 +12,10 @@ export default function AccountTable(props) {
             <AccountTableRow
               key={account.cid}
               account={account}
-            />
+              />
           )
         ) }
-        <AccountTableCreateRow />
+        <AccountTableCreateRow/>
       </tbody>
     </table>
   );

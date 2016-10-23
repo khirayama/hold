@@ -2,8 +2,6 @@ import React from 'react';
 
 import UserSetting from './user-setting';
 
-import {changeHistory} from '../../actions/app-action-creators';
-
 import Link from './link';
 
 export default function SettingPage(props) {

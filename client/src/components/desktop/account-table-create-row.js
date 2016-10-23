@@ -88,7 +88,7 @@ export default class AccountTableCreateRow extends Component {
               onChange={this.handleChangeNameInput}
               onKeyDown={this.handleKeyDownInputs}
               onFocus={this.handleFocusInput}
-            />
+              />
           </td>
           <td>
             <FloatingInput
@@ -99,7 +99,7 @@ export default class AccountTableCreateRow extends Component {
               onChange={this.handleChangeAmountInput}
               onKeyDown={this.handleKeyDownInputs}
               onFocus={this.handleFocusInput}
-            />
+              />
           </td>
           <td>
             <button onClick={this.handleClickCreateButton} className="icon icon-button">done</button>
@@ -117,7 +117,7 @@ export default class AccountTableCreateRow extends Component {
             <button
               className="flat-button"
               onClick={this.handleClickNewButton}
-            >ADD ACCOUNT</button>
+              >ADD ACCOUNT</button>
           </div>
         </td>
       </tr>

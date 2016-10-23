@@ -83,16 +83,14 @@ export default class AccountListItem extends Component {
     this._done();
   }
   _handleClickDeleteButton() {
-    if (confirm('delete it?')) {
-      this._delete();
-    }
+    this._delete();
   }
   _handleKeyDownInputs(event) {
     const keyCode = event.keyCode;
     const shift = event.shiftKey;
     const ctrl = event.ctrlKey || event.metaKey;
 
-    switch(true) {
+    switch (true) {
       case (keyCodes.ENTER === keyCode && !shift && !ctrl):
         if (this.props.account.id) {
           this._update();
@@ -103,6 +101,8 @@ export default class AccountListItem extends Component {
         break;
       case (keyCodes.ESC === keyCode && !shift && !ctrl):
         this._done();
+        break;
+      default:
         break;
     }
   }
@@ -134,7 +134,7 @@ export default class AccountListItem extends Component {
               onChange={this.handleChangeNameInput}
               onKeyDown={this.handleKeyDownInputs}
               onFocus={this.handleFocusInput}
-            />
+              />
           </td>
           <td>
             <FloatingInput
@@ -146,7 +146,7 @@ export default class AccountListItem extends Component {
               onChange={this.handleChangeAmountInput}
               onKeyDown={this.handleKeyDownInputs}
               onFocus={this.handleFocusInput}
-            />
+              />
           </td>
           <td>
             <button className="icon icon-button" onClick={this.handleClickUpdateButton}>done</button>
@@ -164,7 +164,7 @@ export default class AccountListItem extends Component {
           <AmountLabel
             currencyCode={account.currencyCode}
             amount={account.amount}
-          />
+            />
         </td>
         <td>
           <button className="icon icon-button" onClick={this.handleClickDeleteButton}>delete</button>
