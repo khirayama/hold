@@ -32,7 +32,6 @@ export default class TransactionTableRow extends Component {
     };
 
     this.handleClickTransactionListItem = this._handleClickTransactionListItem.bind(this);
-    this.handleClickCancelButton = this._handleClickCancelButton.bind(this);
     this.handleChangeNameInput = this._handleChangeNameInput.bind(this);
     this.handleClickUpdateButton = this._handleClickUpdateButton.bind(this);
     this.handleClickDeleteButton = this._handleClickDeleteButton.bind(this);
@@ -84,9 +83,6 @@ export default class TransactionTableRow extends Component {
   }
   _handleClickTransactionListItem() {
     this._edit();
-  }
-  _handleClickCancelButton() {
-    this._done();
   }
   _handleChangeNameInput(event) {
     this.setState({name: event.target.value});
@@ -159,7 +155,7 @@ export default class TransactionTableRow extends Component {
   }
   _createIdSelectElement(items, initialValue = '', name = null) {
     return (
-      <select value={initialValue} name={name} onChange={this.handleChangeInput}>
+      <select className="flat-select" value={initialValue} name={name} onChange={this.handleChangeInput}>
         {items.map(item => <option key={item.id} value={item.id}>{item.name}</option>)}
       </select>
     );
@@ -178,39 +174,130 @@ export default class TransactionTableRow extends Component {
         case transactionTypes.PAYMENT:
           return (
             <tr>
+              <td><TransactionTypeLabel transactionType={transactionType} /></td>
               <td>
-                <input type="date" name="transactionDate" value={this._formatDate(this.state.transactionDate)} onChange={this.handleChangeInput}/>
-                from: {this._createIdSelectElement(dataset.accounts, this.state.fromAccountId, 'fromAccountId')}
-                category: {this._createIdSelectElement(dataset.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionType), this.state.transactionCategoryId, 'transactionCategoryId')}
-                <input type="number" name="amount" onChange={this.handleChangeInput} value={this.state.amount}/>
-                <span onClick={this.handleClickUpdateButton}>Update</span>
-                <span onClick={this.handleClickCancelButton}>Cancel</span>
+                <input
+                  autoFocus
+                  className="flat-input"
+                  type="date"
+                  name="transactionDate"
+                  value={this._formatDate(this.state.transactionDate)}
+                  onChange={this.handleChangeInput}
+                />
+              </td>
+              <td>
+                {this._createIdSelectElement(
+                  dataset.accounts,
+                  this.state.fromAccountId,
+                  'fromAccountId'
+                )}
+              </td>
+              <td></td>
+              <td>
+                {this._createIdSelectElement(
+                  dataset.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionType),
+                  this.state.transactionCategoryId,
+                  'transactionCategoryId')}
+              </td>
+              <td>
+                <input
+                  className="flat-input"
+                  type="number"
+                  name="amount"
+                  value={this.state.amount}
+                  onChange={this.handleChangeInput}
+                />
+              </td>
+              <td></td>
+              <td>
+                <button className="icon icon-button" onClick={this.handleClickUpdateButton}>done</button>
               </td>
             </tr>
           );
         case transactionTypes.INCOME:
           return (
             <tr>
+              <td><TransactionTypeLabel transactionType={transactionType} /></td>
               <td>
-                <input type="date" name="transactionDate" value={this._formatDate(this.state.transactionDate)} onChange={this.handleChangeInput}/>
-                to: {this._createIdSelectElement(dataset.accounts)}
-                category: {this._createIdSelectElement(dataset.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionType))}
-                <input type="number" name="amount" onChange={this.handleChangeInput} value={this.state.amount}/>
-                <span onClick={this.handleClickUpdateButton}>Update</span>
-                <span onClick={this.handleClickCancelButton}>Cancel</span>
+                <input
+                  autoFocus
+                  className="flat-input"
+                  type="date"
+                  name="transactionDate"
+                  value={this._formatDate(this.state.transactionDate)}
+                  onChange={this.handleChangeInput}
+                />
+              </td>
+              <td></td>
+              <td>
+                {this._createIdSelectElement(
+                  dataset.accounts,
+                  this.state.toAccountId,
+                  'toAccountId'
+                )}</td>
+              <td>
+                {this._createIdSelectElement(
+                  dataset.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionType),
+                  this.state.transactionCategoryId,
+                  'transactionCategoryId'
+                )}
+              </td>
+              <td>
+                <input
+                  className="flat-input"
+                  type="number"
+                  name="amount"
+                  value={this.state.amount}
+                  onChange={this.handleChangeInput}
+                />
+              </td>
+              <td></td>
+              <td>
+                <button className="icon icon-button" onClick={this.handleClickUpdateButton}>done</button>
               </td>
             </tr>
           );
         case transactionTypes.TRANSFER:
           return (
             <tr>
+              <td><TransactionTypeLabel transactionType={transactionType} /></td>
               <td>
-                <input type="date" name="transactionDate" value={this._formatDate(this.state.transactionDate)} onChange={this.handleChangeInput}/>
-                from: {this._createIdSelectElement(dataset.accounts)}
-                to: {this._createIdSelectElement(dataset.accounts)}
-                <input type="number" name="amount" onChange={this.handleChangeInput} value={this.state.amount}/>
-                <span onClick={this.handleClickUpdateButton}>Update</span>
-                <span onClick={this.handleClickCancelButton}>Cancel</span>
+                <input
+                  autoFocus
+                  className="flat-input"
+                  type="date"
+                  name="transactionDate"
+                  value={this._formatDate(this.state.transactionDate)}
+                  onChange={this.handleChangeInput}
+                />
+              </td>
+              <td>
+                {this._createIdSelectElement(
+                  dataset.accounts,
+                  this.state.toAccountId,
+                  'toAccountId'
+                )}
+              </td>
+              <td>
+                {this._createIdSelectElement(
+                  dataset.accounts,
+                  this.state.fromAccountId,
+                  'fromAccountId'
+                )}
+              </td>
+              <td></td>
+              <td>
+                <input
+                  className="flat-input"
+                  type="number"
+                  name="amount"
+                  onChange={this.handleChangeInput}
+                  value={this.state.amount}
+                />
+              </td>
+              <td></td>
+              <td>
+                <button className="icon icon-button" onClick={this.handleClickUpdateButton}>done</button>
               </td>
             </tr>
           );
