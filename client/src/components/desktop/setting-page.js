@@ -4,16 +4,14 @@ import UserSetting from './user-setting';
 
 import {changeHistory} from '../../actions/app-action-creators';
 
+import Link from './link';
+
 export default function SettingPage(props) {
   const state = props.state;
 
-  const toDashboard = () => {
-    changeHistory('/dashboard');
-  };
-
   return (
     <div>
-      <span onClick={toDashboard}>Back</span>
+      <Link href="/dashboard">Back</Link>
       <section className="setting">
         <h2>Setting</h2>
         <UserSetting user={state.user}/>

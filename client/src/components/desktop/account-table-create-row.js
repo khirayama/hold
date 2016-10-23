@@ -114,10 +114,10 @@ export default class AccountTableCreateRow extends Component {
       <tr>
         <td colSpan="4">
           <div className="account-create-button-container">
-            <div
+            <button
               className="flat-button"
               onClick={this.handleClickNewButton}
-            >ADD ACCOUNT</div>
+            >ADD ACCOUNT</button>
           </div>
         </td>
       </tr>

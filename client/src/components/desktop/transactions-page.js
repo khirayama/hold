@@ -5,6 +5,7 @@ import transactionTypes from '../../constants/transaction-types';
 import TransactionTable from './transaction-table';
 import TransactionCreateForm from './transaction-create-form';
 import TransactionCategoryModal from './transaction-category-modal';
+import Link from './link';
 
 import {changeHistory} from '../../actions/app-action-creators';
 import {hideTransactionCategoryModal} from '../../actions/modal-action-creators';
@@ -14,13 +15,9 @@ export default function TransactionsPage(props) {
   const paymentTransactionCategory = state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.PAYMENT);
   const incomeTransactionCategory = state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.INCOME)
 
-  const toDashboard = () => {
-    changeHistory('/dashboard');
-  };
-
   return (
     <div className="transactions-page">
-      <span onClick={toDashboard}>Back</span>
+      <Link href="/dashboard">Back</Link>
       <section className="transactions-page-content">
         <div className="transactions-page-sub-column">
           <section className="transaction-create-section">
