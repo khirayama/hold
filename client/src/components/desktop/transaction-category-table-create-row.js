@@ -6,6 +6,7 @@ import transactionTypes from '../../constants/transaction-types';
 import {createTransactionCategory} from '../../actions/transaction-category-action-creators';
 
 import FloatingButton from './floating-button';
+import FlatInput from './flat-input';
 
 export default class TransactionCategoryTableCreateRow extends Component {
   constructor() {
@@ -49,15 +50,14 @@ export default class TransactionCategoryTableCreateRow extends Component {
     return (
       <tr>
         <td>
-          <input
+          <FlatInput
             autoFocus
-            className="flat-input"
             type="text"
             placeholder="Enter transaction category name"
             value={this.state.name}
             onChange={this.handleChangeNameInput}
             onKeyDown={this.handleKeyDownNameInput}
-            />
+          />
         </td>
         <td>
           <select

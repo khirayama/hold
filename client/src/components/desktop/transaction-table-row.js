@@ -13,6 +13,7 @@ import {
 import AmountLabel from './amount-label';
 import TransactionTypeLabel from './transaction-type-label';
 import IconButton from './icon-button';
+import FlatInput from './flat-input';
 
 export default class TransactionTableRow extends Component {
   constructor(props) {
@@ -175,9 +176,8 @@ export default class TransactionTableRow extends Component {
             <tr>
               <td><TransactionTypeLabel transactionType={transactionType}/></td>
               <td>
-                <input
+                <FlatInput
                   autoFocus
-                  className="flat-input"
                   type="date"
                   name="transactionDate"
                   value={this._formatDate(this.state.transactionDate)}
@@ -199,8 +199,7 @@ export default class TransactionTableRow extends Component {
                   'transactionCategoryId')}
               </td>
               <td>
-                <input
-                  className="flat-input"
+                <FlatInput
                   type="number"
                   name="amount"
                   value={this.state.amount}
@@ -218,9 +217,8 @@ export default class TransactionTableRow extends Component {
             <tr>
               <td><TransactionTypeLabel transactionType={transactionType}/></td>
               <td>
-                <input
+                <FlatInput
                   autoFocus
-                  className="flat-input"
                   type="date"
                   name="transactionDate"
                   value={this._formatDate(this.state.transactionDate)}
@@ -242,8 +240,7 @@ export default class TransactionTableRow extends Component {
                 )}
               </td>
               <td>
-                <input
-                  className="flat-input"
+                <FlatInput
                   type="number"
                   name="amount"
                   value={this.state.amount}
@@ -261,9 +258,8 @@ export default class TransactionTableRow extends Component {
             <tr>
               <td><TransactionTypeLabel transactionType={transactionType}/></td>
               <td>
-                <input
+                <FlatInput
                   autoFocus
-                  className="flat-input"
                   type="date"
                   name="transactionDate"
                   value={this._formatDate(this.state.transactionDate)}
@@ -286,8 +282,7 @@ export default class TransactionTableRow extends Component {
               </td>
               <td/>
               <td>
-                <input
-                  className="flat-input"
+                <FlatInput
                   type="number"
                   name="amount"
                   onChange={this.handleChangeInput}

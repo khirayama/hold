@@ -8,6 +8,7 @@ import transactionTypes from '../../constants/transaction-types';
 import {showTransactionCategoryModal} from '../../actions/modal-action-creators';
 import {createTransaction} from '../../actions/transaction-action-creators';
 
+import FlatInput from './flat-input';
 import FloatingInput from './floating-input';
 import FlatButton from './flat-button';
 import FloatingButton from './floating-button';
@@ -266,8 +267,8 @@ export default class TransactionCreateForm extends Component {
             <tr>
               <th>Date</th>
               <td>
-                <input
-                  className="flat-input size__spread"
+                <FlatInput
+                  className="size__spread"
                   type="date"
                   name="transactionDate"
                   value={this._formatDate(this.state.transactionDate)}
@@ -278,8 +279,8 @@ export default class TransactionCreateForm extends Component {
             <tr>
               <th>Amount({dataset.currencyCode})</th>
               <td>
-                <input
-                  className="flat-input size__spread"
+                <FlatInput
+                  className="size__spread"
                   type="number"
                   name="amount"
                   placeholder="Enter amount"

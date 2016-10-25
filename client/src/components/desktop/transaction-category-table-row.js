@@ -10,6 +10,7 @@ import {
 
 import TransactionTypeLabel from './transaction-type-label';
 import IconButton from './icon-button';
+import FlatInput from './flat-input';
 
 export default class TransactionCategoryListItem extends Component {
   constructor(props) {
@@ -110,9 +111,8 @@ export default class TransactionCategoryListItem extends Component {
       return (
         <tr>
           <td>
-            <input
+            <FlatInput
               autoFocus
-              className="flat-input"
               type="text"
               placeholder="Enter transaction category name"
               value={this.state.name}
