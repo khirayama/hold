@@ -5,6 +5,7 @@ import keyCodes from '../../constants/key-codes';
 import {createAccount} from '../../actions/account-action-creators';
 
 import FloatingInput from './floating-input';
+import IconButton from './icon-button';
 
 export default class AccountTableCreateRow extends Component {
   constructor() {
@@ -102,10 +103,10 @@ export default class AccountTableCreateRow extends Component {
               />
           </td>
           <td>
-            <button onClick={this.handleClickCreateButton} className="icon icon-button">done</button>
+            <IconButton onClick={this.handleClickCreateButton}>done</IconButton>
           </td>
           <td>
-            <button onClick={this.handleClickCancelButton} className="icon icon-button">clear</button>
+            <IconButton onClick={this.handleClickCancelButton}>clear</IconButton>
           </td>
         </tr>
       );

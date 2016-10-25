@@ -12,6 +12,7 @@ import {
 
 import AmountLabel from './amount-label';
 import TransactionTypeLabel from './transaction-type-label';
+import IconButton from './icon-button';
 
 export default class TransactionTableRow extends Component {
   constructor(props) {
@@ -208,7 +209,7 @@ export default class TransactionTableRow extends Component {
               </td>
               <td/>
               <td>
-                <button className="icon icon-button" onClick={this.handleClickUpdateButton}>done</button>
+                <IconButton onClick={this.handleClickUpdateButton}>done</IconButton>
               </td>
             </tr>
           );
@@ -251,7 +252,7 @@ export default class TransactionTableRow extends Component {
               </td>
               <td/>
               <td>
-                <button className="icon icon-button" onClick={this.handleClickUpdateButton}>done</button>
+                <IconButton onClick={this.handleClickUpdateButton}>done</IconButton>
               </td>
             </tr>
           );
@@ -295,7 +296,7 @@ export default class TransactionTableRow extends Component {
               </td>
               <td/>
               <td>
-                <button className="icon icon-button" onClick={this.handleClickUpdateButton}>done</button>
+                <IconButton onClick={this.handleClickUpdateButton}>done</IconButton>
               </td>
             </tr>
           );
@@ -330,10 +331,7 @@ export default class TransactionTableRow extends Component {
           {transaction.note}
         </td>
         <td>
-          <button
-            className="icon icon-button"
-            onClick={this.handleClickDeleteButton}
-            >delete</button>
+          <IconButton onClick={this.handleClickDeleteButton}>delete</IconButton>
           {errorIconElement}
         </td>
       </tr>

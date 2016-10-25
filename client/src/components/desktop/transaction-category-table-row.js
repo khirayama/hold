@@ -9,6 +9,7 @@ import {
 } from '../../actions/transaction-category-action-creators';
 
 import TransactionTypeLabel from './transaction-type-label';
+import IconButton from './icon-button';
 
 export default class TransactionCategoryListItem extends Component {
   constructor(props) {
@@ -130,7 +131,7 @@ export default class TransactionCategoryListItem extends Component {
             </select>
           </td>
           <td>
-            <button className="icon icon-button" onClick={this.handleClickUpdateButton}>done</button>
+            <IconButton onClick={this.handleClickUpdateButton}>done</IconButton>
           </td>
           <td/>
         </tr>
@@ -145,7 +146,7 @@ export default class TransactionCategoryListItem extends Component {
           <TransactionTypeLabel transactionType={transactionCategory.transactionType}/>
         </td>
         <td>
-          <button onClick={this.handleClickDeleteButton} className="icon icon-button">delete</button>
+          <IconButton onClick={this.handleClickDeleteButton}>delete</IconButton>
         </td>
         <td>{errorIconElement}</td>
       </tr>
