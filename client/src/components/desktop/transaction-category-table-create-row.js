@@ -5,6 +5,8 @@ import transactionTypes from '../../constants/transaction-types';
 
 import {createTransactionCategory} from '../../actions/transaction-category-action-creators';
 
+import FloatingButton from './floating-button';
+
 export default class TransactionCategoryTableCreateRow extends Component {
   constructor() {
     super();
@@ -68,10 +70,7 @@ export default class TransactionCategoryTableCreateRow extends Component {
           </select>
         </td>
         <td>
-          <div
-            className="floating-button"
-            onClick={this.handleClickCreateButton}
-            >CREATE</div>
+          <FloatingButton onClick={this.handleClickCreateButton}>CREATE</FloatingButton>
         </td>
       </tr>
     );

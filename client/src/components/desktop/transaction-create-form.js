@@ -10,6 +10,7 @@ import {createTransaction} from '../../actions/transaction-action-creators';
 
 import FloatingInput from './floating-input';
 import FlatButton from './flat-button';
+import FloatingButton from './floating-button';
 
 export default class TransactionCreateForm extends Component {
   constructor(props) {
@@ -308,10 +309,10 @@ export default class TransactionCreateForm extends Component {
             </tr>
           </tbody>
         </table>
-        <button
-          className="floating-button size__spread"
+        <FloatingButton
+          className="size__spread"
           onClick={this.handleClickCreateButton}
-          >ENTER</button>
+          >ENTER</FloatingButton>
         <div className="transaction-category-edit-button-container">
           <FlatButton onClick={showTransactionCategoryModal}>EDIT TRANSACTION CATEGORY</FlatButton>
         </div>
