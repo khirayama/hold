@@ -293,7 +293,7 @@ export default class TransactionCreateForm extends Component {
               <td colSpan="2">
                 <div className="floating-input-container">
                   <FloatingInput
-                    addedClassName="size__spread"
+                    className="size__spread"
                     type="text"
                     name="note"
                     label="Note"

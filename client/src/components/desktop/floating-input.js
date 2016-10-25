@@ -8,14 +8,13 @@ export default function FloatingInput(props) {
   delete props_.label;
 
   return (
-    <span className={`floating-input ${props.addedClassName}`}>
-      <input className="flat-input size__spread" {...props_}/>
+    <span className={`floating-input ${props.className}`}>
+      <input {...props_}/>
       <label>{props.label}</label>
     </span>
   );
 }
 
 FloatingInput.propTypes = {
-  addedClassName: React.PropTypes.string,
   label: React.PropTypes.string.isRequired,
 };

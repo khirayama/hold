@@ -1,0 +1,38 @@
+.floating-input
+  display: inline-block
+  position: relative
+  margin-top: 1.2rem
+  label
+    display: inline-block
+    position: absolute
+    top: 0
+    left: 0
+    pointer-events: none
+    transition: $timing-slow
+    transition-property: font-size, top
+  input[value=""] + label
+    font-size: 1rem
+    top: 0
+  label,
+  input:focus + label
+    font-size: .75rem
+    top: -1.4rem
+  input
+    display: inline-block
+    width: 100%
+    padding: 4px 0
+    border: none
+    border-bottom: solid 1px $color-primary
+    border-radius: 0
+    transition: box-shadow .2s ease-out, background .2s ease-out
+    &:hover
+      box-shadow: 0 1px 0 0 $color-primary
+    &:focus
+      border: none
+      border-bottom: solid 1px $color-primary
+      background: $color-mask
+      box-shadow: 0 1px 0 0 $color-primary
+    &::-webkit-input-placeholder
+      color: rgba(0, 0, 0, 0)
+    &:focus::-webkit-input-placeholder
+      color: $color-text-secondary
