@@ -9,6 +9,7 @@ import {
 } from '../../actions/account-action-creators';
 
 import FloatingInput from './floating-input';
+import IconButton from './icon-button';
 import AmountLabel from './amount-label';
 
 export default class AccountListItem extends Component {
@@ -149,7 +150,7 @@ export default class AccountListItem extends Component {
               />
           </td>
           <td>
-            <button className="icon icon-button" onClick={this.handleClickUpdateButton}>done</button>
+            <IconButton onClick={this.handleClickUpdateButton}>done</IconButton>
           </td>
           <td>{errorIconElement}</td>
         </tr>
@@ -167,7 +168,7 @@ export default class AccountListItem extends Component {
             />
         </td>
         <td>
-          <button className="icon icon-button" onClick={this.handleClickDeleteButton}>delete</button>
+          <IconButton onClick={this.handleClickDeleteButton}>delete</IconButton>
         </td>
         <td>{errorIconElement}</td>
       </tr>
