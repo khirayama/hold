@@ -7,6 +7,7 @@ import {createTransactionCategory} from '../../actions/transaction-category-acti
 
 import FloatingButton from './floating-button';
 import FlatInput from './flat-input';
+import FlatSelect from './flat-select';
 
 export default class TransactionCategoryTableCreateRow extends Component {
   constructor() {
@@ -60,14 +61,13 @@ export default class TransactionCategoryTableCreateRow extends Component {
           />
         </td>
         <td>
-          <select
-            className="flat-select"
+          <FlatSelect
             defaultValue={this.state.transactionType}
             onChange={this.handleChangeTransactionCategorySelect}
             >
             <option value="payment">Payment</option>
             <option value="income">Income</option>
-          </select>
+          </FlatSelect>
         </td>
         <td>
           <FloatingButton onClick={this.handleClickCreateButton}>CREATE</FloatingButton>

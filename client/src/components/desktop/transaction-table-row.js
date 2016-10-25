@@ -14,6 +14,7 @@ import AmountLabel from './amount-label';
 import TransactionTypeLabel from './transaction-type-label';
 import IconButton from './icon-button';
 import FlatInput from './flat-input';
+import FlatSelect from './flat-select';
 
 export default class TransactionTableRow extends Component {
   constructor(props) {
@@ -155,9 +156,9 @@ export default class TransactionTableRow extends Component {
   }
   _createIdSelectElement(items, initialValue = '', name = null) {
     return (
-      <select className="flat-select" value={initialValue} name={name} onChange={this.handleChangeInput}>
+      <FlatSelect value={initialValue} name={name} onChange={this.handleChangeInput}>
         {items.map(item => <option key={item.id} value={item.id}>{item.name}</option>)}
-      </select>
+      </FlatSelect>
     );
   }
   render() {

@@ -11,8 +11,9 @@ import {
 import TransactionTypeLabel from './transaction-type-label';
 import IconButton from './icon-button';
 import FlatInput from './flat-input';
+import FlatSelect from './flat-select';
 
-export default class TransactionCategoryListItem extends Component {
+export default class TransactionCategoryTableRow extends Component {
   constructor(props) {
     super(props);
 
@@ -121,14 +122,13 @@ export default class TransactionCategoryListItem extends Component {
               />
           </td>
           <td>
-            <select
-              className="flat-select"
+            <FlatSelect
               defaultValue={this.state.transactionType}
               onChange={this.handleChangeTransactionTypeSelect}
               >
               <option value="payment">Payment</option>
               <option value="income">Income</option>
-            </select>
+            </FlatSelect>
           </td>
           <td>
             <IconButton onClick={this.handleClickUpdateButton}>done</IconButton>
@@ -154,6 +154,6 @@ export default class TransactionCategoryListItem extends Component {
   }
 }
 
-TransactionCategoryListItem.propTypes = {
+TransactionCategoryTableRow.propTypes = {
   transactionCategory: React.PropTypes.object.isRequired,
 };

@@ -10,6 +10,7 @@ import {createTransaction} from '../../actions/transaction-action-creators';
 
 import FlatInput from './flat-input';
 import FloatingInput from './floating-input';
+import FlatSelect from './flat-select';
 import FlatButton from './flat-button';
 import FloatingButton from './floating-button';
 
@@ -178,15 +179,15 @@ export default class TransactionCreateForm extends Component {
   }
   _createIdSelectElement(items, initialValue = '', name = null) {
     return (
-      <select
-        className="flat-select size__spread"
+      <FlatSelect
+        className="size__spread"
         value={initialValue}
         name={name}
         onChange={this.handleChangeInput}
         onKeyDown={this.handleKeyDownInputWithEnterCreate}
         >
         {items.map(item => <option key={item.id} value={item.id}>{item.name}</option>)}
-      </select>
+      </FlatSelect>
     );
   }
   render() {
