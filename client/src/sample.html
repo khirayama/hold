@@ -1,4 +1,10 @@
-<!DOCTYPE html><html><head><title>Sample</title><meta charset=utf-8><script src=https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js></script><script>
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Sample</title>
+  <meta charset="utf-8">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script>
 window.resources = {};
 function createSelectElement(element, json) {
   var $element = $(element);
@@ -99,14 +105,39 @@ function crud($parent, resources, template, shownUpdateBoxCallback) {
     });
   });
 }
-  </script></head><body><a href=/api/v1/auth/twitter>Sign up with Twitter</a><h2>User</h2><div class=user-information></div><script>
+  </script>
+</head>
+<body>
+  <a href="/api/v1/auth/twitter">Sign up with Twitter</a>
+
+  <h2>User</h2>
+  <div class="user-information"></div>
+  <script>
 $.ajax({
   type: 'GET',
   url: '/api/v1/current_user_information'
 }).done(function(res) {
   $('.user-information').html(JSON.stringify(res));
 });
-  </script><h2>Accounts</h2><div class=accounts><div class=create-box><input type=text name=name> <input type=number name=amount><div class=create-button>Create</div></div><div class=update-box><input type=hidden name=id> <input type=text name=name> <input type=number name=amount><div class=update-button>Update</div><div class=cancel-edit-button>Cancel</div></div><ul class=index-list></ul></div><script>
+  </script>
+
+  <h2>Accounts</h2>
+  <div class="accounts">
+    <div class="create-box">
+      <input type="text" name="name" />
+      <input type="number" name="amount" />
+      <div class="create-button">Create</div>
+    </div>
+    <div class="update-box">
+      <input type="hidden" name="id" />
+      <input type="text" name="name" />
+      <input type="number" name="amount" />
+      <div class="update-button">Update</div>
+      <div class="cancel-edit-button">Cancel</div>
+    </div>
+    <ul class="index-list"></ul>
+  </div>
+  <script>
 var $accounts = $('.accounts');
 function accountTemplate(account) {
   return `
@@ -118,7 +149,23 @@ function accountTemplate(account) {
   `;
 }
 crud($accounts, 'accounts', accountTemplate);
-  </script><h2>TransactionCategories</h2><div class=transaction-categories><div class=create-box><input type=text name=name><div class=create-button>Create</div></div><div class=update-box><input type=hidden name=id> <input type=text name=name><div class=update-button>Update</div><div class=cancel-edit-button>Cancel</div></div><ul class=index-list></ul></div><script>
+  </script>
+
+  <h2>TransactionCategories</h2>
+  <div class="transaction-categories">
+    <div class="create-box">
+      <input type="text" name="name" />
+      <div class="create-button">Create</div>
+    </div>
+    <div class="update-box">
+      <input type="hidden" name="id" />
+      <input type="text" name="name" />
+      <div class="update-button">Update</div>
+      <div class="cancel-edit-button">Cancel</div>
+    </div>
+    <ul class="index-list"></ul>
+  </div>
+  <script>
 var $transactionCategories = $('.transaction-categories');
 function transactionCategoryTemplate(transactionCategory) {
   return `
@@ -130,7 +177,31 @@ function transactionCategoryTemplate(transactionCategory) {
   `;
 }
 crud($transactionCategories, 'transaction_categories', transactionCategoryTemplate);
-  </script><h2>Transactions</h2><div class=transactions><div class=create-box>from:<div class=js-select-accounts name=from_account_id></div>to:<div class=js-select-accounts name=to_account_id></div>transaction category:<div class=js-select-transaction-categories name=transaction_category_id></div><input type=number name=amount> <input type=date name=transaction_date><div class=create-button>Create</div></div><div class=update-box><input type=hidden name=id> from:<div class=js-select-accounts name=from_account_id></div>to:<div class=js-select-accounts name=to_account_id></div>transaction category:<div class=js-select-transaction-categories name=transaction_category_id></div><input type=number name=amount> <input type=date name=transaction_date><div class=update-button>Update</div><div class=cancel-edit-button>Cancel</div></div><ul class=index-list></ul></div><script>
+  </script>
+
+  <h2>Transactions</h2>
+  <div class="transactions">
+    <div class="create-box">
+      from:<div class="js-select-accounts" name="from_account_id"></div>
+      to:<div class="js-select-accounts" name="to_account_id"></div>
+      transaction category:<div class="js-select-transaction-categories" name="transaction_category_id"></div>
+      <input type="number" name="amount" />
+      <input type="date" name="transaction_date" />
+      <div class="create-button">Create</div>
+    </div>
+    <div class="update-box">
+      <input type="hidden" name="id" />
+      from:<div class="js-select-accounts" name="from_account_id"></div>
+      to:<div class="js-select-accounts" name="to_account_id"></div>
+      transaction category:<div class="js-select-transaction-categories" name="transaction_category_id"></div>
+      <input type="number" name="amount" />
+      <input type="date" name="transaction_date" />
+      <div class="update-button">Update</div>
+      <div class="cancel-edit-button">Cancel</div>
+    </div>
+    <ul class="index-list"></ul>
+  </div>
+  <script>
 var $transactions = $('.transactions');
 function transactionTemplate(transaction) {
   return `
@@ -158,4 +229,6 @@ setTimeout(function() {
   createUpdateTransactionForm();
 }, 1000);
 crud($transactions, 'transactions', transactionTemplate, createUpdateTransactionForm);
-  </script></body></html>
+  </script>
+</body>
+</html>

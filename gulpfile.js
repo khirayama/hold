@@ -51,7 +51,7 @@ const options = {
 function buildMarkups(isWatch) {
   function build() {
     console.log('build: markups');
-    return gulp.src([`${SRC_ROOT}/app.html`])
+    return gulp.src([`${SRC_ROOT}/**/*.html`])
       .pipe(plumber())
       .pipe(minifyHTML({empty: true}))
       .pipe(gulp.dest(DIST_ROOT));
@@ -60,7 +60,7 @@ function buildMarkups(isWatch) {
   if (isWatch) {
     return () => {
       build();
-      gulp.watch([`${SRC_ROOT}/app.html`], build);
+      gulp.watch([`${SRC_ROOT}/**/*.html`], build);
     };
   }
   return () => {
@@ -115,7 +115,7 @@ function buildImages() {
 }
 
 function buildFiles() {
-  return gulp.src([`${SRC_ROOT}/**/*.{csv,json}`])
+  return gulp.src([`${SRC_ROOT}/**/*.{csv,json,ico,txt}`])
     .pipe(gulp.dest(DIST_ROOT));
 }
 

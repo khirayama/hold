@@ -1,3 +1,4 @@
+.DS_Store
 /.bundle
 
 /db/*.sqlite3
@@ -15,5 +16,5 @@
 /vendor/bundle
 
 /node_modules
-/* /public */
+/public
 /npm-debug.log
