@@ -6,6 +6,7 @@ import {createAccount} from '../../actions/account-action-creators';
 
 import FloatingInput from './floating-input';
 import IconButton from './icon-button';
+import FlatButton from './flat-button';
 
 export default class AccountTableCreateRow extends Component {
   constructor() {
@@ -115,10 +116,7 @@ export default class AccountTableCreateRow extends Component {
       <tr>
         <td colSpan="4">
           <div className="account-create-button-container">
-            <button
-              className="flat-button"
-              onClick={this.handleClickNewButton}
-              >ADD ACCOUNT</button>
+            <FlatButton onClick={this.handleClickNewButton}>ADD ACCOUNT</FlatButton>
           </div>
         </td>
       </tr>

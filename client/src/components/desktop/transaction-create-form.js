@@ -9,6 +9,7 @@ import {showTransactionCategoryModal} from '../../actions/modal-action-creators'
 import {createTransaction} from '../../actions/transaction-action-creators';
 
 import FloatingInput from './floating-input';
+import FlatButton from './flat-button';
 
 export default class TransactionCreateForm extends Component {
   constructor(props) {
@@ -312,7 +313,7 @@ export default class TransactionCreateForm extends Component {
           onClick={this.handleClickCreateButton}
           >ENTER</button>
         <div className="transaction-category-edit-button-container">
-          <button className="flat-button" onClick={showTransactionCategoryModal}>EDIT TRANSACTION CATEGORY</button>
+          <FlatButton onClick={showTransactionCategoryModal}>EDIT TRANSACTION CATEGORY</FlatButton>
         </div>
       </span>
     );

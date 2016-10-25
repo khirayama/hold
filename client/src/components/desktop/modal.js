@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 
+import FlatButton from './flat-button';
+
 export default class Modal extends Component {
   render() {
     const isShown = this.props.isShown;
@@ -8,7 +10,7 @@ export default class Modal extends Component {
       return (
         <div className="modal-mask">
           <div className="modal">
-            <button className="flat-button modal-close-button" onClick={this.props.onCloseButtonClick}>CLOSE</button>
+            <FlatButton onClick={this.props.onCloseButtonClick}>CLOSE</FlatButton>
             {this.props.children}
           </div>
         </div>
