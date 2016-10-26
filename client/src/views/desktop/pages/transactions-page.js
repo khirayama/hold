@@ -19,14 +19,14 @@ export default class TransactionsPage extends Component {
     const key = '_transactions-page';
 
     if (!state.ready) {
-      return <div key={key} className="transactions-page"></div>;
+      return <div key={key} className="page transactions-page"></div>;
     }
 
     const paymentTransactionCategory = state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.PAYMENT);
     const incomeTransactionCategory = state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.INCOME);
 
     return (
-      <div key={key} className="transactions-page">
+      <div key={key} className="page transactions-page">
         <Link href="/dashboard">Back</Link>
         <section className="transactions-page-content">
           <div className="transactions-page-sub-column">

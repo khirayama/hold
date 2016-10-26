@@ -50,3 +50,17 @@
       display: inline-block
       width: 100%
       vertical-align: top
+
+  &.page-transition-enter
+    transform: scale(.9)
+  &.page-transition-enter.page-transition-enter-active
+    transform: scale(1)
+    transition: 300ms ease-out
+    transition-property: transform
+  &.page-transition-leave
+    z-index: 0
+    transform: scale(1)
+  &.page-transition-leave.page-transition-leave-active
+    transform: scale(.9)
+    transition: 200ms ease-out
+    transition-property: transform

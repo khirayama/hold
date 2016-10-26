@@ -4,3 +4,15 @@
     margin: 0 auto
     h2
       font-size: 1.2rem
+
+  &.page-transition-enter
+    z-index: 1
+    transform: translateX(100%)
+  &.page-transition-enter.page-transition-enter-active
+    transform: translateX(0)
+    transition: transform 400ms $ease-out-expo
+  &.page-transition-leave
+    transform: translateX(0)
+  &.page-transition-leave.page-transition-leave-active
+    transform: translateX(100%)
+    transition: transform 400ms $ease-out-expo
