@@ -52,13 +52,17 @@
       vertical-align: top
 
   &.page-transition-enter
-    transform: scale(.9)
+    .dashboard-page-content
+      transform: scale(.9)
   &.page-transition-enter.page-transition-enter-active
-    transform: scale(1)
-    transition: transform $transition-time $ease-out-expo
+    .dashboard-page-content
+      transform: scale(1)
+      transition: transform $transition-time $ease-out-expo
   &.page-transition-leave
-    z-index: 0
-    transform: scale(1)
+    .dashboard-page-content
+      z-index: 0
+      transform: scale(1)
   &.page-transition-leave.page-transition-leave-active
-    transform: scale(.9)
-    transition: transform $transition-time $ease-out-expo
+    .dashboard-page-content
+      transform: scale(.9)
+      transition: transform $transition-time $ease-out-expo

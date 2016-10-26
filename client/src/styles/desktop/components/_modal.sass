@@ -5,7 +5,8 @@
   left: 0
   width: 100%
   height: 100%
-  background-color: rgba(#000, .1)
+  background-color: $color-background
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, .1)
   .modal
     position: absolute
     top: 50%
@@ -15,3 +16,14 @@
     border-radius: $radius
     background-color: #fff
     transform: translate(-50%, -50%)
+
+  &.modal-transition-enter
+    transform: translateY(100%)
+  &.modal-transition-enter.modal-transition-enter-active
+    transform: translateY(0)
+    transition: transform $transition-time $ease-out-expo
+  &.modal-transition-leave
+    transform: translateY(0)
+  &.modal-transition-leave.modal-transition-leave-active
+    transform: translateY(100%)
+    transition: transform $transition-time $ease-out-expo
