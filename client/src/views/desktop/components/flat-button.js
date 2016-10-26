@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 
 export default function FlatButton(props) {
-  return <button className="flat-button" {...props}>{props.children}</button>;
+  return <button {...props} className={`flat-button ${props.addedClassName}`}>{props.children}</button>;
 }
 
 FlatButton.propTypes = {
-  children: React.PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
+  addedClassName: PropTypes.string,
 };

@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 
 export default function FlatSelect(props) {
-  return <select {...props} className={`flat-select ${props.className}`}>{props.children}</select>;
+  const props_ = Object.assign({}, props);
+  delete props_.addedClassName;
+
+  return <select {...props_} className={`flat-select ${props.addedClassName}`}>{props.children}</select>;
 }
 
 FlatSelect.propTypes = {
-  children: React.PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
+  addedClassName: PropTypes.string,
 };

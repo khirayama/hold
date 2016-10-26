@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 
 export default function FloatingButton(props) {
-  return <button {...props} className={`floating-button ${props.className}`}>{props.children}</button>;
+  const props_ = Object.assign({}, props);
+  delete props_.addedClassName;
+
+  return <button {...props_} className={`floating-button ${props.addedClassName}`}>{props.children}</button>;
 }
 
 FloatingButton.propTypes = {
-  children: React.PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
+  addedClassName: PropTypes.string,
 };

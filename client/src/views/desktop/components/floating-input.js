@@ -1,13 +1,12 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 
 export default function FloatingInput(props) {
   const props_ = Object.assign({}, props);
-
-  // omit className
-  delete props_.className;
+  delete props_.addedClassName;
+  delete props_.label;
 
   return (
-    <span className={`floating-input ${props.className}`}>
+    <span className={`floating-input ${props.addedClassName}`}>
       <input {...props_}/>
       <label>{props.label}</label>
     </span>
@@ -15,5 +14,6 @@ export default function FloatingInput(props) {
 }
 
 FloatingInput.propTypes = {
-  label: React.PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  addedClassName: PropTypes.string,
 };

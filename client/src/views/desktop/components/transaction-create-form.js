@@ -180,7 +180,7 @@ export default class TransactionCreateForm extends Component {
   _createIdSelectElement(items, initialValue = '', name = null) {
     return (
       <FlatSelect
-        className="size__spread"
+        addedClassName="size__spread"
         value={initialValue}
         name={name}
         onChange={this.handleChangeInput}
@@ -269,7 +269,7 @@ export default class TransactionCreateForm extends Component {
               <th>Date</th>
               <td>
                 <FlatInput
-                  className="size__spread"
+                  addedClassName="size__spread"
                   type="date"
                   name="transactionDate"
                   value={this._formatDate(this.state.transactionDate)}
@@ -281,7 +281,7 @@ export default class TransactionCreateForm extends Component {
               <th>Amount({dataset.currencyCode})</th>
               <td>
                 <FlatInput
-                  className="size__spread"
+                  addedClassName="size__spread"
                   type="number"
                   name="amount"
                   placeholder="Enter amount"
@@ -296,7 +296,7 @@ export default class TransactionCreateForm extends Component {
               <td colSpan="2">
                 <div className="floating-input-container">
                   <FloatingInput
-                    className="size__spread"
+                    addedClassName="size__spread"
                     type="text"
                     name="note"
                     label="Note"
@@ -312,7 +312,7 @@ export default class TransactionCreateForm extends Component {
           </tbody>
         </table>
         <FloatingButton
-          className="size__spread"
+          addedClassName="size__spread"
           onClick={this.handleClickCreateButton}
           >ENTER</FloatingButton>
         <div className="transaction-category-edit-button-container">

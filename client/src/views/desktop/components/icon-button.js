@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 
 export default function IconButton(props) {
-  return <button className="icon-button" {...props}>{props.children}</button>;
+  return <button {...props} className={`icon-button ${props.addedClassName}`}>{props.children}</button>;
 }
 
 IconButton.propTypes = {
-  children: React.PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
+  addedClassName: PropTypes.string,
 };
