@@ -19,6 +19,10 @@ export function changeHistory(pathname = '', pushState = true) {
   });
 }
 
+export function startPage() {
+  dispatch({type: types.START_PAGE});
+}
+
 export function startDesktopApp(pathname) {
   User.fetch().then(user => {
     Setting.fetch().then(setting => {

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 
 import transactionTypes from 'constants/transaction-types';
 
@@ -8,21 +8,22 @@ import TransactionCreateForm from '../components/transaction-create-form';
 import Link from '../components/link';
 import TransactionCategoryModal from '../components/transaction-category-modal';
 
-import {fetchInitialDashboardResources} from 'actions/page-initialize-action-creators';
+import {fetchInitialDashboardPageResources} from 'actions/page-initialize-action-creators';
 import {hideTransactionCategoryModal} from 'actions/modal-action-creators';
 
 export default class DashboardPage extends Component {
   componentDidMount() {
-    fetchInitialDashboardResources();
+    fetchInitialDashboardPageResources();
   }
   render() {
     const state = this.props.state;
-    const paymentTransactionCategory = state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.PAYMENT);
-    const incomeTransactionCategory = state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.INCOME);
 
     if (!state.ready) {
       return null;
     }
+
+    const paymentTransactionCategory = state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.PAYMENT);
+    const incomeTransactionCategory = state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.INCOME);
 
     return (
       <div className="dashboard-page">
@@ -64,5 +65,5 @@ export default class DashboardPage extends Component {
 }
 
 DashboardPage.propTypes = {
-  state: React.PropTypes.object.isRequired,
+  state: PropTypes.object.isRequired,
 };
