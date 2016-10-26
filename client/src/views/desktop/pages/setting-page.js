@@ -11,13 +11,14 @@ export default class SettingPage extends Component {
   }
   render() {
     const state = this.props.state;
+    const key = '_setting-page';
 
     if (!state.ready) {
-      return null;
+      return <div key={key} className="page setting-page"></div>;
     }
 
     return (
-      <div className="setting-page">
+      <div key={key} className="page setting-page">
         <Link href="/dashboard">Back</Link>
         <section className="setting-page-content">
           <h2>Setting</h2>

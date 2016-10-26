@@ -1,6 +1,7 @@
 /* eslint-env browser */
 
 import React, {Component} from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import {startDesktopApp} from 'actions/app-action-creators';
 
@@ -34,13 +35,13 @@ export default class Container extends Component {
   _createPageElement(pathname, state) {
     switch (pathname) {
       case '/dashboard':
-        return <DashboardPage state={state}/>;
+        return <DashboardPage key="dashboard-page" state={state}/>;
       case '/transactions':
-        return <TransactionsPage state={state}/>;
+        return <TransactionsPage key="transactions-page" state={state}/>;
       case '/setting':
-        return <SettingPage state={state}/>;
+        return <SettingPage key="setting-page" state={state}/>;
       default:
-        return <NotFoundPage state={state}/>;
+        return <NotFoundPage key="not-fount-page" state={state}/>;
     }
   }
 
@@ -48,7 +49,14 @@ export default class Container extends Component {
     const state = this.state.store.getState();
     const pageElement = this._createPageElement(state.pathname, state);
 
-    return <section>{pageElement}</section>;
+    return (
+      <ReactCSSTransitionGroup
+        className="page-container"
+        transitionName="page-transition"
+        transitionEnterTimeout={400}
+        transitionLeaveTimeout={400}
+      >{pageElement}</ReactCSSTransitionGroup>
+    );
   }
 }
 

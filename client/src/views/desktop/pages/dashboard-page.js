@@ -17,16 +17,17 @@ export default class DashboardPage extends Component {
   }
   render() {
     const state = this.props.state;
+    const key = '_dashboard-page';
 
     if (!state.ready) {
-      return null;
+      return <div key={key} className="page dashboard-page"></div>;
     }
 
     const paymentTransactionCategory = state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.PAYMENT);
     const incomeTransactionCategory = state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.INCOME);
 
     return (
-      <div className="dashboard-page">
+      <div key={key} className="page dashboard-page">
         <div className="dashboard-page-content">
           <div className="dashboard-page-sub-column">
             <h2>Balance</h2>

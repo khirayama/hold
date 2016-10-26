@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 
 export default function NotFound() {
-  return <div>404</div>;
+  const key = '_not-found-page';
+
+  return <div key={key}>404</div>;
 }
 
 NotFound.propTypes = {
-  state: React.PropTypes.object.isRequired,
+  state: PropTypes.object.isRequired,
 };

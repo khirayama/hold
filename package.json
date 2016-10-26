@@ -46,6 +46,7 @@
     "node-uuid": "^1.4.7",
     "numeral": "^1.5.3",
     "react": "^15.3.2",
+    "react-addons-css-transition-group": "^15.3.2",
     "react-dom": "^15.3.2"
   },
   "devDependencies": {
