@@ -50,6 +50,10 @@ export default class Container extends Component {
     const state = this.state.store.getState();
     const pageElement = this._createPageElement(state.pathname, state);
 
+    if (!state.load) {
+      return null;
+    }
+
     return (
       <ReactCSSTransitionGroup
         className="page-container"

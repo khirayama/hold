@@ -16,6 +16,7 @@ export default class Store extends MicroStore {
     super();
 
     this.state = {
+      load: false,
       ready: false,
       pathname: '/',
 
@@ -35,9 +36,11 @@ export default class Store extends MicroStore {
     subscribe(action => {
       switch (action.type) {
         case types.START_DESKTOP_APP:
+          this.state.load = true;
           this.state.pathname = action.pathname;
           break;
         case types.START_MOBILE_APP:
+          this.state.load = true;
           this.state.pathname = action.pathname;
           break;
         case types.CHANGE_HISTORY:
