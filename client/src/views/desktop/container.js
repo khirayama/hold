@@ -2,7 +2,7 @@
 
 import React, {Component} from 'react';
 
-import {fetchInitialDesktopResources} from 'actions/app-action-creators';
+import {startDesktopApp} from 'actions/app-action-creators';
 
 import DashboardPage from './pages/dashboard-page';
 import TransactionsPage from './pages/transactions-page';
@@ -13,16 +13,14 @@ export default class Container extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      store: this.props.store,
-    };
+    this.state = {store: this.props.store};
 
     this.updateState = this._updateState.bind(this);
   }
 
   componentDidMount() {
     this.props.store.addChangeListener(this.updateState);
-    fetchInitialDesktopResources(location.pathname);
+    startDesktopApp(location.pathname);
   }
 
   componentWillUnmount() {
@@ -30,9 +28,7 @@ export default class Container extends Component {
   }
 
   _updateState() {
-    this.setState({
-      store: this.props.store,
-    });
+    this.setState({store: this.props.store});
   }
 
   _createPageElement(pathname, state) {
@@ -50,11 +46,8 @@ export default class Container extends Component {
 
   render() {
     const state = this.state.store.getState();
-
-    if (!state.ready) {
-      return null;
-    }
     const pageElement = this._createPageElement(state.pathname, state);
+
     return <section>{pageElement}</section>;
   }
 }
