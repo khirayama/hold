@@ -55,12 +55,10 @@
     transform: scale(.9)
   &.page-transition-enter.page-transition-enter-active
     transform: scale(1)
-    transition: 300ms ease-out
-    transition-property: transform
+    transition: transform $transition-time $ease-out-expo
   &.page-transition-leave
     z-index: 0
     transform: scale(1)
   &.page-transition-leave.page-transition-leave-active
     transform: scale(.9)
-    transition: 200ms ease-out
-    transition-property: transform
+    transition: transform $transition-time $ease-out-expo
