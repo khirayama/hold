@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
+import {TRANSITION_TIME} from 'constants/constants';
+
 import FlatButton from './flat-button';
 
 export default class Modal extends Component {
@@ -22,8 +24,8 @@ export default class Modal extends Component {
       <ReactCSSTransitionGroup
         className="modal-container"
         transitionName="modal-transition"
-        transitionEnterTimeout={500}
-        transitionLeaveTimeout={500}
+        transitionEnterTimeout={TRANSITION_TIME}
+        transitionLeaveTimeout={TRANSITION_TIME}
       >{content}</ReactCSSTransitionGroup>
     );
   }

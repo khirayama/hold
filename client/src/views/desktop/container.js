@@ -3,6 +3,7 @@
 import React, {Component} from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
+import {TRANSITION_TIME} from 'constants/constants';
 import {startDesktopApp} from 'actions/app-action-creators';
 
 import DashboardPage from './pages/dashboard-page';
@@ -53,8 +54,8 @@ export default class Container extends Component {
       <ReactCSSTransitionGroup
         className="page-container"
         transitionName="page-transition"
-        transitionEnterTimeout={500}
-        transitionLeaveTimeout={500}
+        transitionEnterTimeout={TRANSITION_TIME}
+        transitionLeaveTimeout={TRANSITION_TIME}
       >{pageElement}</ReactCSSTransitionGroup>
     );
   }
