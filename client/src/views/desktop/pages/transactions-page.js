@@ -1,13 +1,13 @@
 import React from 'react';
 
-import transactionTypes from '../../constants/transaction-types';
+import transactionTypes from 'constants/transaction-types';
 
-import TransactionTable from './transaction-table';
-import TransactionCreateForm from './transaction-create-form';
-import TransactionCategoryModal from './transaction-category-modal';
-import Link from './link';
+import TransactionTable from '../components/transaction-table';
+import TransactionCreateForm from '../components/transaction-create-form';
+import TransactionCategoryModal from '../components/transaction-category-modal';
+import Link from '../components/link';
 
-import {hideTransactionCategoryModal} from '../../actions/modal-action-creators';
+import {hideTransactionCategoryModal} from 'actions/modal-action-creators';
 
 export default function TransactionsPage(props) {
   const state = props.state;

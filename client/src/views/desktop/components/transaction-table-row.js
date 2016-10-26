@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import moment from 'moment';
 
-import keyCodes from '../../constants/key-codes';
-import transactionTypes from '../../constants/transaction-types';
+import keyCodes from 'constants/key-codes';
+import transactionTypes from 'constants/transaction-types';
 
 import {
   createTransaction,
   updateTransaction,
   deleteTransaction,
-} from '../../actions/transaction-action-creators';
+} from 'actions/transaction-action-creators';
 
 import AmountLabel from './amount-label';
 import TransactionTypeLabel from './transaction-type-label';

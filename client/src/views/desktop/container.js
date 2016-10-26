@@ -2,12 +2,12 @@
 
 import React, {Component} from 'react';
 
-import {fetchInitialDesktopResources} from '../../actions/app-action-creators';
+import {fetchInitialDesktopResources} from 'actions/app-action-creators';
 
-import DashboardPage from './dashboard-page';
-import TransactionsPage from './transactions-page';
-import SettingPage from './setting-page';
-import NotFoundPage from './not-found-page';
+import DashboardPage from './pages/dashboard-page';
+import TransactionsPage from './pages/transactions-page';
+import SettingPage from './pages/setting-page';
+import NotFoundPage from './pages/not-found-page';
 
 export default class Container extends Component {
   constructor(props) {

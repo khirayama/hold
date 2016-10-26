@@ -1,7 +1,7 @@
 import test from 'ava';
 
 import React from 'react';
-import {shallow, mount} from 'enzyme';
+import {shallow} from 'enzyme';
 import sinon from 'sinon';
 
 import Modal from './modal';

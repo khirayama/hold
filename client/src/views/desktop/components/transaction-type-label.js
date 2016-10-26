@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import transactionTypes from '../../constants/transaction-types';
+import transactionTypes from 'constants/transaction-types';
 
 export default function TransactionTypeLabel(props) {
   return (

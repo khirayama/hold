@@ -9,8 +9,8 @@ import loadStyle from './utils/load-style';
 
 import Store from './store';
 
-import DesktopContainer from './components/desktop/container';
-import MobileContainer from './components/mobile/container';
+import DesktopContainer from './views/desktop/container';
+import MobileContainer from './views/mobile/container';
 
 import {changeHistory} from './actions/app-action-creators';
 

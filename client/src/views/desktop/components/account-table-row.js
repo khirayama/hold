@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 
-import keyCodes from '../../constants/key-codes';
+import keyCodes from 'constants/key-codes';
 
 import {
   createAccount,
   updateAccount,
   deleteAccount,
-} from '../../actions/account-action-creators';
+} from 'actions/account-action-creators';
 
 import FloatingInput from './floating-input';
 import IconButton from './icon-button';

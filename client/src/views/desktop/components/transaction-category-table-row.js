@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 
-import keyCodes from '../../constants/key-codes';
+import keyCodes from 'constants/key-codes';
 
 import {
   createTransactionCategory,
   updateTransactionCategory,
   deleteTransactionCategory,
-} from '../../actions/transaction-category-action-creators';
+} from 'actions/transaction-category-action-creators';
 
 import TransactionTypeLabel from './transaction-type-label';
 import IconButton from './icon-button';

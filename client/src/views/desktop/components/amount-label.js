@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {amount} from '../../utils/currency';
+import {amount} from 'utils/currency';
 
 export default function AmountLabel(props) {
   return (

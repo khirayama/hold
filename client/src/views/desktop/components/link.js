@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {changeHistory} from '../../actions/app-action-creators';
+import {changeHistory} from 'actions/app-action-creators';
 
 export default function Link(props) {
   const handleClickLink = event => {

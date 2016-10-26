@@ -2,11 +2,11 @@ import React, {Component} from 'react';
 import classNames from 'classnames';
 import moment from 'moment';
 
-import keyCodes from '../../constants/key-codes';
-import transactionTypes from '../../constants/transaction-types';
+import keyCodes from 'constants/key-codes';
+import transactionTypes from 'constants/transaction-types';
 
-import {showTransactionCategoryModal} from '../../actions/modal-action-creators';
-import {createTransaction} from '../../actions/transaction-action-creators';
+import {showTransactionCategoryModal} from 'actions/modal-action-creators';
+import {createTransaction} from 'actions/transaction-action-creators';
 
 import FlatInput from './flat-input';
 import FloatingInput from './floating-input';

@@ -1,8 +1,7 @@
 import React from 'react';
 
-import UserSetting from './user-setting';
-
-import Link from './link';
+import UserSetting from '../components/user-setting';
+import Link from '../components/link';
 
 export default function SettingPage(props) {
   const state = props.state;

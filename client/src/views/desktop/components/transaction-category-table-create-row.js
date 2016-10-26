@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 
-import keyCodes from '../../constants/key-codes';
-import transactionTypes from '../../constants/transaction-types';
+import keyCodes from 'constants/key-codes';
+import transactionTypes from 'constants/transaction-types';
 
-import {createTransactionCategory} from '../../actions/transaction-category-action-creators';
+import {createTransactionCategory} from 'actions/transaction-category-action-creators';
 
 import FloatingButton from './floating-button';
 import FlatInput from './flat-input';
@@ -58,7 +58,7 @@ export default class TransactionCategoryTableCreateRow extends Component {
             value={this.state.name}
             onChange={this.handleChangeNameInput}
             onKeyDown={this.handleKeyDownNameInput}
-          />
+            />
         </td>
         <td>
           <FlatSelect
