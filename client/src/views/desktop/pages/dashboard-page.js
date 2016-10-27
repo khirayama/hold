@@ -3,7 +3,7 @@ import moment from 'moment';
 
 import transactionTypes from 'constants/transaction-types';
 
-import AccountTotalSection from '../components/account-total-section';
+import TotalAmountSection from '../components/total-amount-section';
 import AccountTable from '../components/account-table';
 import TransactionTable from '../components/transaction-table';
 import TransactionCreateForm from '../components/transaction-create-form';
@@ -77,8 +77,8 @@ export default class DashboardPage extends Component {
           <div className="dashboard-page-sub-column">
             <h2>Balance</h2>
             <section className="account-section">
-              <section className="account-total-section-container">
-                <AccountTotalSection accounts={state.accounts} label="Total assets"/>
+              <section className="total-amount-section-container">
+                <TotalAmountSection amounts={state.accounts} label="Total assets"/>
               </section>
               <AccountTable accounts={state.accounts}/>
             </section>
@@ -90,9 +90,9 @@ export default class DashboardPage extends Component {
               <TransactionCreateForm transactionDataset={state.transactionDataset}/>
             </section>
             <section className="summary-section">
-              <AccountTotalSection accounts={todayTransactions} label="Today"/>
-              <AccountTotalSection accounts={weekTransactions} label="Week"/>
-              <AccountTotalSection accounts={monthTransactions} label="Month"/>
+              <TotalAmountSection amounts={todayTransactions} label="Today"/>
+              <TotalAmountSection amounts={weekTransactions} label="Week"/>
+              <TotalAmountSection amounts={monthTransactions} label="Month"/>
             </section>
             <section className="transaction-section">
               <h2>Transactions</h2>
