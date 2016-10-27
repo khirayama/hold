@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import moment from 'moment';
 
 import transactionTypes from 'constants/transaction-types';
 
@@ -16,6 +17,26 @@ export default class DashboardPage extends Component {
   componentDidMount() {
     fetchInitialDashboardPageResources();
   }
+  // TODO: common
+  _determineTransactionType(transaction) {
+    if (
+      transaction.toAccount === null &&
+      transaction.fromAccount !== null
+    ) {
+      return transactionTypes.PAYMENT;
+    } else if (
+      transaction.toAccount !== null &&
+      transaction.fromAccount === null
+    ) {
+      return transactionTypes.INCOME;
+    } else if (
+      transaction.toAccount !== null &&
+      transaction.fromAccount !== null
+    ) {
+      return transactionTypes.TRANSFER;
+    }
+    return null;
+  }
   render() {
     const state = this.props.state;
     const key = '_dashboard-page';
@@ -26,6 +47,29 @@ export default class DashboardPage extends Component {
 
     const paymentTransactionCategory = state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.PAYMENT);
     const incomeTransactionCategory = state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.INCOME);
+
+    const todayTransactions = state.transactions.filter((transaction) => {
+      // TODO: common
+      const today = moment().subtract(4, 'hours');
+      const transactionDate = moment(transaction.transactionDate);
+
+      return (this._determineTransactionType(transaction) === transactionTypes.PAYMENT && transactionDate.isSame(today, 'day'));
+    });
+    const weekTransactions = state.transactions.filter((transaction) => {
+      // TODO: common
+      const today = moment().subtract(4, 'hours');
+      const transactionDate = moment(transaction.transactionDate);
+      const since = moment().subtract(4, 'hours').subtract(6, 'days');
+
+      return (this._determineTransactionType(transaction) === transactionTypes.PAYMENT && transactionDate.isBetween(since, today, 'day', '[]'));
+    });
+    const monthTransactions = state.transactions.filter((transaction) => {
+      const today = moment().subtract(4, 'hours');
+      const transactionDate = moment(transaction.transactionDate);
+      const since = moment().subtract(4, 'hours').startOf('month');
+
+      return (this._determineTransactionType(transaction) === transactionTypes.PAYMENT && transactionDate.isBetween(since, today, 'day', '[]'));
+    });
 
     return (
       <div key={key} className="page dashboard-page">
@@ -46,9 +90,9 @@ export default class DashboardPage extends Component {
               <TransactionCreateForm transactionDataset={state.transactionDataset}/>
             </section>
             <section className="summary-section">
-              <AccountTotalSection accounts={state.accounts} label="Today"/>
-              <AccountTotalSection accounts={state.accounts} label="Week"/>
-              <AccountTotalSection accounts={state.accounts} label="Month"/>
+              <AccountTotalSection accounts={todayTransactions} label="Today"/>
+              <AccountTotalSection accounts={weekTransactions} label="Week"/>
+              <AccountTotalSection accounts={monthTransactions} label="Month"/>
             </section>
             <section className="transaction-section">
               <h2>Transactions</h2>
