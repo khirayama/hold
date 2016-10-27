@@ -90,7 +90,8 @@
       "comma-dangle": [
         "error",
         "always-multiline"
-      ]
+      ],
+      "react/forbid-component-props": 0
     }
   }
 }

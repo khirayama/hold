@@ -11,6 +11,8 @@ export function formatUser(user, setting, error = null) {
     setting: {
       language: setting.language,
       currencyCode: setting.currency_code,
+      languages: setting.languages,
+      currencyCodes: setting.currency_codes,
     },
   };
 }

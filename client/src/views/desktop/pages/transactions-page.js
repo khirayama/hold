@@ -19,7 +19,7 @@ export default class TransactionsPage extends Component {
     const key = '_transactions-page';
 
     if (!state.ready) {
-      return <div key={key} className="page transactions-page"></div>;
+      return <div key={key} className="page transactions-page"/>;
     }
 
     const paymentTransactionCategory = state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.PAYMENT);

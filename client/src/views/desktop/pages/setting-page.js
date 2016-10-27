@@ -14,7 +14,7 @@ export default class SettingPage extends Component {
     const key = '_setting-page';
 
     if (!state.ready) {
-      return <div key={key} className="page setting-page"></div>;
+      return <div key={key} className="page setting-page"/>;
     }
 
     return (
@@ -23,7 +23,7 @@ export default class SettingPage extends Component {
         <section className="setting-page-content">
           <h2>Setting</h2>
           <UserSetting user={state.user}/>
-          <a href="/logout">Sign out</a>
+          <a className="link" href="/logout">Sign out</a>
         </section>
       </div>
     );

@@ -60,7 +60,7 @@ export default class Container extends Component {
         transitionName="page-transition"
         transitionEnterTimeout={TRANSITION_TIME}
         transitionLeaveTimeout={TRANSITION_TIME}
-      >{pageElement}</ReactCSSTransitionGroup>
+        >{pageElement}</ReactCSSTransitionGroup>
     );
   }
 }

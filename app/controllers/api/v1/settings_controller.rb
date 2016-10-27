@@ -15,13 +15,15 @@ module Api
 
       private
         def setting_params
-          params.permit(:id, :language, :currency_code)
+          params.permit(:language, :currency_code)
         end
 
         def omit_setting(setting)
           {
             language: setting.language,
             currency_code: setting.currency_code,
+            languages: I18n.available_locales,
+            currency_codes: ['AUD', 'CAD', 'CHF', 'EUR', 'GBP', 'JPY', 'NZD', 'USD']
           }
         end
     end

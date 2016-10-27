@@ -20,7 +20,7 @@ export default class DashboardPage extends Component {
     const key = '_dashboard-page';
 
     if (!state.ready) {
-      return <div key={key} className="page dashboard-page"></div>;
+      return <div key={key} className="page dashboard-page"/>;
     }
 
     const paymentTransactionCategory = state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.PAYMENT);

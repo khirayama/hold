@@ -1,13 +1,13 @@
 import moment from 'moment';
 
-import types from '../constants/action-types';
+import types from 'constants/action-types';
 
-import {dispatch} from '../libs/app-dispatcher';
+import {dispatch} from 'libs/app-dispatcher';
 
-import Transaction from '../resources/transaction';
-import Account from '../resources/account';
-import Setting from '../resources/setting';
-import TransactionCategory from '../resources/transaction-category';
+import Transaction from 'resources/transaction';
+import Account from 'resources/account';
+import Setting from 'resources/setting';
+import TransactionCategory from 'resources/transaction-category';
 
 import {
   formatAccount,

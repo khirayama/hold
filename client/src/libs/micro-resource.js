@@ -30,6 +30,14 @@ export class EntryResource {
       });
     });
   }
+  update(entity) {
+    return new Promise((resolve, reject) => {
+      this._request.put(this._url(), entity).then(res => {
+        this._cache = res.data;
+        resolve(res.data);
+      }).catch(error => reject(error));
+    });
+  }
 }
 
 export class CollectionResource {

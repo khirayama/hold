@@ -18,7 +18,7 @@ window.addEventListener('popstate', () => {
   changeHistory(location.pathname, false);
 });
 
-window.addEventListener('load', () => {
+window.addEventListener('DOMContentLoaded', () => {
   logger.info(`Loaded app at ${new Date()}`);
 
   const store = new Store();

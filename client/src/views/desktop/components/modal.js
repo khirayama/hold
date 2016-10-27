@@ -12,12 +12,12 @@ export default class Modal extends Component {
 
     if (isShown) {
       content = (
-          <div className="modal-mask" key="modal-mask">
-            <div className="modal">
-              <FlatButton onClick={this.props.onCloseButtonClick}>CLOSE</FlatButton>
-              {this.props.children}
-            </div>
+        <div className="modal-mask" key="modal-mask">
+          <div className="modal">
+            <FlatButton onClick={this.props.onCloseButtonClick}>CLOSE</FlatButton>
+            {this.props.children}
           </div>
+        </div>
       );
     }
     return (
@@ -26,7 +26,7 @@ export default class Modal extends Component {
         transitionName="modal-transition"
         transitionEnterTimeout={TRANSITION_TIME}
         transitionLeaveTimeout={TRANSITION_TIME}
-      >{content}</ReactCSSTransitionGroup>
+        >{content}</ReactCSSTransitionGroup>
     );
   }
 }
