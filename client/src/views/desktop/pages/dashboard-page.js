@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 
 import transactionTypes from 'constants/transaction-types';
 
+import AccountTotalSection from '../components/account-total-section';
 import AccountTable from '../components/account-table';
 import TransactionTable from '../components/transaction-table';
 import TransactionCreateForm from '../components/transaction-create-form';
@@ -32,7 +33,7 @@ export default class DashboardPage extends Component {
           <div className="dashboard-page-sub-column">
             <h2>Balance</h2>
             <section className="account-section">
-              <div>TODO: Total assets: </div>
+              <AccountTotalSection accounts={state.accounts}/>
               <AccountTable accounts={state.accounts}/>
             </section>
             <Link href="/setting">Setting</Link>

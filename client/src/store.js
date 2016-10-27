@@ -26,7 +26,7 @@ export default class Store extends MicroStore {
       transactionDataset: null,
       transactions: [],
 
-      isTransactionCategoryModalShown: true,
+      isTransactionCategoryModalShown: false,
     };
 
     this._subscribe();
