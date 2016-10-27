@@ -11,12 +11,13 @@ export default function AccountTotalSection(props) {
 
   return (
     <section className="account-total-section">
-      <span className="account-total-section-label">Total assets:</span>
+      <span className="account-total-section-label">{props.label}</span>
       <AmountLabel currencyCode={currencyCode} amount={total}/>
     </section>
   );
 }
 
 AccountTotalSection.propTypes = {
+  label: PropTypes.string.isRequired,
   accounts: PropTypes.array.isRequired,
 };

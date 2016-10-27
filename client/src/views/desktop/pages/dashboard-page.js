@@ -33,7 +33,9 @@ export default class DashboardPage extends Component {
           <div className="dashboard-page-sub-column">
             <h2>Balance</h2>
             <section className="account-section">
-              <AccountTotalSection accounts={state.accounts}/>
+              <section className="account-total-section-container">
+                <AccountTotalSection accounts={state.accounts} label="Total assets"/>
+              </section>
               <AccountTable accounts={state.accounts}/>
             </section>
             <Link href="/setting">Setting</Link>
@@ -44,7 +46,9 @@ export default class DashboardPage extends Component {
               <TransactionCreateForm transactionDataset={state.transactionDataset}/>
             </section>
             <section className="summary-section">
-              TODO: Summary
+              <AccountTotalSection accounts={state.accounts} label="Today"/>
+              <AccountTotalSection accounts={state.accounts} label="Week"/>
+              <AccountTotalSection accounts={state.accounts} label="Month"/>
             </section>
             <section className="transaction-section">
               <h2>Transactions</h2>
