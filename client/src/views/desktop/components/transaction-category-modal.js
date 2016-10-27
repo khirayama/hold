@@ -6,12 +6,15 @@ import Modal from './modal';
 export default function TransactionCategoryModal(props) {
   return (
     <Modal
+      className="transaction-category-modal"
       isShown={props.isShown}
       onCloseButtonClick={props.onCloseButtonClick}
       >
-      <TransactionCategoryTable
-        transactionCategories={props.transactionCategories}
-        />
+      <div className="transaction-category-table-container">
+        <TransactionCategoryTable
+          transactionCategories={props.transactionCategories}
+          />
+      </div>
     </Modal>
   );
 }

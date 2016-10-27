@@ -19,9 +19,10 @@ export default class SettingPage extends Component {
 
     return (
       <div key={key} className="page setting-page">
-        <Link href="/dashboard">Back</Link>
+        <div className="back-button">
+          <Link href="/dashboard"><span className="icon">arrow_back</span></Link>
+        </div>
         <section className="setting-page-content">
-          <h2>Setting</h2>
           <UserSetting user={state.user}/>
           <a className="link" href="/logout">Sign out</a>
         </section>

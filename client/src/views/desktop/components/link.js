@@ -7,7 +7,7 @@ export default function Link(props) {
     event.preventDefault();
     changeHistory(props.href);
   };
-  return <a className="link" href={props.href} onClick={handleClickLink}>{props.children}</a>;
+  return <a className={`link ${props.className}`} href={props.href} onClick={handleClickLink}>{props.children}</a>;
 }
 
 Link.propTypes = {

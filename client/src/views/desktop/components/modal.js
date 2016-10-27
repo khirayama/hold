@@ -3,7 +3,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import {TRANSITION_TIME} from 'constants/constants';
 
-import FlatButton from './flat-button';
+import IconButton from './icon-button';
 
 export default class Modal extends Component {
   render() {
@@ -12,9 +12,11 @@ export default class Modal extends Component {
 
     if (isShown) {
       content = (
-        <div className="modal-mask" key="modal-mask">
+        <div className={`modal-mask ${this.props.className}`} key="modal-mask">
+          <div className="modal-close-button">
+            <IconButton onClick={this.props.onCloseButtonClick}>close</IconButton>
+          </div>
           <div className="modal">
-            <FlatButton onClick={this.props.onCloseButtonClick}>CLOSE</FlatButton>
             {this.props.children}
           </div>
         </div>

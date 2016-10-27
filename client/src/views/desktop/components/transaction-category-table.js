@@ -5,7 +5,7 @@ import TransactionCategoryTableCreateRow from './transaction-category-table-crea
 
 export default function TransactionCategoryTable(props) {
   return (
-    <table>
+    <table className="transaction-category-table">
       <tbody>
         <TransactionCategoryTableCreateRow/>
         { props.transactionCategories.map(

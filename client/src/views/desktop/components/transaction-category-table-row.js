@@ -133,7 +133,6 @@ export default class TransactionCategoryTableRow extends Component {
           <td>
             <IconButton onClick={this.handleClickUpdateButton}>done</IconButton>
           </td>
-          <td/>
         </tr>
       );
     }
@@ -148,7 +147,9 @@ export default class TransactionCategoryTableRow extends Component {
         <td>
           <IconButton onClick={this.handleClickDeleteButton}>delete</IconButton>
         </td>
-        <td>{errorIconElement}</td>
+        {(errorIconElement) ? (
+          <td>{errorIconElement}</td>
+        ) : null }
       </tr>
     );
   }

@@ -27,7 +27,9 @@ export default class TransactionsPage extends Component {
 
     return (
       <div key={key} className="page transactions-page">
-        <Link href="/dashboard">Back</Link>
+        <div className="back-button">
+          <Link href="/dashboard"><span className="icon">arrow_back</span></Link>
+        </div>
         <section className="transactions-page-content">
           <div className="transactions-page-sub-column">
             <section className="transaction-create-section">

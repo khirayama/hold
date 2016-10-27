@@ -44,17 +44,17 @@ export default class UserSetting extends Component {
       return null;
     }
     return (
-      <section>
-        <div><img src={user.imageUrl} alt="user"/></div>
-        <h3>{user.name}</h3>
+      <section className="user-setting">
+        <div><img className="user-setting-image" src={user.imageUrl} alt="user"/></div>
+        <div className="user-setting-name">{user.name}</div>
         <table>
           <tbody>
             <tr>
-              <th>language</th>
+              <th>Language</th>
               <td>{this._createSelectElement(user.setting.languages, this.state.language, 'language')}</td>
             </tr>
             <tr>
-              <th>currencyCode</th>
+              <th>Currency code</th>
               <td>{this._createSelectElement(user.setting.currencyCodes, this.state.currencyCode, 'currencyCode')}</td>
             </tr>
           </tbody>
