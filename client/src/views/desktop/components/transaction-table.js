@@ -18,7 +18,12 @@ export default function TransactionTable(props) {
         </tr>
       </thead>
       <tbody>
-        { props.transactions.map(
+        { props.transactions.sort((a, b) => {
+          const dateA = new Date(a.transactionDate);
+          const dateB = new Date(b.transactionDate);
+
+          return (dateA.getTime() > dateB.getTime()) ? -1 : 1;
+        }).map(
           transaction => (
             <TransactionTableRow
               key={transaction.cid}
