@@ -37,8 +37,23 @@ export function _formatRequest(transaction) {
   return request;
 }
 
-export function fetchTransactions() {
-  Transaction.fetch().then(data => {
+export function _formatSearchQuery(params) {
+  return {
+    transaction_category_id: params.transactionCategoryId || null,
+    from_account_id: params.fromAccountId || null,
+    to_account_id: params.toAccountId || null,
+    from_amount: params.fromAmount,
+    to_amount: params.toAmount,
+    since: moment(new Date(params.since)).format('YYYY/MM/DD'),
+    until: moment(new Date(params.until)).format('YYYY/MM/DD'),
+    note: params.note,
+  };
+}
+
+export function fetchTransactions(params) {
+  const query = _formatSearchQuery(params);
+
+  Transaction.fetch(query).then(data => {
     dispatch({
       type: types.FETCH_TRANSACTIONS,
       transactions: data.map(transaction => (

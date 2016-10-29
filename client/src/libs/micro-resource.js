@@ -43,6 +43,7 @@ export class EntryResource {
 export class CollectionResource {
   constructor(resourceUrl) {
     this._cache = null;
+    this._cacheQuery = null;
     this._resourceUrl = resourceUrl || null;
     this._request = axios.create();
   }
@@ -55,15 +56,20 @@ export class CollectionResource {
   get data() {
     return this._cache;
   }
-  fetch(data, cache = true) {
-    if (cache && this._cache !== null) {
+  fetch(query, cache = true) {
+    if (
+      cache &&
+      JSON.stringify(query) === this._cacheQuery &&
+      this._cache !== null
+    ) {
       return new Promise(resolve => {
         resolve(this._cache);
       });
     }
     return new Promise((resolve, reject) => {
-      this._request.get(this._url(), {params: data}).then(res => {
+      this._request.get(this._url(), {params: query}).then(res => {
         this._cache = res.data;
+        this._cacheQuery = JSON.stringify(query);
         resolve(res.data);
       }).catch(error => reject(error));
     });
