@@ -1,12 +1,9 @@
 import React, {PropTypes} from 'react';
 
 export default function FlatInput(props) {
-  const props_ = Object.assign({}, props);
-  delete props_.addedClassName;
-
-  return <input {...props_} className={`flat-input ${props.addedClassName}`}/>;
+  return <input {...props} className={`flat-input ${props.className}`}/>;
 }
 
 FlatInput.propTypes = {
-  addedClassName: PropTypes.string,
+  className: PropTypes.string,
 };

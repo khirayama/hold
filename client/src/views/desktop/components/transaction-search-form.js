@@ -24,6 +24,7 @@ export default class TransactionSearchForm extends Component {
     };
 
     this.handleChangeInput = this._handleChangeInput.bind(this);
+    this.handleClickSearchButton = this._handleClickSearchButton.bind(this);
   }
   _handleChangeInput(event) {
     let value = event.currentTarget.value;
@@ -37,13 +38,16 @@ export default class TransactionSearchForm extends Component {
     state[key] = value;
     this.setState(state);
   }
-  _createIdSelectElement(items,  options = {}) {
+  _handleClickSearchButton() {
+    fetchTransactions(this.state);
+  }
+  _createIdSelectElement(items, options = {}) {
     const initialValue = options.initialValue;
     const name = options.name;
 
     return (
       <FlatSelect
-        addedClassName="size__spread"
+        className="size__spread"
         value={initialValue || ''}
         name={name || ''}
         onChange={this.handleChangeInput}
@@ -74,12 +78,12 @@ export default class TransactionSearchForm extends Component {
 
         <FloatingInput onChange={this.handleChangeInput} type="text" label="Note" value={this.state.note} name="note"/>
 
-        <FloatingButton onClick={() => {
-          fetchTransactions(this.state);
-        }}>SEARCH</FloatingButton>
+        <FloatingButton onClick={this.handleClickSearchButton}>SEARCH</FloatingButton>
       </section>
     );
   }
 }
-TransactionSearchForm.propTypes = {};
+TransactionSearchForm.propTypes = {
+  transactionDataset: PropTypes.object.isRequired,
+};
 

@@ -37,4 +37,5 @@ Modal.propTypes = {
   children: React.PropTypes.node.isRequired,
   isShown: React.PropTypes.bool.isRequired,
   onCloseButtonClick: React.PropTypes.func.isRequired,
+  className: React.PropTypes.string,
 };

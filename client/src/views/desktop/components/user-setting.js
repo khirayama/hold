@@ -28,7 +28,7 @@ export default class UserSetting extends Component {
   _createSelectElement(items, initialValue = '', name = null) {
     return (
       <FlatSelect
-        addedClassName="size__spread"
+        className="size__spread"
         value={initialValue}
         name={name}
         onChange={this.handleChangeInput}

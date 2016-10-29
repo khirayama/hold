@@ -36,7 +36,7 @@ export default class TransactionsPage extends Component {
           <div className="transactions-page-main-column">
             <h2>Transactions</h2>
             <section className="transaction-search-section">
-              <TransactionSearchForm transactionDataset={state.transactionDataset} />
+              <TransactionSearchForm transactionDataset={state.transactionDataset}/>
             </section>
             <section className="transaction-section">
               <TransactionTable

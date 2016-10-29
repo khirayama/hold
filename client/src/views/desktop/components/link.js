@@ -13,4 +13,5 @@ export default function Link(props) {
 Link.propTypes = {
   children: React.PropTypes.node,
   href: React.PropTypes.string.isRequired,
+  className: React.PropTypes.string,
 };
