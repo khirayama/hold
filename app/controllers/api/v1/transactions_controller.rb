@@ -4,7 +4,16 @@ module Api
       before_action :authenticate
 
       def index
-        transactions = current_user.transactions.map do |transaction|
+        exec_query = 'current_user.transactions'
+        exec_query += '.where(account_id: params[:to_account_id])' if params[:to_account_id]
+        exec_query += '.where(account_id: params[:from_account_id])' if params[:from_account_id]
+        exec_query += '.where(transaction_category_id: params[:transaction_category_id])' if params[:transaction_category_id]
+        exec_query += '.where("amount >= ?", params[:from_amount])' if params[:from_amount]
+        exec_query += '.where("amount <= ?", params[:to_amount])' if params[:to_amount]
+        exec_query += '.where("transaction_date >= ?", Date.parse(params[:since]))' if params[:since]
+        exec_query += '.where("transaction_date <= ?", Date.parse(params[:until]))' if params[:until]
+
+        transactions = eval(exec_query).map do |transaction|
           format_transaction(transaction)
         end
         render json: transactions
@@ -80,7 +89,13 @@ module Api
             :transaction_category_id,
             :amount,
             :transaction_date,
-            :note
+            :note,
+
+            # for seach
+            :from_amount,
+            :to_amount,
+            :since,
+            :until
           )
         end
 

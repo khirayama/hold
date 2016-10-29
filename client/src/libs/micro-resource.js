@@ -15,14 +15,14 @@ export class EntryResource {
   get data() {
     return this._cache;
   }
-  fetch(cache = true) {
+  fetch(data, cache = true) {
     if (cache && this._cache !== null) {
       return new Promise(resolve => {
         resolve(this._cache);
       });
     }
     return new Promise((resolve, reject) => {
-      this._request.get(this._url()).then(res => {
+      this._request.get(this._url(), {params: data}).then(res => {
         this._cache = res.data;
         resolve(res.data);
       }).catch(error => {
@@ -55,14 +55,14 @@ export class CollectionResource {
   get data() {
     return this._cache;
   }
-  fetch(cache = true) {
+  fetch(data, cache = true) {
     if (cache && this._cache !== null) {
       return new Promise(resolve => {
         resolve(this._cache);
       });
     }
     return new Promise((resolve, reject) => {
-      this._request.get(this._url()).then(res => {
+      this._request.get(this._url(), {params: data}).then(res => {
         this._cache = res.data;
         resolve(res.data);
       }).catch(error => reject(error));

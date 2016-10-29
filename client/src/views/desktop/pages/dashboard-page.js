@@ -55,6 +55,14 @@ export default class DashboardPage extends Component {
 
       return (this._determineTransactionType(transaction) === transactionTypes.PAYMENT && transactionDate.isSame(today, 'day'));
     });
+    const lastThreeDaysTransaction = state.transactions.filter((transaction) => {
+      // TODO: common
+      const today = moment().subtract(4, 'hours');
+      const transactionDate = moment(transaction.transactionDate);
+      const since = moment().subtract(4, 'hours').subtract(3, 'days');
+
+      return (this._determineTransactionType(transaction) === transactionTypes.PAYMENT && transactionDate.isBetween(since, today, 'day', '[]'));
+    });
     const weekTransactions = state.transactions.filter((transaction) => {
       // TODO: common
       const today = moment().subtract(4, 'hours');
@@ -64,6 +72,7 @@ export default class DashboardPage extends Component {
       return (this._determineTransactionType(transaction) === transactionTypes.PAYMENT && transactionDate.isBetween(since, today, 'day', '[]'));
     });
     const monthTransactions = state.transactions.filter((transaction) => {
+      // TODO: common
       const today = moment().subtract(4, 'hours');
       const transactionDate = moment(transaction.transactionDate);
       const since = moment().subtract(4, 'hours').startOf('month');
@@ -95,9 +104,9 @@ export default class DashboardPage extends Component {
               <TotalAmountSection amounts={monthTransactions} label="Month"/>
             </section>
             <section className="transaction-section">
-              <h2>Transactions</h2>
+              <h2>Transactions(last 3 days)</h2>
               <TransactionTable
-                transactions={state.transactions}
+                transactions={lastThreeDaysTransaction}
                 transactionDataset={state.transactionDataset}
                 />
               <Link href="/transactions">More</Link>

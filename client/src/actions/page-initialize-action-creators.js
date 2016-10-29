@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 import types from 'constants/action-types';
 
 import {dispatch} from 'libs/app-dispatcher';
@@ -14,6 +16,11 @@ import TransactionCategory from 'resources/transaction-category';
 import Transaction from 'resources/transaction';
 
 export function fetchInitialDashboardPageResources() {
+  const monthFirstDate = moment().startOf('month');
+  const threeDaysAgoDate = moment().subtract(3, 'days');
+
+  const since = (monthFirstDate.isBefore(threeDaysAgoDate)) ? monthFirstDate : threeDaysAgoDate;
+
   Promise.all([
     Account.fetch().then(data => {
       dispatch({
@@ -29,7 +36,7 @@ export function fetchInitialDashboardPageResources() {
         )),
       });
     }),
-    Transaction.fetch().then(data => {
+    Transaction.fetch({since: since.format('YYYY/MM/DD')}).then(data => {
       dispatch({
         type: types.FETCH_TRANSACTIONS,
         transactions: data.map(transaction => (
@@ -43,6 +50,9 @@ export function fetchInitialDashboardPageResources() {
 }
 
 export function fetchInitialTransactionPageResources() {
+  const since = moment().startOf('month');
+  const until = moment().endOf('month');
+
   Promise.all([
     Account.fetch().then(data => {
       dispatch({
@@ -58,7 +68,10 @@ export function fetchInitialTransactionPageResources() {
         )),
       });
     }),
-    Transaction.fetch().then(data => {
+    Transaction.fetch({
+      since: since.format('YYYY/MM/DD'),
+      until: until.format('YYYY/MM/DD'),
+    }).then(data => {
       dispatch({
         type: types.FETCH_TRANSACTIONS,
         transactions: data.map(transaction => (

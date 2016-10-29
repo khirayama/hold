@@ -40,6 +40,7 @@ export default class TransactionsPage extends Component {
             <h2>Transactions</h2>
             <section className="search-section">
               TODO: search
+              transaction category / from / to / amount(range) / transaction date(range) / note
             </section>
             <section className="transaction-section">
               <TransactionTable
