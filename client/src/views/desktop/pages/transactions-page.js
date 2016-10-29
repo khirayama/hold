@@ -8,20 +8,16 @@ import TransactionCreateForm from '../components/transaction-create-form';
 import TransactionCategoryModal from '../components/transaction-category-modal';
 import Link from '../components/link';
 
-import {fetchInitialTransactionPageResources} from 'actions/page-initialize-action-creators';
+import {fetchInitialTransactionsPageResources} from 'actions/page-initialize-action-creators';
 import {hideTransactionCategoryModal} from 'actions/modal-action-creators';
 
 export default class TransactionsPage extends Component {
   componentDidMount() {
-    fetchInitialTransactionPageResources();
+    fetchInitialTransactionsPageResources();
   }
   render() {
     const state = this.props.state;
     const key = '_transactions-page';
-
-    if (!state.ready) {
-      return <div key={key} className="page transactions-page"/>;
-    }
 
     const paymentTransactionCategory = state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.PAYMENT);
     const incomeTransactionCategory = state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.INCOME);

@@ -17,7 +17,6 @@ export default class Store extends MicroStore {
 
     this.state = {
       load: false,
-      ready: false,
       pathname: '/',
 
       user: {setting: {}},
@@ -44,11 +43,7 @@ export default class Store extends MicroStore {
           this.state.pathname = action.pathname;
           break;
         case types.CHANGE_HISTORY:
-          this.state.ready = false;
           this.state.pathname = action.pathname;
-          break;
-        case types.START_PAGE:
-          this.state.ready = true;
           break;
         default:
           break;

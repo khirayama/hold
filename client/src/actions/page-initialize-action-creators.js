@@ -21,65 +21,57 @@ export function fetchInitialDashboardPageResources() {
 
   const since = (monthFirstDate.isBefore(threeDaysAgoDate)) ? monthFirstDate : threeDaysAgoDate;
 
-  Promise.all([
-    Account.fetch().then(data => {
-      dispatch({
-        type: types.FETCH_ACCOUNTS,
-        accounts: data.map(account => formatAccount(account, Setting.data)),
-      });
-    }),
-    TransactionCategory.fetch().then(data => {
-      dispatch({
-        type: types.FETCH_TRANSACTION_CATEGORIES,
-        transactionCategories: data.map(transactionCategory => (
-          formatTransactionCategory(transactionCategory)
-        )),
-      });
-    }),
-    Transaction.fetch({since: since.format('YYYY/MM/DD')}).then(data => {
-      dispatch({
-        type: types.FETCH_TRANSACTIONS,
-        transactions: data.map(transaction => (
-          formatTransaction(transaction, Account.data, TransactionCategory.data, Setting.data)
-        )),
-      });
-    }),
-  ]).then(() => {
-    dispatch({type: types.START_PAGE});
+  Account.fetch().then(data => {
+    dispatch({
+      type: types.FETCH_ACCOUNTS,
+      accounts: data.map(account => formatAccount(account, Setting.data)),
+    });
+  });
+  TransactionCategory.fetch().then(data => {
+    dispatch({
+      type: types.FETCH_TRANSACTION_CATEGORIES,
+      transactionCategories: data.map(transactionCategory => (
+        formatTransactionCategory(transactionCategory)
+      )),
+    });
+  });
+  Transaction.fetch({since: since.format('YYYY/MM/DD')}).then(data => {
+    dispatch({
+      type: types.FETCH_TRANSACTIONS,
+      transactions: data.map(transaction => (
+        formatTransaction(transaction, Account.data, TransactionCategory.data, Setting.data)
+      )),
+    });
   });
 }
 
-export function fetchInitialTransactionPageResources() {
+export function fetchInitialTransactionsPageResources() {
   const since = moment().startOf('month');
   const until = moment().endOf('month');
 
-  Promise.all([
-    Account.fetch().then(data => {
-      dispatch({
-        type: types.FETCH_ACCOUNTS,
-        accounts: data.map(account => formatAccount(account, Setting.data)),
-      });
-    }),
-    TransactionCategory.fetch().then(data => {
-      dispatch({
-        type: types.FETCH_TRANSACTION_CATEGORIES,
-        transactionCategories: data.map(transactionCategory => (
-          formatTransactionCategory(transactionCategory)
-        )),
-      });
-    }),
-    Transaction.fetch({
-      since: since.format('YYYY/MM/DD'),
-      until: until.format('YYYY/MM/DD'),
-    }).then(data => {
-      dispatch({
-        type: types.FETCH_TRANSACTIONS,
-        transactions: data.map(transaction => (
-          formatTransaction(transaction, Account.data, TransactionCategory.data, Setting.data)
-        )),
-      });
-    }),
-  ]).then(() => {
-    dispatch({type: types.START_PAGE});
+  Account.fetch().then(data => {
+    dispatch({
+      type: types.FETCH_ACCOUNTS,
+      accounts: data.map(account => formatAccount(account, Setting.data)),
+    });
+  });
+  TransactionCategory.fetch().then(data => {
+    dispatch({
+      type: types.FETCH_TRANSACTION_CATEGORIES,
+      transactionCategories: data.map(transactionCategory => (
+        formatTransactionCategory(transactionCategory)
+      )),
+    });
+  });
+  Transaction.fetch({
+    since: since.format('YYYY/MM/DD'),
+    until: until.format('YYYY/MM/DD'),
+  }).then(data => {
+    dispatch({
+      type: types.FETCH_TRANSACTIONS,
+      transactions: data.map(transaction => (
+        formatTransaction(transaction, Account.data, TransactionCategory.data, Setting.data)
+      )),
+    });
   });
 }

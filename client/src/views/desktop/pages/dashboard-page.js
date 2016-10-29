@@ -41,10 +41,6 @@ export default class DashboardPage extends Component {
     const state = this.props.state;
     const key = '_dashboard-page';
 
-    if (!state.ready) {
-      return <div key={key} className="page dashboard-page"/>;
-    }
-
     const paymentTransactionCategory = state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.PAYMENT);
     const incomeTransactionCategory = state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.INCOME);
 
