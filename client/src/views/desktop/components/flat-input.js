@@ -4,6 +4,10 @@ export default function FlatInput(props) {
   return <input {...props} className={`flat-input ${props.className}`}/>;
 }
 
+FlatInput.defaultProps = {
+  className: '',
+};
+
 FlatInput.propTypes = {
   className: PropTypes.string,
 };

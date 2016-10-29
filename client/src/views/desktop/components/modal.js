@@ -33,6 +33,10 @@ export default class Modal extends Component {
   }
 }
 
+Modal.defaultProps = {
+  className: '',
+};
+
 Modal.propTypes = {
   children: React.PropTypes.node.isRequired,
   isShown: React.PropTypes.bool.isRequired,

@@ -5,7 +5,7 @@ import {shallow} from 'enzyme';
 import sinon from 'sinon';
 
 import Modal from './modal';
-import FlatButton from './flat-button';
+import IconButton from './icon-button';
 
 test('<Modal /> > renders an modal > not show', t => {
   const props = {
@@ -37,6 +37,6 @@ test('<Modal /> > simulates click close button event', t => {
     children: [React.createElement('div', {key: 'children', className: 'modal-children'})],
   };
   const wrapper = shallow(React.createElement(Modal, props));
-  wrapper.find(FlatButton).simulate('click');
+  wrapper.find(IconButton).simulate('click');
   t.is(props.onCloseButtonClick.callCount, 1);
 });

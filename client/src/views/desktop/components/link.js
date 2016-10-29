@@ -10,6 +10,10 @@ export default function Link(props) {
   return <a className={`link ${props.className}`} href={props.href} onClick={handleClickLink}>{props.children}</a>;
 }
 
+Link.defaultProps = {
+  className: '',
+};
+
 Link.propTypes = {
   children: React.PropTypes.node,
   href: React.PropTypes.string.isRequired,

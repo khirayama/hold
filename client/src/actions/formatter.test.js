@@ -23,7 +23,9 @@ test('formatUser > without user, setting and error', t => {
     error: null,
     setting: {
       language: undefined,
+      languages: undefined,
       currencyCode: undefined,
+      currencyCodes: undefined,
     },
   });
 });
@@ -37,7 +39,9 @@ test('formatUser > with user and setting without error', t => {
   };
   const setting = {
     language: 'en',
+    languages: ['en', 'ja'],
     currency_code: 'USD',
+    currency_codes: ['USD', 'JPY'],
   };
   const result = formatUser(user, setting);
 
@@ -49,7 +53,9 @@ test('formatUser > with user and setting without error', t => {
     error: null,
     setting: {
       language: 'en',
+      languages: ['en', 'ja'],
       currencyCode: 'USD',
+      currencyCodes: ['USD', 'JPY'],
     },
   });
 });
@@ -63,7 +69,9 @@ test('formatUser > with user, setting and error', t => {
   };
   const setting = {
     language: 'en',
+    languages: ['en', 'ja'],
     currency_code: 'USD',
+    currency_codes: ['USD', 'JPY'],
   };
   const result = formatUser(user, setting, {message: 'error'});
 
@@ -75,7 +83,9 @@ test('formatUser > with user, setting and error', t => {
     error: {message: 'error'},
     setting: {
       language: 'en',
+      languages: ['en', 'ja'],
       currencyCode: 'USD',
+      currencyCodes: ['USD', 'JPY'],
     },
   });
 });

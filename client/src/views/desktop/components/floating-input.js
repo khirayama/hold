@@ -12,6 +12,10 @@ export default function FloatingInput(props) {
   );
 }
 
+FloatingInput.defaultProps = {
+  className: '',
+};
+
 FloatingInput.propTypes = {
   label: PropTypes.string.isRequired,
   className: PropTypes.string,

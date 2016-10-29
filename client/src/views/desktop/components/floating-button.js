@@ -4,6 +4,10 @@ export default function FloatingButton(props) {
   return <button {...props} className={`floating-button ${props.className}`}>{props.children}</button>;
 }
 
+FloatingButton.defaultProps = {
+  className: '',
+};
+
 FloatingButton.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
