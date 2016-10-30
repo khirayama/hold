@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 
 export default function FlatSelect(props) {
-  return <select {...props} className={`flat-select ${props.className}`}>{props.children}</select>;
+  return <select {...props} value={props.value || ''} className={`flat-select ${props.className}`}>{props.children}</select>;
 }
 
 FlatSelect.defaultProps = {
