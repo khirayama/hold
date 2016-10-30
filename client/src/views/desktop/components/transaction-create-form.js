@@ -86,11 +86,13 @@ export default class TransactionCreateForm extends Component {
     });
   }
   _getToday(format = 'L') {
+    // TODO: split this method
     const today = moment().subtract(4, 'hours');
 
     return today.format(format);
   }
   _formatDate(date) {
+    // TODO: split this method
     return moment(new Date(date)).format('YYYY-MM-DD');
   }
   _handleClickCreateButton() {
