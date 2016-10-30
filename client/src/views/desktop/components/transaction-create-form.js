@@ -33,39 +33,10 @@ export default class TransactionCreateForm extends Component {
     this.handleClickCreateButton = this._handleClickCreateButton.bind(this);
     this.handleKeyDownInputWithEnterCreate = this._handleKeyDownInputWithEnterCreate.bind(this);
     this.handleClickPaymentTab = this._handleClickPaymentTab.bind(this);
-    this.handleKeyDownPaymentTab = this._handleKeyDownPaymentTab.bind(this);
     this.handleClickIncomeTab = this._handleClickIncomeTab.bind(this);
-    this.handleKeyDownIncomeTab = this._handleKeyDownIncomeTab.bind(this);
     this.handleClickTransferTab = this._handleClickTransferTab.bind(this);
-    this.handleKeyDownTransferTab = this._handleKeyDownTransferTab.bind(this);
     this.handleChangeInput = this._handleChangeInput.bind(this);
     this.handleFocusInput = this._handleFocusInput.bind(this);
-  }
-  componentDidUpdate(prevProps) {
-    const prevDataset = prevProps.transactionDataset;
-    const dataset = this.props.transactionDataset;
-
-    if (prevDataset.accounts.length !== dataset.accounts.length) {
-      if (this.state.transactionType === transactionTypes.PAYMENT) {
-        this.setState({fromAccountId: (dataset.accounts[0] || {}).id || null});
-      } else if (this.state.transactionType === transactionTypes.INCOME) {
-        this.setState({toAccountId: (dataset.accounts[0] || {}).id || null});
-      } else if (this.state.transactionType === transactionTypes.TRANSFER) {
-        this.setState({
-          fromAccountId: (dataset.accounts[0] || {}).id || null,
-          toAccountId: (dataset.accounts[0] || {}).id || null,
-        });
-      }
-    }
-    if (prevDataset.transactionCategories.length !== dataset.transactionCategories.length) {
-      if (this.state.transactionType === transactionTypes.PAYMENT) {
-        const paymentTransactionCategories = dataset.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.PAYMENT);
-        this.setState({transactionCategoryId: (paymentTransactionCategories[0] || {}).id || null});
-      } else if (this.state.transactionType === transactionTypes.INCOME) {
-        const incomeTransactionCategories = dataset.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.INCOME);
-        this.setState({transactionCategoryId: (incomeTransactionCategories[0] || {}).id || null});
-      }
-    }
   }
   _filterTransactionCategory(transactionCategories, transactionType) {
     return transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionType);
@@ -119,23 +90,6 @@ export default class TransactionCreateForm extends Component {
       transactionCategoryId: (transactionCategories[0] || {}).id || null,
     });
   }
-  _handleKeyDownPaymentTab(event) {
-    const keyCode = event.keyCode;
-    const shift = event.shiftKey;
-    const ctrl = event.ctrlKey || event.metaKey;
-
-    if (keyCodes.ENTER === keyCode && !shift && !ctrl) {
-      const dataset = this.props.transactionDataset;
-      const transactionCategories = this._filterTransactionCategory(dataset.transactionCategories, transactionTypes.PAYMENT);
-
-      this.setState({
-        transactionType: transactionTypes.PAYMENT,
-        fromAccountId: (dataset.accounts[0] || {}).id || null,
-        toAccountId: null,
-        transactionCategoryId: (transactionCategories[0] || {}).id || null,
-      });
-    }
-  }
   _handleClickIncomeTab() {
     const dataset = this.props.transactionDataset;
     const transactionCategories = this._filterTransactionCategory(dataset.transactionCategories, transactionTypes.INCOME);
@@ -147,23 +101,6 @@ export default class TransactionCreateForm extends Component {
       transactionCategoryId: (transactionCategories[0] || {}).id || null,
     });
   }
-  _handleKeyDownIncomeTab(event) {
-    const keyCode = event.keyCode;
-    const shift = event.shiftKey;
-    const ctrl = event.ctrlKey || event.metaKey;
-
-    if (keyCodes.ENTER === keyCode && !shift && !ctrl) {
-      const dataset = this.props.transactionDataset;
-      const transactionCategories = this._filterTransactionCategory(dataset.transactionCategories, transactionTypes.INCOME);
-
-      this.setState({
-        transactionType: transactionTypes.INCOME,
-        fromAccountId: null,
-        toAccountId: (dataset.accounts[0] || {}).id || null,
-        transactionCategoryId: (transactionCategories[0] || {}).id || null,
-      });
-    }
-  }
   _handleClickTransferTab() {
     const dataset = this.props.transactionDataset;
 
@@ -173,22 +110,6 @@ export default class TransactionCreateForm extends Component {
       toAccountId: (dataset.accounts[1] || {}).id || null,
       transactionCategoryId: null,
     });
-  }
-  _handleKeyDownTransferTab(event) {
-    const keyCode = event.keyCode;
-    const shift = event.shiftKey;
-    const ctrl = event.ctrlKey || event.metaKey;
-
-    if (keyCodes.ENTER === keyCode && !shift && !ctrl) {
-      const dataset = this.props.transactionDataset;
-
-      this.setState({
-        transactionType: transactionTypes.TRANSFER,
-        fromAccountId: (dataset.accounts[0] || {}).id || null,
-        toAccountId: (dataset.accounts[1] || {}).id || null,
-        transactionCategoryId: null,
-      });
-    }
   }
   _handleChangeInput(event) {
     let value = event.currentTarget.value;
@@ -223,37 +144,34 @@ export default class TransactionCreateForm extends Component {
 
     return (
       <span className="transaction-create-form">
-        <ul className="transaction-create-form-tab">
-          <li
+        <div className="transaction-create-form-tab">
+          <button
             className={classNames(
               'transaction-create-form-tab-item',
               {'transaction-create-form-tab-item__active': this.state.transactionType === transactionTypes.PAYMENT}
             )}
             onClick={this.handleClickPaymentTab}
-            onKeyDown={this.handleKeyDownPaymentTab}
             tabIndex={(this.state.transactionType === transactionTypes.PAYMENT) ? -1 : 0}
-            >Payment</li>
-          <li
+            >Payment</button>
+          <button
             className={classNames(
               'transaction-create-form-tab-item',
               {'transaction-create-form-tab-item__active': this.state.transactionType === transactionTypes.INCOME}
             )}
             onClick={this.handleClickIncomeTab}
-            onKeyDown={this.handleKeyDownIncomeTab}
             tabIndex={(this.state.transactionType === transactionTypes.INCOME) ? -1 : 0}
-            >Income</li>
+            >Income</button>
           { (dataset.accounts.length >= 2) ? (
-            <li
+            <button
               className={classNames(
                 'transaction-create-form-tab-item',
                 {'transaction-create-form-tab-item__active': this.state.transactionType === transactionTypes.TRANSFER}
               )}
               onClick={this.handleClickTransferTab}
-              onKeyDown={this.handleKeyDownTransferTab}
               tabIndex={(this.state.transactionType === transactionTypes.TRANSFER) ? -1 : 0}
-              >Transfer</li>
+              >Transfer</button>
           ) : null }
-        </ul>
+        </div>
         <table className="transaction-create-form-table">
           <tbody>
             { (
