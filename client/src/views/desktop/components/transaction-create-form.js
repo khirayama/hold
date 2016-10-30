@@ -260,7 +260,7 @@ export default class TransactionCreateForm extends Component {
         <FloatingButton
           className="size__spread"
           onClick={this.handleClickCreateButton}
-          >ENTER</FloatingButton>
+          >CREATE</FloatingButton>
         <div className="transaction-category-edit-button-container">
           <FlatButton onClick={showTransactionCategoryModal}>EDIT TRANSACTION CATEGORY</FlatButton>
         </div>
