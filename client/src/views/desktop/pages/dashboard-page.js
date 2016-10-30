@@ -44,22 +44,23 @@ export default class DashboardPage extends Component {
     const paymentTransactionCategory = state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.PAYMENT);
     const incomeTransactionCategory = state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.INCOME);
 
-    const todayTransactions = state.transactions.filter(transaction => {
-      // TODO: common
-      const today = moment().subtract(4, 'hours');
-      const transactionDate = moment(transaction.transactionDate);
-
-      return (this._determineTransactionType(transaction) === transactionTypes.PAYMENT && transactionDate.isSame(today, 'day'));
-    });
     const lastThreeDaysTransaction = state.transactions.filter(transaction => {
       // TODO: common
       const today = moment().subtract(4, 'hours');
       const transactionDate = moment(transaction.transactionDate);
       const since = moment().subtract(4, 'hours').subtract(3, 'days');
 
-      return (this._determineTransactionType(transaction) === transactionTypes.PAYMENT && transactionDate.isBetween(since, today, 'day', '[]'));
+      return transactionDate.isBetween(since, today, 'day', '[]');
     });
-    const weekTransactions = state.transactions.filter(transaction => {
+
+    const todayPaymentTransactions = state.transactions.filter(transaction => {
+      // TODO: common
+      const today = moment().subtract(4, 'hours');
+      const transactionDate = moment(transaction.transactionDate);
+
+      return (this._determineTransactionType(transaction) === transactionTypes.PAYMENT && transactionDate.isSame(today, 'day'));
+    });
+    const weekPaymentTransactions = state.transactions.filter(transaction => {
       // TODO: common
       const today = moment().subtract(4, 'hours');
       const transactionDate = moment(transaction.transactionDate);
@@ -67,7 +68,7 @@ export default class DashboardPage extends Component {
 
       return (this._determineTransactionType(transaction) === transactionTypes.PAYMENT && transactionDate.isBetween(since, today, 'day', '[]'));
     });
-    const monthTransactions = state.transactions.filter(transaction => {
+    const monthPaymentTransactions = state.transactions.filter(transaction => {
       // TODO: common
       const today = moment().subtract(4, 'hours');
       const transactionDate = moment(transaction.transactionDate);
@@ -95,9 +96,9 @@ export default class DashboardPage extends Component {
               <TransactionCreateForm transactionDataset={state.transactionDataset}/>
             </section>
             <section className="summary-section">
-              <TotalAmountSection amounts={todayTransactions} label="Today"/>
-              <TotalAmountSection amounts={weekTransactions} label="Week"/>
-              <TotalAmountSection amounts={monthTransactions} label="Month"/>
+              <TotalAmountSection amounts={todayPaymentTransactions} label="Today"/>
+              <TotalAmountSection amounts={weekPaymentTransactions} label="Week"/>
+              <TotalAmountSection amounts={monthPaymentTransactions} label="Month"/>
             </section>
             <section className="transaction-section">
               <h2>Transactions(last 3 days)</h2>

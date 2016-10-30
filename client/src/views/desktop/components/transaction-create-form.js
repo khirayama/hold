@@ -41,6 +41,32 @@ export default class TransactionCreateForm extends Component {
     this.handleChangeInput = this._handleChangeInput.bind(this);
     this.handleFocusInput = this._handleFocusInput.bind(this);
   }
+  componentDidUpdate(prevProps) {
+    const prevDataset = prevProps.transactionDataset;
+    const dataset = this.props.transactionDataset;
+
+    if (prevDataset.accounts.length !== dataset.accounts.length) {
+      if (this.state.transactionType === transactionTypes.PAYMENT) {
+        this.setState({fromAccountId: (dataset.accounts[0] || {}).id || null});
+      } else if (this.state.transactionType === transactionTypes.INCOME) {
+        this.setState({toAccountId: (dataset.accounts[0] || {}).id || null});
+      } else if (this.state.transactionType === transactionTypes.TRANSFER) {
+        this.setState({
+          fromAccountId: (dataset.accounts[0] || {}).id || null,
+          toAccountId: (dataset.accounts[0] || {}).id || null,
+        });
+      }
+    }
+    if (prevDataset.transactionCategories.length !== dataset.transactionCategories.length) {
+      if (this.state.transactionType === transactionTypes.PAYMENT) {
+        const paymentTransactionCategories = dataset.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.PAYMENT);
+        this.setState({transactionCategoryId: (paymentTransactionCategories[0] || {}).id || null});
+      } else if (this.state.transactionType === transactionTypes.INCOME) {
+        const incomeTransactionCategories = dataset.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.INCOME);
+        this.setState({transactionCategoryId: (incomeTransactionCategories[0] || {}).id || null});
+      }
+    }
+  }
   _filterTransactionCategory(transactionCategories, transactionType) {
     return transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionType);
   }
@@ -324,5 +350,5 @@ export default class TransactionCreateForm extends Component {
 }
 
 TransactionCreateForm.propTypes = {
-  transactionDataset: React.PropTypes.object,
+  transactionDataset: React.PropTypes.object.isRequired,
 };
