@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import moment from 'moment';
 
@@ -20,11 +21,9 @@ export default class TransactionCreateForm extends Component {
 
     const dataset = props.transactionDataset;
 
+    // uncotrol toAccountId / fromAccountId / transactionCategoryId
     this.state = {
       transactionType: transactionTypes.PAYMENT,
-      fromAccountId: (dataset.accounts[0] || {}).id || null,
-      toAccountId: null,
-      transactionCategoryId: (dataset.transactionCategories[0] || {}).id || null,
       amount: 0,
       transactionDate: this._getToday(),
       note: '',
@@ -47,10 +46,15 @@ export default class TransactionCreateForm extends Component {
     }
   }
   _create() {
+    const form = ReactDOM.findDOMNode(this);
+    const fromAccountId = Number((form.querySelector('select[name="fromAccountId"]') || {}).value) || null;
+    const toAccountId = Number((form.querySelector('select[name="toAccountId"]') || {}).value) || null;
+    const transactionCategoryId = Number((form.querySelector('select[name="transactionCategoryId"]') || {}).value )|| null;
+
     createTransaction({
-      fromAccountId: Number(this.state.fromAccountId) || null,
-      toAccountId: Number(this.state.toAccountId) || null,
-      transactionCategoryId: Number(this.state.transactionCategoryId) || null,
+      fromAccountId,
+      toAccountId,
+      transactionCategoryId,
       amount: this.state.amount,
       transactionDate: this.state.transactionDate,
       note: this.state.note,
