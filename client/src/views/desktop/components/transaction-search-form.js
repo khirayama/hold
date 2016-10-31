@@ -64,21 +64,32 @@ export default class TransactionSearchForm extends Component {
 
     return (
       <section className="transaction-search-form">
-        {this._createIdSelectElement([{name: 'No select', id: ''}].concat(dataset.transactionCategories), {initialValue: this.state.transactionCategoryId, name: 'transactionCategoryId'})}
-        {this._createIdSelectElement([{name: 'No select', id: ''}].concat(dataset.accounts), {initialValue: this.state.fromAccountId, name: 'fromAccountId'})}
-        {this._createIdSelectElement([{name: 'No select', id: ''}].concat(dataset.accounts), {initialValue: this.state.toAccountId, name: 'toAccountId'})}
-
-        <FlatButton>PREV MONTH</FlatButton>
-        <FlatButton>NEXT MONTH</FlatButton>
-        <FloatingInput onChange={this.handleChangeInput} type="date" label="From" value={this._formatDate(this.state.since)} name="since" autoFocus/>
-        <FloatingInput onChange={this.handleChangeInput} type="date" label="To" value={this._formatDate(this.state.until)} name="until"/>
-
-        <FloatingInput onChange={this.handleChangeInput} type="number" label="Min" value={this.state.fromAmount} name="fromAmount"/>
-        <FloatingInput onChange={this.handleChangeInput} type="number" label="Max" value={this.state.toAmount} name="toAmount"/>
-
-        <FloatingInput onChange={this.handleChangeInput} type="text" label="Note" value={this.state.note} name="note"/>
-
-        <FloatingButton onClick={this.handleClickSearchButton}>SEARCH</FloatingButton>
+        <table>
+          <tbody>
+            <tr>
+              <th>From</th>
+              <td>{this._createIdSelectElement([{name: 'No select', id: ''}].concat(dataset.accounts), {initialValue: this.state.fromAccountId, name: 'fromAccountId'})}</td>
+              <th>To</th>
+              <td>{this._createIdSelectElement([{name: 'No select', id: ''}].concat(dataset.accounts), {initialValue: this.state.toAccountId, name: 'toAccountId'})}</td>
+            </tr>
+            <tr>
+              <th>Category</th>
+              <td>{this._createIdSelectElement([{name: 'No select', id: ''}].concat(dataset.transactionCategories), {initialValue: this.state.transactionCategoryId, name: 'transactionCategoryId'})}</td>
+            </tr>
+            <tr>
+              <td><FlatButton>PREV MONTH</FlatButton></td>
+              <td><FloatingInput onChange={this.handleChangeInput} type="date" label="From" value={this._formatDate(this.state.since)} name="since" autoFocus/></td>
+              <td><FloatingInput onChange={this.handleChangeInput} type="date" label="To" value={this._formatDate(this.state.until)} name="until"/></td>
+              <td><FlatButton>NEXT MONTH</FlatButton></td>
+            </tr>
+            <tr>
+              <td><FloatingInput onChange={this.handleChangeInput} type="number" label="Min" value={this.state.fromAmount} name="fromAmount"/></td>
+              <td><FloatingInput onChange={this.handleChangeInput} type="number" label="Max" value={this.state.toAmount} name="toAmount"/></td>
+              <td><FloatingInput onChange={this.handleChangeInput} type="text" label="Note" value={this.state.note} name="note"/></td>
+              <td><FloatingButton onClick={this.handleClickSearchButton}>SEARCH</FloatingButton></td>
+            </tr>
+          </tbody>
+        </table>
       </section>
     );
   }
