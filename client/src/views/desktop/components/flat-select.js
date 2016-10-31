@@ -11,4 +11,5 @@ FlatSelect.defaultProps = {
 FlatSelect.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
+  value: PropTypes.string,
 };

@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import moment from 'moment';
 
@@ -16,10 +15,8 @@ import FlatButton from './flat-button';
 import FloatingButton from './floating-button';
 
 export default class TransactionCreateForm extends Component {
-  constructor(props) {
+  constructor() {
     super();
-
-    const dataset = props.transactionDataset;
 
     // uncotrol toAccountId / fromAccountId / transactionCategoryId
     this.state = {
@@ -36,6 +33,8 @@ export default class TransactionCreateForm extends Component {
     this.handleClickTransferTab = this._handleClickTransferTab.bind(this);
     this.handleChangeInput = this._handleChangeInput.bind(this);
     this.handleFocusInput = this._handleFocusInput.bind(this);
+
+    this.assignForm = this._assignForm.bind(this);
   }
   _filterTransactionCategory(transactionCategories, transactionType) {
     return transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionType);
@@ -46,10 +45,9 @@ export default class TransactionCreateForm extends Component {
     }
   }
   _create() {
-    const form = ReactDOM.findDOMNode(this);
-    const fromAccountId = Number((form.querySelector('select[name="fromAccountId"]') || {}).value) || null;
-    const toAccountId = Number((form.querySelector('select[name="toAccountId"]') || {}).value) || null;
-    const transactionCategoryId = Number((form.querySelector('select[name="transactionCategoryId"]') || {}).value )|| null;
+    const fromAccountId = Number((this.form.querySelector('select[name="fromAccountId"]') || {}).value) || null;
+    const toAccountId = Number((this.form.querySelector('select[name="toAccountId"]') || {}).value) || null;
+    const transactionCategoryId = Number((this.form.querySelector('select[name="transactionCategoryId"]') || {}).value) || null;
 
     createTransaction({
       fromAccountId,
@@ -134,7 +132,7 @@ export default class TransactionCreateForm extends Component {
     return (
       <FlatSelect
         className="size__spread"
-        value={initialValue}
+        value={String(initialValue)}
         name={name}
         onChange={this.handleChangeInput}
         onKeyDown={this.handleKeyDownInputWithEnterCreate}
@@ -143,11 +141,14 @@ export default class TransactionCreateForm extends Component {
       </FlatSelect>
     );
   }
+  _assignForm(form) {
+    this.form = form;
+  }
   render() {
     const dataset = this.props.transactionDataset;
 
     return (
-      <span className="transaction-create-form">
+      <span className="transaction-create-form" ref={this.assignForm}>
         <div className="transaction-create-form-tab">
           <button
             className={classNames(
