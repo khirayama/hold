@@ -85,9 +85,9 @@ export default class TransactionSearchForm extends Component {
             </tr>
             <tr>
               <th>Min</th>
-              <td><FlatInput onChange={this.handleChangeInput} type="number" className="size__spread" value={this.state.fromAmount} name="fromAmount"/></td>
+              <td><FlatInput onChange={this.handleChangeInput} type="number" className="size__spread" value={this.state.fromAmount} name="fromAmount" placeholder="Enter min amount"/></td>
               <th>Max</th>
-              <td><FlatInput onChange={this.handleChangeInput} type="number" className="size__spread" value={this.state.toAmount} name="toAmount"/></td>
+              <td><FlatInput onChange={this.handleChangeInput} type="number" className="size__spread" value={this.state.toAmount} name="toAmount" placeholder="Enter max amount"/></td>
               <td colSpan="2"><FloatingButton onClick={this.handleClickSearchButton} className="size__spread">SEARCH</FloatingButton></td>
             </tr>
           </tbody>
