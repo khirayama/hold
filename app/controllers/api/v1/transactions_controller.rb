@@ -5,8 +5,8 @@ module Api
 
       def index
         exec_query = 'current_user.transactions'
-        exec_query += '.where(account_id: params[:to_account_id])' if params[:to_account_id]
-        exec_query += '.where(account_id: params[:from_account_id])' if params[:from_account_id]
+        exec_query += '.where(to_account_id: params[:to_account_id])' if params[:to_account_id]
+        exec_query += '.where(from_account_id: params[:from_account_id])' if params[:from_account_id]
         exec_query += '.where(transaction_category_id: params[:transaction_category_id])' if params[:transaction_category_id]
         exec_query += '.where("amount >= ?", params[:from_amount])' if params[:from_amount]
         exec_query += '.where("amount <= ?", params[:to_amount])' if params[:to_amount]
