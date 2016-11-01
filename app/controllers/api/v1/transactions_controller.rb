@@ -12,6 +12,7 @@ module Api
         exec_query += '.where("amount <= ?", params[:to_amount])' if params[:to_amount]
         exec_query += '.where("transaction_date >= ?", Date.parse(params[:since]))' if params[:since]
         exec_query += '.where("transaction_date <= ?", Date.parse(params[:until]))' if params[:until]
+        exec_query += '.where("note like ?", "%#{params[:note]}%")' if params[:note]
 
         transactions = eval(exec_query).map do |transaction|
           format_transaction(transaction)
