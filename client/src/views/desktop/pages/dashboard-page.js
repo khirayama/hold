@@ -47,7 +47,7 @@ export default class DashboardPage extends Component {
     const lastThreeDaysTransaction = state.transactions.filter(transaction => {
       // TODO: common
       const today = moment().subtract(4, 'hours');
-      const transactionDate = moment(transaction.transactionDate);
+      const transactionDate = moment(new Date(transaction.transactionDate));
       const since = moment().subtract(4, 'hours').subtract(3, 'days');
 
       return transactionDate.isBetween(since, today, 'day', '[]');
@@ -56,14 +56,14 @@ export default class DashboardPage extends Component {
     const todayPaymentTransactions = state.transactions.filter(transaction => {
       // TODO: common
       const today = moment().subtract(4, 'hours');
-      const transactionDate = moment(transaction.transactionDate);
+      const transactionDate = moment(new Date(transaction.transactionDate));
 
       return (this._determineTransactionType(transaction) === transactionTypes.PAYMENT && transactionDate.isSame(today, 'day'));
     });
     const weekPaymentTransactions = state.transactions.filter(transaction => {
       // TODO: common
       const today = moment().subtract(4, 'hours');
-      const transactionDate = moment(transaction.transactionDate);
+      const transactionDate = moment(new Date(transaction.transactionDate));
       const since = moment().subtract(4, 'hours').subtract(6, 'days');
 
       return (this._determineTransactionType(transaction) === transactionTypes.PAYMENT && transactionDate.isBetween(since, today, 'day', '[]'));
@@ -71,7 +71,7 @@ export default class DashboardPage extends Component {
     const monthPaymentTransactions = state.transactions.filter(transaction => {
       // TODO: common
       const today = moment().subtract(4, 'hours');
-      const transactionDate = moment(transaction.transactionDate);
+      const transactionDate = moment(new Date(transaction.transactionDate));
       const since = moment().subtract(4, 'hours').startOf('month');
 
       return (this._determineTransactionType(transaction) === transactionTypes.PAYMENT && transactionDate.isBetween(since, today, 'day', '[]'));
