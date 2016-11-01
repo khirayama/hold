@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import moment from 'moment';
 
+import FlatInput from '../components/flat-input';
 import FloatingInput from '../components/floating-input';
 import FlatSelect from '../components/flat-select';
 import FloatingButton from '../components/floating-button';
@@ -71,22 +72,23 @@ export default class TransactionSearchForm extends Component {
               <td>{this._createIdSelectElement([{name: 'No select', id: ''}].concat(dataset.accounts), {initialValue: this.state.fromAccountId, name: 'fromAccountId'})}</td>
               <th>To</th>
               <td>{this._createIdSelectElement([{name: 'No select', id: ''}].concat(dataset.accounts), {initialValue: this.state.toAccountId, name: 'toAccountId'})}</td>
-            </tr>
-            <tr>
               <th>Category</th>
               <td>{this._createIdSelectElement([{name: 'No select', id: ''}].concat(dataset.transactionCategories), {initialValue: this.state.transactionCategoryId, name: 'transactionCategoryId'})}</td>
             </tr>
             <tr>
-              <td><FlatButton>PREV MONTH</FlatButton></td>
-              <td><FloatingInput onChange={this.handleChangeInput} type="date" label="From" value={this._formatDate(this.state.since)} name="since" autoFocus/></td>
-              <td><FloatingInput onChange={this.handleChangeInput} type="date" label="To" value={this._formatDate(this.state.until)} name="until"/></td>
-              <td><FlatButton>NEXT MONTH</FlatButton></td>
+              <th>Since</th>
+              <td><FlatInput onChange={this.handleChangeInput} type="date" className="size__spread" value={this._formatDate(this.state.since)} name="since" autoFocus/></td>
+              <th>Until</th>
+              <td><FlatInput onChange={this.handleChangeInput} type="date" className="size__spread" value={this._formatDate(this.state.until)} name="until"/></td>
+              <th>Note</th>
+              <td><FlatInput onChange={this.handleChangeInput} type="text" className="size__spread" value={this.state.note} name="note" placeholder="Enter note"/></td>
             </tr>
             <tr>
-              <td><FloatingInput onChange={this.handleChangeInput} type="number" label="Min" value={this.state.fromAmount} name="fromAmount"/></td>
-              <td><FloatingInput onChange={this.handleChangeInput} type="number" label="Max" value={this.state.toAmount} name="toAmount"/></td>
-              <td><FloatingInput onChange={this.handleChangeInput} type="text" label="Note" value={this.state.note} name="note"/></td>
-              <td><FloatingButton onClick={this.handleClickSearchButton}>SEARCH</FloatingButton></td>
+              <th>Min</th>
+              <td><FlatInput onChange={this.handleChangeInput} type="number" className="size__spread" value={this.state.fromAmount} name="fromAmount"/></td>
+              <th>Max</th>
+              <td><FlatInput onChange={this.handleChangeInput} type="number" className="size__spread" value={this.state.toAmount} name="toAmount"/></td>
+              <td colSpan="2"><FloatingButton onClick={this.handleClickSearchButton} className="size__spread">SEARCH</FloatingButton></td>
             </tr>
           </tbody>
         </table>
