@@ -62,7 +62,7 @@ export default class TransactionCategoryTableCreateRow extends Component {
         </td>
         <td>
           <FlatSelect
-            defaultValue={this.state.transactionType}
+            value={this.state.transactionType}
             onChange={this.handleChangeTransactionCategorySelect}
             >
             <option value="payment">Payment</option>
