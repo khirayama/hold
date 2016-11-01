@@ -1,10 +1,11 @@
 .transactions-page
   h2
     margin-bottom: 32px
+    font-size: 1.2rem
 
   .transactions-page-content
     $width-main-column: 780px
-    $width-sub-column: 320px
+    $width-sub-column: 336px
 
     width: $width-main-column + $width-sub-column
     margin: 64px auto 32px
@@ -12,13 +13,14 @@
     .transactions-page-sub-column
       display: inline-block
       width: $width-sub-column
-      padding: 8px 12px
+      padding: 8px
       vertical-align: top
 
     .transactions-page-main-column
       display: inline-block
       width: $width-main-column
-      padding: 8px 12px
+      border-left: $border
+      padding: 8px 8px 8px 24px
       vertical-align: top
 
     .transaction-create-section
@@ -31,6 +33,12 @@
       display: inline-block
       width: 100%
       padding: 8px
+      vertical-align: top
+
+    .transaction-search-section
+      display: inline-block
+      width: 100%
+      padding: 8px 8px 32px
       vertical-align: top
 
   &.page-transition-enter
