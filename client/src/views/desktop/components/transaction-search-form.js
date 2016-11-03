@@ -1,6 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import moment from 'moment';
 
+import keyCodes from 'constants/key-codes';
+
 import FlatInput from '../components/flat-input';
 import FloatingInput from '../components/floating-input';
 import FlatSelect from '../components/flat-select';
@@ -24,8 +26,25 @@ export default class TransactionSearchForm extends Component {
       note: '',
     };
 
+    this.handleKeyDownInput = this._handleKeyDownInput.bind(this);
     this.handleChangeInput = this._handleChangeInput.bind(this);
     this.handleClickSearchButton = this._handleClickSearchButton.bind(this);
+  }
+  _search() {
+    fetchTransactions(this.state);
+  }
+  _handleKeyDownInput(event) {
+    const keyCode = event.keyCode;
+    const shift = event.shiftKey;
+    const ctrl = event.ctrlKey || event.metaKey;
+
+    switch(true) {
+      case (keyCodes.ENTER === keyCode && !shift && !ctrl):
+        this._search();
+        break
+      default:
+        break
+    }
   }
   _handleChangeInput(event) {
     let value = event.currentTarget.value;
@@ -40,7 +59,7 @@ export default class TransactionSearchForm extends Component {
     this.setState(state);
   }
   _handleClickSearchButton() {
-    fetchTransactions(this.state);
+    this._search();
   }
   _createIdSelectElement(items, options = {}) {
     const initialValue = options.initialValue;
@@ -52,6 +71,7 @@ export default class TransactionSearchForm extends Component {
         value={initialValue || ''}
         name={name || ''}
         onChange={this.handleChangeInput}
+        onKeyDown={this.handleKeyDownInput}
         >
         {items.map(item => <option key={item.id} value={item.id}>{item.name}</option>)}
       </FlatSelect>
@@ -77,17 +97,17 @@ export default class TransactionSearchForm extends Component {
             </tr>
             <tr>
               <th>Since</th>
-              <td><FlatInput onChange={this.handleChangeInput} type="date" className="size__spread" value={this._formatDate(this.state.since)} name="since" autoFocus/></td>
+              <td><FlatInput onChange={this.handleChangeInput} onKeyDown={this.handleKeyDownInput} type="date" className="size__spread" value={this._formatDate(this.state.since)} name="since" autoFocus/></td>
               <th>Until</th>
-              <td><FlatInput onChange={this.handleChangeInput} type="date" className="size__spread" value={this._formatDate(this.state.until)} name="until"/></td>
+              <td><FlatInput onChange={this.handleChangeInput} onKeyDown={this.handleKeyDownInput} type="date" className="size__spread" value={this._formatDate(this.state.until)} name="until"/></td>
               <th>Note</th>
-              <td><FlatInput onChange={this.handleChangeInput} type="text" className="size__spread" value={this.state.note} name="note" placeholder="Enter note"/></td>
+              <td><FlatInput onChange={this.handleChangeInput} onKeyDown={this.handleKeyDownInput} type="text" className="size__spread" value={this.state.note} name="note" placeholder="Enter note"/></td>
             </tr>
             <tr>
               <th>Min</th>
-              <td><FlatInput onChange={this.handleChangeInput} type="number" className="size__spread" value={this.state.fromAmount} name="fromAmount" placeholder="Enter min amount"/></td>
+              <td><FlatInput onChange={this.handleChangeInput} onKeyDown={this.handleKeyDownInput} type="number" className="size__spread" value={this.state.fromAmount} name="fromAmount" placeholder="Enter min amount"/></td>
               <th>Max</th>
-              <td><FlatInput onChange={this.handleChangeInput} type="number" className="size__spread" value={this.state.toAmount} name="toAmount" placeholder="Enter max amount"/></td>
+              <td><FlatInput onChange={this.handleChangeInput} onKeyDown={this.handleKeyDownInput} type="number" className="size__spread" value={this.state.toAmount} name="toAmount" placeholder="Enter max amount"/></td>
               <td colSpan="2"><FloatingButton onClick={this.handleClickSearchButton} className="size__spread">SEARCH</FloatingButton></td>
             </tr>
           </tbody>
