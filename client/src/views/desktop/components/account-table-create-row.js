@@ -19,11 +19,9 @@ export default class AccountTableCreateRow extends Component {
     };
 
     this.handleClickNewButton = this._handleClickNewButton.bind(this);
-    this.handleChangeNameInput = this._handleChangeNameInput.bind(this);
-    this.handleChangeAmountInput = this._handleChangeAmountInput.bind(this);
     this.handleClickCreateButton = this._handleClickCreateButton.bind(this);
-    this.handleClickCancelButton = this._handleClickCancelButton.bind(this);
-    this.handleKeyDownInputs = this._handleKeyDownInputs.bind(this);
+    this.handleKeyDownInput = this._handleKeyDownInput.bind(this);
+    this.handleChangeInput = this._handleChangeInput.bind(this);
     this.handleFocusInput = this._handleFocusInput.bind(this);
   }
   _select(target) {
@@ -50,28 +48,40 @@ export default class AccountTableCreateRow extends Component {
   _handleClickNewButton() {
     this._new();
   }
-  _handleChangeNameInput(event) {
-    this.setState({name: event.target.value});
-  }
-  _handleChangeAmountInput(event) {
-    this.setState({amount: Number(event.target.value)});
-  }
   _handleClickCreateButton() {
-    this._create();
+    if (this.state.name !== '') {
+      this._create();
+    }
     this._done();
   }
-  _handleClickCancelButton() {
-    this._done();
-  }
-  _handleKeyDownInputs(event) {
+  _handleKeyDownInput(event) {
     const keyCode = event.keyCode;
     const shift = event.shiftKey;
     const ctrl = event.ctrlKey || event.metaKey;
 
-    if (keyCodes.ENTER === keyCode && !shift && !ctrl) {
-      this._create();
-      this._done();
+    switch(true) {
+      case (keyCodes.ENTER === keyCode && !shift && !ctrl):
+        this._create();
+        this._done();
+        break
+      case (keyCodes.ESC === keyCode && !shift && !ctrl):
+        this._done();
+        break
+      default:
+        break
     }
+  }
+  _handleChangeInput(event) {
+    let value = event.currentTarget.value;
+    const key = event.currentTarget.name;
+    const type = event.currentTarget.type;
+    const state = {};
+
+    if (type === 'date') {
+      value = moment(new Date(value)).format('L');
+    }
+    state[key] = value;
+    this.setState(state);
   }
   _handleFocusInput(event) {
     this._select(event.target);
@@ -86,9 +96,10 @@ export default class AccountTableCreateRow extends Component {
               type="text"
               value={this.state.name}
               label="Name"
+              name="name"
               placeholder="Enter account name"
-              onChange={this.handleChangeNameInput}
-              onKeyDown={this.handleKeyDownInputs}
+              onChange={this.handleChangeInput}
+              onKeyDown={this.handleKeyDownInput}
               onFocus={this.handleFocusInput}
               />
           </td>
@@ -98,16 +109,14 @@ export default class AccountTableCreateRow extends Component {
               label="Amount"
               placeholder="Enter amount"
               value={this.state.amount}
-              onChange={this.handleChangeAmountInput}
-              onKeyDown={this.handleKeyDownInputs}
+              name="amount"
+              onChange={this.handleChangeInput}
+              onKeyDown={this.handleKeyDownInput}
               onFocus={this.handleFocusInput}
               />
           </td>
           <td>
             <IconButton onClick={this.handleClickCreateButton}>done</IconButton>
-          </td>
-          <td>
-            <IconButton onClick={this.handleClickCancelButton}>clear</IconButton>
           </td>
         </tr>
       );
