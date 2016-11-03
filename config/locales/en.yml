@@ -1,6 +1,8 @@
 en:
   home:
     catchphrase: "Simple personal financial management app"
+  accounts:
+    cash: 'Cash'
   transaction_categories:
     foods: 'Foods'
     daily_goods: 'Daily goods'

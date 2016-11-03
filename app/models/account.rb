@@ -12,4 +12,8 @@ class Account < ApplicationRecord
       end
     end
   end
+
+  def self.create_initial_account(user)
+    user.accounts.create({ name: I18n.t('accounts.cash'), amount: 0 })
+  end
 end
