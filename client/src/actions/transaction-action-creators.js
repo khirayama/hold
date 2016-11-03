@@ -86,7 +86,7 @@ export function createTransaction(entity) {
         Setting.data
       ),
     });
-    Account.fetch(false).then(data_ => {
+    Account.fetch({}, false).then(data_ => {
       dispatch({
         type: types.FETCH_ACCOUNTS,
         accounts: data_.map(account => formatAccount(account, Setting.data)),
@@ -119,7 +119,7 @@ export function updateTransaction(entity) {
     transaction,
   });
   Transaction.update(_formatRequest(transaction)).then(() => {
-    Account.fetch(false).then(data => {
+    Account.fetch({}, false).then(data => {
       dispatch({
         type: types.FETCH_ACCOUNTS,
         accounts: data.map(account => formatAccount(account, Setting.data)),
@@ -156,7 +156,7 @@ export function deleteTransaction(entity) {
   });
   if (transaction.id !== null) {
     Transaction.delete(transaction.id).then(() => {
-      Account.fetch(false).then(data => {
+      Account.fetch({}, false).then(data => {
         dispatch({
           type: types.FETCH_ACCOUNTS,
           accounts: data.map(account => formatAccount(account, Setting.data)),
