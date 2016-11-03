@@ -12,7 +12,7 @@ import FloatingInput from './floating-input';
 import IconButton from './icon-button';
 import AmountLabel from './amount-label';
 
-export default class AccountListItem extends Component {
+export default class AccountTableRow extends Component {
   constructor(props) {
     super(props);
 
@@ -24,13 +24,12 @@ export default class AccountListItem extends Component {
       amount: account.amount,
     };
 
-    this.handleClickAccountListItem = this._handleClickAccountListItem.bind(this);
-    this.handleChangeNameInput = this._handleChangeNameInput.bind(this);
-    this.handleChangeAmountInput = this._handleChangeAmountInput.bind(this);
+    this.handleClickTableRow = this._handleClickTableRow.bind(this);
     this.handleClickUpdateButton = this._handleClickUpdateButton.bind(this);
     this.handleClickDeleteButton = this._handleClickDeleteButton.bind(this);
-    this.handleKeyDownInputs = this._handleKeyDownInputs.bind(this);
-    this.handleClickErrorIcon = this._handleClickErrorIcon.bind(this);
+    this.handleClickErrorButton = this._handleClickErrorButton.bind(this);
+    this.handleKeyDownInput = this._handleKeyDownInput.bind(this);
+    this.handleChangeInput = this._handleChangeInput.bind(this);
     this.handleFocusInput = this._handleFocusInput.bind(this);
   }
   _select(target) {
@@ -66,14 +65,8 @@ export default class AccountListItem extends Component {
   _delete() {
     deleteAccount(this.props.account);
   }
-  _handleClickAccountListItem() {
+  _handleClickTableRow() {
     this._edit();
-  }
-  _handleChangeNameInput(event) {
-    this.setState({name: event.target.value});
-  }
-  _handleChangeAmountInput(event) {
-    this.setState({amount: event.target.value});
   }
   _handleClickUpdateButton() {
     if (this.props.account.id) {
@@ -86,7 +79,7 @@ export default class AccountListItem extends Component {
   _handleClickDeleteButton() {
     this._delete();
   }
-  _handleKeyDownInputs(event) {
+  _handleKeyDownInput(event) {
     const keyCode = event.keyCode;
     const shift = event.shiftKey;
     const ctrl = event.ctrlKey || event.metaKey;
@@ -107,75 +100,84 @@ export default class AccountListItem extends Component {
         break;
     }
   }
-  _handleClickErrorIcon() {
-    if (this.props.account.id) {
-      this._update();
-    } else {
-      this._edit();
-    }
+  _handleClickErrorButton() {
+    this._edit();
   }
   _handleFocusInput(event) {
     this._select(event.target);
   }
+  _handleChangeInput(event) {
+    let value = event.currentTarget.value;
+    const key = event.currentTarget.name;
+    const type = event.currentTarget.type;
+    const state = {};
+
+    if (type === 'date') {
+      value = moment(new Date(value)).format('L');
+    }
+    state[key] = value;
+    this.setState(state);
+  }
   render() {
     const account = this.props.account;
-    const errorIconElement = (account.error) ? (
-      <span onClick={this.handleClickErrorIcon}>E</span>
-    ) : null;
 
     if (this.state.isEditing) {
       return (
-        <tr className="account-table-row account-table-row__editing">
+        <tr key={account.cid} className="account-table-row account-table-row__editing">
           <td>
             <FloatingInput
               type="text"
+              name="name"
               value={this.state.name}
               label="Name"
               placeholder="Enter account name"
-              onChange={this.handleChangeNameInput}
-              onKeyDown={this.handleKeyDownInputs}
+              onChange={this.handleChangeInput}
+              onKeyDown={this.handleKeyDownInput}
               onFocus={this.handleFocusInput}
               />
           </td>
           <td>
             <FloatingInput
               autoFocus
+              name="amount"
               type="number"
               label="Amount"
               placeholder="Enter amount"
               value={this.state.amount}
-              onChange={this.handleChangeAmountInput}
-              onKeyDown={this.handleKeyDownInputs}
+              onChange={this.handleChangeInput}
+              onKeyDown={this.handleKeyDownInput}
               onFocus={this.handleFocusInput}
               />
           </td>
           <td>
             <IconButton onClick={this.handleClickUpdateButton}>done</IconButton>
           </td>
-          <td>{errorIconElement}</td>
         </tr>
       );
     }
     return (
-      <tr className="account-table-row">
-        <td onClick={this.handleClickAccountListItem} >
+      <tr key={account.cid} className="account-table-row">
+        <td onClick={this.handleClickTableRow} >
           <span>{account.name}</span>
         </td>
-        <td onClick={this.handleClickAccountListItem} >
+        <td onClick={this.handleClickTableRow} >
           <AmountLabel
             currencyCode={account.currencyCode}
             amount={account.amount}
             />
         </td>
         <td>
-          <IconButton onClick={this.handleClickDeleteButton}>delete</IconButton>
+          {(account.error) ? (
+            <IconButton onClick={this.handleClickErrorButton}>E</IconButton>
+          ) : (
+            <IconButton onClick={this.handleClickDeleteButton}>delete</IconButton>
+          )}
         </td>
-        <td>{errorIconElement}</td>
       </tr>
     );
   }
 }
 
-AccountListItem.propTypes = {
+AccountTableRow.propTypes = {
   account: React.PropTypes.object.isRequired,
 };
