@@ -36,7 +36,7 @@ export default class TransactionTableRow extends Component {
     this.handleClickTransactionListItem = this._handleClickTransactionListItem.bind(this);
     this.handleClickUpdateButton = this._handleClickUpdateButton.bind(this);
     this.handleClickDeleteButton = this._handleClickDeleteButton.bind(this);
-    this.onKeyDownNameInput = this._onKeyDownNameInput.bind(this);
+    this.handleKeyDownInput = this._handleKeyDownInput.bind(this);
     this.handleChangeInput = this._handleChangeInput.bind(this);
   }
   _edit() {
@@ -80,14 +80,21 @@ export default class TransactionTableRow extends Component {
   _handleClickDeleteButton() {
     this._delete();
   }
-  _onKeyDownNameInput(event) {
+  _handleKeyDownInput(event) {
     const keyCode = event.keyCode;
     const shift = event.shiftKey;
     const ctrl = event.ctrlKey || event.metaKey;
 
-    if (keyCodes.ENTER === keyCode && !shift && !ctrl) {
-      this._update();
-      this._done();
+    switch(true) {
+      case (keyCodes.ENTER === keyCode && !shift && !ctrl):
+        this._update();
+        this._done();
+        break
+      case (keyCodes.ESC === keyCode && !shift && !ctrl):
+        this._done();
+        break
+      default:
+        break
     }
   }
   _handleChangeInput(event) {
@@ -126,7 +133,7 @@ export default class TransactionTableRow extends Component {
   }
   _createIdSelectElement(items, initialValue = '', name = null) {
     return (
-      <FlatSelect value={initialValue} name={name} onChange={this.handleChangeInput}>
+      <FlatSelect value={initialValue} name={name} onChange={this.handleChangeInput} onKeyDown={this.handleKeyDownInput}>
         {items.map(item => <option key={item.id} value={item.id}>{item.name}</option>)}
       </FlatSelect>
     );
@@ -150,6 +157,7 @@ export default class TransactionTableRow extends Component {
                   name="transactionDate"
                   value={this._formatDate(this.state.transactionDate)}
                   onChange={this.handleChangeInput}
+                  onKeyDown={this.handleKeyDownInput}
                   />
               </td>
               <td>
@@ -172,6 +180,7 @@ export default class TransactionTableRow extends Component {
                   name="amount"
                   value={this.state.amount}
                   onChange={this.handleChangeInput}
+                  onKeyDown={this.handleKeyDownInput}
                   />
               </td>
               <td>
@@ -179,6 +188,7 @@ export default class TransactionTableRow extends Component {
                   type="text"
                   name="note"
                   onChange={this.handleChangeInput}
+                  onKeyDown={this.handleKeyDownInput}
                   value={this.state.note}
                   />
               </td>
@@ -198,6 +208,7 @@ export default class TransactionTableRow extends Component {
                   name="transactionDate"
                   value={this._formatDate(this.state.transactionDate)}
                   onChange={this.handleChangeInput}
+                  onKeyDown={this.handleKeyDownInput}
                   />
               </td>
               <td/>
@@ -220,6 +231,7 @@ export default class TransactionTableRow extends Component {
                   name="amount"
                   value={this.state.amount}
                   onChange={this.handleChangeInput}
+                  onKeyDown={this.handleKeyDownInput}
                   />
               </td>
               <td>
@@ -227,6 +239,7 @@ export default class TransactionTableRow extends Component {
                   type="text"
                   name="note"
                   onChange={this.handleChangeInput}
+                  onKeyDown={this.handleKeyDownInput}
                   value={this.state.note}
                   />
               </td>
@@ -246,6 +259,7 @@ export default class TransactionTableRow extends Component {
                   name="transactionDate"
                   value={this._formatDate(this.state.transactionDate)}
                   onChange={this.handleChangeInput}
+                  onKeyDown={this.handleKeyDownInput}
                   />
               </td>
               <td>
@@ -268,6 +282,7 @@ export default class TransactionTableRow extends Component {
                   type="number"
                   name="amount"
                   onChange={this.handleChangeInput}
+                  onKeyDown={this.handleKeyDownInput}
                   value={this.state.amount}
                   />
               </td>
@@ -276,6 +291,7 @@ export default class TransactionTableRow extends Component {
                   type="text"
                   name="note"
                   onChange={this.handleChangeInput}
+                  onKeyDown={this.handleKeyDownInput}
                   value={this.state.note}
                   />
               </td>
