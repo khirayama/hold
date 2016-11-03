@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import moment from 'moment';
 
 import keyCodes from 'constants/key-codes';
 

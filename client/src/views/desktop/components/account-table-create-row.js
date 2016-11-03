@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import moment from 'moment';
 
 import keyCodes from 'constants/key-codes';
 
@@ -59,16 +60,16 @@ export default class AccountTableCreateRow extends Component {
     const shift = event.shiftKey;
     const ctrl = event.ctrlKey || event.metaKey;
 
-    switch(true) {
+    switch (true) {
       case (keyCodes.ENTER === keyCode && !shift && !ctrl):
         this._create();
         this._done();
-        break
+        break;
       case (keyCodes.ESC === keyCode && !shift && !ctrl):
         this._done();
-        break
+        break;
       default:
-        break
+        break;
     }
   }
   _handleChangeInput(event) {

@@ -1,3 +1,4 @@
+/* global localStorage */
 import MicroEmitter from 'micro-emitter';
 
 const EVENT_CHANGE = '__CHANGE_STORE';

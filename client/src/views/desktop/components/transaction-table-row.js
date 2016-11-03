@@ -5,7 +5,6 @@ import keyCodes from 'constants/key-codes';
 import transactionTypes from 'constants/transaction-types';
 
 import {
-  createTransaction,
   updateTransaction,
   deleteTransaction,
 } from 'actions/transaction-action-creators';
@@ -30,7 +29,7 @@ export default class TransactionTableRow extends Component {
       transactionCategoryId: (transaction.transactionCategory || {}).id || null,
       fromAccountId: (transaction.fromAccount || {}).id || null,
       toAccountId: (transaction.toAccount || {}).id || null,
-      note: (transaction.note) || ''
+      note: (transaction.note) || '',
     };
 
     this.handleClickTransactionListItem = this._handleClickTransactionListItem.bind(this);
@@ -85,16 +84,16 @@ export default class TransactionTableRow extends Component {
     const shift = event.shiftKey;
     const ctrl = event.ctrlKey || event.metaKey;
 
-    switch(true) {
+    switch (true) {
       case (keyCodes.ENTER === keyCode && !shift && !ctrl):
         this._update();
         this._done();
-        break
+        break;
       case (keyCodes.ESC === keyCode && !shift && !ctrl):
         this._done();
-        break
+        break;
       default:
-        break
+        break;
     }
   }
   _handleChangeInput(event) {
