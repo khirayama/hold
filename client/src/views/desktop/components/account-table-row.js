@@ -168,7 +168,7 @@ export default class AccountTableRow extends Component {
         </td>
         <td>
           {(account.error) ? (
-            <IconButton onClick={this.handleClickErrorButton}>E</IconButton>
+            <IconButton onClick={this.handleClickErrorButton}>error</IconButton>
           ) : (
             <IconButton onClick={this.handleClickDeleteButton}>delete</IconButton>
           )}
