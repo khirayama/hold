@@ -8,14 +8,18 @@ export default class MicroStore extends MicroEmitter {
     super();
 
     this.state = {};
-    if (localStorage) {
-      this.state = JSON.parse(localStorage.getItem('__state'));
+    if (typeof window === 'object') {
+      if (localStorage) {
+        this.state = JSON.parse(localStorage.getItem('__state') || {});
+      }
     }
   }
 
   dispatchChange() {
-    if (localStorage) {
-      localStorage.setItem('__state', JSON.stringify(this.state));
+    if (typeof window === 'object') {
+      if (localStorage) {
+        localStorage.setItem('__state', JSON.stringify(this.state));
+      }
     }
     this.emit(EVENT_CHANGE);
   }
