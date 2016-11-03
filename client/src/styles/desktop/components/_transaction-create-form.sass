@@ -12,11 +12,13 @@
       color: $color-text-secondary
       background-color: inherit
       cursor: pointer
-      transition: color .2s ease-out, box-shadow .2s ease-out
+      transition: .2s ease-out
+      transition-property: color, box-shadow, background
       &:focus,
       &:hover
         color: $color-text
         box-shadow: 0 2px 0 0 $color-primary-light
+        background: $color-ui-focus
       #{&}__active
         color: $color-text
         font-weight: $font-weight-bold
