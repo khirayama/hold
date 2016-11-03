@@ -70,6 +70,7 @@ export default class TransactionCreateForm extends Component {
   }
   _handleClickCreateButton() {
     this._create();
+    this.setState({amount: 0, note: ''});
   }
   _handleKeyDownInputWithEnterCreate(event) {
     const keyCode = event.keyCode;
@@ -78,6 +79,7 @@ export default class TransactionCreateForm extends Component {
 
     if (keyCodes.ENTER === keyCode && !shift && !ctrl) {
       this._create();
+      this.setState({amount: 0, note: ''});
       this._select(event.target);
     }
   }
