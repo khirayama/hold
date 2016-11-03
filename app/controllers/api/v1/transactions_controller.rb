@@ -5,14 +5,14 @@ module Api
 
       def index
         exec_query = 'current_user.transactions'
-        exec_query += '.where(to_account_id: params[:to_account_id])' if params[:to_account_id]
-        exec_query += '.where(from_account_id: params[:from_account_id])' if params[:from_account_id]
-        exec_query += '.where(transaction_category_id: params[:transaction_category_id])' if params[:transaction_category_id]
-        exec_query += '.where("amount >= ?", params[:from_amount])' if params[:from_amount]
-        exec_query += '.where("amount <= ?", params[:to_amount])' if params[:to_amount]
-        exec_query += '.where("transaction_date >= ?", Date.parse(params[:since]))' if params[:since]
-        exec_query += '.where("transaction_date <= ?", Date.parse(params[:until]))' if params[:until]
-        exec_query += '.where("note like ?", "%#{params[:note]}%")' if params[:note]
+        exec_query += '.where(to_account_id: params[:to_account_id])' if params[:to_account_id].present?
+        exec_query += '.where(from_account_id: params[:from_account_id])' if params[:from_account_id].present?
+        exec_query += '.where(transaction_category_id: params[:transaction_category_id])' if params[:transaction_category_id].present?
+        exec_query += '.where("amount >= ?", params[:from_amount])' if params[:from_amount].present?
+        exec_query += '.where("amount <= ?", params[:to_amount])' if params[:to_amount].present?
+        exec_query += '.where("transaction_date >= ?", Date.parse(params[:since]))' if params[:since].present?
+        exec_query += '.where("transaction_date <= ?", Date.parse(params[:until]))' if params[:until].present?
+        exec_query += '.where("note like ?", "%#{params[:note]}%")' if params[:note].present?
 
         transactions = eval(exec_query).map do |transaction|
           format_transaction(transaction)
