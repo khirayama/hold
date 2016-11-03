@@ -1,4 +1,4 @@
-/* global localStorage */
+/* global window */
 import MicroEmitter from 'micro-emitter';
 
 const EVENT_CHANGE = '__CHANGE_STORE';
@@ -9,16 +9,16 @@ export default class MicroStore extends MicroEmitter {
 
     this.state = {};
     if (typeof window === 'object') {
-      if (localStorage) {
-        this.state = JSON.parse(localStorage.getItem('__state') || {});
+      if (window.localStorage) {
+        this.state = JSON.parse(window.localStorage.getItem('__state') || {});
       }
     }
   }
 
   dispatchChange() {
     if (typeof window === 'object') {
-      if (localStorage) {
-        localStorage.setItem('__state', JSON.stringify(this.state));
+      if (window.localStorage) {
+        window.localStorage.setItem('__state', JSON.stringify(this.state));
       }
     }
     this.emit(EVENT_CHANGE);
