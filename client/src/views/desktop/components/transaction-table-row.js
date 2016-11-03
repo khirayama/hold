@@ -30,14 +30,13 @@ export default class TransactionTableRow extends Component {
       transactionCategoryId: (transaction.transactionCategory || {}).id || null,
       fromAccountId: (transaction.fromAccount || {}).id || null,
       toAccountId: (transaction.toAccount || {}).id || null,
+      note: (transaction.note) || ''
     };
 
     this.handleClickTransactionListItem = this._handleClickTransactionListItem.bind(this);
-    this.handleChangeNameInput = this._handleChangeNameInput.bind(this);
     this.handleClickUpdateButton = this._handleClickUpdateButton.bind(this);
     this.handleClickDeleteButton = this._handleClickDeleteButton.bind(this);
     this.onKeyDownNameInput = this._onKeyDownNameInput.bind(this);
-    this.handleClickErrorIcon = this._handleClickErrorIcon.bind(this);
     this.handleChangeInput = this._handleChangeInput.bind(this);
   }
   _edit() {
@@ -68,32 +67,14 @@ export default class TransactionTableRow extends Component {
       note: this.state.note,
     });
   }
-  _recreate() {
-    createTransaction({
-      cid: this.props.transaction.cid,
-      fromAccountId: this.state.fromAccountId,
-      toAccountId: this.state.toAccountId,
-      transactionCategoryId: this.state.transactionCategoryId,
-      amount: this.state.amount,
-      transactionDate: this.state.transactionDate,
-      note: this.state.note,
-    });
-  }
   _delete() {
     deleteTransaction(this.props.transaction);
   }
   _handleClickTransactionListItem() {
     this._edit();
   }
-  _handleChangeNameInput(event) {
-    this.setState({name: event.target.value});
-  }
   _handleClickUpdateButton() {
-    if (this.props.transaction.id) {
-      this._update();
-    } else {
-      this._recreate();
-    }
+    this._update();
     this._done();
   }
   _handleClickDeleteButton() {
@@ -105,19 +86,8 @@ export default class TransactionTableRow extends Component {
     const ctrl = event.ctrlKey || event.metaKey;
 
     if (keyCodes.ENTER === keyCode && !shift && !ctrl) {
-      if (this.props.transaction.id) {
-        this._update();
-      } else {
-        this._recreate();
-      }
-      this._done();
-    }
-  }
-  _handleClickErrorIcon() {
-    if (this.props.transaction.id) {
       this._update();
-    } else {
-      this._edit();
+      this._done();
     }
   }
   _handleChangeInput(event) {
@@ -164,9 +134,6 @@ export default class TransactionTableRow extends Component {
   render() {
     const transaction = this.props.transaction;
     const dataset = this.props.transactionDataset;
-    const errorIconElement = (transaction.error) ? (
-      <span onClick={this.handleClickErrorIcon}>E</span>
-    ) : null;
 
     const transactionType = this._determineTransactionType(transaction);
 
@@ -207,7 +174,14 @@ export default class TransactionTableRow extends Component {
                   onChange={this.handleChangeInput}
                   />
               </td>
-              <td/>
+              <td>
+                <FlatInput
+                  type="text"
+                  name="note"
+                  onChange={this.handleChangeInput}
+                  value={this.state.note}
+                  />
+              </td>
               <td>
                 <IconButton onClick={this.handleClickUpdateButton}>done</IconButton>
               </td>
@@ -248,7 +222,14 @@ export default class TransactionTableRow extends Component {
                   onChange={this.handleChangeInput}
                   />
               </td>
-              <td/>
+              <td>
+                <FlatInput
+                  type="text"
+                  name="note"
+                  onChange={this.handleChangeInput}
+                  value={this.state.note}
+                  />
+              </td>
               <td>
                 <IconButton onClick={this.handleClickUpdateButton}>done</IconButton>
               </td>
@@ -290,7 +271,14 @@ export default class TransactionTableRow extends Component {
                   value={this.state.amount}
                   />
               </td>
-              <td/>
+              <td>
+                <FlatInput
+                  type="text"
+                  name="note"
+                  onChange={this.handleChangeInput}
+                  value={this.state.note}
+                  />
+              </td>
               <td>
                 <IconButton onClick={this.handleClickUpdateButton}>done</IconButton>
               </td>
@@ -328,7 +316,6 @@ export default class TransactionTableRow extends Component {
         </td>
         <td>
           <IconButton onClick={this.handleClickDeleteButton}>delete</IconButton>
-          {errorIconElement}
         </td>
       </tr>
     );
