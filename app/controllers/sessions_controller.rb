@@ -13,11 +13,11 @@ class SessionsController < ApplicationController
       Account.create_initial_account(user)
     end
 
-    redirect_to dashboard_path
+    redirect_to root_path
   end
 
   def destroy
     reset_session
-    redirect_to dashboard_path
+    redirect_to root_path
   end
 end
