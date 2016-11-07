@@ -35,8 +35,16 @@ export function startDesktopApp(pathname) {
 }
 
 export function startMobileApp(pathname = '') {
-  dispatch({
-    type: types.START_MOBILE_APP,
-    pathname,
+  User.fetch().then(user => {
+    Setting.fetch().then(setting => {
+      dispatch({
+        type: types.FETCH_USER,
+        user: formatUser(user, setting),
+      });
+      dispatch({
+        type: types.START_MOBILE_APP,
+        pathname,
+      });
+    });
   });
 }
