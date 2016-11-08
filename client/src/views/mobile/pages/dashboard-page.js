@@ -46,7 +46,10 @@ export default class DashboardPage extends Component {
       <div key={key} className="page dashboard-page">
         <div className="dashboard-page-content">
           <section className="transaction-create-section">
-            <TransactionCreateForm transactionDataset={state.transactionDataset}/>
+            <TransactionCreateForm
+              isMobileStyle
+              transactionDataset={state.transactionDataset}
+            />
           </section>
         </div>
       </div>

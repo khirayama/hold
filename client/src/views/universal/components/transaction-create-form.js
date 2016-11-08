@@ -150,7 +150,7 @@ export default class TransactionCreateForm extends Component {
     const dataset = this.props.transactionDataset;
 
     return (
-      <span className="transaction-create-form" ref={this.assignForm}>
+      <span className={`transaction-create-form ${(this.props.isMobileStyle) ? 'transaction-create-form__mobile' : ''}`} ref={this.assignForm}>
         <div className="transaction-create-form-tab">
           <button
             className={classNames(
@@ -179,98 +179,100 @@ export default class TransactionCreateForm extends Component {
               >Transfer</button>
           ) : null }
         </div>
-        <table className="transaction-create-form-table">
-          <tbody>
-            { (
-                this.state.transactionType === transactionTypes.PAYMENT ||
-                this.state.transactionType === transactionTypes.TRANSFER
-              ) ? (
-                <tr>
-                  <th>From</th>
-                  <td>{
-                    this._createIdSelectElement(dataset.accounts, this.state.fromAccountId, 'fromAccountId')
+        <section className="transaction-create-form-content">
+          <table className="transaction-create-form-table">
+            <tbody>
+              { (
+                  this.state.transactionType === transactionTypes.PAYMENT ||
+                  this.state.transactionType === transactionTypes.TRANSFER
+                ) ? (
+                  <tr>
+                    <th>From</th>
+                    <td>{
+                      this._createIdSelectElement(dataset.accounts, this.state.fromAccountId, 'fromAccountId')
+                    }</td>
+                  </tr>
+              ) : null }
+              { (
+                  this.state.transactionType === transactionTypes.INCOME ||
+                  this.state.transactionType === transactionTypes.TRANSFER
+                ) ? (
+                  <tr>
+                    <th>To</th>
+                    <td>{
+                      this._createIdSelectElement(dataset.accounts, this.state.toAccountId, 'toAccountId')
+                    }</td>
+                  </tr>
+              ) : null }
+              { (
+                  this.state.transactionType === transactionTypes.PAYMENT ||
+                  this.state.transactionType === transactionTypes.INCOME
+                ) ? (
+                  <tr>
+                    <th>Category</th>
+                    <td>{
+                    this._createIdSelectElement(
+                      this._filterTransactionCategory(dataset.transactionCategories, this.state.transactionType),
+                      this.state.transactionCategoryId,
+                      'transactionCategoryId'
+                    )
                   }</td>
-                </tr>
-            ) : null }
-            { (
-                this.state.transactionType === transactionTypes.INCOME ||
-                this.state.transactionType === transactionTypes.TRANSFER
-              ) ? (
-                <tr>
-                  <th>To</th>
-                  <td>{
-                    this._createIdSelectElement(dataset.accounts, this.state.toAccountId, 'toAccountId')
-                  }</td>
-                </tr>
-            ) : null }
-            { (
-                this.state.transactionType === transactionTypes.PAYMENT ||
-                this.state.transactionType === transactionTypes.INCOME
-              ) ? (
-                <tr>
-                  <th>Category</th>
-                  <td>{
-                  this._createIdSelectElement(
-                    this._filterTransactionCategory(dataset.transactionCategories, this.state.transactionType),
-                    this.state.transactionCategoryId,
-                    'transactionCategoryId'
-                  )
-                }</td>
-                </tr>
-            ) : null }
-            <tr>
-              <th>Date</th>
-              <td>
-                <FlatInput
-                  className="size__spread"
-                  type="date"
-                  name="transactionDate"
-                  value={this._formatDate(this.state.transactionDate)}
-                  onChange={this.handleChangeInput}
-                  />
-              </td>
-            </tr>
-            <tr>
-              <th>Amount({dataset.currencyCode})</th>
-              <td>
-                <FlatInput
-                  className="size__spread"
-                  type="number"
-                  name="amount"
-                  placeholder="Enter amount"
-                  value={this.state.amount}
-                  onChange={this.handleChangeInput}
-                  onKeyDown={this.handleKeyDownInputWithEnterCreate}
-                  onFocus={this.handleFocusInput}
-                  />
-              </td>
-            </tr>
-            <tr>
-              <td colSpan="2">
-                <div className="floating-input-container">
-                  <FloatingInput
+                  </tr>
+              ) : null }
+              <tr>
+                <th>Date</th>
+                <td>
+                  <FlatInput
                     className="size__spread"
-                    type="text"
-                    name="note"
-                    label="Note"
-                    placeholder="Enter note"
-                    value={this.state.note}
+                    type="date"
+                    name="transactionDate"
+                    value={this._formatDate(this.state.transactionDate)}
+                    onChange={this.handleChangeInput}
+                    />
+                </td>
+              </tr>
+              <tr>
+                <th>Amount({dataset.currencyCode})</th>
+                <td>
+                  <FlatInput
+                    className="size__spread"
+                    type="number"
+                    name="amount"
+                    placeholder="Enter amount"
+                    value={this.state.amount}
                     onChange={this.handleChangeInput}
                     onKeyDown={this.handleKeyDownInputWithEnterCreate}
                     onFocus={this.handleFocusInput}
                     />
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <FloatingButton
-          className="size__spread"
-          onClick={this.handleClickCreateButton}
-          >CREATE</FloatingButton>
-        <div className="transaction-category-edit-button-container">
-          <FlatButton onClick={showTransactionCategoryModal}>EDIT TRANSACTION CATEGORY</FlatButton>
-        </div>
+                </td>
+              </tr>
+              <tr>
+                <td colSpan="2">
+                  <div className="floating-input-container">
+                    <FloatingInput
+                      className="size__spread"
+                      type="text"
+                      name="note"
+                      label="Note"
+                      placeholder="Enter note"
+                      value={this.state.note}
+                      onChange={this.handleChangeInput}
+                      onKeyDown={this.handleKeyDownInputWithEnterCreate}
+                      onFocus={this.handleFocusInput}
+                      />
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <FloatingButton
+            className="size__spread"
+            onClick={this.handleClickCreateButton}
+            >CREATE</FloatingButton>
+          <div className="transaction-category-edit-button-container">
+            <FlatButton onClick={showTransactionCategoryModal}>EDIT TRANSACTION CATEGORY</FlatButton>
+          </div>
+        </section>
       </span>
     );
   }
