@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 
-import TransactionTableRow from './transaction-table-row';
+import TransactionTableRow from 'views/desktop/components/transaction-table-row';
 
 export default function TransactionTable(props) {
   return (
@@ -38,6 +38,6 @@ export default function TransactionTable(props) {
 }
 
 TransactionTable.propTypes = {
-  transactions: React.PropTypes.array.isRequired,
-  transactionDataset: React.PropTypes.object,
+  transactions: PropTypes.array.isRequired,
+  transactionDataset: PropTypes.object,
 };

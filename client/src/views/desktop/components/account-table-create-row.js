@@ -5,9 +5,9 @@ import keyCodes from 'constants/key-codes';
 
 import {createAccount} from 'actions/account-action-creators';
 
-import FloatingInput from './floating-input';
-import IconButton from './icon-button';
-import FlatButton from './flat-button';
+import FloatingInput from 'views/universal/components/floating-input';
+import IconButton from 'views/universal/components/icon-button';
+import FlatButton from 'views/universal/components/flat-button';
 
 export default class AccountTableCreateRow extends Component {
   constructor() {

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import moment from 'moment';
 
 import keyCodes from 'constants/key-codes';
@@ -9,11 +9,12 @@ import {
   deleteTransaction,
 } from 'actions/transaction-action-creators';
 
-import AmountLabel from './amount-label';
-import TransactionTypeLabel from './transaction-type-label';
-import IconButton from './icon-button';
-import FlatInput from './flat-input';
-import FlatSelect from './flat-select';
+import IconButton from 'views/universal/components/icon-button';
+import FlatInput from 'views/universal/components/flat-input';
+import FlatSelect from 'views/universal/components/flat-select';
+
+import AmountLabel from 'views/desktop/components/amount-label';
+import TransactionTypeLabel from 'views/desktop/components/transaction-type-label';
 
 export default class TransactionTableRow extends Component {
   constructor(props) {
@@ -338,7 +339,7 @@ export default class TransactionTableRow extends Component {
 }
 
 TransactionTableRow.propTypes = {
-  transaction: React.PropTypes.object.isRequired,
-  transactionDataset: React.PropTypes.object,
+  transaction: PropTypes.object.isRequired,
+  transactionDataset: PropTypes.object,
 };
 

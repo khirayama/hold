@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 
-import AccountTableRow from './account-table-row';
-import AccountTableCreateRow from './account-table-create-row';
+import AccountTableRow from 'views/desktop/components/account-table-row';
+import AccountTableCreateRow from 'views/desktop/components/account-table-create-row';
 
 export default function AccountTable(props) {
   return (
@@ -22,5 +22,5 @@ export default function AccountTable(props) {
 }
 
 AccountTable.propTypes = {
-  accounts: React.PropTypes.array.isRequired,
+  accounts: PropTypes.array.isRequired,
 };

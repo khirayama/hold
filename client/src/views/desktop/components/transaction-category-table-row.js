@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 
 import keyCodes from 'constants/key-codes';
 
@@ -8,10 +8,11 @@ import {
   deleteTransactionCategory,
 } from 'actions/transaction-category-action-creators';
 
-import TransactionTypeLabel from './transaction-type-label';
-import IconButton from './icon-button';
-import FlatInput from './flat-input';
-import FlatSelect from './flat-select';
+import IconButton from 'views/universal/components/icon-button';
+import FlatInput from 'views/universal/components/flat-input';
+import FlatSelect from 'views/universal/components/flat-select';
+
+import TransactionTypeLabel from 'views/desktop/components/transaction-type-label';
 
 export default class TransactionCategoryTableRow extends Component {
   constructor(props) {
@@ -156,5 +157,5 @@ export default class TransactionCategoryTableRow extends Component {
 }
 
 TransactionCategoryTableRow.propTypes = {
-  transactionCategory: React.PropTypes.object.isRequired,
+  transactionCategory: PropTypes.object.isRequired,
 };

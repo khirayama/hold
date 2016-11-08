@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 
-import TransactionCategoryTable from './transaction-category-table';
-import Modal from './modal';
+import Modal from 'views/universal/components/modal';
+
+import TransactionCategoryTable from 'views/desktop/components/transaction-category-table';
 
 export default function TransactionCategoryModal(props) {
   return (
@@ -20,7 +21,7 @@ export default function TransactionCategoryModal(props) {
 }
 
 TransactionCategoryModal.propTypes = {
-  isShown: React.PropTypes.bool.isRequired,
-  onCloseButtonClick: React.PropTypes.func.isRequired,
-  transactionCategories: React.PropTypes.array.isRequired,
+  isShown: PropTypes.bool.isRequired,
+  onCloseButtonClick: PropTypes.func.isRequired,
+  transactionCategories: PropTypes.array.isRequired,
 };

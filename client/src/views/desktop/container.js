@@ -1,15 +1,15 @@
 /* eslint-env browser */
 
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import {TRANSITION_TIME} from 'constants/constants';
 import {startDesktopApp} from 'actions/app-action-creators';
 
-import DashboardPage from './pages/dashboard-page';
-import TransactionsPage from './pages/transactions-page';
-import SettingPage from './pages/setting-page';
-import NotFoundPage from './pages/not-found-page';
+import DashboardPage from 'views/desktop/pages/dashboard-page';
+import TransactionsPage from 'views/desktop/pages/transactions-page';
+import SettingPage from 'views/desktop/pages/setting-page';
+import NotFoundPage from 'views/desktop/pages/not-found-page';
 
 export default class Container extends Component {
   constructor(props) {
@@ -66,5 +66,5 @@ export default class Container extends Component {
 }
 
 Container.propTypes = {
-  store: React.PropTypes.object.isRequired,
+  store: PropTypes.object.isRequired,
 };

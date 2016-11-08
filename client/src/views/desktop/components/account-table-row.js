@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import moment from 'moment';
 
 import keyCodes from 'constants/key-codes';
@@ -9,9 +9,10 @@ import {
   deleteAccount,
 } from 'actions/account-action-creators';
 
-import FloatingInput from './floating-input';
-import IconButton from './icon-button';
-import AmountLabel from './amount-label';
+import FloatingInput from 'views/universal/components/floating-input';
+import IconButton from 'views/universal/components/icon-button';
+
+import AmountLabel from 'views/desktop/components/amount-label';
 
 export default class AccountTableRow extends Component {
   constructor(props) {
@@ -180,5 +181,5 @@ export default class AccountTableRow extends Component {
 }
 
 AccountTableRow.propTypes = {
-  account: React.PropTypes.object.isRequired,
+  account: PropTypes.object.isRequired,
 };

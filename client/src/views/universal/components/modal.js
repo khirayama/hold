@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import {TRANSITION_TIME} from 'constants/constants';
@@ -38,8 +38,8 @@ Modal.defaultProps = {
 };
 
 Modal.propTypes = {
-  children: React.PropTypes.node.isRequired,
-  isShown: React.PropTypes.bool.isRequired,
-  onCloseButtonClick: React.PropTypes.func.isRequired,
-  className: React.PropTypes.string,
+  children: PropTypes.node.isRequired,
+  isShown: PropTypes.bool.isRequired,
+  onCloseButtonClick: PropTypes.func.isRequired,
+  className: PropTypes.string,
 };

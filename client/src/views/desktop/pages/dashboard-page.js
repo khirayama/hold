@@ -3,12 +3,13 @@ import moment from 'moment';
 
 import transactionTypes from 'constants/transaction-types';
 
-import TotalAmountSection from '../components/total-amount-section';
-import AccountTable from '../components/account-table';
-import TransactionTable from '../components/transaction-table';
-import TransactionCreateForm from '../components/transaction-create-form';
-import Link from '../components/link';
-import TransactionCategoryModal from '../components/transaction-category-modal';
+import TotalAmountSection from 'views/desktop/components/total-amount-section';
+import AccountTable from 'views/desktop/components/account-table';
+import TransactionTable from 'views/desktop/components/transaction-table';
+import TransactionCategoryModal from 'views/desktop/components/transaction-category-modal';
+
+import Link from 'views/universal/components/link';
+import TransactionCreateForm from 'views/universal/components/transaction-create-form';
 
 import {fetchInitialDashboardPageResources} from 'actions/page-initialize-action-creators';
 import {hideTransactionCategoryModal} from 'actions/modal-action-creators';

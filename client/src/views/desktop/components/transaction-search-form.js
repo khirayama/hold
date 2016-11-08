@@ -3,9 +3,9 @@ import moment from 'moment';
 
 import keyCodes from 'constants/key-codes';
 
-import FlatInput from '../components/flat-input';
-import FlatSelect from '../components/flat-select';
-import FloatingButton from '../components/floating-button';
+import FlatInput from 'views/universal/components/flat-input';
+import FlatSelect from 'views/universal/components/flat-select';
+import FloatingButton from 'views/universal/components/floating-button';
 
 import {fetchTransactions} from 'actions/transaction-action-creators';
 

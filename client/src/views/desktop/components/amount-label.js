@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 
 import {amount} from 'utils/currency';
 
@@ -12,6 +12,6 @@ export default function AmountLabel(props) {
 }
 
 AmountLabel.propTypes = {
-  currencyCode: React.PropTypes.string.isRequired,
-  amount: React.PropTypes.number.isRequired,
+  currencyCode: PropTypes.string.isRequired,
+  amount: PropTypes.number.isRequired,
 };

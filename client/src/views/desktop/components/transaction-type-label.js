@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import classNames from 'classnames';
 
 import transactionTypes from 'constants/transaction-types';
@@ -19,5 +19,5 @@ export default function TransactionTypeLabel(props) {
 }
 
 TransactionTypeLabel.propTypes = {
-  transactionType: React.PropTypes.string.isRequired,
+  transactionType: PropTypes.string.isRequired,
 };

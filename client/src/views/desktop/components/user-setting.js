@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-
-import FlatSelect from './flat-select';
+import React, {Component, PropTypes} from 'react';
 
 import {updateUserSetting} from 'actions/user-setting-action-creators';
+
+import FlatSelect from 'views/universal/components/flat-select';
 
 export default class UserSetting extends Component {
   constructor(props) {
@@ -65,5 +65,5 @@ export default class UserSetting extends Component {
 }
 
 UserSetting.propTypes = {
-  user: React.PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
 };

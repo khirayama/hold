@@ -1,0 +1,54 @@
+.transactions-page
+  h2
+    margin-bottom: 32px
+    font-size: 1.2rem
+
+  .transactions-page-content
+    $width-main-column: 780px
+    $width-sub-column: 336px
+
+    width: $width-main-column + $width-sub-column
+    margin: 64px auto 32px
+
+    .transactions-page-sub-column
+      display: inline-block
+      width: $width-sub-column
+      padding: 8px
+      vertical-align: top
+
+    .transactions-page-main-column
+      display: inline-block
+      width: $width-main-column
+      border-left: $border
+      padding: 8px 8px 8px 24px
+      vertical-align: top
+
+    .transaction-create-section
+      display: inline-block
+      width: 320px
+      padding: 8px
+      vertical-align: top
+
+    .transaction-section
+      display: inline-block
+      width: 100%
+      padding: 8px
+      vertical-align: top
+
+    .transaction-search-section
+      display: inline-block
+      width: 100%
+      padding: 8px 8px 32px
+      vertical-align: top
+
+  &.page-transition-enter
+    z-index: 1
+    transform: translateX(100%)
+  &.page-transition-enter.page-transition-enter-active
+    transform: translateX(0)
+    transition: transform $transition-time $ease-out-expo
+  &.page-transition-leave
+    transform: translateX(0)
+  &.page-transition-leave.page-transition-leave-active
+    transform: translateX(100%)
+    transition: transform $transition-time $ease-out-expo

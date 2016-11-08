@@ -1,0 +1,24 @@
+.dashboard-page
+  .dashboard-page-content
+    width: 100%
+    .transaction-create-section
+      display: inline-block
+      width: 100%
+      padding: 0 16px
+      vertical-align: top
+
+  &.page-transition-enter
+    .dashboard-page-content
+      transform: scale(.9)
+  &.page-transition-enter.page-transition-enter-active
+    .dashboard-page-content
+      transform: scale(1)
+      transition: transform $transition-time $ease-out-expo
+  &.page-transition-leave
+    .dashboard-page-content
+      z-index: 0
+      transform: scale(1)
+  &.page-transition-leave.page-transition-leave-active
+    .dashboard-page-content
+      transform: scale(.9)
+      transition: transform $transition-time $ease-out-expo

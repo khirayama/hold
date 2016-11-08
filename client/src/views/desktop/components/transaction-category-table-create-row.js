@@ -5,9 +5,9 @@ import transactionTypes from 'constants/transaction-types';
 
 import {createTransactionCategory} from 'actions/transaction-category-action-creators';
 
-import FloatingButton from './floating-button';
-import FlatInput from './flat-input';
-import FlatSelect from './flat-select';
+import FloatingButton from 'views/universal/components/floating-button';
+import FlatInput from 'views/universal/components/flat-input';
+import FlatSelect from 'views/universal/components/flat-select';
 
 export default class TransactionCategoryTableCreateRow extends Component {
   constructor() {

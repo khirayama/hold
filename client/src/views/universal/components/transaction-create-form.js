@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import classNames from 'classnames';
 import moment from 'moment';
 
@@ -277,5 +277,5 @@ export default class TransactionCreateForm extends Component {
 }
 
 TransactionCreateForm.propTypes = {
-  transactionDataset: React.PropTypes.object.isRequired,
+  transactionDataset: PropTypes.object.isRequired,
 };

@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 
-import TransactionCategoryTableRow from './transaction-category-table-row';
-import TransactionCategoryTableCreateRow from './transaction-category-table-create-row';
+import TransactionCategoryTableRow from 'views/desktop/components/transaction-category-table-row';
+import TransactionCategoryTableCreateRow from 'views/desktop/components/transaction-category-table-create-row';
 
 export default function TransactionCategoryTable(props) {
   return (
@@ -22,5 +22,5 @@ export default function TransactionCategoryTable(props) {
 }
 
 TransactionCategoryTable.propTypes = {
-  transactionCategories: React.PropTypes.array.isRequired,
+  transactionCategories: PropTypes.array.isRequired,
 };

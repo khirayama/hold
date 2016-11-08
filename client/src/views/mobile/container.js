@@ -1,16 +1,12 @@
 /* eslint-env browser */
 
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import {TRANSITION_TIME} from 'constants/constants';
-import {startMobileApp} from '../../actions/app-action-creators';
+import {startMobileApp} from 'actions/app-action-creators';
 
-import DashboardPage from './pages/dashboard-page';
-
-const propTypes = {
-  store: React.PropTypes.object.isRequired,
-};
+import DashboardPage from 'views/mobile/pages/dashboard-page';
 
 export default class Container extends Component {
   constructor(props) {
@@ -62,4 +58,7 @@ export default class Container extends Component {
   }
 }
 
-Container.propTypes = propTypes;
+Container.propTypes = {
+  store: PropTypes.object.isRequired,
+};
+

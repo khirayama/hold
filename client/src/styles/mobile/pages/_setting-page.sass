@@ -1,0 +1,27 @@
+.setting-page
+  .setting-page-content
+    width: 320px
+    margin: 120px auto
+    text-align: center
+    h2
+      font-size: 1.2rem
+  .user-setting
+    .user-setting-image
+      border-radius: 50%
+    table
+      width: 100%
+      padding: 24px 0
+      th
+        text-align: left
+
+  &.page-transition-enter
+    z-index: 1
+    transform: translateX(100%)
+  &.page-transition-enter.page-transition-enter-active
+    transform: translateX(0)
+    transition: transform $transition-time $ease-out-expo
+  &.page-transition-leave
+    transform: translateX(0)
+  &.page-transition-leave.page-transition-leave-active
+    transform: translateX(100%)
+    transition: transform $transition-time $ease-out-expo

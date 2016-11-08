@@ -1,7 +1,8 @@
 import React, {PropTypes} from 'react';
 
-import UserSetting from '../components/user-setting';
-import Link from '../components/link';
+import UserSetting from 'views/desktop/components/user-setting';
+
+import Link from 'views/universal/components/link';
 
 export default function SettingPage(props) {
   const state = props.state;

@@ -2,11 +2,12 @@ import React, {Component, PropTypes} from 'react';
 
 import transactionTypes from 'constants/transaction-types';
 
-import TransactionTable from '../components/transaction-table';
-import TransactionSearchForm from '../components/transaction-search-form';
-import TransactionCreateForm from '../components/transaction-create-form';
-import TransactionCategoryModal from '../components/transaction-category-modal';
-import Link from '../components/link';
+import TransactionTable from 'views/desktop/components/transaction-table';
+import TransactionSearchForm from 'views/desktop/components/transaction-search-form';
+import TransactionCategoryModal from 'views/desktop/components/transaction-category-modal';
+
+import Link from 'views/universal/components/link';
+import TransactionCreateForm from 'views/universal/components/transaction-create-form';
 
 import {fetchInitialTransactionsPageResources} from 'actions/page-initialize-action-creators';
 import {hideTransactionCategoryModal} from 'actions/modal-action-creators';

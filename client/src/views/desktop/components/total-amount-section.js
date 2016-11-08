@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 
-import AmountLabel from './amount-label';
+import AmountLabel from 'views/desktop/components/amount-label';
 
 export default function TotalAmountSection(props) {
   let total = 0;

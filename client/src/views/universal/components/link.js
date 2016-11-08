@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 
 import {changeHistory} from 'actions/app-action-creators';
 
@@ -15,7 +15,7 @@ Link.defaultProps = {
 };
 
 Link.propTypes = {
-  children: React.PropTypes.node,
-  href: React.PropTypes.string.isRequired,
-  className: React.PropTypes.string,
+  children: PropTypes.node,
+  href: PropTypes.string.isRequired,
+  className: PropTypes.string,
 };
