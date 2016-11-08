@@ -150,7 +150,7 @@ export default class TransactionCreateForm extends Component {
     const dataset = this.props.transactionDataset;
 
     return (
-      <span className={`transaction-create-form ${(this.props.isMobileStyle) ? 'transaction-create-form__mobile' : ''}`} ref={this.assignForm}>
+      <span className="transaction-create-form" ref={this.assignForm}>
         <div className="transaction-create-form-tab">
           <button
             className={classNames(

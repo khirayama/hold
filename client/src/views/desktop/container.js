@@ -56,7 +56,7 @@ export default class Container extends Component {
 
     return (
       <ReactCSSTransitionGroup
-        className="page-container"
+        className="desktop page-container"
         transitionName="page-transition"
         transitionEnterTimeout={TRANSITION_TIME}
         transitionLeaveTimeout={TRANSITION_TIME}
