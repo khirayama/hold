@@ -10,7 +10,7 @@ export default class MicroStore extends MicroEmitter {
     this.state = {};
     if (typeof window === 'object') {
       if (window.localStorage) {
-        this.state = JSON.parse(window.localStorage.getItem('__state') || {});
+        this.state = JSON.parse(window.localStorage.getItem('__state') || "{}");
       }
     }
   }
