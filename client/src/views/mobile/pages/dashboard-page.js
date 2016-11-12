@@ -12,26 +12,6 @@ export default class DashboardPage extends Component {
   componentDidMount() {
     fetchInitialDashboardPageResources();
   }
-  // TODO: common
-  _determineTransactionType(transaction) {
-    if (
-      transaction.toAccount === null &&
-      transaction.fromAccount !== null
-    ) {
-      return transactionTypes.PAYMENT;
-    } else if (
-      transaction.toAccount !== null &&
-      transaction.fromAccount === null
-    ) {
-      return transactionTypes.INCOME;
-    } else if (
-      transaction.toAccount !== null &&
-      transaction.fromAccount !== null
-    ) {
-      return transactionTypes.TRANSFER;
-    }
-    return null;
-  }
   _getToday() {
     return moment().subtract(4, 'hours');
   }

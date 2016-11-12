@@ -1,8 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import moment from 'moment';
 
-import transactionTypes from 'constants/transaction-types';
-
 import TotalAmountSection from 'views/desktop/components/total-amount-section';
 import AccountTable from 'views/desktop/components/account-table';
 import TransactionTable from 'views/desktop/components/transaction-table';
@@ -14,29 +12,11 @@ import TransactionCreateForm from 'views/universal/components/transaction-create
 import {fetchInitialDashboardPageResources} from 'actions/page-initialize-action-creators';
 import {hideTransactionCategoryModal} from 'actions/modal-action-creators';
 
+import determineTransactionType from 'utils/determine-transaction-type';
+
 export default class DashboardPage extends Component {
   componentDidMount() {
     fetchInitialDashboardPageResources();
-  }
-  // TODO: common
-  _determineTransactionType(transaction) {
-    if (
-      transaction.toAccount === null &&
-      transaction.fromAccount !== null
-    ) {
-      return transactionTypes.PAYMENT;
-    } else if (
-      transaction.toAccount !== null &&
-      transaction.fromAccount === null
-    ) {
-      return transactionTypes.INCOME;
-    } else if (
-      transaction.toAccount !== null &&
-      transaction.fromAccount !== null
-    ) {
-      return transactionTypes.TRANSFER;
-    }
-    return null;
   }
   _getToday() {
     return moment().subtract(4, 'hours');
@@ -63,21 +43,21 @@ export default class DashboardPage extends Component {
       const today = this._getToday();
       const transactionDate = this._getTransactionDate(transaction.transactionDate);
 
-      return (this._determineTransactionType(transaction) === transactionTypes.PAYMENT && transactionDate.isSame(today, 'day'));
+      return (determineTransactionType(transaction) === transactionTypes.PAYMENT && transactionDate.isSame(today, 'day'));
     });
     const weekPaymentTransactions = state.transactions.filter(transaction => {
       const today = this._getToday();
       const transactionDate = this._getTransactionDate(transaction.transactionDate);
       const since = this._getToday().subtract(6, 'days');
 
-      return (this._determineTransactionType(transaction) === transactionTypes.PAYMENT && transactionDate.isBetween(since, today, 'day', '[]'));
+      return (determineTransactionType(transaction) === transactionTypes.PAYMENT && transactionDate.isBetween(since, today, 'day', '[]'));
     });
     const monthPaymentTransactions = state.transactions.filter(transaction => {
       const today = this._getToday();
       const transactionDate = this._getTransactionDate(transaction.transactionDate);
       const since = this._getToday().startOf('month');
 
-      return (this._determineTransactionType(transaction) === transactionTypes.PAYMENT && transactionDate.isBetween(since, today, 'day', '[]'));
+      return (determineTransactionType(transaction) === transactionTypes.PAYMENT && transactionDate.isBetween(since, today, 'day', '[]'));
     });
 
     return (
