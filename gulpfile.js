@@ -115,7 +115,7 @@ function buildImages() {
 }
 
 function buildFiles() {
-  return gulp.src([`${SRC_ROOT}/static/**/*.{csv,json,ico,txt}`])
+  return gulp.src([`${SRC_ROOT}/static/**/*.{csv,json,ico,txt,woff2}`])
     .pipe(gulp.dest(DIST_ROOT));
 }
 
