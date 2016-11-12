@@ -1,6 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import moment from 'moment';
 
+import transactionTypes from 'constants/transaction-types';
+
 import TotalAmountSection from 'views/desktop/components/total-amount-section';
 import AccountTable from 'views/desktop/components/account-table';
 import TransactionTable from 'views/desktop/components/transaction-table';

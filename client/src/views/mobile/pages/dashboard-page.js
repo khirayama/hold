@@ -2,8 +2,6 @@ import React, {Component, PropTypes} from 'react';
 
 import moment from 'moment';
 
-import transactionTypes from 'constants/transaction-types';
-
 import TransactionCreateForm from 'views/universal/components/transaction-create-form';
 
 import {fetchInitialDashboardPageResources} from 'actions/page-initialize-action-creators';
