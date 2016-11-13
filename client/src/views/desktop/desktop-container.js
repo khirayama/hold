@@ -40,7 +40,7 @@ export default class DesktopContainer extends MicroContainer {
 
     return (
       <ReactCSSTransitionGroup
-        className="mobile page-container"
+        className="desktop page-container"
         transitionName="page-transition"
         transitionEnterTimeout={TRANSITION_TIME}
         transitionLeaveTimeout={TRANSITION_TIME}
