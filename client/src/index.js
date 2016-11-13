@@ -7,14 +7,14 @@ import logger from 'utils/logger';
 import isMobileUI from 'utils/is-mobile-ui';
 import loadStyle from 'utils/load-style';
 
-import Store from './store';
+import Store from 'store';
 
 import DesktopContainer from 'views/desktop/desktop-container';
 import DesktopModalContainer from 'views/desktop/modal-container';
 import MobileContainer from 'views/mobile/mobile-container';
 import MobileModalContainer from 'views/mobile/modal-container';
 
-import {changeHistory} from './actions/app-action-creators';
+import {changeHistory} from 'actions/app-action-creators';
 
 window.addEventListener('popstate', () => {
   changeHistory(location.pathname, false);

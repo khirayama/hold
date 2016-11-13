@@ -4,6 +4,8 @@ import transactionTypes from 'constants/transaction-types';
 
 import Modal from 'views/universal/components/modal';
 
+import TransactionCategoryTable from 'views/desktop/components/transaction-category-table';
+
 export default function TransactionCategoryModal(props) {
   const paymentTransactionCategory = props.state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.PAYMENT);
   const incomeTransactionCategory = props.state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.INCOME);
@@ -13,7 +15,7 @@ export default function TransactionCategoryModal(props) {
   return (
     <Modal className="transaction-category-modal">
       <div className="transaction-category-table-container">
-        {JSON.stringify(transactionCategories)}
+        <TransactionCategoryTable transactionCategories={transactionCategories}/>
       </div>
     </Modal>
   );
