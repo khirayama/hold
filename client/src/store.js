@@ -19,6 +19,7 @@ export default class Store extends MicroStore {
         load: false,
         pathname: '/',
         modalname: null,
+        messagename: null,
 
         user: {setting: {}},
         accounts: [],
@@ -45,11 +46,19 @@ export default class Store extends MicroStore {
         case types.CHANGE_HISTORY:
           this.state.pathname = action.pathname;
           break;
+        // modal
         case types.SHOW_MODAL:
           this.state.modalname = action.modalname;
           break;
         case types.HIDE_MODAL:
           this.state.modalname = null;
+          break;
+        // message
+        case types.SHOW_MESSAGE:
+          this.state.messagename = action.messagename;
+          break;
+        case types.HIDE_MESSAGE:
+          this.state.messagename = null;
           break;
         default:
           break;

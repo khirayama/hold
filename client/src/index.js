@@ -10,9 +10,11 @@ import loadStyle from 'utils/load-style';
 import Store from 'store';
 
 import DesktopContainer from 'views/desktop/desktop-container';
-import DesktopModalContainer from 'views/desktop/modal-container';
+import DesktopModalContainer from 'views/desktop/desktop-modal-container';
+import DesktopMessageContainer from 'views/desktop/desktop-message-container';
 import MobileContainer from 'views/mobile/mobile-container';
-import MobileModalContainer from 'views/mobile/modal-container';
+import MobileModalContainer from 'views/mobile/mobile-modal-container';
+import MobileMessageContainer from 'views/mobile/mobile-message-container';
 
 import {changeHistory} from 'actions/app-action-creators';
 
@@ -32,6 +34,7 @@ window.addEventListener('DOMContentLoaded', () => {
       <section className="container">
         <MobileContainer store={store}/>
         <MobileModalContainer store={store}/>
+        <MobileMessageContainer store={store}/>
       </section>
       , document.querySelector('#app'));
   } else {
@@ -41,6 +44,7 @@ window.addEventListener('DOMContentLoaded', () => {
       <section className="container">
         <DesktopContainer store={store}/>
         <DesktopModalContainer store={store}/>
+        <DesktopMessageContainer store={store}/>
       </section>
       , document.querySelector('#app'));
   }

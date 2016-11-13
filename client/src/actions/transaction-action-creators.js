@@ -92,6 +92,13 @@ export function createTransaction(entity) {
         accounts: data_.map(account => formatAccount(account, Setting.data)),
       });
     });
+    dispatch({
+      type: types.SHOW_MESSAGE,
+      messagename: 'createTransaction',
+    });
+    setTimeout(() => {
+      dispatch({type: types.HIDE_MESSAGE});
+    }, 2000);
   }).catch(error => {
     dispatch({
       type: types.FAIL_TO_CREATE_TRANSACTION,

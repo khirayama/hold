@@ -31,6 +31,9 @@ const actionTypes = {
 
   SHOW_MODAL: '__SHOW_MODAL',
   HIDE_MODAL: '__HIDE_MODAL',
+
+  SHOW_MESSAGE: '__SHOW_MESSAGE',
+  HIDE_MESSAGE: '__HIDE_MESSAGE',
 };
 
 export default actionTypes;

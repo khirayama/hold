@@ -1,0 +1,19 @@
+.message
+  position: fixed
+  bottom: 0
+  left: 0
+  width: 100%
+  color: #fff
+  background: rgba(0, 0, 0, .6)
+  padding: 8px
+
+  &.message-transition-enter
+    transform: translateY(100%)
+  &.message-transition-enter.message-transition-enter-active
+    transform: translateY(0)
+    transition: transform $transition-time $ease-out-expo
+  &.message-transition-leave
+    transform: translateY(0)
+  &.message-transition-leave.message-transition-leave-active
+    transform: translateY(100%)
+    transition: transform $transition-time $ease-out-expo
