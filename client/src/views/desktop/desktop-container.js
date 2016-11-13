@@ -1,8 +1,11 @@
 /* eslint-env browser */
 
-import React, {Component, PropTypes} from 'react';
+import React from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-import Container from 'views/universal/container';
+import MicroContainer from 'libs/micro-container';
+
+import {TRANSITION_TIME} from 'constants/constants';
 
 import {startDesktopApp} from 'actions/app-action-creators';
 
@@ -11,7 +14,7 @@ import TransactionsPage from 'views/desktop/pages/transactions-page';
 import SettingPage from 'views/desktop/pages/setting-page';
 import NotFoundPage from 'views/desktop/pages/not-found-page';
 
-export default class DesktopContainer extends Container {
+export default class DesktopContainer extends MicroContainer {
   _initialize() {
     startDesktopApp(location.pathname);
   }
@@ -26,6 +29,23 @@ export default class DesktopContainer extends Container {
       default:
         return <NotFoundPage key="not-fount-page" state={state}/>;
     }
+  }
+  render() {
+    const state = this.state.store.getState();
+    const pageElement = this._createPageElement(state.pathname, state);
+
+    if (!state.load) {
+      return null;
+    }
+
+    return (
+      <ReactCSSTransitionGroup
+        className="mobile page-container"
+        transitionName="page-transition"
+        transitionEnterTimeout={TRANSITION_TIME}
+        transitionLeaveTimeout={TRANSITION_TIME}
+        >{pageElement}</ReactCSSTransitionGroup>
+    );
   }
 }
 

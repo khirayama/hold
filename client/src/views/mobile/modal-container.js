@@ -1,24 +1,13 @@
 /* eslint-env browser */
 
-import React, {Component, PropTypes} from 'react';
+import React from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-export default class MobileModalContainer extends Component {
-  constructor(props) {
-    super(props);
+import MicroContainer from 'libs/micro-container';
 
-    this.state = {store: this.props.store};
+import {TRANSITION_TIME} from 'constants/constants';
 
-    this.updateState = this._updateState.bind(this);
-  }
-  componentDidMount() {
-    this.props.store.addChangeListener(this.updateState);
-  }
-  componentWillUnmount() {
-    this.props.store.removeChangeListener(this.updateState);
-  }
-  _updateState() {
-    this.setState({store: this.props.store});
-  }
+export default class MobileModalContainer extends MicroContainer {
   _createModalElement(modalname, state) {
     switch (modalname) {
       default:
@@ -29,10 +18,15 @@ export default class MobileModalContainer extends Component {
     const state = this.state.store.getState();
     const modalElement = this._createModalElement(state.modalname, state);
 
-    return modalElement;
+    return (
+      <ReactCSSTransitionGroup
+        className="modal-container"
+        transitionName="modal-transition"
+        transitionEnterTimeout={TRANSITION_TIME}
+        transitionLeaveTimeout={TRANSITION_TIME}
+        >{modalElement}</ReactCSSTransitionGroup>
+    );
   }
 }
 
-MobileModalContainer.propTypes = {
-  store: PropTypes.object.isRequired,
-};
+MobileModalContainer.propTypes = {};

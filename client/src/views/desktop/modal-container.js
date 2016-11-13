@@ -1,29 +1,15 @@
 /* eslint-env browser */
 
-import React, {Component, PropTypes} from 'react';
+import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+
+import MicroContainer from 'libs/micro-container';
 
 import {TRANSITION_TIME} from 'constants/constants';
 
 import TransactionCategoryModal from 'views/desktop/components/transaction-category-modal';
 
-export default class DesktopModalContainer extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {store: this.props.store};
-
-    this.updateState = this._updateState.bind(this);
-  }
-  componentDidMount() {
-    this.props.store.addChangeListener(this.updateState);
-  }
-  componentWillUnmount() {
-    this.props.store.removeChangeListener(this.updateState);
-  }
-  _updateState() {
-    this.setState({store: this.props.store});
-  }
+export default class DesktopModalContainer extends MicroContainer {
   _createModalElement(modalname, state) {
     switch (modalname) {
       case 'transactionCategories':
@@ -47,6 +33,4 @@ export default class DesktopModalContainer extends Component {
   }
 }
 
-DesktopModalContainer.propTypes = {
-  store: PropTypes.object.isRequired,
-};
+DesktopModalContainer.propTypes = {};
