@@ -3,15 +3,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import logger from './utils/logger';
-import isMobileUI from './utils/is-mobile-ui';
-import loadStyle from './utils/load-style';
+import logger from 'utils/logger';
+import isMobileUI from 'utils/is-mobile-ui';
+import loadStyle from 'utils/load-style';
 
 import Store from './store';
 
-import DesktopContainer from 'views/desktop/container';
+import DesktopContainer from 'views/desktop/desktop-container';
 import DesktopModalContainer from 'views/desktop/modal-container';
-import MobileContainer from 'views/mobile/container';
+import MobileContainer from 'views/mobile/mobile-container';
 import MobileModalContainer from 'views/mobile/modal-container';
 
 import {changeHistory} from './actions/app-action-creators';

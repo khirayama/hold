@@ -1,12 +1,7 @@
-/* eslint-env browser */
-
 import React, {Component, PropTypes} from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import {TRANSITION_TIME} from 'constants/constants';
-import {startMobileApp} from 'actions/app-action-creators';
-
-import DashboardPage from 'views/mobile/pages/dashboard-page';
 
 export default class Container extends Component {
   constructor(props) {
@@ -16,29 +11,16 @@ export default class Container extends Component {
 
     this.updateState = this._updateState.bind(this);
   }
-
   componentDidMount() {
     this.props.store.addChangeListener(this.updateState);
-    startMobileApp(location.pathname);
+    this._initialize();
   }
-
   componentWillUnmount() {
     this.props.store.removeChangeListener(this.updateState);
   }
-
   _updateState() {
     this.setState({store: this.props.store});
   }
-
-  _createPageElement(pathname, state) {
-    switch (pathname) {
-      case '/dashboard':
-        return <DashboardPage key="dashboard-page" state={state}/>;
-      default:
-        return <div key="not-fount-page">not found</div>;
-    }
-  }
-
   render() {
     const state = this.state.store.getState();
     const pageElement = this._createPageElement(state.pathname, state);
@@ -61,4 +43,3 @@ export default class Container extends Component {
 Container.propTypes = {
   store: PropTypes.object.isRequired,
 };
-
