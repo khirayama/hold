@@ -24,7 +24,7 @@ export default class DesktopModalContainer extends MicroContainer {
 
     return (
       <ReactCSSTransitionGroup
-        className="modal-container"
+        className="desktop modal-container"
         transitionName="modal-transition"
         transitionEnterTimeout={TRANSITION_TIME}
         transitionLeaveTimeout={TRANSITION_TIME}

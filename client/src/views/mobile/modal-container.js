@@ -7,9 +7,13 @@ import MicroContainer from 'libs/micro-container';
 
 import {TRANSITION_TIME} from 'constants/constants';
 
+import TransactionCategoryModal from 'views/mobile/modals/transaction-category-modal';
+
 export default class MobileModalContainer extends MicroContainer {
   _createModalElement(modalname, state) {
     switch (modalname) {
+      case 'transactionCategories':
+        return <TransactionCategoryModal state={state}/>;
       default:
         return null;
     }
@@ -20,7 +24,7 @@ export default class MobileModalContainer extends MicroContainer {
 
     return (
       <ReactCSSTransitionGroup
-        className="modal-container"
+        className="mobile modal-container"
         transitionName="modal-transition"
         transitionEnterTimeout={TRANSITION_TIME}
         transitionLeaveTimeout={TRANSITION_TIME}
