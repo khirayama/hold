@@ -7,7 +7,7 @@ import MicroContainer from 'libs/micro-container';
 
 import {TRANSITION_TIME} from 'constants/constants';
 
-import TransactionCategoryModal from 'views/desktop/modals/transaction-category-modal';
+import TransactionCategoryModal from 'views/universal/components/transaction-category-modal';
 
 export default class DesktopModalContainer extends MicroContainer {
   _createModalElement(modalname, state) {
