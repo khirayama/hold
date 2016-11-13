@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export class EntryResource {
   constructor(resourceUrl) {
-    this._cache = null;
+    this._cache = this._load();
     this._resourceUrl = resourceUrl || null;
     this._request = axios.create();
   }
@@ -24,6 +24,7 @@ export class EntryResource {
     return new Promise((resolve, reject) => {
       this._request.get(this._url(), {params: data}).then(res => {
         this._cache = res.data;
+        this._save();
         resolve(res.data);
       }).catch(error => {
         reject(error);
@@ -34,15 +35,36 @@ export class EntryResource {
     return new Promise((resolve, reject) => {
       this._request.put(this._url(), entity).then(res => {
         this._cache = res.data;
+        this._save();
         resolve(res.data);
       }).catch(error => reject(error));
     });
+  }
+  _save() {
+    const key = '__' + this.constructor.name + 'Cache';
+    if (typeof window === 'object') {
+      if (window.localStorage) {
+        window.localStorage.setItem(key, JSON.stringify(this._cache));
+      }
+    }
+  }
+  _load() {
+    const key = '__' + this.constructor.name + 'Cache';
+    if (typeof window === 'object') {
+      if (window.localStorage) {
+        const cacheString = window.localStorage.getItem(key);
+        if (cacheString) {
+          return JSON.parse(cacheString);
+        }
+      }
+    }
+    return null;
   }
 }
 
 export class CollectionResource {
   constructor(resourceUrl) {
-    this._cache = null;
+    this._cache = this._load();
     this._cacheQuery = null;
     this._resourceUrl = resourceUrl || null;
     this._request = axios.create();
@@ -70,6 +92,7 @@ export class CollectionResource {
       this._request.get(this._url(), {params: query}).then(res => {
         this._cache = res.data;
         this._cacheQuery = JSON.stringify(query);
+        this._save();
         resolve(res.data);
       }).catch(error => reject(error));
     });
@@ -78,6 +101,7 @@ export class CollectionResource {
     return new Promise((resolve, reject) => {
       this._request.post(this._url(), entity).then(res => {
         this._create(res.data);
+        this._save();
         resolve(res.data);
       }).catch(error => reject(error));
     });
@@ -86,6 +110,7 @@ export class CollectionResource {
     return new Promise((resolve, reject) => {
       this._request.put(this._url(entity.id), entity).then(res => {
         this._update(res.data);
+        this._save();
         resolve(res.data);
       }).catch(error => reject(error));
     });
@@ -94,6 +119,7 @@ export class CollectionResource {
     return new Promise((resolve, reject) => {
       this._request.delete(this._url(id)).then(res => {
         this._delete(res.data);
+        this._save();
         resolve(res.data);
       }).catch(error => reject(error));
     });
@@ -117,6 +143,7 @@ export class CollectionResource {
   _find(id, resolve, reject) {
     this._request.get(this._url(id)).then(res => {
       this._create(res.data);
+      this._save();
       resolve(res.data);
     }).catch(error => reject(error));
   }
@@ -148,5 +175,25 @@ export class CollectionResource {
   }
   _clear() {
     this._cache = null;
+  }
+  _save() {
+    const key = '__' + this.constructor.name + 'Cache';
+    if (typeof window === 'object') {
+      if (window.localStorage) {
+        window.localStorage.setItem(key, JSON.stringify(this._cache));
+      }
+    }
+  }
+  _load() {
+    const key = '__' + this.constructor.name + 'Cache';
+    if (typeof window === 'object') {
+      if (window.localStorage) {
+        const cacheString = window.localStorage.getItem(key);
+        if (cacheString) {
+          return JSON.parse(cacheString);
+        }
+      }
+    }
+    return null;
   }
 }

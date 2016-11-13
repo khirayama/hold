@@ -23,6 +23,6 @@ export default function transactionsReducer(state, action) {
     case types.FAIL_TO_DELETE_TRANSACTION:
       return updateResource(state, action.transaction);
     default:
-      return state.concat() || [];
+      return (state || []).concat();
   }
 }

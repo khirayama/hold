@@ -14,17 +14,19 @@ export default class Store extends MicroStore {
   constructor() {
     super();
 
-    this.state = {
-      load: false,
-      pathname: '/',
-      modalname: null,
+    if (this.state === null) {
+      this.state = {
+        load: false,
+        pathname: '/',
+        modalname: null,
 
-      user: {setting: {}},
-      accounts: [],
-      transactionCategories: [],
-      transactionDataset: null,
-      transactions: [],
-    };
+        user: {setting: {}},
+        accounts: [],
+        transactionCategories: [],
+        transactionDataset: null,
+        transactions: [],
+      };
+    }
 
     this._subscribe();
   }

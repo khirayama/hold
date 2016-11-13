@@ -23,6 +23,6 @@ export default function accountsReducer(state, action) {
     case types.FAIL_TO_DELETE_ACCOUNT:
       return updateResource(state, action.account);
     default:
-      return state.concat() || [];
+      return (state || []).concat();
   }
 }

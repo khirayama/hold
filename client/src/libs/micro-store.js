@@ -7,31 +7,38 @@ export default class MicroStore extends MicroEmitter {
   constructor() {
     super();
 
-    this.state = {};
+    this.state = this._load();
+  }
+  _save() {
+    const key = '__' + this.constructor.name + 'Cache';
     if (typeof window === 'object') {
       if (window.localStorage) {
-        this.state = JSON.parse(window.localStorage.getItem('__state') || '{}');
+        window.localStorage.setItem(key, JSON.stringify(this.state));
       }
     }
   }
-
-  dispatchChange() {
+  _load() {
+    const key = '__' + this.constructor.name + 'Cache';
     if (typeof window === 'object') {
       if (window.localStorage) {
-        window.localStorage.setItem('__state', JSON.stringify(this.state));
+        const cacheString = window.localStorage.getItem(key);
+        if (cacheString) {
+          return JSON.parse(cacheString);
+        }
       }
     }
+    return {};
+  }
+  dispatchChange() {
+    this._save();
     this.emit(EVENT_CHANGE);
   }
-
   addChangeListener(listener) {
     this.addListener(EVENT_CHANGE, listener);
   }
-
   removeChangeListener(listener) {
     this.removeListener(EVENT_CHANGE, listener);
   }
-
   getState() {
     return Object.assign({}, this.state);
   }
