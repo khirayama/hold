@@ -1,6 +1,9 @@
 /* eslint-env browser */
 
 import React, {Component, PropTypes} from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+
+import {TRANSITION_TIME} from 'constants/constants';
 
 import TransactionCategoryModal from 'views/desktop/components/transaction-category-modal';
 
@@ -33,7 +36,14 @@ export default class DesktopModalContainer extends Component {
     const state = this.state.store.getState();
     const modalElement = this._createModalElement(state.modalname, state);
 
-    return modalElement;
+    return (
+      <ReactCSSTransitionGroup
+        className="modal-container"
+        transitionName="modal-transition"
+        transitionEnterTimeout={TRANSITION_TIME}
+        transitionLeaveTimeout={TRANSITION_TIME}
+        >{modalElement}</ReactCSSTransitionGroup>
+    );
   }
 }
 
