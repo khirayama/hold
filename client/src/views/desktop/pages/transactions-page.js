@@ -1,16 +1,12 @@
 import React, {Component, PropTypes} from 'react';
 
-import transactionTypes from 'constants/transaction-types';
-
 import TransactionTable from 'views/desktop/components/transaction-table';
 import TransactionSearchForm from 'views/desktop/components/transaction-search-form';
-import TransactionCategoryModal from 'views/desktop/components/transaction-category-modal';
 
 import Link from 'views/universal/components/link';
 import TransactionCreateForm from 'views/universal/components/transaction-create-form';
 
 import {fetchInitialTransactionsPageResources} from 'actions/page-initialize-action-creators';
-import {hideTransactionCategoryModal} from 'actions/modal-action-creators';
 
 export default class TransactionsPage extends Component {
   componentDidMount() {
@@ -19,9 +15,6 @@ export default class TransactionsPage extends Component {
   render() {
     const state = this.props.state;
     const key = '_transactions-page';
-
-    const paymentTransactionCategory = state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.PAYMENT);
-    const incomeTransactionCategory = state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.INCOME);
 
     return (
       <div key={key} className="page transactions-page">
@@ -47,11 +40,6 @@ export default class TransactionsPage extends Component {
             </section>
           </div>
         </section>
-        <TransactionCategoryModal
-          isShown={state.isTransactionCategoryModalShown}
-          onCloseButtonClick={hideTransactionCategoryModal}
-          transactionCategories={paymentTransactionCategory.concat(incomeTransactionCategory)}
-          />
       </div>
     );
   }

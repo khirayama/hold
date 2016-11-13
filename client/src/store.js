@@ -9,7 +9,6 @@ import userReducer from './reducers/user';
 import accountsReducer from './reducers/accounts';
 import transactionCategoriesReducer from './reducers/transaction-categories';
 import transactionsReducer from './reducers/transactions';
-import isTransactionCategoryModalShownReducer from './reducers/is-transaction-category-modal-shown';
 
 export default class Store extends MicroStore {
   constructor() {
@@ -18,14 +17,13 @@ export default class Store extends MicroStore {
     this.state = {
       load: false,
       pathname: '/',
+      modalname: null,
 
       user: {setting: {}},
       accounts: [],
       transactionCategories: [],
       transactionDataset: null,
       transactions: [],
-
-      isTransactionCategoryModalShown: false,
     };
 
     this._subscribe();
@@ -44,6 +42,12 @@ export default class Store extends MicroStore {
           break;
         case types.CHANGE_HISTORY:
           this.state.pathname = action.pathname;
+          break;
+        case types.SHOW_MODAL:
+          this.state.modalname = action.modalname;
+          break;
+        case types.HIDE_MODAL:
+          this.state.modalname = null;
           break;
         default:
           break;
@@ -64,10 +68,6 @@ export default class Store extends MicroStore {
         accounts: this.state.accounts,
         transactionCategories: this.state.transactionCategories,
       };
-      this.state.isTransactionCategoryModalShown = isTransactionCategoryModalShownReducer(
-        this.state.isTransactionCategoryModalShown,
-        action
-      );
 
       logger.debug(action, this.state);
       this.dispatchChange();

@@ -1,27 +1,24 @@
 import React, {PropTypes} from 'react';
 
+import transactionTypes from 'constants/transaction-types';
+
 import Modal from 'views/universal/components/modal';
 
 import TransactionCategoryTable from 'views/desktop/components/transaction-category-table';
 
 export default function TransactionCategoryModal(props) {
+  const paymentTransactionCategory = props.state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.PAYMENT);
+  const incomeTransactionCategory = props.state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.INCOME);
+
   return (
-    <Modal
-      className="transaction-category-modal"
-      isShown={props.isShown}
-      onCloseButtonClick={props.onCloseButtonClick}
-      >
+    <Modal className="transaction-category-modal">
       <div className="transaction-category-table-container">
-        <TransactionCategoryTable
-          transactionCategories={props.transactionCategories}
-          />
+        <TransactionCategoryTable transactionCategories={paymentTransactionCategory.concat(incomeTransactionCategory)}/>
       </div>
     </Modal>
   );
 }
 
 TransactionCategoryModal.propTypes = {
-  isShown: PropTypes.bool.isRequired,
-  onCloseButtonClick: PropTypes.func.isRequired,
-  transactionCategories: PropTypes.array.isRequired,
+  state: PropTypes.object.isRequired,
 };

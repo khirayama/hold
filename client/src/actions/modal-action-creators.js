@@ -2,16 +2,13 @@ import types from '../constants/action-types';
 
 import {dispatch} from '../libs/app-dispatcher';
 
-export function showTransactionCategoryModal() {
+export function showModal(modalname) {
   dispatch({
-    type: types.SHOW_TRANSACTION_CATEGORY_MODAL,
-    isTransactionCategoryModalShown: true,
+    type: types.SHOW_MODAL,
+    modalname,
   });
 }
 
-export function hideTransactionCategoryModal() {
-  dispatch({
-    type: types.HIDE_TRANSACTION_CATEGORY_MODAL,
-    isTransactionCategoryModalShown: false,
-  });
+export function hideModal() {
+  dispatch({type: types.HIDE_MODAL});
 }

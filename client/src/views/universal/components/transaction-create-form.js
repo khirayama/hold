@@ -5,7 +5,7 @@ import moment from 'moment';
 import keyCodes from 'constants/key-codes';
 import transactionTypes from 'constants/transaction-types';
 
-import {showTransactionCategoryModal} from 'actions/modal-action-creators';
+import {showModal} from 'actions/modal-action-creators';
 import {createTransaction} from 'actions/transaction-action-creators';
 
 import FlatInput from './flat-input';
@@ -33,6 +33,8 @@ export default class TransactionCreateForm extends Component {
     this.handleClickTransferTab = this._handleClickTransferTab.bind(this);
     this.handleChangeInput = this._handleChangeInput.bind(this);
     this.handleFocusInput = this._handleFocusInput.bind(this);
+
+    this.handleClickEditTransactionCategory = this._handleClickEditTransactionCategory.bind(this);
 
     this.assignForm = this._assignForm.bind(this);
   }
@@ -129,6 +131,9 @@ export default class TransactionCreateForm extends Component {
   }
   _handleFocusInput(event) {
     this._select(event.target);
+  }
+  _handleClickEditTransactionCategory() {
+    showModal('transactionCategories');
   }
   _createIdSelectElement(items, initialValue = '', name = null) {
     return (
@@ -270,7 +275,7 @@ export default class TransactionCreateForm extends Component {
             onClick={this.handleClickCreateButton}
             >CREATE</FloatingButton>
           <div className="transaction-category-edit-button-container">
-            <FlatButton onClick={showTransactionCategoryModal}>EDIT TRANSACTION CATEGORY</FlatButton>
+            <FlatButton onClick={this.handleClickEditTransactionCategory}>EDIT TRANSACTION CATEGORY</FlatButton>
           </div>
         </section>
       </span>

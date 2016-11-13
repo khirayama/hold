@@ -9,8 +9,10 @@ import loadStyle from './utils/load-style';
 
 import Store from './store';
 
-import DesktopContainer from './views/desktop/container';
-import MobileContainer from './views/mobile/container';
+import DesktopContainer from 'views/desktop/container';
+import DesktopModalContainer from 'views/desktop/modal-container';
+import MobileContainer from 'views/mobile/container';
+import MobileModalContainer from 'views/mobile/modal-container';
 
 import {changeHistory} from './actions/app-action-creators';
 
@@ -26,10 +28,20 @@ window.addEventListener('DOMContentLoaded', () => {
   if (isMobileUI(window.navigator.userAgent, window.ontouchstart)) {
     logger.info(`Start app for mobile at ${new Date()}`);
     loadStyle('/mobile/index.css');
-    ReactDOM.render(<MobileContainer store={store}/>, document.querySelector('#app'));
+    ReactDOM.render(
+      <section className="container">
+        <MobileContainer store={store}/>
+        <MobileModalContainer store={store}/>
+      </section>
+      , document.querySelector('#app'));
   } else {
     logger.info(`Start app for desktop at ${new Date()}`);
     loadStyle('/desktop/index.css');
-    ReactDOM.render(<DesktopContainer store={store}/>, document.querySelector('#app'));
+    ReactDOM.render(
+      <section className="container">
+        <DesktopContainer store={store}/>
+        <DesktopModalContainer store={store}/>
+      </section>
+      , document.querySelector('#app'));
   }
 });

@@ -6,13 +6,11 @@ import transactionTypes from 'constants/transaction-types';
 import TotalAmountSection from 'views/desktop/components/total-amount-section';
 import AccountTable from 'views/desktop/components/account-table';
 import TransactionTable from 'views/desktop/components/transaction-table';
-import TransactionCategoryModal from 'views/desktop/components/transaction-category-modal';
 
 import Link from 'views/universal/components/link';
 import TransactionCreateForm from 'views/universal/components/transaction-create-form';
 
 import {fetchInitialDashboardPageResources} from 'actions/page-initialize-action-creators';
-import {hideTransactionCategoryModal} from 'actions/modal-action-creators';
 
 import determineTransactionType from 'utils/determine-transaction-type';
 
@@ -29,9 +27,6 @@ export default class DashboardPage extends Component {
   render() {
     const state = this.props.state;
     const key = '_dashboard-page';
-
-    const paymentTransactionCategory = state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.PAYMENT);
-    const incomeTransactionCategory = state.transactionCategories.filter(transactionCategory => transactionCategory.transactionType === transactionTypes.INCOME);
 
     const lastThreeDaysTransaction = state.transactions.filter(transaction => {
       const today = this._getToday();
@@ -95,11 +90,6 @@ export default class DashboardPage extends Component {
             </section>
           </div>
         </div>
-        <TransactionCategoryModal
-          isShown={state.isTransactionCategoryModalShown}
-          onCloseButtonClick={hideTransactionCategoryModal}
-          transactionCategories={paymentTransactionCategory.concat(incomeTransactionCategory)}
-          />
       </div>
     );
   }
