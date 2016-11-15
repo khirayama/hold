@@ -17,14 +17,14 @@ class Container extends MicroContainer {
 
 test.beforeEach(t => {
   global.document = jsdom('');
-  global.window = document.defaultView;
-  global.navigator = { userAgent: 'node.js' };
+  global.window = global.document.defaultView;
+  global.navigator = {userAgent: 'node.js'};
 
   t.context.keys = [];
-  Object.keys(document.defaultView).forEach((property) => {
+  Object.keys(global.document.defaultView).forEach(property => {
     if (typeof global[property] === 'undefined') {
       t.context.keys.push(property);
-      global[property] = document.defaultView[property];
+      global[property] = global.document.defaultView[property];
     }
   });
 
@@ -40,7 +40,7 @@ test.afterEach(t => {
   delete global.window;
   delete global.navigator;
 
-  t.context.keys.forEach((property) => {
+  t.context.keys.forEach(property => {
     delete global[property];
   });
 });
@@ -53,7 +53,7 @@ test('renderable', t => {
 
 test('Dispatch updateSate', t => {
   const updateState = sinon.spy(Container.prototype, '_updateState');
-  const wrapper = mount(t.context.container);
+  mount(t.context.container);
 
   t.is(updateState.callCount, 0);
   t.context.store.dispatchChange();

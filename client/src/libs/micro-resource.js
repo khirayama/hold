@@ -1,3 +1,5 @@
+/* global window */
+
 import axios from 'axios';
 
 export class EntryResource {

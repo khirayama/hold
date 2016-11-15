@@ -3,8 +3,6 @@ import React, {Component} from 'react';
 import keyCodes from 'constants/key-codes';
 import transactionTypes from 'constants/transaction-types';
 
-import isMobileUI from 'utils/is-mobile-ui';
-
 import {createTransactionCategory} from 'actions/transaction-category-action-creators';
 
 import FloatingButton from 'views/universal/components/floating-button';
@@ -54,7 +52,6 @@ export default class TransactionCategoryTableCreateRow extends Component {
       <tr>
         <td>
           <FlatInput
-            autoFocus={!isMobileUI(window.navigator.userAgent, window.ontouchstart)}
             type="text"
             placeholder="Enter transaction category name"
             value={this.state.name}
